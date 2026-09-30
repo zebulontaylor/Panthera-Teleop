@@ -1,0 +1,127 @@
+README.md
+  s_ea088a569fa03e::t_fbeae61135badf 1-56
+app/launch-teleop.py
+  s_7f0dc769c9282b::t_e213476dc809a7 1-152
+app/web/index.html
+  s_7f0dc769c9282b::t_13dfd9108940c6 1-31
+archive/README.md
+  s_7f0dc769c9282b::t_7801d07c7ec716 1-5
+archive/experiments/approach-carrier-left.json
+  s_7f0dc769c9282b::t_7af63fbed4a899 1-25
+archive/experiments/approach-carrier.py
+  s_7f0dc769c9282b::t_0126a86110c620 1-65
+archive/experiments/closer-view-left.json
+  s_7f0dc769c9282b::t_911f85e2a23d03 1-33
+archive/experiments/closer-view-right.json
+  s_7f0dc769c9282b::t_764b61e5ad8df0 1-33
+archive/experiments/closer-view.py
+  s_7f0dc769c9282b::t_1625dece2d1a16 1-77
+archive/experiments/noncontact-position-result.json
+  s_7f0dc769c9282b::t_ff3c25a03631f1 1-72
+archive/experiments/noncontact-step-result.json
+  s_7f0dc769c9282b::t_4a3b632959fada 1-72
+archive/experiments/noncontact-step.py
+  s_7f0dc769c9282b::t_ce80ced48fad77 1-124
+archive/experiments/ten-cm-view-left-1.json
+  s_7f0dc769c9282b::t_0625f00cd26994 1-26
+archive/experiments/ten-cm-view-left-2.json
+  s_7f0dc769c9282b::t_254bb0095acf95 1-26
+archive/experiments/ten-cm-view-right-1.json
+  s_7f0dc769c9282b::t_130c43769fb64c 1-26
+archive/experiments/ten-cm-view.py
+  s_7f0dc769c9282b::t_d0209a1e390db6 1-76
+archive/setup/arm-a-motors.yaml
+  s_7f0dc769c9282b::t_27a9a9d5dd1438 1-94
+archive/setup/arm-a.yaml
+  s_7f0dc769c9282b::t_a4dc07c786ab94 1-64
+archive/setup/arm-b-motors.yaml
+  s_7f0dc769c9282b::t_2bb696cb695f66 1-94
+archive/setup/arm-b.yaml
+  s_7f0dc769c9282b::t_5de34f8f33c7b3 1-64
+archive/setup/probe-ttyACM0-robot.yaml
+  s_7f0dc769c9282b::t_9286118c4ebd8b 1-4
+archive/setup/probe-ttyACM0.yaml
+  s_7f0dc769c9282b::t_c4310602bc7143 1-94
+archive/setup/probe-ttyACM7-robot.yaml
+  s_7f0dc769c9282b::t_327aa08ad7e28c 1-4
+archive/setup/probe-ttyACM7.yaml
+  s_7f0dc769c9282b::t_5976d3f9f8fb44 1-94
+archive/setup/quest-passthrough.patch
+  s_7f0dc769c9282b::t_88ff2641dfe2fb 1-104
+config/calibration/screen-target.html
+  s_f0c28b94056ee7::t_e63ac2be13928f 1-11
+config/calibration/setup.json
+  s_f0c28b94056ee7::t_8d316c957aeccc 1-34
+config/postprocessing-gear-pin.json
+  s_ea088a569fa03e::t_a10e47e715d07f 1-268
+config/robot-configs/arm-mapping.json
+  s_f0c28b94056ee7::t_fd4dad21659a9e 1-10
+config/robot-configs/left-motors.yaml
+  s_7f0dc769c9282b::t_af92c8bc99df7c 1-94
+config/robot-configs/left.yaml
+  s_7f0dc769c9282b::t_1f2017509b07bd 1-64
+config/robot-configs/right-motors.yaml
+  s_7f0dc769c9282b::t_259a6e17d1d51f 1-94
+config/robot-configs/right.yaml
+  s_7f0dc769c9282b::t_4807828ce22256 1-64
+docs/neutral-hold-verification.json
+  s_7f0dc769c9282b::t_be0215cc1d102c 1-124
+docs/neutral-return-verification.json
+  s_7f0dc769c9282b::t_897c55acad7398 1-121
+docs/quest-quick-start.md
+  s_7f0dc769c9282b::t_c0fba5c676e0ea 1-37
+docs/reset-speed-grippers-verification.json
+  s_7f0dc769c9282b::t_ccd75c53491600 1-203
+docs/setup-history.md
+  s_7f0dc769c9282b::t_c881c197a39078 1-56
+docs/verification.json
+  s_7f0dc769c9282b::t_8fa96977c8ede2 1-19
+scripts/enable-quest-usb.sh
+  s_7f0dc769c9282b::t_49e16256fb0710 1-15
+scripts/probe_robot_state.py
+  s_7f0dc769c9282b::t_4667ff449e3bab 1-46
+scripts/start-hand-guide.sh
+  s_7f0dc769c9282b::t_ba5bc80572f172 1-4
+scripts/start-headset.sh
+  s_7f0dc769c9282b::t_7d0b7efc11dcc6 1-6
+scripts/stop-gravity-assist.sh
+  s_7f0dc769c9282b::t_3f0952fdea092e 1-4
+scripts/verify_processed.py
+  s_ea088a569fa03e::t_9fc993c03db756 1-127
+start.sh
+  s_7f0dc769c9282b::t_4ce3d041f1a8a0 1-5
+tests/check_wrist_mapping.py
+  s_7f0dc769c9282b::t_d922a86b3fb180 1-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "507db10956c57b605741190264074e8bebde4627",
+  "prompts": {},
+  "sessions": {
+    "s_7f0dc769c9282b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0efd8-6c3c-75f2-aba4-803eb63cfd8b",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Zeb Taylor <zceboys@gmail.com>"
+    },
+    "s_ea088a569fa03e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f024-0407-7110-9ea9-eb3a545e12b7",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Zeb Taylor <zceboys@gmail.com>"
+    },
+    "s_f0c28b94056ee7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0ea02-0812-7833-a415-c364095c77e0",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Zeb Taylor <zceboys@gmail.com>"
+    }
+  }
+}
