@@ -1,0 +1,10 @@
+{
+  "left": {
+    "usb_path": "1-1.2",
+    "pci_controller": "0000:06:00.3"
+  },
+  "right": {
+    "usb_path": "1-1.3",
+    "pci_controller": "0000:06:00.3"
+  }
+}
