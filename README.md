@@ -1,5 +1,69 @@
 # Panthera gravity assist and recording
 
+## Getting started
+
+On an already configured machine, run `./start.sh` from the repository root. A fresh clone also needs the manufacturer's [Panthera-HT SDK](https://github.com/HighTorque-Robotics/Panthera-HT_SDK) and a Python environment: the local `work/` folder is excluded from Git.
+
+### 1. Install the software
+
+The commands below use Linux x86_64, Python 3.10, Git, and [uv](https://docs.astral.sh/uv/getting-started/installation/). The vendor's prebuilt motor wheel targets Linux x86_64 and was built on Ubuntu 22. For other platforms or binary compatibility issues, follow the [SDK's source-build instructions](https://github.com/HighTorque-Robotics/Panthera-HT_SDK/blob/4a267c148cffa56b369222110bcd0b925809e365/panthera_python/README.md).
+
+```bash
+git clone https://github.com/zebulontaylor/Panthera-Teleop.git
+cd Panthera-Teleop
+mkdir -p work
+git clone https://github.com/HighTorque-Robotics/Panthera-HT_SDK.git work/Panthera-HT_SDK
+git -C work/Panthera-HT_SDK checkout 4a267c148cffa56b369222110bcd0b925809e365
+
+uv venv --python 3.10 work/teleop-venv
+UV_SKIP_WHEEL_FILENAME_CHECK=1 uv pip install --python work/teleop-venv/bin/python \
+  work/Panthera-HT_SDK/panthera_python/motor_whl/hightorque_robot-1.2.0-cp310-cp310-linux_x86_64.whl \
+  -r work/Panthera-HT_SDK/panthera_python/requirements.txt \
+  -r requirements-recording.txt 'pin==4.1.0'
+```
+
+The SDK revision and Pinocchio version above match this setup. `UV_SKIP_WHEEL_FILENAME_CHECK=1` accommodates the vendor wheel's filename/metadata version mismatch. The launchers use `work/teleop-venv/bin/python` directly, so activating the environment is optional.
+
+Check imports, then try the dashboard in simulation:
+
+```bash
+work/teleop-venv/bin/python -c 'import hightorque_robot, pinocchio, numpy, yaml, cv2'
+./start.sh --demo --data-dir /tmp/panthera-demo
+```
+
+Simulation opens the dashboard at http://127.0.0.1:8090 without opening motor devices. Stop it with Ctrl+C before starting live control.
+
+### 2. Configure your hardware
+
+Live recording uses two Panthera arms and three USB cameras. Connect the arms through their communication sockets, power their motor supplies, and enable motor power with the round buttons. Your user must have access to the robot serial devices and camera devices.
+
+The checked-in USB mapping and camera paths describe the original laptop. On another machine, update:
+
+- `config/robot-configs/arm-mapping.json`: set each arm's `usb_path` and `pci_controller` from its Linux USB topology. Inspect `readlink -f /sys/class/tty/ttyACM*/device` and identify which physical arm is left/right. The tested boards share a serial number, so serial-number links cannot distinguish them.
+- `config/recording.json`: set the three `cameras` paths using `ls -l /dev/v4l/by-path/` and confirm each view. Close other applications using the cameras.
+
+Check the mappings and URDFs without opening motor devices:
+
+```bash
+./scripts/start-hand-guide.sh
+```
+
+This regenerates the left/right robot YAMLs, including absolute SDK/model paths, for your checkout. Keep the robot cables in the configured hub ports afterward.
+
+### 3. Start recording
+
+With both arms supported and the return path clear, run:
+
+```bash
+./start.sh
+```
+
+The dashboard opens at http://127.0.0.1:8090. Guide the arms by their physical handles; K keeps an episode, R flags it for review, and D discards it. Each decision triggers a raised-neutral return and gripper opening. Support both arms before Ctrl+C ends assistance. Recordings are saved under `data/` and are excluded from Git. The recorder reserves 2 GiB of free disk space.
+
+For optional Quest controller operation, also clone [Quest_controller_stream](https://github.com/HighTorque-Robotics/Quest_controller_stream) into `work/Quest_controller_stream`, install its Python/UI dependencies into the same environment, and install Android `adb`. Follow [the Quest guide](docs/quest-quick-start.md); the preserved passthrough changes are in `archive/setup/quest-passthrough.patch`. Physical handle mode uses the Panthera SDK without a headset or Quest bridge.
+
+## Recording and control
+
 Run `./start.sh` from this workspace. It checks all three cameras and both arm configurations, enables independent gravity assistance, and opens http://127.0.0.1:8090. Grippers are passive during demonstrations and open to 60% during each reset. There is no starting-pose or exit trajectory. Episode decisions return both arms to a raised neutral pose. The session started by Codex runs as the user service `panthera-gravity-assist`; inspect it with `systemctl --user status panthera-gravity-assist` and support both arms before running `./scripts/stop-gravity-assist.sh` to stop it. A running session must be stopped before launching another.
 
 Move either arm to start an episode automatically. The recorder includes 0.75 seconds of pre-roll and requires sustained motion for 0.12 seconds to reject encoder jitter. Keep the browser page focused:
