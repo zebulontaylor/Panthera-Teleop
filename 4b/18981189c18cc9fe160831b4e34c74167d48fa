@@ -1,0 +1,20 @@
+README.md
+  s_68751e6a1be693::t_45909f2692da2f 27
+  s_68751e6a1be693::t_eb2a6319323c26 3-26,28-66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4b18981189c18cc9fe160831b4e34c74167d48fa",
+  "prompts": {},
+  "sessions": {
+    "s_68751e6a1be693": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f03a-3f37-7fb3-97d6-d6363a740620",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Zeb Taylor <zceboys@gmail.com>"
+    }
+  }
+}
