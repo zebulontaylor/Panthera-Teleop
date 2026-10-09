@@ -73,6 +73,10 @@ class Cameras:
         with self.lock:
             return self.latest.get(name, {}).get('jpeg')
 
+    def recording_frames(self):
+        with self.lock:
+            return dict(self.latest)
+
     def wait_ready(self, timeout=10):
         deadline = time.monotonic() + timeout
         while time.monotonic() < deadline:

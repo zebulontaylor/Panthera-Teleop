@@ -36,6 +36,13 @@ class HoldTests(unittest.TestCase):
         for t in np.arange(1.2,1.5,.01):ready=self.hold.tick(float(t),self.arms)
         self.assertTrue(all(ready.values()))
 
+    def test_long_idle_hold_still_allows_independent_handle_release(self):
+        for t in (60, 600, 3600, 86400):
+            self.assertEqual(self.hold.tick(t,self.arms),dict(left=False,right=False))
+        self.arms['left']['measured_torque_nm'][1]+=1.5
+        self.hold.tick(86400.1,self.arms)
+        self.assertEqual(self.hold.tick(86400.3,self.arms),dict(left=True,right=False))
+
     def test_short_load_spike_does_not_release(self):
         self.arms['left']['measured_torque_nm'][1]+=2
         self.hold.tick(.7,self.arms)

@@ -11,7 +11,8 @@ from PIL import Image
 import pyarrow.parquet as pq
 from lerobot.datasets.lerobot_dataset import LeRobotDataset
 
-from postprocess_kept import CAMERAS, prepare_image, read_rows, sha256, vector, write_json
+from postprocess_kept import (CAMERAS, prepare_image, read_rows, sha256, vector, write_json,
+                              source_path, validate_hitl_selection, data_timestamp, data_origin)
 
 
 def verify(root, source):
@@ -29,11 +30,15 @@ def verify(root, source):
     episode_lengths = {}
     for episode in manifest["episodes"]:
         ep = episode["episode_index"]
-        p = source / episode["id"]
-        origins[ep] = json.loads((p / "metadata.json").read_text())["start_monotonic_ns"]
+        p = source_path(source, episode)
+        origins[ep] = data_origin(json.loads((p / "metadata.json").read_text()))
         for name in ("metadata.json", "states.jsonl", "frames.jsonl"):
             assert sha256(p / name) == episode["source_hashes"][name]
         states = read_rows(p / "states.jsonl")
+        meta = json.loads((p / 'metadata.json').read_text())
+        start = data_origin(meta) + round(episode['start_s'] * 1e9)
+        end = data_origin(meta) + round(episode['end_s'] * 1e9)
+        validate_hitl_selection(meta, episode, [s for s in states if start <= data_timestamp(s) <= end])
         state_map[ep] = {s["sequence"]: s for s in states}
         episode_lengths[ep] = episode["exported_observations"]
         archive = root / f"trimmed_full_rate/{episode['id']}.tar.gz"
@@ -58,9 +63,11 @@ def verify(root, source):
                 action = state_map[ep][a["action_sequence"]]
                 assert state["monotonic_ns"] == a["state_monotonic_ns"]
                 assert action["monotonic_ns"] == a["action_monotonic_ns"]
-                assert state["episode_time_s"] <= episode["end_s"]
-                assert action["episode_time_s"] <= episode["end_s"]
-                assert action["monotonic_ns"] > state["monotonic_ns"]
+                assert data_timestamp(state) == a.get('state_data_monotonic_ns', a['state_monotonic_ns'])
+                assert data_timestamp(action) == a.get('action_data_monotonic_ns', a['action_monotonic_ns'])
+                assert state.get("data_time_s", state["episode_time_s"]) <= episode["end_s"]
+                assert action.get("data_time_s", action["episode_time_s"]) <= episode["end_s"]
+                assert data_timestamp(action) > data_timestamp(state)
                 for key, expected in (
                     ("observation.state", vector(state)), ("action", vector(action)),
                     ("observation.velocity", vector(state, "velocity_rad_s", "velocity")),
@@ -76,11 +83,11 @@ def verify(root, source):
                         image.load()
                         assert image.size == (256, 256) and image.mode == "RGB"
                     assert abs(a[f"{camera}.offset_s"]) <= manifest["max_camera_alignment_s"]
-                    source_path = source / episode["id"] / a[f"{camera}.source_path"]
-                    assert sha256(source_path) == a[f"{camera}.source_sha256"]
-                    assert a[f"{camera}.source_monotonic_ns"] <= origins[ep] + round(episode["end_s"] * 1e9)
+                    image_path = source_path(source, episode) / a[f"{camera}.source_path"]
+                    assert sha256(image_path) == a[f"{camera}.source_sha256"]
+                    assert a.get(f"{camera}.source_data_monotonic_ns", a[f"{camera}.source_monotonic_ns"]) <= origins[ep] + round(episode["end_s"] * 1e9)
                     if frame_index in (0, episode_lengths[ep] // 2, episode_lengths[ep] - 1):
-                        transformed = prepare_image(source_path, manifest["image_crops_xyxy"][camera], 256)
+                        transformed = prepare_image(image_path, manifest["image_crops_xyxy"][camera], 256)
                         buffer = io.BytesIO()
                         Image.fromarray(transformed).save(buffer, format="JPEG", quality=95, subsampling=0)
                         assert hashlib.sha256(buffer.getvalue()).digest() == hashlib.sha256(encoded).digest()

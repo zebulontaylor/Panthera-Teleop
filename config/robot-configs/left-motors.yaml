@@ -1,6 +1,6 @@
 robot:
   robot_name: Panthera-HT
-  Serial_Type: /dev/ttyACM7
+  Serial_Type: /dev/ttyACM0
   Seial_baudrate: 4000000
   motor_timeout_ms: 0
   canport_error_output_flag: false

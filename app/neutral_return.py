@@ -13,7 +13,6 @@ class NeutralReturn:
         self.targets = {side: np.asarray(q, dtype=float) for side, q in settings['position_rad'].items()}
         self.duration = None
         self.last_targets = None
-        self.quiet_since = None
         self.arrival_samples = deque()
         self.diagnostics = {}
         for side, goal in self.targets.items():
@@ -26,12 +25,6 @@ class NeutralReturn:
             return None, False, 'countdown'
         measured = {side: np.asarray(a['position_rad']) for side, a in arms.items()}
         if self.started is None:
-            quiet = all(max(abs(v) for v in a['velocity_rad_s']) < 0.05 for a in arms.values())
-            self.quiet_since = (self.quiet_since if self.quiet_since is not None else now) if quiet else None
-            if self.quiet_since is None or now-self.quiet_since < 0.3:
-                if now-self.requested_at > self.settings['release_delay_seconds']+8:
-                    raise RuntimeError('Arms still moving; neutral return canceled')
-                return None, False, 'waiting_for_release'
             self.initial = measured
             largest = max(float(np.max(np.abs(self.targets[s]-q))) for s, q in measured.items())
             self.duration = max(self.settings.get('minimum_duration_seconds', 1.2),

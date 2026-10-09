@@ -26,14 +26,18 @@ class MotionTests(unittest.TestCase):
     def test_countdown_speed_limit_and_arrival(self):
         motion = NeutralReturn(self.settings, self.limits, 0)
         q = np.zeros(6)
-        commanded, done, stage = motion.tick(1, arms(q))
-        self.assertIsNone(commanded)
+        commanded, done, stage = motion.tick(self.settings['release_delay_seconds']/2, arms(q))
         self.assertFalse(done)
-        self.assertEqual(stage, 'countdown')
+        if self.settings['release_delay_seconds'] > 0:
+            self.assertIsNone(commanded)
+            self.assertEqual(stage, 'countdown')
+        else:
+            self.assertIsNotNone(commanded)
+            np.testing.assert_allclose(commanded['left'], q)
         previous = q.copy()
         max_speed = 0
         complete = False
-        for now in np.arange(2, 12, .01):
+        for now in np.arange(self.settings['release_delay_seconds'], 12, .01):
             target, complete, _ = motion.tick(float(now), arms(q))
             if target is not None:
                 q = target['left'].copy()  # Fake motors track with one tick of latency.
@@ -50,16 +54,21 @@ class MotionTests(unittest.TestCase):
     def test_stall_and_tracking_deviation_cancel(self):
         motion = NeutralReturn(self.settings, self.limits, 0)
         motion.tick(2, arms(np.zeros(6)))
-        motion.tick(2.4, arms(np.zeros(6)))
         motion.tick(4.2, arms(np.zeros(6)))
         with self.assertRaisesRegex(RuntimeError, 'tracking deviation'):
             motion.tick(4.3, arms(np.zeros(6)))
 
-    def test_held_moving_arms_never_receive_return_target(self):
-        motion = NeutralReturn(self.settings, self.limits, 0)
-        self.assertIsNone(motion.tick(3, arms(np.zeros(6), v=.2))[0])
-        with self.assertRaisesRegex(RuntimeError, 'still moving'):
-            motion.tick(11, arms(np.zeros(6), v=.2))
+    def test_moving_arms_start_return_on_first_tick(self):
+        settings = copy.deepcopy(self.settings)
+        settings['release_delay_seconds'] = 0
+        motion = NeutralReturn(settings, self.limits, 0)
+        q = np.zeros(6)
+        target, complete, _ = motion.tick(0, arms(q, v=.2))
+        self.assertIsNotNone(target)
+        self.assertFalse(complete)
+        self.assertEqual(motion.started, 0)
+        for side in ('left', 'right'):
+            np.testing.assert_allclose(target[side], q)
 
     def test_invalid_target_rejected_before_commands(self):
         settings = copy.deepcopy(self.settings)

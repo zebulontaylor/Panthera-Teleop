@@ -21,6 +21,10 @@ SDK = ROOT / 'work/Panthera-HT_SDK/panthera_python'
 CONFIG = ROOT / 'config/robot-configs'
 
 
+class RobotConnectionError(RuntimeError):
+    """An expected hardware preflight failure, before opening motor devices."""
+
+
 def wait_for_joint_feedback(robot, label, timeout=5.0):
     """Reject SDK placeholder readings before any startup trajectory is built."""
     deadline = time.monotonic() + timeout
@@ -41,9 +45,10 @@ def wait_for_joint_feedback(robot, label, timeout=5.0):
     raise RuntimeError(f'{label}: joint feedback invalid or motor fault present; startup refused')
 
 
-def resolve_board(mapping):
+def resolve_board(mapping, sys_tty=Path('/sys/class/tty'),
+                  sys_usb=Path('/sys/bus/usb/devices'), dev_root=Path('/dev')):
     found = []
-    for tty in Path('/sys/class/tty').glob('ttyACM*'):
+    for tty in sys_tty.glob('ttyACM*'):
         resolved = tty.resolve()
         interface = f"{mapping['usb_path']}:1.0"
         if interface not in resolved.parts or mapping['pci_controller'] not in resolved.parts:
@@ -52,14 +57,36 @@ def resolve_board(mapping):
         if usb_device is None:
             continue
         if (usb_device/'idVendor').read_text().strip() != 'caf1' or (usb_device/'idProduct').read_text().strip() != 'ffff':
-            raise RuntimeError('Unexpected device at the saved robot USB connection')
-        found.append(Path('/dev')/tty.name)
+            raise RobotConnectionError('Unexpected device at the saved robot USB connection')
+        found.append(dev_root/tty.name)
     if len(found) != 1:
-        raise RuntimeError(f"Expected one robot at USB {mapping['usb_path']}; found {len(found)}. Reconnect its USB cable to the original hub port.")
+        board = (sys_usb / mapping['usb_path']).resolve()
+        if board.exists() and mapping['pci_controller'] in board.parts:
+            try:
+                vendor = (board / 'idVendor').read_text().strip()
+                product = (board / 'idProduct').read_text().strip()
+                configured = (board / 'bConfigurationValue').read_text().strip()
+            except OSError:
+                pass  # The device may have disappeared during enumeration.
+            else:
+                if (vendor, product) != ('caf1', 'ffff'):
+                    raise RobotConnectionError('Unexpected device at the saved robot USB connection')
+                if configured in ('', '0'):
+                    raise RobotConnectionError(
+                        f"Robot board at USB {mapping['usb_path']} is detected but USB is unconfigured; "
+                        'no serial port is available. Check the robot hub external power supply '
+                        'and USB cable, then reconnect the hub. Linux may have rejected the '
+                        'configuration because of insufficient available bus power '
+                        '(check journalctl -k).')
+                raise RobotConnectionError(
+                    f"Robot board at USB {mapping['usb_path']} is detected but its serial interface "
+                    'is unavailable. Wait for enumeration or check the cdc_acm driver '
+                    'and reconnect the robot USB cable.')
+        raise RobotConnectionError(f"Expected one robot at USB {mapping['usb_path']}; found {len(found)}. Reconnect its USB cable to the original hub port.")
     device = found[0]
     # The vendor SDK uses prefix matching, so refuse ambiguous tty names.
     if list(device.parent.glob(device.name+'*')) != [device]:
-        raise RuntimeError(f'SDK prefix matching is ambiguous for {device}; do not launch.')
+        raise RobotConnectionError(f'SDK prefix matching is ambiguous for {device}; do not launch.')
     return device
 
 

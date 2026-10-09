@@ -21,7 +21,7 @@
       "arm_assignment": "unverified"
     },
     "overhead": {
-      "device": "/dev/v4l/by-path/pci-0000:06:00.3-usb-0:1.1:1.0-video-index0"
+      "device": "/dev/v4l/by-path/pci-0000:06:00.3-usb-0:1:1.0-video-index0"
     }
   },
   "capture_resolution": [

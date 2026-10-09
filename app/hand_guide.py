@@ -24,6 +24,7 @@ from dashboard import Cameras, Dashboard
 from neutral_return import NeutralReturn
 from neutral_hold import NeutralHold
 from reset_grippers import ResetGrippers, command_gripper
+from usb_stability import keep_usb_awake, is_serial_disconnect
 
 spec = importlib.util.spec_from_file_location('teleop_setup', Path(__file__).with_name('launch-teleop.py'))
 setup = importlib.util.module_from_spec(spec)
@@ -130,7 +131,12 @@ def main():
     parser.add_argument('--port', type=int)
     parser.add_argument('--data-dir', type=Path, default=setup.ROOT/'data')
     args = parser.parse_args()
-    configs = {} if args.demo else setup.prepare()
+    try:
+        configs = {} if args.demo else setup.prepare()
+    except setup.RobotConnectionError as exc:
+        print(f'Robot startup unavailable: {exc} No motor devices opened.',
+              file=sys.stderr, flush=True)
+        return 1
     if not args.run and not args.demo:
         print('Hand-guidance configurations ready. No motor devices opened.')
         return
@@ -182,6 +188,7 @@ def main():
                 expected = yaml.safe_load((setup.CONFIG/f'{side}-motors.yaml').read_text())['robot']['Serial_Type']
                 if str(setup.resolve_board(mapping)) != expected:
                     raise RuntimeError('USB mapping changed; restart the launcher')
+                keep_usb_awake(expected)
                 robots[side] = Panthera(str(configs[side]))
                 setup.wait_for_joint_feedback(robots[side], side)
         # Validate both models/readings before either arm receives assist torque.
@@ -367,6 +374,13 @@ def main():
                 log.write(message + '\n')
         except OSError as log_error:
             print(f'Could not save event: {log_error}', file=sys.stderr, flush=True)
+        if is_serial_disconnect(exc):
+            print('Robot USB connection lost. Ending control and saving any unfinished '
+                  'episode for review. Support the arms, check USB/power, and restart '
+                  'the launcher. For idle USB protection run '
+                  'sudo ./scripts/enable-robot-usb.sh with control stopped.',
+                  file=sys.stderr, flush=True)
+            return 1
         raise
     finally:
         if store:
@@ -382,4 +396,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
