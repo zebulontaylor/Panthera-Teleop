@@ -23,6 +23,7 @@ env/
 # Recorded episodes, processed datasets, and runtime files
 /data/
 /logs/
+/checkpoints/
 *.log
 
 # Local SDK/Quest checkouts, Python environments, and Android tools

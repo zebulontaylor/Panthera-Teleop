@@ -1,0 +1,26 @@
+{
+  "format_version": 1,
+  "task": "match the held planet gear height to the carrier side opening",
+  "source_kind": "visually reviewed operator-kept RGB demonstrations",
+  "time_origin": "metadata.start_monotonic_ns",
+  "cameras": ["wrist_port2", "wrist_port3"],
+  "gear_arm": "left",
+  "carrier_arm": "right",
+  "arm_assignment_evidence": "Gear pickup and release coincide with left gripper changes in the reviewed states. Wrist port2 shows the gear gripper; wrist port3 shows the carrier gripper. The recording calibration still marks camera-to-arm assignments unverified.",
+  "target_name": "demonstration_relative_tool_z_error_m",
+  "target_definition": "(left tool base Z - right tool base Z) at observation minus the same quantity at the reviewed reference. Positive values mean the gear tool is higher relative to the reference; the corresponding left-only correction is the negative of this value.",
+  "target_provenance": "Weak kinematic reference from a grasp-preserving demonstration interval. The reference is a visible near-contact pose before release, not measured gear seating or object-center height ground truth.",
+  "limitations": [
+    "No measured camera intrinsics, extrinsics, depth, object poses, or contact event labels are available in these recordings.",
+    "Tool Z is reported in each arm's base frame. The label assumes both base Z axes share the vertical direction. Fixed base height offsets cancel within an episode; changing tool rotations and object grasp offsets do not.",
+    "The intended opening is the side gap between carrier plates. The carrier center bearing and the top pin bore are different targets.",
+    "The held-out episode is reserved before dense extraction. Five episodes provide a small development set, not a hardware success estimate."
+  ],
+  "episodes": [
+    {"id": "20260930T020311-ee8fe583", "split": "train", "start_s": 3.0, "end_s": 5.0, "reference_s": 5.0, "phase": "held_gear_approach_to_carrier_side_gap", "visual_evidence": "Gear remains between the jaws while approaching the carrier rim; gear gripper withdraws toward the pin after this interval."},
+    {"id": "20260930T020432-eacee9a3", "split": "train", "start_s": 3.0, "end_s": 4.5, "reference_s": 4.5, "phase": "held_gear_approach_to_carrier_side_gap", "visual_evidence": "Gear approaches the same peripheral side opening; the selected reference precedes the later release and withdrawal."},
+    {"id": "20260930T020558-ca008d0e", "split": "train", "start_s": 4.0, "end_s": 6.0, "reference_s": 6.0, "phase": "held_gear_approach_to_carrier_side_gap", "visual_evidence": "Held gear converges on the carrier rim; release and local retry motions later in the recording are excluded."},
+    {"id": "20261005T150837-d76f2a97", "split": "development", "start_s": 5.0, "end_s": 9.0, "reference_s": 9.0, "phase": "held_gear_approach_to_carrier_side_gap", "visual_evidence": "Gear is transported to the rim and remains grasped during local alignment; later opening and pin transport are excluded."},
+    {"id": "20261011T191045-ee339dd5", "split": "heldout", "start_s": 5.0, "end_s": 7.5, "reference_s": 7.5, "phase": "held_gear_approach_to_carrier_side_gap", "visual_evidence": "Held gear approaches the rim; the reference precedes the opening and withdrawal visible around 8–9 seconds."}
+  ]
+}
