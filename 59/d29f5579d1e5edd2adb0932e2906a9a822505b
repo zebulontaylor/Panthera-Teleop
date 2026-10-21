@@ -1,0 +1,59 @@
+infra/inference/contract.json
+  s_f9c8a18bcde943::t_808335bed040ed 4
+infra/training/launch-oct05-202-fresh.sh
+  s_e3054a76e905b5::t_d602b816dbff34 6-44
+  s_f60be41b3d063a::t_e7906cb7c36e6e 1-5
+.gitignore
+  s_e3054a76e905b5::t_7f5857c6b423eb 26
+docs/training-oct05-202-fresh-20261008.json
+  s_f60be41b3d063a::t_e7906cb7c36e6e 1-26
+tests/test_gear_alignment_data.py
+  s_df94f0849ec884::t_11fa4eca2c4ba8 1-4,7-36
+  s_e3054a76e905b5::t_7f5857c6b423eb 5-6,37-67
+config/gear-alignment-demos.json
+  s_df94f0849ec884::t_18b2c84634e595 1-26
+scripts/gear_alignment_data.py
+  s_df94f0849ec884::t_18b2c84634e595 1-123
+docs/gear-alignment-demo-audit.md
+  s_df94f0849ec884::t_18b2c84634e595 1-71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "59d29f5579d1e5edd2adb0932e2906a9a822505b",
+  "prompts": {},
+  "sessions": {
+    "s_df94f0849ec884": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a15c23-9168-7000-8d5c-3b3c1d2f008a",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Zeb Taylor <zceboys@gmail.com>"
+    },
+    "s_e3054a76e905b5": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1606a-d3cb-7d71-8aec-85aea29ed6ee",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Zeb Taylor <zceboys@gmail.com>"
+    },
+    "s_f60be41b3d063a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a11e5e-fd25-71a3-9ad8-8023b7794cf0",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Zeb Taylor <zceboys@gmail.com>"
+    },
+    "s_f9c8a18bcde943": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12c36-70b1-7151-b545-4decbbe6f2dc",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Zeb Taylor <zceboys@gmail.com>"
+    }
+  }
+}
