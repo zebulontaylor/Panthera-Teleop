@@ -1,0 +1,106 @@
+work/pi05-demo-matched-20261027/camera-v3/fit_moving_tools.py
+  s_f133c9cac4e8c0::t_a778eebdc62a10 1-44
+work/pi05-demo-matched-20261027/README.md
+  s_f133c9cac4e8c0::t_a778eebdc62a10 1-73
+work/pi05-demo-matched-20261027/demo_scene.py
+  s_f133c9cac4e8c0::t_8a0aace149303f 94-98
+  s_f133c9cac4e8c0::t_30cb6ed4c134ba 1-18,38-41,48-50,52-54,58-61,64-75,92-93,99-154
+  s_f133c9cac4e8c0::t_3d6a8dcae375f0 19-37,51,55-57,62-63,76-91
+  s_f133c9cac4e8c0::t_8d747b7fc84904 44-47
+  s_f133c9cac4e8c0::t_5be71da63f47fb 42-43
+work/pi05-demo-matched-20261027/run_sim.py
+  s_f133c9cac4e8c0::t_fad0b6d3d5597b 37-49,163-164,243,266
+  s_f133c9cac4e8c0::t_1df5337cfd0bdd 55-59,61
+  s_f133c9cac4e8c0::t_5b91e379c3412e 81-87,219,245,265
+  s_f133c9cac4e8c0::t_6ffd8c41fd4548 74-79,100,141,176,183,244,263
+  s_f133c9cac4e8c0::t_226f9ae0d5f1af 248-251,267
+  s_f133c9cac4e8c0::t_f89dbb136ffcab 1-36,50-54,60,62-73,80,88-99,101-140,142-162,165-175,177-182,184-218,220-242,246-247,252-262,264,268-281
+work/pi05-demo-matched-20261027/appearance-targets.json
+  s_f133c9cac4e8c0::t_d171dc8f5c8872 1-52
+work/pi05-demo-matched-20261027/camera-v3/apply_fit.py
+  s_f133c9cac4e8c0::t_098ab9fb14cc3f 1-17
+work/pi05-demo-matched-20261027/camera-v3/camera_report.py
+  s_f133c9cac4e8c0::t_4000e699a1d73f 1-24
+work/pi05-demo-matched-20261027/camera-v3/comparison.json
+  s_f133c9cac4e8c0::t_634b9f41a5f57a 1-25
+work/pi05-demo-matched-20261027/camera-v3/moving-tools-fit.json
+  s_f133c9cac4e8c0::t_364d425c7ebca5 1-149
+work/pi05-demo-matched-20261027/camera-v3/pose_compare_after.py
+  s_f133c9cac4e8c0::t_6a9287bb03ef39 1-20
+work/pi05-demo-matched-20261027/camera-v3/refine_table.py
+  s_f133c9cac4e8c0::t_ee76e046413caf 1-13
+work/pi05-demo-matched-20261027/camera-v3/results.json
+  s_f133c9cac4e8c0::t_6fd14e04061536 1-179
+work/pi05-demo-matched-20261027/camera-v3/scene-fit.json
+  s_f133c9cac4e8c0::t_98be68ec6dc8d7 1-229
+work/pi05-demo-matched-20261027/camera-v3/summarize.py
+  s_f133c9cac4e8c0::t_d52feab7b21eb4 1-22
+work/pi05-demo-matched-20261027/evaluation-v3-assisted80/protocol.json
+  s_f133c9cac4e8c0::t_f273443b02febe 1-491
+work/pi05-demo-matched-20261027/evaluation-v3-assisted80/seed_0_port2_right/result.json
+  s_f133c9cac4e8c0::t_729c1fdd29f79c 1-72
+work/pi05-demo-matched-20261027/evaluation-v3-assisted80/summary.json
+  s_f133c9cac4e8c0::t_da947d264d04cf 1-145
+work/pi05-demo-matched-20261027/evaluation-v3-chunk25/protocol.json
+  s_f133c9cac4e8c0::t_85077bc89fc2a3 1-479
+work/pi05-demo-matched-20261027/evaluation-v3-chunk25/seed_0_port2_right/result.json
+  s_f133c9cac4e8c0::t_c525313ff0cab5 1-69
+work/pi05-demo-matched-20261027/evaluation-v3-chunk25/summary.json
+  s_f133c9cac4e8c0::t_1dcbc979fb37a5 1-142
+work/pi05-demo-matched-20261027/evaluation-v3-chunk50/protocol.json
+  s_f133c9cac4e8c0::t_8421cd23afa220 1-491
+work/pi05-demo-matched-20261027/evaluation-v3-chunk50/seed_0_port2_right/result.json
+  s_f133c9cac4e8c0::t_e33b4bcf51acdf 1-69
+work/pi05-demo-matched-20261027/evaluation-v3-chunk50/summary.json
+  s_f133c9cac4e8c0::t_505976059b059b 1-142
+work/pi05-demo-matched-20261027/evaluation-v3-native25-darkgrip/protocol.json
+  s_f133c9cac4e8c0::t_ba1dcf64eac6a2 1-491
+work/pi05-demo-matched-20261027/evaluation-v3-native25-darkgrip/seed_0_port2_right/result.json
+  s_f133c9cac4e8c0::t_2d97b72ea0877b 1-72
+work/pi05-demo-matched-20261027/evaluation-v3-native25-darkgrip/summary.json
+  s_f133c9cac4e8c0::t_d4ceb10921cb71 1-145
+work/pi05-demo-matched-20261027/evaluation-v3-native50-darkgrip/protocol.json
+  s_f133c9cac4e8c0::t_f89da2f9ec5884 1-491
+work/pi05-demo-matched-20261027/evaluation-v3-native50-darkgrip/seed_0_port2_right/result.json
+  s_f133c9cac4e8c0::t_0c85ac641b6bf9 1-72
+work/pi05-demo-matched-20261027/evaluation-v3-native50-darkgrip/summary.json
+  s_f133c9cac4e8c0::t_568024efe8f778 1-145
+work/pi05-demo-matched-20261027/evaluation-v3-native50-halfgrip/protocol.json
+  s_f133c9cac4e8c0::t_e6bd6ea5a12de4 1-491
+work/pi05-demo-matched-20261027/evaluation-v3-native50/protocol.json
+  s_f133c9cac4e8c0::t_51b9b776caf22e 1-491
+work/pi05-demo-matched-20261027/evaluation-v3-native50/seed_0_port2_right/result.json
+  s_f133c9cac4e8c0::t_21fea97699a75a 1-69
+work/pi05-demo-matched-20261027/evaluation-v3-native50/summary.json
+  s_f133c9cac4e8c0::t_1861189b3ff263 1-142
+work/pi05-demo-matched-20261027/insertion-diagnostics/pickup-result.json
+  s_f133c9cac4e8c0::t_b80d51bdb4d304 1-74
+work/pi05-demo-matched-20261027/reference-provenance.json
+  s_f133c9cac4e8c0::t_36682d2735911a 1-21
+work/pi05-demo-matched-20261027/scene-fit.json
+  s_f133c9cac4e8c0::t_da3f2dc24c9ce2 1-391
+work/pi05-demo-matched-20261027/scene-verification.json
+  s_f133c9cac4e8c0::t_31e9b2236b001f 1-172
+work/pi05-demo-matched-20261027/verify_scene.py
+  s_f133c9cac4e8c0::t_2c9147954356b3 1-33
+work/pi05-demo-matched-20261027/evaluation-v3-native50-halfgrip/seed_0_port2_right/result.json
+  s_f133c9cac4e8c0::t_d5a570f6b43cbf 1-69
+work/pi05-demo-matched-20261027/evaluation-v3-native50-halfgrip/summary.json
+  s_f133c9cac4e8c0::t_dda7d948aa062b 1-142
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "48f85edc17adc7c02d68edb550d8fed0e65c5343",
+  "prompts": {},
+  "sessions": {
+    "s_f133c9cac4e8c0": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a17d95-06c3-7543-9168-78760ebf4b7d",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Zeb Taylor <zceboys@gmail.com>"
+    }
+  }
+}
