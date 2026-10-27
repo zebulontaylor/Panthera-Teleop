@@ -23,9 +23,12 @@ Prefixes are absolute physical actions on the wire. The server uses checkpoint
 **action** normalization before padding them for the model, and guidance only
 constrains the 14 physical action dimensions. Guidance changes denoising itself;
 there is no second client crossfade. Each guided response must acknowledge the
-requested overlap. The dashboard rejects missing acknowledgements and stale
-source observations before executing a new chunk. A guidance error stops playback
-and holds instead of retrying with independent chunks.
+requested overlap. The dashboard rejects missing acknowledgements and expired
+current observations before executing a new chunk. The old plan is a continuity
+prior, so its source timestamp is not subject to the current sensor deadline;
+that age includes previous inference and safety-retimed playback. Non-play
+commands, pause, intervention, and faults invalidate the prior. A guidance error
+stops playback and holds instead of retrying with independent chunks.
 
 Deploy the inference server and `rtc_guidance.py` together using the deployment
 script with the correct `PANTHERA_SSH_HOST`. Reconnect the dashboard to refresh

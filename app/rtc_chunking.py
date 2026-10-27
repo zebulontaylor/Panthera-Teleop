@@ -10,21 +10,24 @@ def supports_rtc(health):
             and capability.get('protocol') == RTC_PROTOCOL)
 
 
-def prepare_rtc(previous_tail, overlap, now, max_age):
-    """Align old row N with new row zero; no actions elapse while holding."""
+def prepare_rtc(previous_tail, overlap):
+    """Align old row N with new row zero at a stopped playback boundary.
+
+    The tail is a continuity prior, not a sensor observation. Its source age
+    includes inference and safety-retimed execution, so the current-observation
+    deadline does not apply. The controller clears it on playback discontinuities.
+    """
     if previous_tail is None or not overlap:
-        return None, None
-    actions, observed_at = previous_tail
-    if now - observed_at > max_age:
-        return None, None
+        return None
+    actions, _observed_at = previous_tail
     count = min(overlap, len(actions))
     if not count:
-        return None, None
-    return dict(previous_actions=np.asarray(actions[:count]).tolist(), overlap=count), observed_at
+        return None
+    return dict(previous_actions=np.asarray(actions[:count]).tolist(), overlap=count)
 
 
-def confirm_rtc(result, request, previous_observed_at, now, max_age):
-    """Fail closed if guidance was ignored or its source observation expired."""
+def confirm_rtc(result, request):
+    """Fail closed if the server ignored or changed the requested guidance."""
     if request is None:
         return 0
     confirmation = result.get('rtc')
@@ -32,6 +35,4 @@ def confirm_rtc(result, request, previous_observed_at, now, max_age):
             or type(confirmation.get('overlap')) is not int
             or confirmation['overlap'] != request['overlap']):
         raise RuntimeError('Inference server did not confirm requested RTC guidance')
-    if now - previous_observed_at > max_age:
-        raise RuntimeError('RTC previous observation expired; discard the guided prediction')
     return request['overlap']

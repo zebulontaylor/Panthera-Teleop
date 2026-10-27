@@ -474,7 +474,7 @@ class Controller:
         pool = ThreadPoolExecutor(max_workers=1)
         future = step = None
         previous_tail = None
-        rtc_body = rtc_observed_at = None
+        rtc_body = None
         target = None
         sequence = 0
         sample_sequence = 0
@@ -711,6 +711,8 @@ class Controller:
                                     blend = self.state['blend_actions']
                                     if kind == 'play':
                                         count = self.state['actions_per_step']
+                                if kind != 'play':
+                                    previous_tail = None
                                 if kind == 'reset':
                                     reset = self.collection_reset(hardware, measured)
                                     if reset is None:
@@ -723,10 +725,9 @@ class Controller:
                                         images = hardware.images()
                                     observed_at = time.monotonic()
                                     inference_body = dict(sequence=sequence, state=measured.tolist(), images=images)
-                                    rtc_body = rtc_observed_at = None
+                                    rtc_body = None
                                     if rtc_enabled and kind == 'play' and not self.expo_recorder:
-                                        rtc_body, rtc_observed_at = prepare_rtc(
-                                            previous_tail, blend, observed_at, CONTRACT['max_observation_age_s'])
+                                        rtc_body = prepare_rtc(previous_tail, blend)
                                         if rtc_body is not None:
                                             inference_body['rtc'] = rtc_body
                                     if self.expo_recorder and kind in ('step', 'play'):
@@ -765,8 +766,7 @@ class Controller:
                                     if now - old_observed_at <= CONTRACT['max_observation_age_s']:
                                         tail = old_tail
                                 if rtc_enabled:
-                                    overlap = confirm_rtc(result, rtc_body, rtc_observed_at,
-                                                          time.monotonic(), CONTRACT['max_observation_age_s'])
+                                    overlap = confirm_rtc(result, rtc_body)
                                     actions = raw_actions.copy()
                                 else:
                                     actions, overlap = blend_predictions(raw_actions, tail, blend if kind == 'play' else 0)
