@@ -23,6 +23,7 @@ from remote_inference import (CONTRACT, ROOT, GRIPPER_ENCODER_TOLERANCE_RAD,
 from hitl_recording import RolloutStore
 from expo_recording import ExplorationRolloutStore
 from takeover_hold import TakeoverHold
+from rtc_chunking import supports_rtc, prepare_rtc, confirm_rtc
 
 LEASE_SECONDS = 2.0
 
@@ -473,6 +474,7 @@ class Controller:
         pool = ThreadPoolExecutor(max_workers=1)
         future = step = None
         previous_tail = None
+        rtc_body = rtc_observed_at = None
         target = None
         sequence = 0
         sample_sequence = 0
@@ -490,6 +492,8 @@ class Controller:
             if health['contract'] != CONTRACT:
                 raise RuntimeError('AWS inference has a different robot contract')
             checkpoint = health['checkpoint']
+            rtc_enabled = supports_rtc(health)
+            self.update(blending_method='rtc' if rtc_enabled else 'crossfade')
             if (self.expo_record_dir is not None and health.get('chunk_size') is not None and
                     health['chunk_size'] != self.expo_prefix_length):
                 raise RuntimeError('EXPO server chunk size differs from the fixed collection prefix length')
@@ -719,6 +723,12 @@ class Controller:
                                         images = hardware.images()
                                     observed_at = time.monotonic()
                                     inference_body = dict(sequence=sequence, state=measured.tolist(), images=images)
+                                    rtc_body = rtc_observed_at = None
+                                    if rtc_enabled and kind == 'play' and not self.expo_recorder:
+                                        rtc_body, rtc_observed_at = prepare_rtc(
+                                            previous_tail, blend, observed_at, CONTRACT['max_observation_age_s'])
+                                        if rtc_body is not None:
+                                            inference_body['rtc'] = rtc_body
                                     if self.expo_recorder and kind in ('step', 'play'):
                                         observation_id = self.expo_recorder.requested(sequence, measured.tolist(), images,
                                             measured_at, request_cameras, expo_next_observation_id)
@@ -754,13 +764,19 @@ class Controller:
                                     old_tail, old_observed_at = previous_tail
                                     if now - old_observed_at <= CONTRACT['max_observation_age_s']:
                                         tail = old_tail
-                                actions, overlap = blend_predictions(raw_actions, tail, blend if kind == 'play' else 0)
+                                if rtc_enabled:
+                                    overlap = confirm_rtc(result, rtc_body, rtc_observed_at,
+                                                          time.monotonic(), CONTRACT['max_observation_age_s'])
+                                    actions = raw_actions.copy()
+                                else:
+                                    actions, overlap = blend_predictions(raw_actions, tail, blend if kind == 'play' else 0)
                                 self.update(prediction=actions.tolist(), latency_s=latency,
                                             blended_actions=overlap)
                                 if kind == 'play':
                                     log.write(json.dumps(dict(unix_ns=time.time_ns(), event='play_blend',
                                                               sequence=sequence, count=count,
                                                               blend_actions=blend, blended_actions=overlap,
+                                                              method='rtc' if rtc_enabled else 'crossfade',
                                                               actions=actions.tolist())) + '\n')
                                     log.flush()
                                 sequence += 1

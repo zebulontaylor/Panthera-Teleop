@@ -10,6 +10,7 @@ import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from action_limits import clamp_gripper_actions
+from rtc_guidance import configure_rtc, prepare_prefix, validate_prefix
 
 ROOT = Path(__file__).resolve().parent
 CONTRACT = json.loads((ROOT / 'contract.json').read_text())
@@ -52,6 +53,8 @@ class Runtime:
         self.allow_training = allow_training
         self.status = 'mock' if mock else 'waiting_for_training'
         self.error = None
+        self.rtc = dict(supported=False, protocol='prefix-v1',
+                        error='RTC is unavailable in transport mock mode' if mock else 'Policy is not loaded')
         self.lock = threading.Lock()
         if not mock:
             threading.Thread(target=self.load, daemon=True).start()
@@ -81,6 +84,11 @@ class Runtime:
                 raise ValueError('Checkpoint feature contract mismatch')
             self.pre, self.post = make_pre_post_processors(
                 self.policy.config, pretrained_path=self.checkpoint)
+            try:
+                configure_rtc(self.policy)
+                self.rtc = dict(supported=True, protocol='prefix-v1')
+            except (ImportError, AttributeError, RuntimeError, TypeError) as exc:
+                self.rtc = dict(supported=False, protocol='prefix-v1', error=str(exc))
             self.torch = torch
             self.status = 'ready'
         except Exception as exc:
@@ -90,6 +98,12 @@ class Runtime:
     def infer(self, payload):
         import numpy as np
         from PIL import Image
+        prefix = None
+        overlap = 0
+        if 'rtc' in payload:
+            if not self.rtc['supported']:
+                raise RuntimeError(f"RTC unsupported: {self.rtc.get('error', 'unavailable')}")
+            prefix, overlap = validate_prefix(payload['rtc'], self.policy.config.chunk_size)
         state = np.asarray(payload['state'], dtype=np.float32)
         if state.shape != (14,) or not np.isfinite(state).all():
             raise ValueError('Expected 14 finite joint/gripper positions')
@@ -111,15 +125,28 @@ class Runtime:
                          'task': CONTRACT['task']}
                 batch.update({f'observation.images.{n}': self.torch.from_numpy(v)
                               .permute(2, 0, 1).float() / 255 for n, v in images.items()})
-                with self.torch.inference_mode():
+                # RTC locally enables input gradients for the denoiser VJP.
+                # inference_mode disables those gradients even in enable_grad.
+                with self.torch.no_grad() if prefix is not None else self.torch.inference_mode():
                     self.policy.reset()
-                    actions = self.post(self.policy.predict_action_chunk(self.pre(batch)))[0].cpu().numpy()
+                    kwargs = {}
+                    if prefix is not None:
+                        batch, normalized_prefix = prepare_prefix(
+                            batch, prefix, self.pre, self.torch, self.policy.config.max_action_dim)
+                        kwargs = dict(prev_chunk_left_over=normalized_prefix,
+                                      inference_delay=0, execution_horizon=overlap)
+                    else:
+                        batch = self.pre(batch)
+                    actions = self.post(self.policy.predict_action_chunk(batch, **kwargs))[0].cpu().numpy()
             if actions.ndim != 2 or actions.shape[1] != 14 or not np.isfinite(actions).all():
                 raise RuntimeError('Invalid model output')
             actions, corrections = clamp_gripper_actions(actions)
-            return dict(sequence=payload['sequence'], actions=actions.tolist(),
-                        checkpoint=self.checkpoint, fps=20, mock=self.mock,
-                        limit_corrections=corrections)
+            result = dict(sequence=payload['sequence'], actions=actions.tolist(),
+                          checkpoint=self.checkpoint, fps=20, mock=self.mock,
+                          limit_corrections=corrections)
+            if prefix is not None:
+                result['rtc'] = dict(overlap=overlap)
+            return result
         finally:
             self.lock.release()
 
@@ -147,7 +174,8 @@ def main():
             if self.path != '/health':
                 return self.send(404, {})
             self.send(200, dict(status=runtime.status, error=runtime.error,
-                                checkpoint=runtime.checkpoint, contract=CONTRACT, names=NAMES))
+                                checkpoint=runtime.checkpoint, contract=CONTRACT, names=NAMES,
+                                rtc=runtime.rtc))
 
         def do_POST(self):
             if self.path != '/infer':
