@@ -20,6 +20,24 @@ except ImportError:
 
 
 class PrefixValidationTests(unittest.TestCase):
+    def test_deployment_checks_and_memory_cap_are_preserved(self):
+        import argparse
+        meta = {key: server.CONTRACT[key] for key in
+                ('fps', 'task', 'dataset_repo', 'dataset_revision')}
+        meta.update(action_representation='absolute', image_crops={
+            f'observation.images.{name}': crop
+            for name, crop in server.CONTRACT['image_crops_xyxy'].items()})
+        for key in ('dataset_manifest_sha256', 'dataset_mix'):
+            if key in server.CONTRACT:
+                meta[key] = server.CONTRACT[key]
+        server.validate_deployment(meta, server.CONTRACT)
+        with self.assertRaisesRegex(ValueError, 'image_crops'):
+            server.validate_deployment(dict(meta, image_crops={}), server.CONTRACT)
+        self.assertEqual(server.cuda_memory_fraction('.16'), .16)
+        for value in ('0', '-1', '2', 'nan'):
+            with self.assertRaises(argparse.ArgumentTypeError):
+                server.cuda_memory_fraction(value)
+
     def test_valid(self):
         actions, overlap = rtc.validate_prefix(dict(previous_actions=[[1.] * 14] * 3, overlap=3), 50)
         self.assertEqual((actions.shape, overlap), ((3, 14), 3))

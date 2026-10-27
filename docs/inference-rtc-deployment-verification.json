@@ -1,0 +1,120 @@
+{
+  "health": {
+    "status": "ready",
+    "error": null,
+    "checkpoint": "/mnt/pi05/inference/checkpoints/mixed70-real30-008500/pretrained_model",
+    "contract": {
+      "fps": 20,
+      "task": "put the gear in the carrier and put a pin in it",
+      "dataset_repo": "ZebTaylor/panthera-gear-carrier-pin-latest200-restyled-20hz",
+      "dataset_revision": "95c9576e09682582611636eebb683304e9eebf4b",
+      "image_size": 256,
+      "image_crops_xyxy": {
+        "overhead": [
+          80,
+          0,
+          560,
+          480
+        ],
+        "wrist_port2": [
+          80,
+          0,
+          560,
+          480
+        ],
+        "wrist_port3": [
+          80,
+          0,
+          560,
+          480
+        ]
+      },
+      "max_observation_age_s": 2.0,
+      "max_camera_age_s": 0.2,
+      "max_joint_speed_rad_s": 1.0,
+      "max_joint_acceleration_rad_s2": 8.0,
+      "max_target_jump_rad": 0.5,
+      "max_tracking_error_rad": 0.1,
+      "gripper_speed_rad_s": 5.0,
+      "gripper_acceleration_rad_s2": 30.0,
+      "gripper_torque_limit_nm": 0.5,
+      "torque_limits_nm": [
+        5,
+        8,
+        8,
+        3,
+        2,
+        2
+      ],
+      "dataset_manifest_sha256": "b1058e4f20cd93100b814078aa6dbcc1e4411db1990fd49bb742ba815e7c2475"
+    },
+    "names": [
+      "left.joint1",
+      "left.joint2",
+      "left.joint3",
+      "left.joint4",
+      "left.joint5",
+      "left.joint6",
+      "left.gripper_rad",
+      "right.joint1",
+      "right.joint2",
+      "right.joint3",
+      "right.joint4",
+      "right.joint5",
+      "right.joint6",
+      "right.gripper_rad"
+    ],
+    "rtc": {
+      "supported": true,
+      "protocol": "prefix-v1"
+    }
+  },
+  "synthetic": true,
+  "robot_motion": false,
+  "probes": [
+    {
+      "sequence": 0,
+      "guided": false,
+      "latency_s": 3.7899974809988635,
+      "acknowledged_overlap": 0,
+      "within_request_age_limit": false
+    },
+    {
+      "sequence": 1,
+      "guided": true,
+      "latency_s": 0.4307126969943056,
+      "acknowledged_overlap": 10,
+      "within_request_age_limit": true
+    },
+    {
+      "sequence": 2,
+      "guided": true,
+      "latency_s": 0.40088680799817666,
+      "acknowledged_overlap": 10,
+      "within_request_age_limit": true
+    },
+    {
+      "sequence": 3,
+      "guided": true,
+      "latency_s": 0.40060653999535134,
+      "acknowledged_overlap": 10,
+      "within_request_age_limit": true
+    }
+  ],
+  "verified_utc": "2026-10-27T23:01:27.792448+00:00",
+  "aws_host": "admin@54.166.156.98",
+  "backup": "/mnt/pi05/inference/backups/pre-rtc-20261027T225940Z",
+  "cuda_memory_fraction": 0.16,
+  "server_sha256": "6b98a790997d663f4fcab12f7c67617a0020469f79f980345b9f55a4bb5b603f",
+  "rtc_guidance_sha256": "22276324e6176707479cfabb52bdf35a46a1084efb9bfcb2aed555b8d68161b6",
+  "dashboard": {
+    "mode": "stopped",
+    "connected": false,
+    "playing": false
+  },
+  "motor_backend": {
+    "mode": "holding",
+    "owner": null,
+    "error": null
+  }
+}

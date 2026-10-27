@@ -39,3 +39,24 @@ latency. Local CPU tests cover normalization, the guidance calculation and clien
 handoff; deployed GPU latency and physical task success need validation on the
 actual checkpoint. Existing observation-age limits are unchanged, so an overly
 slow guided request is rejected.
+
+## Deployment verification
+
+Deployed October 27, 2026 to the existing `mixed70-real30-008500` service. Its
+0.16 CUDA allocator cap and checkpoint deployment checks were retained. The
+inference-only synthetic probe acknowledged 10 guided actions on three requests
+at 0.40–0.43 seconds each. The first unguided warmup took 3.79 seconds; subsequent
+guided requests were within the unchanged two-second request-age limit. This
+checks the real GPU sampler, not physical task success.
+
+See `inference-rtc-deployment-verification.json` for the full result, file hashes
+and backup location. The dashboard was restarted and left disconnected; the
+separate motor backend confirmed powered hold. Reconnect from the dashboard when
+ready for its normal collection-pose reset.
+
+For server rollback, restore `server.py` from
+`/mnt/pi05/inference/backups/pre-rtc-20261027T225940Z/` and restart only
+`panthera-inference.service` on the inference host. The original checkpoint,
+contract, memory cap and service configuration are in that backup. The extra RTC
+helper is inert with the old server. Reconnect the dashboard to negotiate the
+restored server's capabilities; it will select crossfading again.

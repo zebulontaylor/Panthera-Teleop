@@ -18,6 +18,29 @@ NAMES = [name for side in ('left', 'right') for name in
          [*[f'{side}.joint{i}' for i in range(1, 7)], f'{side}.gripper_rad']]
 
 
+def cuda_memory_fraction(value):
+    """Parse a fraction of device memory allowed to PyTorch's allocator."""
+    fraction = float(value)
+    if not 0 < fraction <= 1:
+        raise argparse.ArgumentTypeError('CUDA memory fraction must be greater than 0 and at most 1')
+    return fraction
+
+
+def validate_deployment(meta, contract):
+    for key in ('fps', 'task', 'dataset_repo', 'dataset_revision'):
+        if meta.get(key) != contract[key]:
+            raise ValueError(f'Checkpoint deployment mismatch: {key}')
+    if meta.get('action_representation') != 'absolute':
+        raise ValueError('Only absolute joint actions are supported')
+    expected_crops = {f'observation.images.{name}': crop
+                      for name, crop in contract['image_crops_xyxy'].items()}
+    if meta.get('image_crops') != expected_crops:
+        raise ValueError('Checkpoint deployment mismatch: image_crops')
+    for key in ('dataset_manifest_sha256', 'dataset_mix'):
+        if key in contract and meta.get(key) != contract[key]:
+            raise ValueError(f'Checkpoint deployment mismatch: {key}')
+
+
 def load_policy(checkpoint):
     """Load saved weights strictly; the upstream loader can swallow load errors."""
     from lerobot.configs.policies import PreTrainedConfig
@@ -47,10 +70,11 @@ def load_policy(checkpoint):
 
 
 class Runtime:
-    def __init__(self, checkpoint, mock=False, allow_training=False):
+    def __init__(self, checkpoint, mock=False, allow_training=False, cuda_memory_fraction=None):
         self.checkpoint = checkpoint
         self.mock = mock
         self.allow_training = allow_training
+        self.cuda_memory_fraction = cuda_memory_fraction
         self.status = 'mock' if mock else 'waiting_for_training'
         self.error = None
         self.rtc = dict(supported=False, protocol='prefix-v1',
@@ -71,11 +95,9 @@ class Runtime:
             from lerobot.policies.factory import make_pre_post_processors
             self.checkpoint = str(Path(self.checkpoint).resolve(strict=True))
             meta = json.loads((Path(self.checkpoint) / 'deployment.json').read_text())
-            for key in ('fps', 'task', 'dataset_repo', 'dataset_revision'):
-                if meta.get(key) != CONTRACT[key]:
-                    raise ValueError(f'Checkpoint deployment mismatch: {key}')
-            if meta.get('action_representation') != 'absolute':
-                raise ValueError('Only absolute joint actions are supported')
+            validate_deployment(meta, CONTRACT)
+            if self.cuda_memory_fraction is not None:
+                torch.cuda.set_per_process_memory_fraction(self.cuda_memory_fraction)
             self.policy = load_policy(self.checkpoint)
             if (self.policy.config.action_feature_names != NAMES or
                     self.policy.config.use_relative_actions or
@@ -158,8 +180,10 @@ def main():
     p.add_argument('--mock', action='store_true', help='Transport testing only; echoes state')
     p.add_argument('--allow-training', action='store_true',
                    help='Load alongside training after checking available GPU memory')
+    p.add_argument('--cuda-memory-fraction', type=cuda_memory_fraction,
+                   help="Limit PyTorch's GPU allocator to this fraction of device memory")
     args = p.parse_args()
-    runtime = Runtime(args.checkpoint, args.mock, args.allow_training)
+    runtime = Runtime(args.checkpoint, args.mock, args.allow_training, args.cuda_memory_fraction)
 
     class Handler(BaseHTTPRequestHandler):
         def send(self, status, body):
