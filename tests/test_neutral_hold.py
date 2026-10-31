@@ -25,6 +25,16 @@ class HoldTests(unittest.TestCase):
             self.assertFalse(any(self.hold.tick(float(t),self.arms).values()))
         np.testing.assert_allclose(self.hold.targets['left'],self.targets['left'])
 
+    def test_left_only_hold_ignores_right_and_releases_on_left_pull(self):
+        hold = NeutralHold({'left': self.targets['left']}, self.settings, 0)
+        self.arms['right'] = {}  # No reset tracking or handoff requirement for right.
+        for t in np.arange(0, .7, .01):
+            self.assertEqual(hold.tick(float(t), self.arms), {'left': False})
+        self.arms['left']['measured_torque_nm'][1] += 1.5
+        for t in np.arange(.7, 1., .01):
+            ready = hold.tick(float(t), self.arms)
+        self.assertEqual(ready, {'left': True})
+
     def test_one_handle_releases_only_that_arm_and_latches(self):
         self.arms['left']['measured_torque_nm'][1]+=1.5
         for t in np.arange(.7,1.0,.01):ready=self.hold.tick(float(t),self.arms)

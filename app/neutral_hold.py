@@ -15,7 +15,8 @@ class NeutralHold:
         self.diagnostics = {}
 
     def tick(self, now, arms):
-        for side, arm in arms.items():
+        for side in self.targets:
+            arm = arms[side]
             if self.ready[side]:
                 continue
             if np.max(np.abs(np.asarray(arm['position_rad'])-self.targets[side])) > self.settings['hold_tracking_limit_rad']:

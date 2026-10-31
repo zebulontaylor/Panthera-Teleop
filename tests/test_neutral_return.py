@@ -21,7 +21,30 @@ def arms(q, v=0):
 class MotionTests(unittest.TestCase):
     def setUp(self):
         self.settings = json.loads((ROOT/'config/recording.json').read_text())['neutral_return']
+        self.settings.pop('arms', None)  # Exercise the backward-compatible two-arm default.
         self.limits = {s: (np.full(6, -1), np.full(6, 1)) for s in ('left', 'right')}
+
+    def test_left_only_return_ignores_right_motion_and_feedback(self):
+        self.settings['arms'] = ['left']
+        motion = NeutralReturn(self.settings, self.limits, 0)
+        q = np.zeros(6)
+        for now in np.arange(self.settings['release_delay_seconds'], 12, .01):
+            sample = arms(q)
+            sample['right'] = {}  # The unselected arm is not read by the reset controller.
+            target, complete, _ = motion.tick(float(now), sample)
+            self.assertEqual(set(target), {'left'})
+            q = target['left'].copy()
+            if complete:
+                break
+        self.assertTrue(complete)
+        self.assertEqual(set(motion.initial), {'left'})
+        self.assertEqual(set(motion.diagnostics['max_joint_error_rad']), {'left'})
+        self.assertEqual(set(motion.diagnostics['reported_max_speed_rad_s']), {'left'})
+
+    def test_invalid_arm_selection_rejected(self):
+        for selected in ([], ['left', 'left'], ['unknown'], 'left', None, [None]):
+            with self.subTest(selected=selected), self.assertRaisesRegex(ValueError, 'neutral_return.arms'):
+                NeutralReturn(dict(self.settings, arms=selected), self.limits, 0)
 
     def test_countdown_speed_limit_and_arrival(self):
         motion = NeutralReturn(self.settings, self.limits, 0)

@@ -10,7 +10,13 @@ class NeutralReturn:
         self.requested_at = requested_at
         self.started = None
         self.initial = None
-        self.targets = {side: np.asarray(q, dtype=float) for side, q in settings['position_rad'].items()}
+        selected = settings.get('arms', list(settings['position_rad']))
+        if (not isinstance(selected, list) or not selected
+                or any(not isinstance(side, str) or side not in settings['position_rad']
+                       or side not in limits for side in selected)
+                or len(set(selected)) != len(selected)):
+            raise ValueError('neutral_return.arms must be a nonempty list of unique configured arms')
+        self.targets = {side: np.asarray(settings['position_rad'][side], dtype=float) for side in selected}
         self.duration = None
         self.last_targets = None
         self.arrival_samples = deque()
@@ -23,7 +29,7 @@ class NeutralReturn:
     def tick(self, now, arms):
         if now-self.requested_at < self.settings['release_delay_seconds']:
             return None, False, 'countdown'
-        measured = {side: np.asarray(a['position_rad']) for side, a in arms.items()}
+        measured = {side: np.asarray(arms[side]['position_rad']) for side in self.targets}
         if self.started is None:
             self.initial = measured
             largest = max(float(np.max(np.abs(self.targets[s]-q))) for s, q in measured.items())
@@ -56,7 +62,7 @@ class NeutralReturn:
                     if self.arrival_samples else None for s in measured}
         self.diagnostics = dict(
             max_joint_error_rad={s: float(np.max(np.abs(q-self.targets[s]))) for s, q in measured.items()},
-            reported_max_speed_rad_s={s: max(abs(v) for v in a['velocity_rad_s']) for s, a in arms.items()},
+            reported_max_speed_rad_s={s: max(abs(v) for v in arms[s]['velocity_rad_s']) for s in self.targets},
             encoder_motion_window_rad=movement, arrival_window_observed_seconds=span,
             planned_duration_seconds=self.duration)
         complete = within and span >= window and all(

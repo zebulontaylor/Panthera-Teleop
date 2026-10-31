@@ -43,6 +43,6 @@ def command_gripper(robot, arm, command=None):
         accepted = robot.gripper_control(command['position_rad'], command['speed_limit_rad_s'],
                                          command['torque_limit_nm'])
         arm['gripper']['command'] = dict(command)
-        arm['gripper']['control_mode'] = 'reset_open'
+        arm['gripper']['control_mode'] = command.get('control_mode', 'reset_open')
     if not accepted:
         raise RuntimeError('Gripper command rejected')

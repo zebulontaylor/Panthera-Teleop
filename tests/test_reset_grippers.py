@@ -39,6 +39,12 @@ class GripperResetTests(unittest.TestCase):
         self.assertIn('right', commands)
         self.assertEqual(self.reset.status['left'], 'released')
 
+    def test_left_only_reset_never_commands_right_gripper(self):
+        reset = ResetGrippers(self.settings, {'left': dict(lower=0, upper=2)}, 10)
+        self.assertEqual(set(reset.tick(10, self.arms, {})), {'left'})
+        self.assertEqual(reset.tick(10.5, self.arms, {'left': True}), {})
+        self.assertEqual(reset.status, {'left': 'released'})
+
     def test_reset_from_full_open_moves_back_to_partial_target(self):
         self.arms['left']['gripper']['position'] = 2.0
         commands = self.reset.tick(10.5, self.arms, {})
