@@ -1,0 +1,260 @@
+{
+  "format_version": 1,
+  "mapping": {
+    "wrist_port2": "right",
+    "wrist_port3": "left",
+    "overhead": "overhead"
+  },
+  "mapping_status": "visually_reviewed_all_17_kept_trials_and_gripper_state_correlated",
+  "moving_arm": "left",
+  "carrier_arm": "right",
+  "time_origin": "metadata.start_monotonic_ns",
+  "interval_status": "coarse_visual_review_of_contact_sheets_not_per_frame_grasp_or_success_ground_truth",
+  "episodes": [
+    {
+      "id": "20261022T170024-d0c16ab8",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 12.5,
+        "end_s": 14,
+        "reference_s": 14
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170054-82f86946",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 12.5,
+        "end_s": 14,
+        "reference_s": 14
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170129-22311e84",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 14,
+        "end_s": 16,
+        "reference_s": 16
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170159-e0f8056d",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 14.5,
+        "end_s": 16.5,
+        "reference_s": 16.5
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170232-8bc49e59",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 13.5,
+        "end_s": 15.5,
+        "reference_s": 15.5
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170349-77ed3f1f",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 13.5,
+        "end_s": 15.5,
+        "reference_s": 15.5
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170425-67793553",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 12,
+        "end_s": 14.2,
+        "reference_s": 14.2
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170458-a53c70d5",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 11,
+        "end_s": 13,
+        "reference_s": 13
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170538-fea9c395",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 13.5,
+        "end_s": 16,
+        "reference_s": 16
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170616-ae7f206f",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 14.5,
+        "end_s": 17,
+        "reference_s": 17
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170655-770dab38",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 12,
+        "end_s": 14,
+        "reference_s": 14
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170730-6b3f71c9",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 12,
+        "end_s": 14,
+        "reference_s": 14
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170803-c865755a",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 12.5,
+        "end_s": 14.5,
+        "reference_s": 14.5
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170840-28788d65",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 14.5,
+        "end_s": 16.5,
+        "reference_s": 16.5
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170913-c58d3db7",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 13,
+        "end_s": 15.5,
+        "reference_s": 15.5
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T170949-7a8e8a55",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 11.5,
+        "end_s": 13.5,
+        "reference_s": 13.5
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    },
+    {
+      "id": "20261022T203832-a5a458c8",
+      "gear": {
+        "start_s": 3.5,
+        "end_s": 5.0,
+        "reference_s": 5.0
+      },
+      "pin": {
+        "start_s": 16,
+        "end_s": 18,
+        "reference_s": 18
+      },
+      "limitations": "Pin intervals bound observed transport toward carrier; endpoint can include initial contact/occlusion. No assertion of successful seating or retained grasp at every frame. Gear interval conservative common pre-insertion window."
+    }
+  ],
+  "model_input_camera_order": [
+    "overhead",
+    "wrist_port2",
+    "wrist_port3"
+  ],
+  "model_slot_note": "Preserve checkpoint real_input_camera_order. Network slots named left_wrist/right_wrist are not physical arm identities for these trials.",
+  "source_root": "data/kept"
+}

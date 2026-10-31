@@ -1,0 +1,288 @@
+{
+  "format_version": 1,
+  "mapping": {
+    "wrist_port2": "right",
+    "wrist_port3": "left",
+    "overhead": "overhead"
+  },
+  "mapping_status": "visually_reviewed_all_17_kept_trials_and_gripper_state_correlated",
+  "moving_arm": "left",
+  "carrier_arm": "right",
+  "time_origin": "metadata.start_monotonic_ns",
+  "interval_status": "Gear intervals visually reviewed in both wrist views around first assembly release, excluding final 0.2 s before gripper crosses 0.7 rad opening threshold. Pin intervals retained from coarse audit.",
+  "episodes": [
+    {
+      "id": "20261022T170024-d0c16ab8",
+      "gear": {
+        "start_s": 3.879,
+        "end_s": 6.179,
+        "reference_s": 6.179,
+        "release_open_threshold_s": 6.379,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 12.5,
+        "end_s": 14,
+        "reference_s": 14
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170054-82f86946",
+      "gear": {
+        "start_s": 3.714,
+        "end_s": 6.014,
+        "reference_s": 6.014,
+        "release_open_threshold_s": 6.214,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 12.5,
+        "end_s": 14,
+        "reference_s": 14
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170129-22311e84",
+      "gear": {
+        "start_s": 4.959,
+        "end_s": 7.259,
+        "reference_s": 7.259,
+        "release_open_threshold_s": 7.459,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 14,
+        "end_s": 16,
+        "reference_s": 16
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170159-e0f8056d",
+      "gear": {
+        "start_s": 5.563,
+        "end_s": 7.863,
+        "reference_s": 7.863,
+        "release_open_threshold_s": 8.063,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 14.5,
+        "end_s": 16.5,
+        "reference_s": 16.5
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170232-8bc49e59",
+      "gear": {
+        "start_s": 4.249,
+        "end_s": 6.549,
+        "reference_s": 6.549,
+        "release_open_threshold_s": 6.749,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 13.5,
+        "end_s": 15.5,
+        "reference_s": 15.5
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170349-77ed3f1f",
+      "gear": {
+        "start_s": 4.059,
+        "end_s": 6.359,
+        "reference_s": 6.359,
+        "release_open_threshold_s": 6.559,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 13.5,
+        "end_s": 15.5,
+        "reference_s": 15.5
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170425-67793553",
+      "gear": {
+        "start_s": 3.802,
+        "end_s": 6.102,
+        "reference_s": 6.102,
+        "release_open_threshold_s": 6.302,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 12,
+        "end_s": 14.2,
+        "reference_s": 14.2
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170458-a53c70d5",
+      "gear": {
+        "start_s": 3.198,
+        "end_s": 5.498,
+        "reference_s": 5.498,
+        "release_open_threshold_s": 5.698,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 11,
+        "end_s": 13,
+        "reference_s": 13
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170538-fea9c395",
+      "gear": {
+        "start_s": 5.371,
+        "end_s": 7.671,
+        "reference_s": 7.671,
+        "release_open_threshold_s": 7.871,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 13.5,
+        "end_s": 16,
+        "reference_s": 16
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170616-ae7f206f",
+      "gear": {
+        "start_s": 6.6,
+        "end_s": 8.196,
+        "reference_s": 8.196,
+        "release_open_threshold_s": 8.396,
+        "visual_review": "Earlier failed pickup/retry around 4.8-6.0 s excluded. At 6.9 s gear is held again and transported to carrier before release at 8.396 s. Start conservatively 6.6 s."
+      },
+      "pin": {
+        "start_s": 14.5,
+        "end_s": 17,
+        "reference_s": 17
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170655-770dab38",
+      "gear": {
+        "start_s": 5.001,
+        "end_s": 7.301,
+        "reference_s": 7.301,
+        "release_open_threshold_s": 7.501,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 12,
+        "end_s": 14,
+        "reference_s": 14
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170730-6b3f71c9",
+      "gear": {
+        "start_s": 4.465,
+        "end_s": 6.765,
+        "reference_s": 6.765,
+        "release_open_threshold_s": 6.965,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 12,
+        "end_s": 14,
+        "reference_s": 14
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170803-c865755a",
+      "gear": {
+        "start_s": 4.538,
+        "end_s": 6.838,
+        "reference_s": 6.838,
+        "release_open_threshold_s": 7.038,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 12.5,
+        "end_s": 14.5,
+        "reference_s": 14.5
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170840-28788d65",
+      "gear": {
+        "start_s": 5.346,
+        "end_s": 7.646,
+        "reference_s": 7.646,
+        "release_open_threshold_s": 7.846,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 14.5,
+        "end_s": 16.5,
+        "reference_s": 16.5
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170913-c58d3db7",
+      "gear": {
+        "start_s": 4.585,
+        "end_s": 6.885,
+        "reference_s": 6.885,
+        "release_open_threshold_s": 7.085,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 13,
+        "end_s": 15.5,
+        "reference_s": 15.5
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T170949-7a8e8a55",
+      "gear": {
+        "start_s": 3.764,
+        "end_s": 6.064,
+        "reference_s": 6.064,
+        "release_open_threshold_s": 6.264,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 11.5,
+        "end_s": 13.5,
+        "reference_s": 13.5
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    },
+    {
+      "id": "20261022T203832-a5a458c8",
+      "gear": {
+        "start_s": 3.947,
+        "end_s": 6.247,
+        "reference_s": 6.247,
+        "release_open_threshold_s": 6.447,
+        "visual_review": "Reviewed both wrist cameras at release offsets -2.5,-1.5,-0.5,-0.2,+0.2,+0.7 s; gear approaches peripheral carrier opening before jaws open and withdraw."
+      },
+      "pin": {
+        "start_s": 16,
+        "end_s": 18,
+        "reference_s": 18
+      },
+      "limitations": "Gear remains visually between jaws approaching carrier in reviewed frames. Interval ends before release opening; endpoint does not certify seating height or insertion success. Pin interval remains coarse transport-to-contact candidate and does not certify every-frame grasp."
+    }
+  ],
+  "gear_selection_method": "Select first left-gripper upward crossing of 0.7 rad between 5.5 and 9.0 s. This identifies first assembly gear release after grasp, except episode 170616 where earlier pickup retry at 5.134 s is excluded. Interval starts 2.5 s before crossing, ends 0.2 s before it; all 17 were visually reviewed around crossing. Episode 170616 starts at 6.6 s to exclude pickup retry and regrasp. Endpoint is demonstrated near-contact before opening, not measured successful seating."
+}

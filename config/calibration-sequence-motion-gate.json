@@ -1,0 +1,10 @@
+{
+  "operator_motion_verified": false,
+  "axis_base": null,
+  "reference_q_rad": null,
+  "camera_mapping": null,
+  "checkpoint_id": null,
+  "motion_audit_path": null,
+  "motion_audit_sha256": null,
+  "note": "Deliberately blocks sequence motion. Requires independently measured positive/negative movement checks and an explicit operator-verified local axis. Never populated automatically."
+}

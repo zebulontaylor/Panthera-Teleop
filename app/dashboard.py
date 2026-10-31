@@ -9,6 +9,8 @@ from urllib.parse import urlsplit
 
 import cv2
 
+from robot_commands import LEGACY_ROUTES, RobotCommands
+
 
 class Cameras:
     def __init__(self, store, config):
@@ -95,9 +97,10 @@ class Cameras:
 
 
 class Dashboard:
-    def __init__(self, store, cameras, port, demo=False):
+    def __init__(self, store, cameras, port, demo=False, vision=None):
         self.token = secrets.token_urlsafe(32)
         self.store = store
+        self.commands = RobotCommands(store)
         self.cameras = cameras
         self.url = f'http://127.0.0.1:{port}'
         dashboard = self
@@ -129,10 +132,14 @@ class Dashboard:
                 path = urlsplit(self.path).path
                 if path == '/':
                     self.send(200, html, 'text/html; charset=utf-8')
+                elif path == '/api/commands':
+                    self.send(200, json.dumps(dashboard.commands.capabilities()).encode())
                 elif path == '/api/status':
                     status = dict(store.snapshot(), cameras=cameras.status() if cameras else {},
                                   token=dashboard.token, demo=demo)
                     self.send(200, json.dumps(status).encode())
+                elif path == '/api/alignment-preview' and vision:
+                    self.send(200, json.dumps(vision.preview()).encode())
                 elif path.startswith('/camera/') and cameras:
                     jpg = cameras.jpeg(path.split('/')[-1])
                     self.send(200 if jpg else 503, jpg or b'', 'image/jpeg')
@@ -149,12 +156,20 @@ class Dashboard:
                     if not 0 < size < 2048:
                         raise ValueError('Invalid request size')
                     payload = json.loads(self.rfile.read(size))
-                    if self.path != '/api/decision' or payload.get('label') not in ('kept', 'review', 'discarded'):
+                    if not isinstance(payload, dict):
+                        raise ValueError('Expected a JSON object')
+                    if self.path in LEGACY_ROUTES:
+                        result = dashboard.commands.submit(dict(
+                            command=LEGACY_ROUTES[self.path], parameters=payload))
+                    elif self.path == '/api/commands':
+                        result = dashboard.commands.submit(payload)
+                    elif self.path == '/api/episode-mode':
+                        if set(payload) != {'mode'}:
+                            raise ValueError('Expected only an episode mode')
+                        result = store.set_episode_mode(payload['mode'])
+                    else:
                         raise ValueError('Unknown action')
-                    if payload.get('episode_id') != store.snapshot()['active'] or not payload.get('episode_id'):
-                        raise ValueError('Episode changed; action was not applied')
-                    store.submit('decision', payload)
-                    self.send(202, b'{"accepted":true}')
+                    self.send(202, json.dumps(result).encode())
                 except (ValueError, RuntimeError, TypeError) as exc:
                     self.send(409, json.dumps({'error': str(exc)}).encode())
 

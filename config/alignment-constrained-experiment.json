@@ -1,0 +1,5 @@
+{
+  "axis_verified": false,
+  "forward_axis_base": null,
+  "note": "Measure and set a unit vector pointing forward in the left arm base frame. Positive displacement along this vector is allowed; retreat is blocked. No axis is assumed."
+}

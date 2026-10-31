@@ -1,0 +1,17 @@
+{
+  "axis_verified": false,
+  "forward_axis_base": null,
+  "stereo_calibration": {
+    "verified": false,
+    "checkpoint_id": null,
+    "camera_mapping": null,
+    "image_size": null,
+    "target_offset_left_base_m": null,
+    "T_left_base_right_base": null,
+    "cameras": {
+      "left_wrist": {"side": null, "intrinsics": null, "distortion": null, "T_tool_camera": null},
+      "right_wrist": {"side": null, "intrinsics": null, "distortion": null, "T_tool_camera": null}
+    }
+  },
+  "note": "Missing measured geometry intentionally blocks correction. Transform T_A_B maps coordinates in frame B into frame A. Target offset is demonstrated gear-center minus slot-reference in left-base meters."
+}
