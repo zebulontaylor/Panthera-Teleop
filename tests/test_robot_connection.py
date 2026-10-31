@@ -70,7 +70,7 @@ class RobotConnectionTests(unittest.TestCase):
 
     def test_startup_preflight_failure_exits_cleanly_before_motor_or_camera_setup(self):
         with patch.object(sys, 'argv', ['hand_guide.py', '--run']), \
-                patch.object(setup, 'prepare', side_effect=setup.RobotConnectionError('USB is unconfigured')), \
+                patch.object(setup, 'resolve_board', side_effect=setup.RobotConnectionError('USB is unconfigured')), \
                 patch.object(hand_guide, 'Cameras') as cameras, \
                 patch.object(hand_guide, 'EpisodeStore') as store, \
                 redirect_stderr(io.StringIO()) as output:

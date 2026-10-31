@@ -1,0 +1,17 @@
+{
+  "control_hz": 150,
+  "command_lease_seconds": 0.5,
+  "max_joint_speed_rad_s": 1.0,
+  "joint_torque_limits_nm": [
+    5,
+    8,
+    8,
+    3,
+    2,
+    2
+  ],
+  "max_gripper_speed_rad_s": 5.0,
+  "max_gripper_torque_nm": 0.5,
+  "disconnect_hold_speed_rad_s": 0.6,
+  "startup_lease_seconds": 30.0
+}
