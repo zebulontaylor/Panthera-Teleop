@@ -24,6 +24,9 @@ env/
 /data/
 /logs/
 /checkpoints/
+# Generated export media (keep export scripts and provenance in Git)
+/exports/**/*.mp4
+/exports/**/*.jpg
 *.log
 
 # Local SDK/Quest checkouts, Python environments, and Android tools

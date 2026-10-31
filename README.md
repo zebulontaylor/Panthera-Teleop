@@ -2,7 +2,36 @@
 
 ## Getting started
 
+Switch between dashboards from the repository root:
+
+```bash
+./start-teleop.sh
+./start-inference.sh
+```
+
+Each launcher stops this checkout's running teleop or inference dashboard, lets
+recording cleanup finish, and starts the selected dashboard at
+http://127.0.0.1:8093. The independent motor backend keeps running. Launchers run
+in the foreground; Ctrl+C stops the dashboard. Extra arguments are forwarded,
+for example `./start-teleop.sh --port 8090`. Inference starts disconnected; use
+its Connect button when ready. `--help` leaves the current session running.
+
 On an already configured machine, run `./start.sh` from the repository root. A fresh clone also needs the manufacturer's [Panthera-HT SDK](https://github.com/HighTorque-Robotics/Panthera-HT_SDK) and a Python environment: the local `work/` folder is excluded from Git.
+
+### Single-arm hand guidance
+
+For a connected right arm only, start the motor backend in one terminal and
+the hand-guidance client in another:
+
+```bash
+work/teleop-venv/bin/python app/motor_backend.py --run --arm right
+work/teleop-venv/bin/python app/single_arm_hand_guide.py --run --arm right
+```
+
+This mode provides gravity assistance and a passive gripper, without recording
+or automatic trajectories. Ctrl+C in the client leaves the backend holding the
+measured pose. Support the arm before stopping the backend to end powered control.
+The backend defaults to both arms when `--arm` is omitted.
 
 ### 1. Install the software
 
@@ -37,6 +66,21 @@ Simulation opens the dashboard at http://127.0.0.1:8090 without opening motor de
 
 Live recording uses two Panthera arms and three USB cameras. Connect the arms through their communication sockets, power their motor supplies, and enable motor power with the round buttons. Your user must have access to the robot serial devices and camera devices.
 
+The optional PCsensor USB FootSwitch finishes and classifies an active episode:
+one tap keeps, two flag for review, and three delete to recoverable trash.
+For first-time Linux access, run `sudo ./scripts/enable-foot-pedal.sh`.
+Connect the pedal before starting `./start.sh`; the dashboard displays its
+connection and classification status. The pedal is used only for episode
+keep/review/delete decisions; it does not annotate force or start episodes.
+The recorder exclusively captures pedal keystrokes so they cannot activate
+dashboard shortcuts. Ordinary keyboard input is unaffected.
+If a connected pedal is unplugged or loses events, the session stops and preserves
+the unfinished episode for review. If absent at launch (or disabled through
+`foot_pedal.enabled` in `config/recording.json`), use K/R/D on the dashboard.
+Hardware-free demo mode does not open the pedal. To check the pedal independently
+while control is stopped, run `work/teleop-venv/bin/python app/foot_pedal.py` and
+press/release it.
+
 The checked-in USB mapping and camera paths describe the original laptop. On another machine, update:
 
 - `config/robot-configs/arm-mapping.json`: set each arm's `usb_path` and `pci_controller` from its Linux USB topology. Inspect `readlink -f /sys/class/tty/ttyACM*/device` and identify which physical arm is left/right. The tested boards share a serial number, so serial-number links cannot distinguish them.
@@ -52,21 +96,104 @@ This regenerates the left/right robot YAMLs, including absolute SDK/model paths,
 
 ### 3. Start recording
 
+Use the **Trial mode** selector on the Episode desk to switch between
+**Single bolt insertion · left arm** and **Regular testing** between trials,
+after reset. Switching takes effect immediately for the next trial without
+restarting or moving the arms. The current held pose is unchanged. Regular
+testing restores both-arm triggering and resets, with pre-roll and no setup
+delay. The selection lasts for the current session; startup uses the settings
+in `config/recording.json`.
+
+The current startup configuration is for **left-arm bolt insertion trials**.
+Only left-arm motion starts a take. After motion triggers recording, the first
+2 seconds are a setup window: move the left arm from neutral to the pose that
+represents having just inserted the gear, then pick up and insert the bolt.
+A short rising three-note chime sounds when the first state sample is saved
+after the setup window. State samples and camera images from that window
+(including pre-roll) are not saved. Saved timestamps start at the end of the window. Both arms' subsequent
+state data remain in the usual dataset format. Takes ended before any saved
+state sample are sent to review instead of being kept as empty demonstrations.
+
+Finishing a take returns only the left arm to neutral and opens only its gripper;
+the right arm continues its existing control without a reset. Pull only the left
+handle to resume. These settings are `motion_arms: ["left"]`,
+`start_delay_seconds: 2.0`, and `neutral_return.arms: ["left"]` in
+`config/recording.json`. Restart the recording frontend to apply changes. Set
+both arm lists to `["left", "right"]` and the delay to `0` to restore dual-arm
+recording with pre-roll.
+
+Optional CNN gear/pin alignment assistance is available from the recording dashboard.
+The current configuration enables a supervised gear trial using the October 22
+hand-guided calibration. Hold the dashboard's test-nudge button to authorize one
+bounded pulse; release stops assistance. Automatic nudges still require verified
+calibration and validated grasp/visibility evidence. Pin is not enabled for the
+supervised trial.
+See the [alignment assist setup](docs/alignment-assist.md).
+The [recorded calibration analysis](docs/recorded-alignment-calibration.md) uses
+the 17 kept October 22 trials and reports held-out validation separately from
+the CNN visibility and grasp checks.
+
+For repeated, feedback-controlled vertical corrections using the existing
+demonstrated reference, use `./start-incremental-nudge.sh` and the dashboard's
+**Align vertically with repeated nudges** action. This separate supervised experiment checks fresh
+images between timed moves and holds when both views are within tolerance.
+The launcher now selects the user-requested [relaxed supervised trial](docs/relaxed-nudge.md):
+up to 5 mm per move and 50 mm total travel, with fresh feedback between moves.
+Supervised mode replans from measured joint positions without requiring exact
+settling or confirmed visual progress; hardware limits and stop controls remain.
+See [incremental height alignment](docs/incremental-nudge.md) for the underlying
+controller and strict profile. The revised mode has not yet demonstrated
+convergence on hardware.
+
 With both arms supported and the return path clear, run:
 
 ```bash
 ./start.sh
 ```
 
-The dashboard opens at http://127.0.0.1:8090. Guide the arms by their physical handles; K keeps an episode, R flags it for review, and D discards it. Each decision triggers a raised-neutral return and gripper opening. Support both arms before Ctrl+C ends assistance. Recordings are saved under `data/` and are excluded from Git. The recorder reserves 2 GiB of free disk space.
+The dashboard opens at http://127.0.0.1:8090. Guide the arms by their physical handles; K keeps an episode, R flags it for review, and D discards it. Each decision triggers a raised-neutral return and gripper opening. Ctrl+C ends the frontend session; the independent motor backend retains powered position hold. Recordings are saved under `data/` and are excluded from Git. The recorder reserves 2 GiB of free disk space.
 
 For optional Quest controller operation, also clone [Quest_controller_stream](https://github.com/HighTorque-Robotics/Quest_controller_stream) into `work/Quest_controller_stream`, install its Python/UI dependencies into the same environment, and install Android `adb`. Follow [the Quest guide](docs/quest-quick-start.md); the preserved passthrough changes are in `archive/setup/quest-passthrough.patch`. Physical handle mode uses the Panthera SDK without a headset or Quest bridge.
 
+## Independent motor backend
+
+Teleop and inference now connect to a separate motor-controller process. The
+backend owns the SDK, motor loop, feedback checks, command caps, and control lease.
+It starts as the independent `panthera-motor-controller` user service on the first
+live connection. Frontend exit or lease expiry leaves the arms in powered position
+hold with passive grippers. Support both arms before explicitly stopping powered
+control with `python3 scripts/motor-controller.py stop`.
+See [the architecture and lifecycle guide](docs/motor-controller.md).
+
+## Robot command interface
+
+The backend accepts structured commands and supported plain-English instructions
+through `/api/commands`. Use `python3 scripts/robot-command.py --list` to inspect
+available actions. See [the command API guide](docs/robot-commands.md) for examples,
+authentication, and execution semantics.
+
 ## Recording and control
 
-Run `./start.sh` from this workspace. It checks all three cameras and both arm configurations, enables independent gravity assistance, and opens http://127.0.0.1:8090. Grippers are passive during demonstrations and open to 60% during each reset. There is no starting-pose or exit trajectory. Episode decisions return both arms to a raised neutral pose. The session started by Codex runs as the user service `panthera-gravity-assist`; inspect it with `systemctl --user status panthera-gravity-assist` and support both arms before running `./scripts/stop-gravity-assist.sh` to stop it. A running session must be stopped before launching another.
+Run `./start.sh` from this workspace. It checks all three cameras and both arm configurations, enables independent gravity assistance, and opens http://127.0.0.1:8090. Grippers are passive during demonstrations and open to 60% during each reset. There is no starting-pose or exit trajectory. Episode decisions return the configured reset arms to a raised neutral pose. The session started by Codex runs as the user service `panthera-gravity-assist`; inspect it with `systemctl --user status panthera-gravity-assist` and use `./scripts/stop-gravity-assist.sh` to stop that frontend. Support both arms before running `python3 scripts/motor-controller.py stop` to stop the motor backend and end powered control. A running session must be stopped before launching another.
 
 Move either arm to start an episode automatically. The recorder includes 0.75 seconds of pre-roll and requires sustained motion for 0.12 seconds to reject encoder jitter. Keep the browser page focused:
+
+During recording, the pedal finishes and classifies the active episode at any
+time: **one short tap keeps, two flag for review, three delete to recoverable
+trash**. No gripper gesture or automatic end cue is required. Tap length is
+0.04–0.5 seconds; pause 0.65 seconds after the last release to confirm.
+Release the handles and clear the return path first: the **first press immediately
+ends capture and starts the neutral return**, while further taps select the label
+during the return. Only saving the final label waits for the tap window. Long
+holds and groups above three taps cancel the group and save the take for review,
+marked incomplete, with a low cancellation tone. K/R/D remain available while an
+episode is recording. Interrupted classification also preserves the take for review.
+The pedal does not start episodes or record downward-force requests.
+
+Every classification press clicks, and a confirmation tone announces the saved
+category (one high tone keep, two review, three descending delete). Local audio
+uses `pw-play`, `paplay`, or `aplay`, runs without browser focus, and reports
+playback failures on the dashboard. Set `audio_cues.enabled` to false to disable it.
 
 | Key | Action |
 | --- | --- |
@@ -74,11 +201,21 @@ Move either arm to start an episode automatically. The recorder includes 0.75 se
 | R | Finish and flag the episode for review |
 | D | Finish and move the episode to recoverable trash |
 
-Release the handles and clear the return path before pressing K/R/D. Each decision immediately starts returning both arms to `[0, 0.25, 0.25, 0, 0, 0]` radians. The model places the tool about 6.4 cm above the zero pose. Joint speed is capped at 0.60 rad/s (2× the preceding speed setting), with a 0.6-second minimum trajectory duration, a 2.0 rad/s² acceleration cap, and return torque caps are `[5, 8, 8, 3, 2, 2]` Nm. Recording stays paused throughout the return and clears its pre-roll afterward. Arrival requires both arms within 0.015 rad of target and no more than 0.004 rad of encoder motion across a 0.25-second window. Reported velocity spikes cannot reset arrival while the encoder pose is stable. Real positional error or vibration still prevents arrival. Return logs include joint error, reported speed, encoder motion, and planned duration. Both arms remain in powered position hold at neutral. Grab a handle and gently pull: a sustained change in measured motor torque releases that arm into gravity assistance, independently of the other arm. A 0.5-second hold baseline and 0.15-second confirmation reject brief torque spikes. Pull thresholds are configured per joint as `[0.6, 1.2, 1.2, 0.6, 0.25, 0.25]` Nm. Recording remains blocked while both arms are held; the first released arm rearms it and movement starts the next episode. The other arm stays held until its own handle is pulled. During the return, both grippers move to 60% of their configured travel (currently 1.2 rad) at 0.8 rad/s with a 0.5 Nm torque cap. Each becomes passive once it reaches the reset opening, so it can be closed freely. Pulling an arm handle also cancels any remaining gripper opening for that arm. An obstructed gripper is released to passive control after 5 seconds and its error is shown on the dashboard; the arms keep holding. Gripper reset outcomes are included in the return log. Return results are saved in `data/return-events.jsonl`. A rejected path, tracking deviation, or arrival timeout cancels the return, shows an error, and holds the measured poses until handle pulls release them. Joint/motor/camera faults still stop the session. The tool path is checked against dipping below its endpoint heights; this is not obstacle or collision detection. Idle pauses during a demonstration do not end it. Support both arms before stopping: Ctrl+C in the controller terminal ends assistance and sends the SDK stop command. Closing the dashboard does not stop the controller.
+Release the handles and clear the return path before pressing K/R/D. Each decision immediately starts returning both arms to `[0, 0.25, 0.25, 0, 0, 0]` radians. The model places the tool about 6.4 cm above the zero pose. Joint speed is capped at 0.60 rad/s (2× the preceding speed setting), with a 0.6-second minimum trajectory duration, a 2.0 rad/s² acceleration cap, and return torque caps are `[5, 8, 8, 3, 2, 2]` Nm. Recording stays paused throughout the return and clears its pre-roll afterward. Arrival requires both arms within 0.015 rad of target and no more than 0.004 rad of encoder motion across a 0.25-second window. Reported velocity spikes cannot reset arrival while the encoder pose is stable. Real positional error or vibration still prevents arrival. Return logs include joint error, reported speed, encoder motion, and planned duration. Both arms remain in powered position hold at neutral. Grab a handle and gently pull: a sustained change in measured motor torque releases that arm into gravity assistance, independently of the other arm. A 0.5-second hold baseline and 0.15-second confirmation reject brief torque spikes. Pull thresholds are configured per joint as `[0.6, 1.2, 1.2, 0.6, 0.25, 0.25]` Nm. Recording remains blocked while both arms are held; the first released arm rearms it and movement starts the next episode. The other arm stays held until its own handle is pulled. During the return, both grippers move to 60% of their configured travel (currently 1.2 rad) at 0.8 rad/s with a 0.5 Nm torque cap. Each becomes passive once it reaches the reset opening, so it can be closed freely. Pulling an arm handle also cancels any remaining gripper opening for that arm. An obstructed gripper is released to passive control after 5 seconds and its error is shown on the dashboard; the arms keep holding. Gripper reset outcomes are included in the return log. Return results are saved in `data/return-events.jsonl`. A rejected path, tracking deviation, or arrival timeout cancels the return, shows an error, and holds the measured poses until handle pulls release them. Joint/motor/camera faults still stop the session. The tool path is checked against dipping below its endpoint heights; this is not obstacle or collision detection. Idle pauses during a demonstration do not end it. Ctrl+C in the teleop terminal releases its control lease; the motor backend retains powered position hold. Support both arms before `python3 scripts/motor-controller.py stop` ends powered control. Closing the dashboard does not stop the controller.
 
 Episodes live under `data/kept`, `data/review`, or `data/discarded`. Discarded episodes remain recoverable and are excluded from the kept dataset. An unfinished episode goes to review on shutdown. After an abrupt interruption, pending episodes are recovered to review on the next launch. No test recordings enter these directories; simulation defaults should be directed to a temporary directory.
 
 Each episode contains `metadata.json`, `states.jsonl`, `frames.jsonl`, and timestamped JPEGs in `images/<camera>/`. States include both arms' positions, velocities, measured torques, gripper states, motor modes/faults and SDK feedback times; sent gravity torques and zero-stiffness commands; URDF-derived tool poses; host wall-clock and monotonic timestamps; sequence numbers and control compute time. Metadata snapshots the URDFs, robot and motor configurations, USB mapping, thresholds, camera settings, and calibration status. Camera frames carry individual timestamps, indices, actual image sizes, and file paths. Match camera and joint observations by their shared host monotonic clock. These are receive timestamps, not hardware exposure synchronization.
+
+Hand-guidance states preserve the pedal connection, physical switch state, and
+sample timestamp under `foot_pedal`. `foot_pedal.events` preserves each
+press/release since the previous state sample, including short taps between
+control ticks, with Linux input key codes and host monotonic event timestamps.
+Pedal signal semantics and device paths are saved in metadata under
+`context.foot_pedal`; pedal input is used only for episode classification.
+Metadata records `end_reason=foot_pedal` for pedal decisions. Subsequent taps
+during the return are saved separately in `pedal-decision-events.jsonl`;
+motor-driven return states stay out of the episode.
 
 Control targets 150 Hz; actual achieved rate can be measured from the state timestamps. Cameras target 20 Hz at 640 × 480 with JPEG quality 85. Recording I/O runs on a separate thread with a bounded queue. The session stops and preserves its active episode for review on recording failure, lost camera frames, invalid/stale motor feedback, motor faults, or joint-limit violations. Two GiB of free disk space is reserved. Joint limits and the existing gravity torque caps are retained. Camera intrinsics, hand-eye transforms, and wrist-to-arm assignments remain unverified; each tool pose is expressed in that arm's model base frame.
 
@@ -99,7 +236,7 @@ Test without motors: `./start.sh --demo --data-dir /tmp/panthera-demo`; add `--d
 
 Run hardware-free checks: `work/teleop-venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v`.
 
-Never run a separate probe or legacy experiment while control is active. The current gravity and Quest launchers share an exclusive controller lock. Keep robot USB cables in the saved hub ports.
+Never run a separate probe or legacy experiment while control is active. The motor backend and legacy Quest launcher share an exclusive controller lock; stop the backend before using a legacy controller. Keep robot USB cables in the saved hub ports.
 
 If the serial connection drops during an idle hold, install the targeted USB protection once, with the controller stopped:
 
