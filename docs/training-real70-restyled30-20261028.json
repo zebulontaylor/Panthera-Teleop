@@ -1,0 +1,25 @@
+{
+  "status": "training_running_verified",
+  "run": "aws-real70-restyled30-nohitl-12000-20261028",
+  "wandb_url": "https://wandb.ai/foxnerdsaysmoo/panthera-pi05/runs/bf8ea6c4fc0fc75a",
+  "resume_step": 12000,
+  "sampling": {
+    "real": 0.7,
+    "restyled": 0.3,
+    "within_domain": "uniform_frames"
+  },
+  "sampler_probe": {
+    "count": 10000,
+    "real": 7000,
+    "restyled": 3000
+  },
+  "metrics_reporting": {
+    "updates_per_report": 20,
+    "aggregation": "mean"
+  },
+  "parent_progress_preserved": true,
+  "full_model_gradient_check_passed": true,
+  "target_step": 15000,
+  "hitl_included": false,
+  "verified_at": 1793204193.3734708
+}

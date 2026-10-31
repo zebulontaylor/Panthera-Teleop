@@ -1,0 +1,891 @@
+{
+  "dataset_root": "/home/robotics/Desktop/panthera-teleop/data/processed/panthera-oct28-reference-20hz",
+  "episodes": 28,
+  "frames": 11171,
+  "fps": 20,
+  "baseline_transition_duration_s": 558.55,
+  "numeric_input_sha256": "a9c05b6f740de46a722b7b837c41bd4cdb061b0cc2bd95fa1709d7b41652f613",
+  "info_sha256": "bbeb35570d3c691c290f363471dcad0bec78afd466a3834be56fc9b06219f3e2",
+  "method": {
+    "velocity": "(next_pose - current_pose) * fps, per episode",
+    "acceleration": "diff(velocity) * fps, interior only, per episode",
+    "local_velocity_lower_bound": "sum(max(1, max_axis(abs(v)/v_cap))) / frame_count",
+    "uniform_reference": "per-episode max(1, max(abs(v)/v_cap), sqrt(max(abs(a)/a_cap)))",
+    "boundary_conditions": "No assumed rest at episode boundaries; no cross-episode differences"
+  },
+  "limitations": [
+    "Discrete acceleration includes encoder quantization and sampling artifacts.",
+    "Velocity-only local bound omits acceleration ramps and frame-grid rounding.",
+    "Uniform reference bounds original-grid finite differences, not continuous acceleration.",
+    "No local acceleration-constrained retimer or training-loss experiment was run.",
+    "Thresholds are sensitivity probes, not certified robot limits."
+  ],
+  "velocity_rad_s": {
+    "joints": {
+      "frame_max_percentiles": {
+        "50": 0.1382303237915039,
+        "90": 0.6031858548521996,
+        "95": 0.7665491104125977,
+        "99": 1.0932743418961763,
+        "100": 1.9100886583328247
+      },
+      "axis_sample_percentiles": {
+        "50": 0.0,
+        "90": 0.1633637547492981,
+        "95": 0.3267255425453186,
+        "99": 0.6785845756530762,
+        "100": 1.9100886583328247
+      }
+    },
+    "grippers": {
+      "frame_max_percentiles": {
+        "50": 0.0,
+        "90": 1.7215925455093384,
+        "95": 2.4127429723739624,
+        "99": 3.543716460466385,
+        "100": 5.994160175323486
+      },
+      "axis_sample_percentiles": {
+        "50": 0.0,
+        "90": 1.0555744171142578,
+        "95": 1.7844247817993164,
+        "99": 3.103893995285034,
+        "100": 5.994160175323486
+      }
+    }
+  },
+  "acceleration_rad_s2": {
+    "joints": {
+      "frame_max_percentiles": {
+        "50": 1.2566447257995605,
+        "90": 4.272527694702148,
+        "95": 5.780523419380188,
+        "99": 9.55044972896576,
+        "100": 28.148676455020905
+      },
+      "axis_sample_percentiles": {
+        "50": 0.0,
+        "90": 1.2566328048706055,
+        "95": 2.010619640350342,
+        "99": 4.272568225860596,
+        "100": 28.148676455020905
+      }
+    },
+    "grippers": {
+      "frame_max_percentiles": {
+        "50": 0.2513274550437927,
+        "90": 13.320350646972656,
+        "95": 18.84958505630493,
+        "99": 32.81831905245779,
+        "100": 117.87256896495819
+      },
+      "axis_sample_percentiles": {
+        "50": 0.0,
+        "90": 7.288575172424316,
+        "95": 13.571679592132568,
+        "99": 26.640726923942566,
+        "100": 117.87256896495819
+      }
+    }
+  },
+  "probes": [
+    {
+      "joint_velocity_rad_s": 0.6,
+      "joint_acceleration_rad_s2": 2.0,
+      "gripper_velocity_rad_s": 2.0,
+      "gripper_acceleration_rad_s2": 8.0,
+      "local_velocity_only_duration_ratio_lower_bound": 1.0669737062354443,
+      "local_velocity_only_added_seconds_lower_bound": 37.40816361780744,
+      "velocity_exceedance_frame_percent": 17.20526362903948,
+      "uniform_episode_discrete_velocity_acceleration_duration_ratio": 2.979710798004891
+    },
+    {
+      "joint_velocity_rad_s": 0.8,
+      "joint_acceleration_rad_s2": 3.0,
+      "gripper_velocity_rad_s": 2.0,
+      "gripper_acceleration_rad_s2": 8.0,
+      "local_velocity_only_duration_ratio_lower_bound": 1.041001054816351,
+      "local_velocity_only_added_seconds_lower_bound": 22.901139167672955,
+      "velocity_exceedance_frame_percent": 11.896875839226569,
+      "uniform_episode_discrete_velocity_acceleration_duration_ratio": 2.8136229667253367
+    },
+    {
+      "joint_velocity_rad_s": 1.0,
+      "joint_acceleration_rad_s2": 4.0,
+      "gripper_velocity_rad_s": 3.0,
+      "gripper_acceleration_rad_s2": 12.0,
+      "local_velocity_only_duration_ratio_lower_bound": 1.0075780204575229,
+      "local_velocity_only_added_seconds_lower_bound": 4.232703326549381,
+      "velocity_exceedance_frame_percent": 3.9029630292722226,
+      "uniform_episode_discrete_velocity_acceleration_duration_ratio": 2.3068418460683655
+    },
+    {
+      "joint_velocity_rad_s": 1.5,
+      "joint_acceleration_rad_s2": 6.0,
+      "gripper_velocity_rad_s": 3.0,
+      "gripper_acceleration_rad_s2": 12.0,
+      "local_velocity_only_duration_ratio_lower_bound": 1.0047859894303781,
+      "local_velocity_only_added_seconds_lower_bound": 2.6732143963376984,
+      "velocity_exceedance_frame_percent": 2.497538268731537,
+      "uniform_episode_discrete_velocity_acceleration_duration_ratio": 2.263471991115561
+    }
+  ],
+  "per_episode": [
+    {
+      "episode_index": 0,
+      "frames": 381,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 403.30091116142773,
+          "velocity_exceedance_frame_percent": 14.173228346456693,
+          "uniform_episode_scale": 2.6763467295592123
+        },
+        {
+          "local_velocity_interval_equivalents": 392.98579395748675,
+          "velocity_exceedance_frame_percent": 13.385826771653544,
+          "uniform_episode_scale": 2.6289739245791712
+        },
+        {
+          "local_velocity_interval_equivalents": 381.85846490164596,
+          "velocity_exceedance_frame_percent": 2.8871391076115485,
+          "uniform_episode_scale": 2.146548220767039
+        },
+        {
+          "local_velocity_interval_equivalents": 381.3616515298684,
+          "velocity_exceedance_frame_percent": 1.3123359580052494,
+          "uniform_episode_scale": 2.146548220767039
+        }
+      ]
+    },
+    {
+      "episode_index": 1,
+      "frames": 357,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 390.55601779185236,
+          "velocity_exceedance_frame_percent": 22.408963585434176,
+          "uniform_episode_scale": 3.400156090813824
+        },
+        {
+          "local_velocity_interval_equivalents": 374.79406783916056,
+          "velocity_exceedance_frame_percent": 16.246498599439775,
+          "uniform_episode_scale": 2.852494580641295
+        },
+        {
+          "local_velocity_interval_equivalents": 360.3555716002981,
+          "velocity_exceedance_frame_percent": 5.322128851540616,
+          "uniform_episode_scale": 2.4042734289071976
+        },
+        {
+          "local_velocity_interval_equivalents": 359.07822918395203,
+          "velocity_exceedance_frame_percent": 2.2408963585434174,
+          "uniform_episode_scale": 2.3290520722084853
+        }
+      ]
+    },
+    {
+      "episode_index": 2,
+      "frames": 358,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 385.9366962316757,
+          "velocity_exceedance_frame_percent": 18.156424581005588,
+          "uniform_episode_scale": 3.1756122709552983
+        },
+        {
+          "local_velocity_interval_equivalents": 377.2707040673122,
+          "velocity_exceedance_frame_percent": 12.569832402234638,
+          "uniform_episode_scale": 3.1756122709552983
+        },
+        {
+          "local_velocity_interval_equivalents": 362.7378737144172,
+          "velocity_exceedance_frame_percent": 5.307262569832402,
+          "uniform_episode_scale": 2.5928765615871323
+        },
+        {
+          "local_velocity_interval_equivalents": 361.3991132937372,
+          "velocity_exceedance_frame_percent": 3.6312849162011176,
+          "uniform_episode_scale": 2.5928765615871323
+        }
+      ]
+    },
+    {
+      "episode_index": 3,
+      "frames": 378,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 408.01619924729073,
+          "velocity_exceedance_frame_percent": 20.105820105820104,
+          "uniform_episode_scale": 2.997080087661743
+        },
+        {
+          "local_velocity_interval_equivalents": 395.36398196592927,
+          "velocity_exceedance_frame_percent": 12.698412698412698,
+          "uniform_episode_scale": 2.997080087661743
+        },
+        {
+          "local_velocity_interval_equivalents": 382.2254263261954,
+          "velocity_exceedance_frame_percent": 3.7037037037037033,
+          "uniform_episode_scale": 2.204312701035802
+        },
+        {
+          "local_velocity_interval_equivalents": 380.9076102077961,
+          "velocity_exceedance_frame_percent": 2.1164021164021163,
+          "uniform_episode_scale": 2.204312701035802
+        }
+      ]
+    },
+    {
+      "episode_index": 4,
+      "frames": 358,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 390.2271273030589,
+          "velocity_exceedance_frame_percent": 18.435754189944134,
+          "uniform_episode_scale": 3.23442564109189
+        },
+        {
+          "local_velocity_interval_equivalents": 380.38065795693547,
+          "velocity_exceedance_frame_percent": 11.731843575418994,
+          "uniform_episode_scale": 3.23442564109189
+        },
+        {
+          "local_velocity_interval_equivalents": 364.74041129772866,
+          "velocity_exceedance_frame_percent": 6.424581005586592,
+          "uniform_episode_scale": 2.640897477216497
+        },
+        {
+          "local_velocity_interval_equivalents": 362.26005750894547,
+          "velocity_exceedance_frame_percent": 4.189944134078212,
+          "uniform_episode_scale": 2.640897477216497
+        }
+      ]
+    },
+    {
+      "episode_index": 5,
+      "frames": 370,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 397.6107031103069,
+          "velocity_exceedance_frame_percent": 20.27027027027027,
+          "uniform_episode_scale": 2.743657430013021
+        },
+        {
+          "local_velocity_interval_equivalents": 387.71583936573006,
+          "velocity_exceedance_frame_percent": 12.972972972972974,
+          "uniform_episode_scale": 2.4001771211624146
+        },
+        {
+          "local_velocity_interval_equivalents": 373.6613558332125,
+          "velocity_exceedance_frame_percent": 5.135135135135135,
+          "uniform_episode_scale": 1.9470124279357686
+        },
+        {
+          "local_velocity_interval_equivalents": 372.15085503458977,
+          "velocity_exceedance_frame_percent": 3.5135135135135136,
+          "uniform_episode_scale": 1.9470124279357686
+        }
+      ]
+    },
+    {
+      "episode_index": 6,
+      "frames": 381,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 406.8413812542955,
+          "velocity_exceedance_frame_percent": 21.25984251968504,
+          "uniform_episode_scale": 2.7572910495314695
+        },
+        {
+          "local_velocity_interval_equivalents": 394.93552425224334,
+          "velocity_exceedance_frame_percent": 12.860892388451445,
+          "uniform_episode_scale": 2.7572910495314695
+        },
+        {
+          "local_velocity_interval_equivalents": 383.16648864746094,
+          "velocity_exceedance_frame_percent": 3.149606299212598,
+          "uniform_episode_scale": 2.251318714565066
+        },
+        {
+          "local_velocity_interval_equivalents": 382.7503831088543,
+          "velocity_exceedance_frame_percent": 1.837270341207349,
+          "uniform_episode_scale": 2.251318714565066
+        }
+      ]
+    },
+    {
+      "episode_index": 7,
+      "frames": 389,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 421.4514444669864,
+          "velocity_exceedance_frame_percent": 21.336760925449873,
+          "uniform_episode_scale": 2.835926137903404
+        },
+        {
+          "local_velocity_interval_equivalents": 409.62614585622214,
+          "velocity_exceedance_frame_percent": 12.853470437017995,
+          "uniform_episode_scale": 2.835926137903404
+        },
+        {
+          "local_velocity_interval_equivalents": 393.8543345791598,
+          "velocity_exceedance_frame_percent": 5.655526992287918,
+          "uniform_episode_scale": 2.3155239953617
+        },
+        {
+          "local_velocity_interval_equivalents": 392.07769821087516,
+          "velocity_exceedance_frame_percent": 3.5989717223650386,
+          "uniform_episode_scale": 2.3155239953617
+        }
+      ]
+    },
+    {
+      "episode_index": 8,
+      "frames": 413,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 446.0653278959604,
+          "velocity_exceedance_frame_percent": 17.433414043583532,
+          "uniform_episode_scale": 2.827433745066325
+        },
+        {
+          "local_velocity_interval_equivalents": 432.9322968753986,
+          "velocity_exceedance_frame_percent": 13.559322033898304,
+          "uniform_episode_scale": 2.5807321255253455
+        },
+        {
+          "local_velocity_interval_equivalents": 418.0204694444934,
+          "velocity_exceedance_frame_percent": 4.116222760290557,
+          "uniform_episode_scale": 2.1071589567817877
+        },
+        {
+          "local_velocity_interval_equivalents": 415.32342079281807,
+          "velocity_exceedance_frame_percent": 2.4213075060532687,
+          "uniform_episode_scale": 2.1071589567817877
+        }
+      ]
+    },
+    {
+      "episode_index": 9,
+      "frames": 435,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 471.7886382836538,
+          "velocity_exceedance_frame_percent": 18.160919540229887,
+          "uniform_episode_scale": 3.8384985502953852
+        },
+        {
+          "local_velocity_interval_equivalents": 458.95181299513206,
+          "velocity_exceedance_frame_percent": 14.022988505747128,
+          "uniform_episode_scale": 3.8384985502953852
+        },
+        {
+          "local_velocity_interval_equivalents": 439.9624179738263,
+          "velocity_exceedance_frame_percent": 5.747126436781609,
+          "uniform_episode_scale": 3.134120942212215
+        },
+        {
+          "local_velocity_interval_equivalents": 437.9310907150308,
+          "velocity_exceedance_frame_percent": 3.218390804597701,
+          "uniform_episode_scale": 3.134120942212215
+        }
+      ]
+    },
+    {
+      "episode_index": 10,
+      "frames": 380,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 405.8768404747049,
+          "velocity_exceedance_frame_percent": 20.789473684210527,
+          "uniform_episode_scale": 3.190416984077433
+        },
+        {
+          "local_velocity_interval_equivalents": 394.82677057618275,
+          "velocity_exceedance_frame_percent": 13.157894736842104,
+          "uniform_episode_scale": 2.6049645592329713
+        },
+        {
+          "local_velocity_interval_equivalents": 381.66607560652,
+          "velocity_exceedance_frame_percent": 3.684210526315789,
+          "uniform_episode_scale": 2.255965484253886
+        },
+        {
+          "local_velocity_interval_equivalents": 381.1726247171561,
+          "velocity_exceedance_frame_percent": 2.8947368421052633,
+          "uniform_episode_scale": 1.9523829838778297
+        }
+      ]
+    },
+    {
+      "episode_index": 11,
+      "frames": 410,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 429.8417047827194,
+          "velocity_exceedance_frame_percent": 15.365853658536585,
+          "uniform_episode_scale": 2.9446215040352786
+        },
+        {
+          "local_velocity_interval_equivalents": 420.1062338394113,
+          "velocity_exceedance_frame_percent": 9.512195121951219,
+          "uniform_episode_scale": 2.8469824834391058
+        },
+        {
+          "local_velocity_interval_equivalents": 410.8760463396708,
+          "velocity_exceedance_frame_percent": 1.951219512195122,
+          "uniform_episode_scale": 2.324551463689156
+        },
+        {
+          "local_velocity_interval_equivalents": 410.62666598955786,
+          "velocity_exceedance_frame_percent": 1.4634146341463417,
+          "uniform_episode_scale": 2.324551463689156
+        }
+      ]
+    },
+    {
+      "episode_index": 12,
+      "frames": 383,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 413.35766957529506,
+          "velocity_exceedance_frame_percent": 16.449086161879894,
+          "uniform_episode_scale": 2.8359262877366125
+        },
+        {
+          "local_velocity_interval_equivalents": 402.12207730673254,
+          "velocity_exceedance_frame_percent": 12.010443864229766,
+          "uniform_episode_scale": 2.762981638628891
+        },
+        {
+          "local_velocity_interval_equivalents": 387.124361946558,
+          "velocity_exceedance_frame_percent": 5.483028720626632,
+          "uniform_episode_scale": 2.255965061106575
+        },
+        {
+          "local_velocity_interval_equivalents": 385.25445367892587,
+          "velocity_exceedance_frame_percent": 3.1331592689295036,
+          "uniform_episode_scale": 2.255965061106575
+        }
+      ]
+    },
+    {
+      "episode_index": 13,
+      "frames": 419,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 445.34898496605456,
+          "velocity_exceedance_frame_percent": 15.035799522673033,
+          "uniform_episode_scale": 2.55626776579487
+        },
+        {
+          "local_velocity_interval_equivalents": 436.4350389614701,
+          "velocity_exceedance_frame_percent": 10.978520286396181,
+          "uniform_episode_scale": 2.55626776579487
+        },
+        {
+          "local_velocity_interval_equivalents": 422.6515614489714,
+          "velocity_exceedance_frame_percent": 3.341288782816229,
+          "uniform_episode_scale": 2.0871838907072684
+        },
+        {
+          "local_velocity_interval_equivalents": 421.89616406957305,
+          "velocity_exceedance_frame_percent": 2.1479713603818613,
+          "uniform_episode_scale": 2.0871838907072684
+        }
+      ]
+    },
+    {
+      "episode_index": 14,
+      "frames": 376,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 398.8277855995111,
+          "velocity_exceedance_frame_percent": 18.617021276595743,
+          "uniform_episode_scale": 2.9446216621748813
+        },
+        {
+          "local_velocity_interval_equivalents": 390.18685496458784,
+          "velocity_exceedance_frame_percent": 13.031914893617023,
+          "uniform_episode_scale": 2.531570430845494
+        },
+        {
+          "local_velocity_interval_equivalents": 377.48678381865227,
+          "velocity_exceedance_frame_percent": 2.925531914893617,
+          "uniform_episode_scale": 2.0821619453526616
+        },
+        {
+          "local_velocity_interval_equivalents": 376.8048368444046,
+          "velocity_exceedance_frame_percent": 2.127659574468085,
+          "uniform_episode_scale": 2.067018601163076
+        }
+      ]
+    },
+    {
+      "episode_index": 15,
+      "frames": 371,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 391.25839607867726,
+          "velocity_exceedance_frame_percent": 20.485175202156334,
+          "uniform_episode_scale": 2.717120087606125
+        },
+        {
+          "local_velocity_interval_equivalents": 382.08207168010995,
+          "velocity_exceedance_frame_percent": 9.973045822102426,
+          "uniform_episode_scale": 2.717120087606125
+        },
+        {
+          "local_velocity_interval_equivalents": 372.4133319606384,
+          "velocity_exceedance_frame_percent": 2.4258760107816713,
+          "uniform_episode_scale": 2.2185192615004445
+        },
+        {
+          "local_velocity_interval_equivalents": 372.30218163629377,
+          "velocity_exceedance_frame_percent": 1.8867924528301887,
+          "uniform_episode_scale": 2.2185192615004445
+        }
+      ]
+    },
+    {
+      "episode_index": 16,
+      "frames": 413,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 436.752682775259,
+          "velocity_exceedance_frame_percent": 17.675544794188863,
+          "uniform_episode_scale": 3.150782738705829
+        },
+        {
+          "local_velocity_interval_equivalents": 424.6293723937124,
+          "velocity_exceedance_frame_percent": 11.138014527845035,
+          "uniform_episode_scale": 2.572603333399406
+        },
+        {
+          "local_velocity_interval_equivalents": 414.4015928929051,
+          "velocity_exceedance_frame_percent": 1.4527845036319613,
+          "uniform_episode_scale": 2.2279398405844133
+        },
+        {
+          "local_velocity_interval_equivalents": 413.49345107873285,
+          "velocity_exceedance_frame_percent": 0.7263922518159807,
+          "uniform_episode_scale": 1.9144689645743067
+        }
+      ]
+    },
+    {
+      "episode_index": 17,
+      "frames": 388,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 409.64371440187097,
+          "velocity_exceedance_frame_percent": 15.463917525773196,
+          "uniform_episode_scale": 2.4940636868659856
+        },
+        {
+          "local_velocity_interval_equivalents": 402.4585372051224,
+          "velocity_exceedance_frame_percent": 10.56701030927835,
+          "uniform_episode_scale": 2.4940636868659856
+        },
+        {
+          "local_velocity_interval_equivalents": 390.0023015948633,
+          "velocity_exceedance_frame_percent": 3.865979381443299,
+          "uniform_episode_scale": 2.0363944729420758
+        },
+        {
+          "local_velocity_interval_equivalents": 389.15893820921576,
+          "velocity_exceedance_frame_percent": 2.5773195876288657,
+          "uniform_episode_scale": 2.0363944729420758
+        }
+      ]
+    },
+    {
+      "episode_index": 18,
+      "frames": 405,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 430.955450112621,
+          "velocity_exceedance_frame_percent": 19.753086419753085,
+          "uniform_episode_scale": 2.9124380293380487
+        },
+        {
+          "local_velocity_interval_equivalents": 421.1778715699911,
+          "velocity_exceedance_frame_percent": 13.086419753086421,
+          "uniform_episode_scale": 2.9124380293380487
+        },
+        {
+          "local_velocity_interval_equivalents": 406.7037742435932,
+          "velocity_exceedance_frame_percent": 3.45679012345679,
+          "uniform_episode_scale": 2.377995693118401
+        },
+        {
+          "local_velocity_interval_equivalents": 406.2354571521282,
+          "velocity_exceedance_frame_percent": 2.7160493827160495,
+          "uniform_episode_scale": 2.377995693118401
+        }
+      ]
+    },
+    {
+      "episode_index": 19,
+      "frames": 434,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 458.0776909956088,
+          "velocity_exceedance_frame_percent": 14.746543778801843,
+          "uniform_episode_scale": 2.9232058987404383
+        },
+        {
+          "local_velocity_interval_equivalents": 448.2211881335825,
+          "velocity_exceedance_frame_percent": 10.599078341013826,
+          "uniform_episode_scale": 2.7912631946129927
+        },
+        {
+          "local_velocity_interval_equivalents": 435.5697331639627,
+          "velocity_exceedance_frame_percent": 3.225806451612903,
+          "uniform_episode_scale": 2.2790568548709103
+        },
+        {
+          "local_velocity_interval_equivalents": 435.17681304241216,
+          "velocity_exceedance_frame_percent": 2.5345622119815667,
+          "uniform_episode_scale": 2.2790568548709103
+        }
+      ]
+    },
+    {
+      "episode_index": 20,
+      "frames": 452,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 483.34194296722615,
+          "velocity_exceedance_frame_percent": 16.8141592920354,
+          "uniform_episode_scale": 2.7968874030664015
+        },
+        {
+          "local_velocity_interval_equivalents": 471.29770033434033,
+          "velocity_exceedance_frame_percent": 12.389380530973451,
+          "uniform_episode_scale": 2.7968874030664015
+        },
+        {
+          "local_velocity_interval_equivalents": 455.3658992548784,
+          "velocity_exceedance_frame_percent": 3.761061946902655,
+          "uniform_episode_scale": 2.2836490018435436
+        },
+        {
+          "local_velocity_interval_equivalents": 454.0827131768068,
+          "velocity_exceedance_frame_percent": 2.6548672566371683,
+          "uniform_episode_scale": 2.2836490018435436
+        }
+      ]
+    },
+    {
+      "episode_index": 21,
+      "frames": 454,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 474.48252893115085,
+          "velocity_exceedance_frame_percent": 10.572687224669604,
+          "uniform_episode_scale": 3.069980252254886
+        },
+        {
+          "local_velocity_interval_equivalents": 465.30415318347514,
+          "velocity_exceedance_frame_percent": 8.370044052863436,
+          "uniform_episode_scale": 3.0391254050797776
+        },
+        {
+          "local_velocity_interval_equivalents": 455.4021817073226,
+          "velocity_exceedance_frame_percent": 3.0837004405286343,
+          "uniform_episode_scale": 2.481435502258229
+        },
+        {
+          "local_velocity_interval_equivalents": 454.817403614521,
+          "velocity_exceedance_frame_percent": 1.762114537444934,
+          "uniform_episode_scale": 2.481435502258229
+        }
+      ]
+    },
+    {
+      "episode_index": 22,
+      "frames": 381,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 408.22040608525276,
+          "velocity_exceedance_frame_percent": 17.060367454068242,
+          "uniform_episode_scale": 2.481434551457383
+        },
+        {
+          "local_velocity_interval_equivalents": 399.5903945378959,
+          "velocity_exceedance_frame_percent": 13.123359580052494,
+          "uniform_episode_scale": 2.234979747748732
+        },
+        {
+          "local_velocity_interval_equivalents": 384.44271282851696,
+          "velocity_exceedance_frame_percent": 5.774278215223097,
+          "uniform_episode_scale": 1.8248533224795511
+        },
+        {
+          "local_velocity_interval_equivalents": 382.7758103609085,
+          "velocity_exceedance_frame_percent": 2.8871391076115485,
+          "uniform_episode_scale": 1.8248533224795511
+        }
+      ]
+    },
+    {
+      "episode_index": 23,
+      "frames": 413,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 435.6698199097688,
+          "velocity_exceedance_frame_percent": 14.043583535108958,
+          "uniform_episode_scale": 3.7515780982821685
+        },
+        {
+          "local_velocity_interval_equivalents": 426.49429664807394,
+          "velocity_exceedance_frame_percent": 10.653753026634384,
+          "uniform_episode_scale": 3.063150690330731
+        },
+        {
+          "local_velocity_interval_equivalents": 415.3770503184448,
+          "velocity_exceedance_frame_percent": 3.14769975786925,
+          "uniform_episode_scale": 2.6527663134462536
+        },
+        {
+          "local_velocity_interval_equivalents": 414.5169322192669,
+          "velocity_exceedance_frame_percent": 1.937046004842615,
+          "uniform_episode_scale": 2.1659746249291145
+        }
+      ]
+    },
+    {
+      "episode_index": 24,
+      "frames": 450,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 471.88135549177724,
+          "velocity_exceedance_frame_percent": 13.111111111111112,
+          "uniform_episode_scale": 2.8248267284409883
+        },
+        {
+          "local_velocity_interval_equivalents": 463.9788447227329,
+          "velocity_exceedance_frame_percent": 8.88888888888889,
+          "uniform_episode_scale": 2.8248267284409883
+        },
+        {
+          "local_velocity_interval_equivalents": 452.1340999081731,
+          "velocity_exceedance_frame_percent": 2.888888888888889,
+          "uniform_episode_scale": 2.3064613654853208
+        },
+        {
+          "local_velocity_interval_equivalents": 452.00507305562496,
+          "velocity_exceedance_frame_percent": 2.2222222222222223,
+          "uniform_episode_scale": 2.3064613654853208
+        }
+      ]
+    },
+    {
+      "episode_index": 25,
+      "frames": 437,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 455.80214598464465,
+          "velocity_exceedance_frame_percent": 12.128146453089245,
+          "uniform_episode_scale": 3.2100507249567727
+        },
+        {
+          "local_velocity_interval_equivalents": 449.58375685848296,
+          "velocity_exceedance_frame_percent": 8.466819221967963,
+          "uniform_episode_scale": 2.762982152662996
+        },
+        {
+          "local_velocity_interval_equivalents": 438.7559862931569,
+          "velocity_exceedance_frame_percent": 2.745995423340961,
+          "uniform_episode_scale": 2.2698486355697267
+        },
+        {
+          "local_velocity_interval_equivalents": 437.97350921233493,
+          "velocity_exceedance_frame_percent": 2.059496567505721,
+          "uniform_episode_scale": 2.2559654808136647
+        }
+      ]
+    },
+    {
+      "episode_index": 26,
+      "frames": 430,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 455.1324471477419,
+          "velocity_exceedance_frame_percent": 15.58139534883721,
+          "uniform_episode_scale": 2.76866159114953
+        },
+        {
+          "local_velocity_interval_equivalents": 445.9746439680457,
+          "velocity_exceedance_frame_percent": 12.093023255813954,
+          "uniform_episode_scale": 2.574637394901507
+        },
+        {
+          "local_velocity_interval_equivalents": 432.36365912109613,
+          "velocity_exceedance_frame_percent": 3.7209302325581395,
+          "uniform_episode_scale": 2.102182630065748
+        },
+        {
+          "local_velocity_interval_equivalents": 431.82188788056374,
+          "velocity_exceedance_frame_percent": 2.558139534883721,
+          "uniform_episode_scale": 2.102182630065748
+        }
+      ]
+    },
+    {
+      "episode_index": 27,
+      "frames": 355,
+      "next_state_error_rad": 0.0,
+      "probes": [
+        {
+          "local_velocity_interval_equivalents": 392.89725932975614,
+          "velocity_exceedance_frame_percent": 20.845070422535212,
+          "uniform_episode_scale": 3.358320636297335
+        },
+        {
+          "local_velocity_interval_equivalents": 379.5961513379589,
+          "velocity_exceedance_frame_percent": 14.366197183098592,
+          "uniform_episode_scale": 3.358320636297335
+        },
+        {
+          "local_velocity_interval_equivalents": 362.3340997646252,
+          "velocity_exceedance_frame_percent": 6.197183098591549,
+          "uniform_episode_scale": 2.742057317195799
+        },
+        {
+          "local_velocity_interval_equivalents": 359.109262401859,
+          "velocity_exceedance_frame_percent": 4.225352112676056,
+          "uniform_episode_scale": 2.742057317195799
+        }
+      ]
+    }
+  ]
+}

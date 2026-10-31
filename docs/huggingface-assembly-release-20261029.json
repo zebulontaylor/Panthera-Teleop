@@ -1,0 +1,170 @@
+{
+  "collection_local_dates": [
+    "2026-10-28",
+    "2026-10-29"
+  ],
+  "timezone": "America/Chicago",
+  "task": "put the four gears in the carrier and put a pin in each gear",
+  "total_episodes": 164,
+  "total_frames": 111565,
+  "releases": [
+    {
+      "repo_id": "ZebTaylor/panthera-single-bolt-insertion-real-20hz",
+      "root": "/home/robotics/Desktop/panthera-teleop/data/processed/panthera-single-bolt-insertion-20261029-20hz",
+      "phase": "published",
+      "created_at": "2026-10-30T02:09:23.755368+00:00",
+      "commit": "b217be1892349eaa777049b12c40bf26f711d80c",
+      "public": true,
+      "url": "https://huggingface.co/datasets/ZebTaylor/panthera-single-bolt-insertion-real-20hz",
+      "remote_files_verified": 353,
+      "remote_lfs_sha256_files_verified": 238,
+      "remote_regular_sha256_files_verified": 115,
+      "episodes": 105,
+      "frames": 20057,
+      "task": "put the four gears in the carrier and put a pin in each gear",
+      "public_tag_and_counts_verified": true,
+      "validation": {
+        "verification.json": {
+          "passed": true,
+          "checked_observations": 20057,
+          "decoded_images": 60171,
+          "exact_source_transform_image_checks": 945,
+          "native_loader_items_with_10_step_action_chunks": 315,
+          "episode_boundary_padding_verified": true,
+          "source_logs_unchanged": true,
+          "action_state_velocity_effort_exact_source_match": true,
+          "all_source_image_hashes_match": true,
+          "archive_hashes_verified": true,
+          "counts": {
+            "episodes": 105,
+            "observations": 20057,
+            "original_states": 150366,
+            "trimmed_states": 150261,
+            "original_images": 60598,
+            "trimmed_images": 60576,
+            "removed_states": 105,
+            "removed_images": 22,
+            "removed_tail_seconds": 0.34129385399999457
+          },
+          "training_or_robot_execution_performed": false
+        },
+        "processing/full_rate_verification.json": {
+          "passed": true,
+          "episodes": 105,
+          "original_image_hashes_verified": 60598,
+          "archived_images_exact_source_match": 60576,
+          "archived_states_exact_source_match": 150261,
+          "archive_contents_and_boundaries_verified": true,
+          "newly_verified_episodes": 105,
+          "reused_verified_episodes": 0,
+          "previous_verification_root": null
+        },
+        "processing/metadata_verification.json": {
+          "passed": true,
+          "total_episodes": 105,
+          "total_frames": 20057,
+          "task": "put the four gears in the carrier and put a pin in each gear",
+          "numeric_features": [
+            "observation.state",
+            "action",
+            "observation.velocity",
+            "observation.effort",
+            "timestamp",
+            "frame_index",
+            "episode_index",
+            "index",
+            "task_index"
+          ],
+          "image_features": [
+            "observation.images.overhead",
+            "observation.images.wrist_port2",
+            "observation.images.wrist_port3"
+          ],
+          "statistics_compared": 9540,
+          "method": "Independent numeric-only Arrow projection, float64 centered population variance and exact linear quantiles; all global/per-episode numeric statistics checked.",
+          "image_bytes_loaded": false
+        }
+      }
+    },
+    {
+      "repo_id": "ZebTaylor/panthera-four-gear-assembly-real-20hz",
+      "root": "/home/robotics/Desktop/panthera-teleop/data/processed/panthera-four-gear-assembly-20261028-29-20hz",
+      "phase": "published",
+      "created_at": "2026-10-30T02:23:50.069239+00:00",
+      "commit": "0c27a75215466b7dd4d4a6c8683c3f30d2911ef4",
+      "public": true,
+      "url": "https://huggingface.co/datasets/ZebTaylor/panthera-four-gear-assembly-real-20hz",
+      "remote_files_verified": 261,
+      "remote_lfs_sha256_files_verified": 180,
+      "remote_regular_sha256_files_verified": 81,
+      "episodes": 59,
+      "frames": 91508,
+      "task": "put the four gears in the carrier and put a pin in each gear",
+      "public_tag_and_counts_verified": true,
+      "validation": {
+        "verification.json": {
+          "passed": true,
+          "checked_observations": 91508,
+          "decoded_images": 274524,
+          "exact_source_transform_image_checks": 531,
+          "native_loader_items_with_10_step_action_chunks": 177,
+          "episode_boundary_padding_verified": true,
+          "source_logs_unchanged": true,
+          "action_state_velocity_effort_exact_source_match": true,
+          "all_source_image_hashes_match": true,
+          "archive_hashes_verified": true,
+          "counts": {
+            "episodes": 59,
+            "observations": 91508,
+            "original_states": 680594,
+            "trimmed_states": 680535,
+            "original_images": 274381,
+            "trimmed_images": 274369,
+            "removed_states": 59,
+            "removed_images": 12,
+            "removed_tail_seconds": 0.19696953400005413
+          },
+          "training_or_robot_execution_performed": false
+        },
+        "processing/full_rate_verification.json": {
+          "passed": true,
+          "episodes": 59,
+          "original_image_hashes_verified": 274381,
+          "archived_images_exact_source_match": 274369,
+          "archived_states_exact_source_match": 680535,
+          "archive_contents_and_boundaries_verified": true,
+          "newly_verified_episodes": 59,
+          "reused_verified_episodes": 0,
+          "previous_verification_root": null
+        },
+        "processing/metadata_verification.json": {
+          "passed": true,
+          "total_episodes": 59,
+          "total_frames": 91508,
+          "task": "put the four gears in the carrier and put a pin in each gear",
+          "numeric_features": [
+            "observation.state",
+            "action",
+            "observation.velocity",
+            "observation.effort",
+            "timestamp",
+            "frame_index",
+            "episode_index",
+            "index",
+            "task_index"
+          ],
+          "image_features": [
+            "observation.images.overhead",
+            "observation.images.wrist_port2",
+            "observation.images.wrist_port3"
+          ],
+          "statistics_compared": 5400,
+          "method": "Independent numeric-only Arrow projection, float64 centered population variance and exact linear quantiles; all global/per-episode numeric statistics checked.",
+          "image_bytes_loaded": false
+        }
+      }
+    }
+  ],
+  "selection": "Complete operator-kept recordings only. Four-gear cohort excludes the 28 previously published October 28 single-insertion references. Single-bolt cohort is partial-task demonstration data under the same user-requested full-assembly instruction.",
+  "original_recordings_preserved": true
+}

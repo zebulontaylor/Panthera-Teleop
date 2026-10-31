@@ -1,0 +1,313 @@
+{
+  "processing_version": 2,
+  "recording_session_local_date": "2026-10-28",
+  "recording_timezone": "America/Chicago",
+  "task": "put the gear in the carrier and put a pin in it",
+  "fps": 20,
+  "image_size": 256,
+  "image_crops_xyxy": {
+    "overhead": [
+      120,
+      80,
+      520,
+      480
+    ],
+    "wrist_port2": [
+      80,
+      0,
+      560,
+      480
+    ],
+    "wrist_port3": [
+      80,
+      0,
+      560,
+      480
+    ]
+  },
+  "image_resize": "Overhead fixed400x400 source crop [120,80,520,480]; each wrist fixed480x480 source crop [80,0,560,480]. Pillow LANCZOS resize each to256x256, preserving square geometry without padding.",
+  "image_encoding": "embedded RGB JPEG, quality=95, chroma_subsampling=0",
+  "sampling": "Regular 50ms host-monotonic grid; nearest measured state and nearest frame per camera within the annotated crop; ties select earlier samples. No interpolation, numerical low-pass filter, or duplicated synthetic states. Some camera frames repeat because achieved capture rate is below 20 Hz; counts are reported per episode.",
+  "action_semantics": "absolute measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad at the NEXT grid tick (t+0.05s). Kinesthetic next-pose proxy, not sent motor commands. Final observation is omitted if its next state would leave the crop.",
+  "state_semantics": "measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad. Both joint and gripper values remain native radians.",
+  "state_names": [
+    "left.joint1",
+    "left.joint2",
+    "left.joint3",
+    "left.joint4",
+    "left.joint5",
+    "left.joint6",
+    "left.gripper_rad",
+    "right.joint1",
+    "right.joint2",
+    "right.joint3",
+    "right.joint4",
+    "right.joint5",
+    "right.joint6",
+    "right.gripper_rad"
+  ],
+  "max_state_alignment_s": 0.01,
+  "max_camera_alignment_s": 0.04,
+  "camera_assignment": "Wrist-to-arm assignments are unverified; preserve USB-port names rather than inventing left/right labels.",
+  "timing": "Host receive timestamps, not hardware exposure timestamps. Offline nearest-frame alignment may choose a frame slightly later than the grid tick; all actual offsets are retained.",
+  "trim_method": "Stop at earliest terminal-opening cue or classification-state timestamp; preserve all earlier motion and pauses. Metadata/pedal boundary only; no visual task-success claim.",
+  "trim_uncertainty_s": 0.25,
+  "episodes": [
+    {
+      "id": "20261028T174111-1db8d582",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.109993309,
+      "original_end_s": 20.398594009,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174207-8eb51382",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.926036077,
+      "original_end_s": 18.987816728,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174235-38e7763e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.975567179,
+      "original_end_s": 18.959839333,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174302-ac7447ff",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.956332548,
+      "original_end_s": 19.962424834,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174330-8f8a1927",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.999484221,
+      "original_end_s": 18.978516791,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174357-b3535bf8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.579112072,
+      "original_end_s": 19.622224977,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174425-28064878",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.138480111,
+      "original_end_s": 20.3933619,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174458-51cd8bd3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.533294377,
+      "original_end_s": 21.145235231,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174603-b53ab72f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 20.70443919,
+      "original_end_s": 22.489931699,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174641-dcfb14a3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 21.839966497,
+      "original_end_s": 23.214281253,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174714-98a6c689",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.053062215,
+      "original_end_s": 20.62991084,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174743-63e6079f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 20.560570035,
+      "original_end_s": 21.863537483,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174816-7511967f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.2379503,
+      "original_end_s": 20.513187939,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174844-25ebd688",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 21.019730839,
+      "original_end_s": 22.388992657,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174917-616aaef3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.865344895,
+      "original_end_s": 20.50898036,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T174947-6213d900",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.634238539,
+      "original_end_s": 19.854292809,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T175016-1c30884d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 20.714390285,
+      "original_end_s": 22.150607322,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T175048-d8b6cedf",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.489141367,
+      "original_end_s": 20.972631806,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T175127-889300d8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 20.307613722,
+      "original_end_s": 21.564993525,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T175158-af5e6bc9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 21.754931499,
+      "original_end_s": 23.178052201,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T175229-1bcfe05a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 22.683315561,
+      "original_end_s": 24.248206639,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T175302-c8d79115",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 22.76557893,
+      "original_end_s": 23.496013574,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T180518-81bd82a6",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.102715609,
+      "original_end_s": 20.468304615,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T180547-31e959f6",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 20.732494806,
+      "original_end_s": 21.708776145,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T180634-f4d9826e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 22.563447654,
+      "original_end_s": 23.681204279,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T180713-5232174c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 21.928407717,
+      "original_end_s": 23.495364482,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T181124-734dd09a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 21.55553467,
+      "original_end_s": 22.555500582,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    },
+    {
+      "id": "20261028T181240-48890010",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.810142549,
+      "original_end_s": 18.593598501,
+      "reason": "Operator-kept complete new-method reference; exclude terminal classification tail only.",
+      "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+    }
+  ],
+  "crop_rationale": "User-reviewed October26 overhead crop; wrist crops and encoded wrist bytes preserved.",
+  "source_kind": "operator_kept_new_timing_reference",
+  "overhead_crop_audit": "processing/crop_audit/overhead-crop-audit.md",
+  "annotation_source": "Complete operator-kept recordings selected by created_utc converted to local date; validated source indexes and image availability."
+}

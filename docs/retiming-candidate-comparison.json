@@ -1,0 +1,463 @@
+{
+  "source": "/home/robotics/Desktop/panthera-teleop/data/processed/panthera-oct22-onward-curated-20hz",
+  "reference": "/home/robotics/Desktop/panthera-teleop/docs/retiming-new-cohort-baseline.json",
+  "reference_p95": {
+    "joint_velocity": 0.7665491104125977,
+    "joint_acceleration": 5.780523419380188,
+    "gripper_velocity": 2.4127429723739624,
+    "gripper_acceleration": 18.84958505630493
+  },
+  "source_duration_seconds": 3653.7,
+  "original": {
+    "joint_velocity": {
+      "p50": 0.1633620262145996,
+      "p90": 0.7288479804992676,
+      "p95": 0.955042839050293,
+      "p99": 1.3320356607437134,
+      "max": 2.839999198913574
+    },
+    "gripper_velocity": {
+      "p50": 0.012564659118652344,
+      "p90": 1.7969918251037598,
+      "p95": 2.563539743423462,
+      "p99": 4.121770423650742,
+      "max": 7.464423179626465
+    },
+    "joint_acceleration": {
+      "p50": 1.5079975128173828,
+      "p90": 5.277872085571289,
+      "p95": 7.037167996168137,
+      "p99": 11.812389319762588,
+      "max": 55.54336607456207
+    },
+    "gripper_acceleration": {
+      "p50": 0.2513408660888672,
+      "p90": 14.828317612409592,
+      "p95": 21.865484695881605,
+      "p99": 39.96105194091797,
+      "max": 135.4654710739851
+    }
+  },
+  "candidates": [
+    {
+      "config": {
+        "joint_velocity": 0.8,
+        "joint_acceleration": 6.0,
+        "gripper_velocity": 2.5,
+        "gripper_acceleration": 19.0,
+        "protect_joint_speed": 0.15,
+        "protect_gripper_speed": 0.3,
+        "max_iterations": 40,
+        "max_scale": 4.0
+      },
+      "stats": {
+        "joint_velocity": {
+          "p50": 0.14870033695512763,
+          "p90": 0.5943820551875573,
+          "p95": 0.7213846494328312,
+          "p99": 0.8000000000000007,
+          "max": 1.1567332509121975
+        },
+        "gripper_velocity": {
+          "p50": 0.012684361265100641,
+          "p90": 1.4673873921787952,
+          "p95": 1.848330488920269,
+          "p99": 2.4637400623589985,
+          "max": 6.4736859454315425
+        },
+        "joint_acceleration": {
+          "p50": 1.1108350782598642,
+          "p90": 3.3230081169275727,
+          "p95": 4.125765824280166,
+          "p99": 5.490299225804779,
+          "max": 14.634233110929381
+        },
+        "gripper_acceleration": {
+          "p50": 0.20257125007088206,
+          "p90": 8.86614379664684,
+          "p95": 12.74616016067847,
+          "p99": 18.30138344626759,
+          "max": 96.46732535670006
+        }
+      },
+      "duration_seconds": 4275.1,
+      "added_duration_seconds": 621.4000000000005,
+      "added_duration_percent": 17.007417138790835,
+      "p95_relative_error_to_reference": {
+        "joint_velocity": -0.05891920082648916,
+        "joint_acceleration": -0.28626431813288145,
+        "gripper_velocity": -0.23392980102574001,
+        "gripper_acceleration": -0.3237962468348845
+      },
+      "comparison_score": 0.28093520831963475,
+      "protected_source_seconds": 1409.8500000000001,
+      "max_protected_duration_error_seconds": 2.8449465006019636e-15,
+      "editable_or_seam_violations": {
+        "joint_velocity": 0,
+        "joint_acceleration": 33,
+        "gripper_velocity": 17,
+        "gripper_acceleration": 74
+      },
+      "protected_violations": {
+        "joint_velocity": 30,
+        "joint_acceleration": 140,
+        "gripper_velocity": 371,
+        "gripper_acceleration": 497
+      },
+      "intervals_at_scale_cap": 550
+    },
+    {
+      "config": {
+        "joint_velocity": 0.8,
+        "joint_acceleration": 10.0,
+        "gripper_velocity": 3.0,
+        "gripper_acceleration": 40.0,
+        "protect_joint_speed": 0.15,
+        "protect_gripper_speed": 0.3,
+        "max_iterations": 40,
+        "max_scale": 4.0
+      },
+      "stats": {
+        "joint_velocity": {
+          "p50": 0.15830649209632508,
+          "p90": 0.7301593163816166,
+          "p95": 0.7999999999999985,
+          "p99": 0.8000000000000018,
+          "max": 1.2999945174844507
+        },
+        "gripper_velocity": {
+          "p50": 0.00966077350512684,
+          "p90": 1.7831634458084817,
+          "p95": 2.418689807039502,
+          "p99": 3.0000000000000093,
+          "max": 6.2831854820225725
+        },
+        "joint_acceleration": {
+          "p50": 1.2959854152345018,
+          "p90": 3.8416946951148847,
+          "p95": 4.902047753168736,
+          "p99": 7.339126544513748,
+          "max": 20.53351857501575
+        },
+        "gripper_acceleration": {
+          "p50": 0.20559598939138418,
+          "p90": 11.533173813013116,
+          "p95": 16.87488374483146,
+          "p99": 29.221534140686938,
+          "max": 101.62979694918224
+        }
+      },
+      "duration_seconds": 3830.75,
+      "added_duration_seconds": 177.05000000000018,
+      "added_duration_percent": 4.845772778279556,
+      "p95_relative_error_to_reference": {
+        "joint_velocity": 0.04363828635766831,
+        "joint_acceleration": -0.1519716472847793,
+        "gripper_velocity": 0.002464760952008316,
+        "gripper_acceleration": -0.10476099636012726
+      },
+      "comparison_score": 0.085015885517838,
+      "protected_source_seconds": 1409.8500000000001,
+      "max_protected_duration_error_seconds": 2.8449465006019636e-15,
+      "editable_or_seam_violations": {
+        "joint_velocity": 1,
+        "joint_acceleration": 5,
+        "gripper_velocity": 6,
+        "gripper_acceleration": 12
+      },
+      "protected_violations": {
+        "joint_velocity": 34,
+        "joint_acceleration": 14,
+        "gripper_velocity": 232,
+        "gripper_acceleration": 69
+      },
+      "intervals_at_scale_cap": 38
+    },
+    {
+      "config": {
+        "joint_velocity": 0.8,
+        "joint_acceleration": 20.0,
+        "gripper_velocity": 3.0,
+        "gripper_acceleration": 40.0,
+        "protect_joint_speed": 0.15,
+        "protect_gripper_speed": 0.3,
+        "max_iterations": 40,
+        "max_scale": 4.0
+      },
+      "stats": {
+        "joint_velocity": {
+          "p50": 0.15769661014993885,
+          "p90": 0.753982186317445,
+          "p95": 0.7999999999999996,
+          "p99": 0.8000000000000018,
+          "max": 1.3314093574812114
+        },
+        "gripper_velocity": {
+          "p50": 0.009653281523993584,
+          "p90": 1.7884507874830382,
+          "p95": 2.446586528771844,
+          "p99": 3.0000000000000204,
+          "max": 6.2831854820225725
+        },
+        "joint_acceleration": {
+          "p50": 1.3107696296368154,
+          "p90": 3.862961322898664,
+          "p95": 4.9823290023422615,
+          "p99": 7.843274387010879,
+          "max": 20.638730345521992
+        },
+        "gripper_acceleration": {
+          "p50": 0.20780748985411712,
+          "p90": 11.714770768806181,
+          "p95": 17.2462481736644,
+          "p99": 29.36930244387932,
+          "max": 101.62979694918224
+        }
+      },
+      "duration_seconds": 3813.65,
+      "added_duration_seconds": 159.95000000000027,
+      "added_duration_percent": 4.377754057530736,
+      "p95_relative_error_to_reference": {
+        "joint_velocity": 0.04363828635766964,
+        "joint_acceleration": -0.13808341548480607,
+        "gripper_velocity": 0.01402700444489624,
+        "gripper_acceleration": -0.08505953196588989
+      },
+      "comparison_score": 0.07791164346325904,
+      "protected_source_seconds": 1409.8500000000001,
+      "max_protected_duration_error_seconds": 2.8449465006019636e-15,
+      "editable_or_seam_violations": {
+        "joint_velocity": 2,
+        "joint_acceleration": 1,
+        "gripper_velocity": 7,
+        "gripper_acceleration": 15
+      },
+      "protected_violations": {
+        "joint_velocity": 31,
+        "joint_acceleration": 0,
+        "gripper_velocity": 234,
+        "gripper_acceleration": 75
+      },
+      "intervals_at_scale_cap": 33
+    },
+    {
+      "config": {
+        "joint_velocity": 0.75,
+        "joint_acceleration": 20.0,
+        "gripper_velocity": 3.0,
+        "gripper_acceleration": 40.0,
+        "protect_joint_speed": 0.15,
+        "protect_gripper_speed": 0.3,
+        "max_iterations": 40,
+        "max_scale": 4.0
+      },
+      "stats": {
+        "joint_velocity": {
+          "p50": 0.16029998332866835,
+          "p90": 0.736599016232253,
+          "p95": 0.7499999999999996,
+          "p99": 0.7500000000000029,
+          "max": 1.1262927796375943
+        },
+        "gripper_velocity": {
+          "p50": 0.009545273992552783,
+          "p90": 1.784592170629051,
+          "p95": 2.4255194222803667,
+          "p99": 3.0000000000000204,
+          "max": 6.36320194973897
+        },
+        "joint_acceleration": {
+          "p50": 1.2999665498680146,
+          "p90": 3.7919467435355454,
+          "p95": 4.835168280839132,
+          "p99": 7.535499448878171,
+          "max": 18.23531212633131
+        },
+        "gripper_acceleration": {
+          "p50": 0.2075262861614302,
+          "p90": 11.623342904408613,
+          "p95": 17.11332598097961,
+          "p99": 29.446057640819134,
+          "max": 101.80005186754599
+        }
+      },
+      "duration_seconds": 3841.2,
+      "added_duration_seconds": 187.5,
+      "added_duration_percent": 5.131784218737168,
+      "p95_relative_error_to_reference": {
+        "joint_velocity": -0.02158910653968471,
+        "joint_acceleration": -0.16354144252259095,
+        "gripper_velocity": 0.0052954044640043385,
+        "gripper_acceleration": -0.09211126240386747
+      },
+      "comparison_score": 0.08071146920657349,
+      "protected_source_seconds": 1409.8500000000001,
+      "max_protected_duration_error_seconds": 2.8449465006019636e-15,
+      "editable_or_seam_violations": {
+        "joint_velocity": 0,
+        "joint_acceleration": 0,
+        "gripper_velocity": 7,
+        "gripper_acceleration": 11
+      },
+      "protected_violations": {
+        "joint_velocity": 51,
+        "joint_acceleration": 0,
+        "gripper_velocity": 228,
+        "gripper_acceleration": 76
+      },
+      "intervals_at_scale_cap": 31
+    },
+    {
+      "config": {
+        "joint_velocity": 0.8,
+        "joint_acceleration": 20.0,
+        "gripper_velocity": 3.2,
+        "gripper_acceleration": 50.0,
+        "protect_joint_speed": 0.15,
+        "protect_gripper_speed": 0.3,
+        "max_iterations": 40,
+        "max_scale": 4.0
+      },
+      "stats": {
+        "joint_velocity": {
+          "p50": 0.16016064388242324,
+          "p90": 0.7577946918868504,
+          "p95": 0.7999999999999996,
+          "p99": 0.8000000000000018,
+          "max": 1.2359629431181485
+        },
+        "gripper_velocity": {
+          "p50": 0.00925015656699113,
+          "p90": 1.7785677298413969,
+          "p95": 2.505363915588942,
+          "p99": 3.2000000000000006,
+          "max": 6.283185482022682
+        },
+        "joint_acceleration": {
+          "p50": 1.3241325007922633,
+          "p90": 3.881231023807147,
+          "p95": 4.98058623460253,
+          "p99": 7.842563075898415,
+          "max": 18.381393288198677
+        },
+        "gripper_acceleration": {
+          "p50": 0.20863948314362446,
+          "p90": 11.954198436770008,
+          "p95": 17.557853553681984,
+          "p99": 30.74618619789609,
+          "max": 115.48719696745573
+        }
+      },
+      "duration_seconds": 3789.45,
+      "added_duration_seconds": 135.75,
+      "added_duration_percent": 3.715411774365718,
+      "p95_relative_error_to_reference": {
+        "joint_velocity": 0.04363828635766964,
+        "joint_acceleration": -0.138384905092804,
+        "gripper_velocity": 0.038388234584244785,
+        "gripper_acceleration": -0.06852837867594763
+      },
+      "comparison_score": 0.07879513318308487,
+      "protected_source_seconds": 1409.8500000000001,
+      "max_protected_duration_error_seconds": 2.8449465006019636e-15,
+      "editable_or_seam_violations": {
+        "joint_velocity": 0,
+        "joint_acceleration": 0,
+        "gripper_velocity": 6,
+        "gripper_acceleration": 5
+      },
+      "protected_violations": {
+        "joint_velocity": 29,
+        "joint_acceleration": 0,
+        "gripper_velocity": 181,
+        "gripper_acceleration": 38
+      },
+      "intervals_at_scale_cap": 15
+    },
+    {
+      "config": {
+        "joint_velocity": 0.85,
+        "joint_acceleration": 20.0,
+        "gripper_velocity": 3.2,
+        "gripper_acceleration": 50.0,
+        "protect_joint_speed": 0.15,
+        "protect_gripper_speed": 0.3,
+        "max_iterations": 40,
+        "max_scale": 4.0
+      },
+      "stats": {
+        "joint_velocity": {
+          "p50": 0.15799869828864166,
+          "p90": 0.7584877840937357,
+          "p95": 0.8499999999999974,
+          "p99": 0.8500000000000019,
+          "max": 1.3108050534386717
+        },
+        "gripper_velocity": {
+          "p50": 0.009456912369421033,
+          "p90": 1.7922289756665486,
+          "p95": 2.5285038408537135,
+          "p99": 3.2000000000000095,
+          "max": 6.361830090144272
+        },
+        "joint_acceleration": {
+          "p50": 1.3325879106727,
+          "p90": 3.9802296886665784,
+          "p95": 5.13063674808826,
+          "p99": 8.08766781858217,
+          "max": 20.74972929410017
+        },
+        "gripper_acceleration": {
+          "p50": 0.21292714139722335,
+          "p90": 12.104046738351226,
+          "p95": 17.64325121834451,
+          "p99": 30.83319603466598,
+          "max": 105.34904897330372
+        }
+      },
+      "duration_seconds": 3767.2,
+      "added_duration_seconds": 113.5,
+      "added_duration_percent": 3.106440047075565,
+      "p95_relative_error_to_reference": {
+        "joint_velocity": 0.10886567925502133,
+        "joint_acceleration": -0.11242695931532298,
+        "gripper_velocity": 0.04797894753200782,
+        "gripper_acceleration": -0.06399789885862339
+      },
+      "comparison_score": 0.08700721481074633,
+      "protected_source_seconds": 1409.8500000000001,
+      "max_protected_duration_error_seconds": 2.8449465006019636e-15,
+      "editable_or_seam_violations": {
+        "joint_velocity": 1,
+        "joint_acceleration": 1,
+        "gripper_velocity": 4,
+        "gripper_acceleration": 4
+      },
+      "protected_violations": {
+        "joint_velocity": 21,
+        "joint_acceleration": 0,
+        "gripper_velocity": 188,
+        "gripper_acceleration": 41
+      },
+      "intervals_at_scale_cap": 12
+    }
+  ],
+  "selected_candidate_index": 2,
+  "selected_config": {
+    "joint_velocity": 0.8,
+    "joint_acceleration": 20.0,
+    "gripper_velocity": 3.0,
+    "gripper_acceleration": 40.0,
+    "protect_joint_speed": 0.15,
+    "protect_gripper_speed": 0.3,
+    "max_iterations": 40,
+    "max_scale": 4.0
+  },
+  "selection_method": "Minimum mean absolute log ratio of four pooled frame-max p95 values to reference, plus 0.1 times fractional added duration. Six fixed exploratory candidates; no training-loss optimization.",
+  "limitations": [
+    "20Hz finite differences, not physical acceleration.",
+    "Reference and old episodes differ in phase composition; matching p95 does not establish behavioral equivalence.",
+    "Slow intervals and annotated precision windows fixed exactly in source clock; protected/seam violations reported.",
+    "4x per-interval cap bounds pathological slowdown; this is not a hard-limit trajectory planner."
+  ]
+}

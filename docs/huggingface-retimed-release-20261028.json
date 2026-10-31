@@ -1,0 +1,53 @@
+{
+  "published_on": "2026-10-28",
+  "releases": {
+    "real": {
+      "repo_id": "ZebTaylor/panthera-gear-carrier-pin-retimed-real-20hz",
+      "root": "/home/robotics/Desktop/panthera-teleop/data/processed/panthera-retimed-real255-20hz",
+      "phase": "published",
+      "created_at": "2026-10-28T19:04:21.813899+00:00",
+      "commit": "cae3a648340c24f45a6dabe436844d3ade06c97f",
+      "public": true,
+      "url": "https://huggingface.co/datasets/ZebTaylor/panthera-gear-carrier-pin-retimed-real-20hz",
+      "remote_files_verified": 1324,
+      "remote_lfs_sha256_files_verified": 773,
+      "remote_regular_sha256_files_verified": 551,
+      "episodes": 255,
+      "frames": 87444,
+      "payload_commit": "d11de5131264d669b7f5aa2b41d288a054b3d378",
+      "viewer_training_files_explicit": true,
+      "unchanged_remote_blobs_except_readme_verified": true,
+      "public_v3_tag_verified": true,
+      "native_info_counts_verified_publicly": true
+    },
+    "restyled": {
+      "repo_id": "ZebTaylor/panthera-gear-carrier-pin-retimed-restyled-20hz",
+      "root": "/mnt/pi05/retiming-release-20261028/restyled400",
+      "phase": "published",
+      "created_at": "2026-10-28T19:09:43.748159+00:00",
+      "commit": "83162f9578196d832a3335a37dcee8efb3e063f4",
+      "public": true,
+      "url": "https://huggingface.co/datasets/ZebTaylor/panthera-gear-carrier-pin-retimed-restyled-20hz",
+      "remote_files_verified": 1012,
+      "remote_lfs_sha256_files_verified": 802,
+      "remote_regular_sha256_files_verified": 210,
+      "episodes": 400,
+      "frames": 129892,
+      "public_v3_tag_verified": true,
+      "native_info_counts_verified_publicly": true
+    }
+  },
+  "training_changed": false,
+  "original_releases_changed": false,
+  "scoped_tests_passed": 36,
+  "real_cohorts": {
+    "retimed_previous": 227,
+    "unchanged_new_reference": 28
+  },
+  "restyled_pairing": {
+    "original_sources": 200,
+    "variants_per_source": 2,
+    "identical_paired_timing_maps": true,
+    "new_reference_styled": false
+  }
+}

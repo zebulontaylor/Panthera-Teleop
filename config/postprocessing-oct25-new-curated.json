@@ -1,0 +1,548 @@
+{
+  "processing_version": 2,
+  "recording_session_local_date": "2026-10-25",
+  "recording_timezone": "America/Chicago",
+  "task": "put the gear in the carrier and put a pin in it",
+  "fps": 20,
+  "image_size": 256,
+  "image_crops_xyxy": {
+    "overhead": [
+      80,
+      0,
+      560,
+      480
+    ],
+    "wrist_port2": [
+      80,
+      0,
+      560,
+      480
+    ],
+    "wrist_port3": [
+      80,
+      0,
+      560,
+      480
+    ]
+  },
+  "image_resize": "Fixed centered 480-square crops from 640x480 sources, LANCZOS resized to 256; broad work area for October camera setup.",
+  "image_encoding": "embedded RGB JPEG, quality=95, chroma_subsampling=0",
+  "sampling": "Regular 50ms host-monotonic grid; nearest measured state and nearest frame per camera within the annotated crop; ties select earlier samples. No interpolation, numerical low-pass filter, or duplicated synthetic states. Some camera frames repeat because achieved capture rate is below 20 Hz; counts are reported per episode.",
+  "action_semantics": "absolute measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad at the NEXT grid tick (t+0.05s). Kinesthetic next-pose proxy, not sent motor commands. Final observation is omitted if its next state would leave the crop.",
+  "state_semantics": "measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad. Both joint and gripper values remain native radians.",
+  "state_names": [
+    "left.joint1",
+    "left.joint2",
+    "left.joint3",
+    "left.joint4",
+    "left.joint5",
+    "left.joint6",
+    "left.gripper_rad",
+    "right.joint1",
+    "right.joint2",
+    "right.joint3",
+    "right.joint4",
+    "right.joint5",
+    "right.joint6",
+    "right.gripper_rad"
+  ],
+  "max_state_alignment_s": 0.01,
+  "max_camera_alignment_s": 0.04,
+  "camera_assignment": "Wrist-to-arm assignments are unverified; preserve USB-port names rather than inventing left/right labels.",
+  "timing": "Host receive timestamps, not hardware exposure timestamps. Offline nearest-frame alignment may choose a frame slightly later than the grid tick; all actual offsets are retained.",
+  "trim_method": "Kept task episodes exclude terminal pedal classification tails. Every retained review recording has one conservative contiguous error-cropped partial-task interval from detailed three-camera1s review and0.25s boundary refinement; exact error onset can remain occluded. No discontinuous stitching.",
+  "trim_uncertainty_s": 0.25,
+  "episodes": [
+    {
+      "id": "20261025T210250-96b78d60",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.766201069,
+      "original_end_s": 17.526584959,
+      "reason": "Inspected all three cameras at 1-second intervals: coherent carrier/gear manipulation followed by pin pickup/placement and retreat; no obvious setup-only recording, test motion, drop or accidental input. Exact assembly success not certified.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T212413-26f959c6",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.530615973,
+      "original_end_s": 16.626364948,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T212448-d2053888",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.258051233,
+      "original_end_s": 16.247809174,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T212512-cc561a82",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.1410407,
+      "original_end_s": 18.496288346,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T212545-8e3854ec",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.251110052,
+      "original_end_s": 18.423913436,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T212616-70c2ae0a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.159825138,
+      "original_end_s": 19.07010682,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T212644-06a84c9d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.514673327,
+      "original_end_s": 19.674154906,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T212733-0d6e397b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.73962746,
+      "original_end_s": 16.677592658,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T212759-44dcd81b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.259476858,
+      "original_end_s": 17.943642288,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T212900-2a3bb8b3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.85668038,
+      "original_end_s": 16.427268255,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T212935-48c16080",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.153948146,
+      "original_end_s": 16.420897295,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213012-c39f38b0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.506621507,
+      "original_end_s": 15.866646548,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213041-47a01a38",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.299315583,
+      "original_end_s": 17.782166386,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213131-685eb37f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.527586121,
+      "original_end_s": 15.625094378,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213210-922bf569",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 13.411063104,
+      "original_end_s": 14.64642454,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213237-3b45871e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.484136607,
+      "original_end_s": 15.770618919,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213310-31ee5eb4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.813968475,
+      "original_end_s": 16.873826865,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213339-8743c2e4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.425578362,
+      "original_end_s": 15.519284167,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213408-35c3b261",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.561353069,
+      "original_end_s": 16.80840399,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213500-a70642d9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.746574189,
+      "original_end_s": 15.998630848,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213546-3f99b77b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.513798642,
+      "original_end_s": 15.472923223,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213621-3e886e6f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.373244707,
+      "original_end_s": 19.223339532,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213703-632a73e8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.038323137,
+      "original_end_s": 17.099131661,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213743-7a892bc9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.974368673,
+      "original_end_s": 17.333237687,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213835-72469062",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.832474266,
+      "original_end_s": 17.044728039,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213917-7d47d23a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.338286371,
+      "original_end_s": 17.624047875,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T213954-ae0df7ca",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.639564696,
+      "original_end_s": 16.941178952,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214028-41556091",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.922688617,
+      "original_end_s": 16.134002614,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214121-c6e1a374",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.490614494,
+      "original_end_s": 16.667895766,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214154-eb9d35af",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.107044396,
+      "original_end_s": 16.42007224,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214223-f9ea1be5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.193705727,
+      "original_end_s": 17.399425242,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214303-2ff636bd",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.379901003,
+      "original_end_s": 18.441185266,
+      "reason": "Contact sheet shows coherent gear/carrier manipulation, pin approach and release/retreat; no obvious setup-only recording, test motion, drop or accidental input. Task success is not certified from sampled thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214339-31d42dca",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.510324952,
+      "original_end_s": 18.688395071,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214423-84ee3ac1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.253528353,
+      "original_end_s": 16.498030752,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214451-2fa0f597",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.476321433,
+      "original_end_s": 18.85705795,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214532-21a6769b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.562388866,
+      "original_end_s": 17.035471982,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214600-d30bdeb4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.820136042,
+      "original_end_s": 18.357163132,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214630-be8e093e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.267473605,
+      "original_end_s": 16.734649402,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214700-56f0425c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.682468801,
+      "original_end_s": 16.927985255,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214730-5f43ad56",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.148182829,
+      "original_end_s": 16.758375494,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214804-a0a3ea13",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.934646712,
+      "original_end_s": 18.410027551,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214837-9c285054",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.937191884,
+      "original_end_s": 18.298296832,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214913-0cca9275",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.865118492,
+      "original_end_s": 17.173990073,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T214953-797c2f41",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.975682837,
+      "original_end_s": 18.154651954,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T215029-d9233731",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.455940989,
+      "original_end_s": 16.669846326,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T215059-f862eee3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.896066289,
+      "original_end_s": 17.982907393,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T215128-fee37bc6",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.555713023,
+      "original_end_s": 16.696831483,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T215213-2e5629f9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.799657685,
+      "original_end_s": 18.124886247,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T215242-f54d3720",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.887808816,
+      "original_end_s": 17.430405842,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T215336-418a2056",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.148584396,
+      "original_end_s": 17.220988364,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T215442-80496133",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.299928799,
+      "original_end_s": 18.687738839,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T215519-eb1b09fc",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.774069355,
+      "original_end_s": 18.409537386,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T215548-4679256f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.211023538,
+      "original_end_s": 18.202999821,
+      "reason": "Contact-sheet frames show a full task-directed bimanual manipulation sequence followed by gripper withdrawal; no obvious setup-only recording, accidental trigger, or unrelated test. Fine side-slot/pin success cannot be certified from thumbnails.",
+      "annotation_source": "Six time-distributed overhead images per episode; detailed three-camera review for representative episodes. Task relevance, not certified success."
+    },
+    {
+      "id": "20261025T212826-dc3303ba",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.75,
+      "end_s": 9.75,
+      "original_end_s": 16.735394315,
+      "reason": "Retain one conservative contiguous clean gear-task prefix; exclude subsequent pin attempt because release/contact outcome is uncertain in flagged-review episode. No success claim for pin insertion.",
+      "annotation_source": "Detailed all-camera1s review with0.25s boundary refinement by subagent; conservative contiguous clean prefix.",
+      "partial_demonstration": true,
+      "recovery_confidence": "medium"
+    }
+  ],
+  "crop_rationale": "Overhead isolates the tabletop parts and assembly area. Wider wrist crops retain the approach, gear pickup, pin insertion and contact positions across the session; wrist-to-arm assignment remains unverified.",
+  "source_kind": "new_task_kept_and_error_cropped_review_recordings"
+}

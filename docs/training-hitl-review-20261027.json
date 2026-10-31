@@ -1,0 +1,178 @@
+{
+  "status": "stopped_per_user_rollback",
+  "source_rollouts": 23,
+  "intervention_episodes": 81,
+  "observations": 5393,
+  "fps": 20,
+  "training_observation_seconds": 269.65,
+  "selected_human_interval_seconds": 275.30169714699997,
+  "annotations": "/home/robotics/Desktop/panthera-teleop/config/hitl-review-20261027-2x.json",
+  "dataset": "/home/robotics/Desktop/panthera-teleop/data/processed/hitl-review-20261027-20hz",
+  "full_rate_dataset": "/home/robotics/Desktop/panthera-teleop/data/processed/hitl-review-20261027-full-rate",
+  "verification": {
+    "frames_images_actions": {
+      "passed": true,
+      "checked_observations": 5393,
+      "decoded_images": 16179,
+      "exact_source_transform_image_checks": 729,
+      "native_loader_items_with_10_step_action_chunks": 243,
+      "episode_boundary_padding_verified": true,
+      "source_logs_unchanged": true,
+      "action_state_velocity_effort_exact_source_match": true,
+      "all_source_image_hashes_match": true,
+      "archive_hashes_verified": true,
+      "counts": {
+        "episodes": 81,
+        "observations": 5393,
+        "original_states": 311235,
+        "trimmed_states": 36482,
+        "original_images": 115175,
+        "trimmed_images": 12351,
+        "removed_states": 274753,
+        "removed_images": 102824,
+        "removed_tail_seconds": 1037.959075663
+      },
+      "training_or_robot_execution_performed": false
+    },
+    "full_rate": {
+      "passed": true,
+      "episodes": 81,
+      "original_image_hashes_verified": 115175,
+      "archived_images_exact_source_match": 12351,
+      "archived_states_exact_source_match": 36482,
+      "archive_contents_and_boundaries_verified": true,
+      "newly_verified_episodes": 81,
+      "reused_verified_episodes": 0,
+      "previous_verification_root": null
+    },
+    "production_50_step_chunks": {
+      "passed": true,
+      "chunk_size": 50,
+      "episodes": 81,
+      "native_items_checked": 162,
+      "action_vectors_checked": 8100,
+      "first_and_last_episode_frames_checked": true,
+      "all_actions_match_same_episode_clamp": true,
+      "no_cross_correction_boundary": true
+    }
+  },
+  "sampling": {
+    "interpretation": "Each new intervention frame has twice the average existing-frame weight; existing corpus conditional70:30 restyled:real remains. Loss weighting unchanged.",
+    "per_frame_weights": {
+      "restyled": 1.05,
+      "existing_real": 0.9,
+      "new_interventions": 2.0
+    },
+    "expected_sample_fractions": {
+      "restyled": 0.6617723005883366,
+      "existing_real": 0.28361670025214425,
+      "new_interventions": 0.054610999159519204
+    }
+  },
+  "training": {
+    "host": "admin@54.166.156.98",
+    "dataset": "/mnt/pi05/mixed600-hitl81-2x-20261027",
+    "total_frames": 192113,
+    "total_episodes": 681,
+    "run": "aws-mixed600-hitl81-2x-8500-20261027",
+    "resume_step": 8500,
+    "resume_checkpoint": "/mnt/pi05/runs/aws-mixed70-real30-6500-108dedd99f/checkpoints/008500",
+    "target_step": 15000,
+    "target_samples": 1920000,
+    "global_batch_size": 128,
+    "microbatch_size": 64,
+    "checkpoint_every": 500,
+    "normalization": "Inherited unchanged from existing mixture/checkpoint",
+    "schedule": "Continue persisted sample-based decay segment",
+    "restart_authorization": "User requested immediate restart and accepted loss of updates since checkpoint8500",
+    "shutdown_policy": "Preserve prior behavior: shutdown after final checkpoint backup and inventory verification",
+    "wandb_url": "https://wandb.ai/foxnerdsaysmoo/panthera-pi05/runs/ace38fa0a3f9660d",
+    "observed_step": 8503,
+    "dataset_manifest_sha256": "c69ed233a7f66567363076dafb6b3f16427394cb13bc2ebda0d8d9e29b6472d7"
+  },
+  "implementation": "/home/robotics/Desktop/panthera-teleop/work/hitl-training-update",
+  "lightweight_tests_passed": 19,
+  "runtime_verification": {
+    "passed": true,
+    "verified_at_unix": 1793141211.3916953,
+    "run": "aws-mixed600-hitl81-2x-8500-20261027",
+    "wandb_url": "https://wandb.ai/foxnerdsaysmoo/panthera-pi05/runs/ace38fa0a3f9660d",
+    "resume_step": 8500,
+    "completed_updates": 3,
+    "observed_step": 8503,
+    "dataset_episodes": 681,
+    "dataset_frames": 192113,
+    "dataset_manifest_sha256": "c69ed233a7f66567363076dafb6b3f16427394cb13bc2ebda0d8d9e29b6472d7",
+    "gradient_checks": {
+      "vision_encoder": 0.02376427873969078,
+      "vision_projector": 0.027572324499487877,
+      "language_backbone": 0.007267167791724205,
+      "action_expert": 0.0007479299674741924,
+      "action_projection": 0.07463513314723969
+    },
+    "sampling": {
+      "passed": true,
+      "sampling": {
+        "restyled_frame_weight": 1.05,
+        "real_frame_weight": 0.9,
+        "hitl_frame_weight": 2.0,
+        "within_domain": "uniform_frames",
+        "replacement": true,
+        "sampler": "panthera-hitl-2x-v1"
+      },
+      "first_logical_batch_domain_counts": {
+        "restyled": 86,
+        "real": 37,
+        "hitl": 5
+      },
+      "hitl_sample_probability": 0.054610999159519204,
+      "old_conditional_restyled_real_ratio": [
+        0.7,
+        0.3
+      ],
+      "seed": 20261025,
+      "sampler_resume": {
+        "epoch": 0,
+        "start_index": 0
+      }
+    },
+    "initial_sample_progress": {
+      "start": {
+        "schema": 1,
+        "step": 8500,
+        "frames": 192113,
+        "samples_seen": 1088000,
+        "global_batch_size": 128,
+        "sampler": {
+          "epoch": 0,
+          "start_index": 0
+        },
+        "decay_segment": {
+          "start_step": 2500,
+          "start_samples": 320000,
+          "start_lr": [
+            1.535104193057446e-05
+          ],
+          "target_samples": 1920000,
+          "min_lr": 2.5e-06
+        }
+      },
+      "target_step": 15000,
+      "target_samples": 1920000,
+      "dataset_migration": true,
+      "parent_checkpoint": "/mnt/pi05/runs/aws-mixed70-real30-6500-108dedd99f/checkpoints/008500"
+    },
+    "old_training_processes_stopped": true,
+    "build_verification": {
+      "passed": true,
+      "checked_rows": 192113,
+      "encoded_images_unchanged": true,
+      "numeric_payloads_unchanged": true,
+      "normalization_unchanged": true,
+      "manifest_hash": "c69ed233a7f66567363076dafb6b3f16427394cb13bc2ebda0d8d9e29b6472d7",
+      "hitl_probability": 0.054610999159519204
+    }
+  },
+  "superseded_by": "/home/robotics/Desktop/panthera-teleop/docs/training-hitl-unweighted-20261027.json",
+  "stop_reason": "User reported performance regression and requested rollback to original8500 plus HITL at1x."
+}

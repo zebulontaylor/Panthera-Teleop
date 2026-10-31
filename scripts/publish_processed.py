@@ -8,7 +8,16 @@ from pathlib import Path
 from huggingface_hub import HfApi, hf_hub_download
 
 
-def main(root, update_existing=False):
+def obsolete_files(remote_files, local_files, replace_all=False):
+    """Keep Hub attributes while replacing either training files or the release."""
+    return [name for name in remote_files if name not in local_files
+            and (name != '.gitattributes' if replace_all else
+                 name.startswith(('data/', 'meta/', 'processing/alignment/')))]
+
+
+def main(root, update_existing=False, replace_all=False):
+    if replace_all and not update_existing:
+        raise ValueError('--replace-all requires --update-existing')
     verification = json.loads((root / "verification.json").read_text())
     assert verification["passed"]
     assert json.loads((root / "processing/full_rate_verification.json").read_text())["passed"]
@@ -30,9 +39,7 @@ def main(root, update_existing=False):
                        revision=parent_commit, exist_ok=True)
         local_files = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file()}
         remote_files = api.list_repo_files(repo_id, repo_type="dataset", revision=parent_commit)
-        delete_patterns = [name for name in remote_files
-                           if name.startswith(("data/", "meta/", "processing/alignment/"))
-                           and name not in local_files]
+        delete_patterns = obsolete_files(remote_files, local_files, replace_all)
         print(f"Updating {url} from {parent_commit}", flush=True)
     else:
         url = api.create_repo(repo_id=repo_id, repo_type="dataset", private=True, exist_ok=False)
@@ -43,7 +50,7 @@ def main(root, update_existing=False):
                         "data/**", "meta/**", "processing/**", "trimmed_full_rate/**"],
         ignore_patterns=["**/__pycache__/**", "**/*.pyc", "**/.cache/**"],
         parent_commit=parent_commit, delete_patterns=delete_patterns,
-        commit_message=f"Publish {len(manifest['episodes'])} contact-trimmed Panthera demos, 20 Hz LeRobot v3")
+        commit_message=f"Publish only {len(manifest['episodes'])} curated Panthera episodes with precision loss metadata")
     revision = commit.oid
     files = api.list_repo_files(repo_id=repo_id, repo_type="dataset", revision=revision)
     expected = [p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file()
@@ -53,6 +60,8 @@ def main(root, update_existing=False):
     assert not (set(expected) - set(files)), sorted(set(expected) - set(files))
     assert not {name for name in files if name.startswith(("data/", "meta/", "processing/alignment/"))
                 and name not in expected}, "Obsolete training files remain on the remote"
+    if replace_all:
+        assert not (set(files) - set(expected) - {'.gitattributes'}), 'Obsolete release files remain'
     lfs_checks = 0
     remote_info = api.dataset_info(repo_id, revision=revision, files_metadata=True)
     for sibling in remote_info.siblings:
@@ -86,5 +95,6 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("root", type=Path)
     p.add_argument("--update-existing", action="store_true")
+    p.add_argument("--replace-all", action="store_true", help="Replace the entire current release, including old archives and provenance")
     args = p.parse_args()
-    main(args.root.resolve(), args.update_existing)
+    main(args.root.resolve(), args.update_existing, args.replace_all)

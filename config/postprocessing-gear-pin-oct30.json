@@ -1,0 +1,1968 @@
+{
+  "processing_version": 2,
+  "recording_session_local_date": "2026-10-30",
+  "recording_timezone": "America/Chicago",
+  "task": "put the gear in the carrier and put a pin in it",
+  "fps": 20,
+  "image_size": 256,
+  "image_crops_xyxy": {
+    "overhead": [
+      120,
+      80,
+      520,
+      480
+    ],
+    "wrist_port2": [
+      80,
+      0,
+      560,
+      480
+    ],
+    "wrist_port3": [
+      80,
+      0,
+      560,
+      480
+    ]
+  },
+  "image_resize": "Overhead fixed400x400 source crop [120,80,520,480]; each wrist fixed480x480 source crop [80,0,560,480]. Pillow LANCZOS resize each to256x256, preserving square geometry without padding.",
+  "image_encoding": "embedded RGB JPEG, quality=95, chroma_subsampling=0",
+  "sampling": "Regular 50ms host-monotonic grid; nearest measured state and nearest frame per camera within the annotated crop; ties select earlier samples. No interpolation, numerical low-pass filter, or duplicated synthetic states. Some camera frames repeat because achieved capture rate is below 20 Hz; counts are reported per episode.",
+  "action_semantics": "absolute measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad at the NEXT grid tick (t+0.05s). Kinesthetic next-pose proxy, not sent motor commands. Final observation is omitted if its next state would leave the crop.",
+  "state_semantics": "measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad. Both joint and gripper values remain native radians.",
+  "state_names": [
+    "left.joint1",
+    "left.joint2",
+    "left.joint3",
+    "left.joint4",
+    "left.joint5",
+    "left.joint6",
+    "left.gripper_rad",
+    "right.joint1",
+    "right.joint2",
+    "right.joint3",
+    "right.joint4",
+    "right.joint5",
+    "right.joint6",
+    "right.gripper_rad"
+  ],
+  "max_state_alignment_s": 0.01,
+  "max_camera_alignment_s": 0.04,
+  "camera_assignment": "Wrist-to-arm assignments are unverified; preserve USB-port names rather than inventing left/right labels.",
+  "timing": "Host receive timestamps, not hardware exposure timestamps. Offline nearest-frame alignment may choose a frame slightly later than the grid tick; all actual offsets are retained.",
+  "trim_method": "Manual visual review of both wrist-camera tails, assisted by gripper position and tool-motion plots; conservative contact-boundary cuts before the assembly becomes unsupported. No automatic contact sensor or exact release event exists.",
+  "trim_uncertainty_s": 0.15,
+  "episodes": [
+    {
+      "id": "20261030T171428-72aea079",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 21.209252617,
+      "original_end_s": 21.233321467,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T171458-097b4f18",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.516116734,
+      "original_end_s": 18.532738627,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T171525-b6fd5f07",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.72150869,
+      "original_end_s": 18.738029095,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T171552-8eb9c98f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.651402215,
+      "original_end_s": 19.66448033,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T171619-75748bf8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.449390759,
+      "original_end_s": 19.471924329,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T171646-8bd0eb38",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.808156802,
+      "original_end_s": 16.823726434,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T171708-4ed8adfa",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.987540883,
+      "original_end_s": 18.010374696,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T171733-3fbaba4c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.150533709,
+      "original_end_s": 17.170109329,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T171757-8208bc9f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.891571124,
+      "original_end_s": 17.913225447,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T171830-32f3c729",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.338324054,
+      "original_end_s": 16.35677833,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T171854-74c15d71",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.382980685,
+      "original_end_s": 19.406104938,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T171921-96913651",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.115616481,
+      "original_end_s": 17.136406711,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T171946-357d81bc",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.312179611,
+      "original_end_s": 15.331057207,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172033-7f4d5de3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.901903811,
+      "original_end_s": 17.916278947,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172234-d44a50ed",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.41171511,
+      "original_end_s": 18.4317233,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172300-67915af4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.654189112,
+      "original_end_s": 16.675174738,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172323-84c1bce0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.433168844,
+      "original_end_s": 17.449623209,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172349-f46a09f8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.642287609,
+      "original_end_s": 17.653340931,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172424-9a4fe398",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.720323411,
+      "original_end_s": 18.742080275,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172450-f076e691",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.17158677,
+      "original_end_s": 17.186386201,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172517-cf945e0a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.643375684,
+      "original_end_s": 15.658706839,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172539-8b8c89af",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.895226651,
+      "original_end_s": 16.917976955,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172604-596c14a1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.608484404,
+      "original_end_s": 16.626100776,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172627-856ca1f1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.293461532,
+      "original_end_s": 16.31017392,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172649-af0b7093",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.732761825,
+      "original_end_s": 16.753715929,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172712-8c53bd47",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.892177832,
+      "original_end_s": 18.908752462,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172809-f338cd86",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.064089709,
+      "original_end_s": 16.088920246,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172834-814b15c1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.354765378,
+      "original_end_s": 16.374708156,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172856-e5ed9448",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.799359567,
+      "original_end_s": 15.815458486,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172919-d9a0cf50",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.840406067,
+      "original_end_s": 15.855733629,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T172943-defc48d5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.253884523,
+      "original_end_s": 18.270450442,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173009-99e14540",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.026127398,
+      "original_end_s": 18.045161163,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173035-cd066eac",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.931491283,
+      "original_end_s": 15.951805269,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173057-4ebcfd05",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.069043568,
+      "original_end_s": 15.091374689,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173548-92e313a6",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 12.995389979,
+      "original_end_s": 13.041425412,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173605-16e39398",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.764117962,
+      "original_end_s": 15.779351083,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173627-0886676c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.13171008,
+      "original_end_s": 17.14860837,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173651-031aadc5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.162334644,
+      "original_end_s": 15.18331191,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173713-7bfcb491",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.755517813,
+      "original_end_s": 14.772976154,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173734-497b6ce9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.558320384,
+      "original_end_s": 15.575439782,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173757-1f36679e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.598455885,
+      "original_end_s": 17.615788772,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173820-c5bc6e1d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.282363531,
+      "original_end_s": 15.296456504,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173842-482f23c5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.279673577,
+      "original_end_s": 16.296529538,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173903-8dc7b56e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.303507796,
+      "original_end_s": 16.326768399,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173927-2aa6f88c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.728791269,
+      "original_end_s": 17.745940163,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T173953-b5773520",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.112619904,
+      "original_end_s": 18.127867983,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T174018-851af67a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.666722937,
+      "original_end_s": 17.683042938,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T174117-01acd232",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.174830592,
+      "original_end_s": 15.196924272,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T174138-1f0e2c8b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.258753982,
+      "original_end_s": 14.278156461,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T174202-9085c5dd",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.237750725,
+      "original_end_s": 14.256925952,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T174222-f5337960",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.207431277,
+      "original_end_s": 16.228042002,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T174245-e366d522",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.889317344,
+      "original_end_s": 16.909383925,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T174308-66fddf4f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.876409127,
+      "original_end_s": 15.893847377,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T174331-98239529",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.420172349,
+      "original_end_s": 16.440769817,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T174356-998927c7",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.422629271,
+      "original_end_s": 16.439858448,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T174420-6bafcef4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.69690904,
+      "original_end_s": 15.714503172,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175005-7fe83ef6",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.776208811,
+      "original_end_s": 15.7981848,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175027-039bd63e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.860754909,
+      "original_end_s": 15.875048804,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175050-f7b23706",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.461193302,
+      "original_end_s": 17.478550555,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175114-4a59843f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.216344105,
+      "original_end_s": 14.326668979,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175135-09890bb8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.341462543,
+      "original_end_s": 14.359736575,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175157-a6834a97",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.645280866,
+      "original_end_s": 16.661479652,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175220-3d43f101",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.597004179,
+      "original_end_s": 15.611052737,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175305-f09e399c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.466167071,
+      "original_end_s": 15.482408945,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175328-7409bbde",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 13.800892387,
+      "original_end_s": 13.825411351,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175348-21c09dee",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.079465625,
+      "original_end_s": 15.099769344,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175433-609e170e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.579525858,
+      "original_end_s": 15.590844582,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175456-fd782cdd",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.962283175,
+      "original_end_s": 14.977673197,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175518-2210469b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.975854396,
+      "original_end_s": 16.987965863,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175548-fd8294b0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.111845491,
+      "original_end_s": 17.134029827,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175612-08f461f7",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.035459328,
+      "original_end_s": 17.057785303,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175636-32f48a05",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.585319958,
+      "original_end_s": 14.601608114,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T175658-650fbebe",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.335675869,
+      "original_end_s": 15.356908057,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180321-d8b2cae2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.986550282,
+      "original_end_s": 15.03858873,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180343-035ac7ce",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.633164013,
+      "original_end_s": 16.650989253,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180406-9da5c568",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.544793877,
+      "original_end_s": 15.565623143,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180450-5d885071",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.876356635,
+      "original_end_s": 16.893669298,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180516-4451f97a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.289228074,
+      "original_end_s": 17.306239225,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180541-28ea50ce",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.807719555,
+      "original_end_s": 15.829726464,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180605-ac47fcf7",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.864390072,
+      "original_end_s": 16.891863404,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180630-a4be6ea8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.694987736,
+      "original_end_s": 16.712726178,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180656-4482b411",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.975934641,
+      "original_end_s": 14.993425856,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180718-324364f5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.559612094,
+      "original_end_s": 15.574177331,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180743-68be50db",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.385771166,
+      "original_end_s": 15.41087968,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180806-356b50a3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.123060555,
+      "original_end_s": 17.139803054,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180841-4e65da71",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.432318461,
+      "original_end_s": 15.453627197,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180907-68a935ef",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.630277656,
+      "original_end_s": 18.653514116,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T180935-827cfedb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.649519184,
+      "original_end_s": 15.666089338,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181009-be0be440",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.346494173,
+      "original_end_s": 14.361197593,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181035-2700e4b9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.332236331,
+      "original_end_s": 15.351382385,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181102-a84d9de8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.000458526,
+      "original_end_s": 18.016748298,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181131-eb88dae1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.331401691,
+      "original_end_s": 16.351565359,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181156-ef96c121",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.241932353,
+      "original_end_s": 16.26285435,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181223-b1b7d195",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.302260106,
+      "original_end_s": 17.320645011,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181249-0ac200c4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.907471123,
+      "original_end_s": 15.929526831,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181314-88958cbc",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.249912217,
+      "original_end_s": 17.264671716,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181339-2a55a635",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.919898458,
+      "original_end_s": 18.938998766,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181505-941aa366",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.849032712,
+      "original_end_s": 17.877092335,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181531-3afa7c5c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.80795642,
+      "original_end_s": 17.82417625,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181557-5044b3b4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.408504055,
+      "original_end_s": 17.426852001,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181623-416e8436",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.794321721,
+      "original_end_s": 16.815570263,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181647-7963aac7",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.07446538,
+      "original_end_s": 19.091440272,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181717-67a3256d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.799321804,
+      "original_end_s": 18.820639576,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181744-7b44fbca",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.220325946,
+      "original_end_s": 17.238209883,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181808-131235d6",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.763179444,
+      "original_end_s": 17.78439117,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181845-a9fa1c4f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.771567767,
+      "original_end_s": 17.803611845,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181920-518a2380",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.717772577,
+      "original_end_s": 17.732455637,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T181947-2ddbce57",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.746500732,
+      "original_end_s": 19.772827123,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182016-4d2e9bd7",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.702629387,
+      "original_end_s": 19.72389559,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182045-2194b54f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.528154233,
+      "original_end_s": 19.543434952,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182114-94f019ef",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.742919185,
+      "original_end_s": 18.760797822,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182140-48f5a0cd",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.06285288,
+      "original_end_s": 16.08480858,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182204-856f251c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.864481736,
+      "original_end_s": 15.885298902,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182237-d2c3bc51",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.513080794,
+      "original_end_s": 16.528840541,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182302-1c08ef79",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.332940534,
+      "original_end_s": 16.352597804,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182327-c2daf2d4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.170310837,
+      "original_end_s": 19.196586908,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182354-462d4012",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.504963202,
+      "original_end_s": 17.527111416,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182420-bcdee520",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.313564134,
+      "original_end_s": 18.335345229,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182446-4a3d7b01",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.619928565,
+      "original_end_s": 16.639715327,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182512-e26e6c68",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.066070296,
+      "original_end_s": 16.093374067,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182536-e4f4034c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.299851255,
+      "original_end_s": 16.319440426,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182600-02f06590",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.739170756,
+      "original_end_s": 17.759928474,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182628-cf70d8a3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.782747413,
+      "original_end_s": 17.797347436,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182658-1256a145",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.378043432,
+      "original_end_s": 19.398830915,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182727-62744ba2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 20.979651213,
+      "original_end_s": 21.002818649,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182758-71241904",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.325767408,
+      "original_end_s": 19.343797513,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182925-761efff0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.332158099,
+      "original_end_s": 18.374819665,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T182952-3ff069ba",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.158288828,
+      "original_end_s": 18.168879555,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183019-6ffb6453",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.594462906,
+      "original_end_s": 17.61132466,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183051-88b41be9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 20.102590475,
+      "original_end_s": 20.128906876,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183133-236b26a1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.880587861,
+      "original_end_s": 17.899877873,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183200-603907d8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.840436476,
+      "original_end_s": 14.860220149,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183221-09aa3310",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.283631262,
+      "original_end_s": 17.305891308,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183246-51e0f521",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.660750276,
+      "original_end_s": 16.679951856,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183309-8419c3f4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.967451049,
+      "original_end_s": 16.990251238,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183333-c3e7fe88",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.783711825,
+      "original_end_s": 14.79985759,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183354-14deb4a9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.250717231,
+      "original_end_s": 16.27134087,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183418-c77cdf49",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.631647888,
+      "original_end_s": 16.663205429,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183441-d128ccff",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.121413297,
+      "original_end_s": 16.137612687,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183505-eeb406fe",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.405392837,
+      "original_end_s": 16.423316947,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183527-ee8d9963",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.997644973,
+      "original_end_s": 18.016796625,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183552-bf1fba89",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.277615433,
+      "original_end_s": 15.295596725,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183614-45ac4ac2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.12694493,
+      "original_end_s": 14.153041863,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183639-bf24f1f9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.478768846,
+      "original_end_s": 15.499689649,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183848-af42b8d0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.105789778,
+      "original_end_s": 15.129474867,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183910-7eed4395",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.222458501,
+      "original_end_s": 14.237954939,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183931-130bc26c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.157966535,
+      "original_end_s": 14.185430939,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T183955-551334c9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.078063587,
+      "original_end_s": 16.092878829,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184019-ebc6cdf1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.365104849,
+      "original_end_s": 15.382179672,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184041-c79a971c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.112034648,
+      "original_end_s": 17.12365589,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184104-472f8dec",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.791603197,
+      "original_end_s": 15.807405077,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184126-1aa687b6",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.022351477,
+      "original_end_s": 16.03627412,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184147-6eb729c0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.699003867,
+      "original_end_s": 14.724168909,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184211-f7372f83",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.343354707,
+      "original_end_s": 15.360732615,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184234-f892a2d2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.613376783,
+      "original_end_s": 16.633209073,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184259-5116799f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.260386318,
+      "original_end_s": 17.279233545,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184324-94bf37d5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.469504811,
+      "original_end_s": 16.489643689,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184352-fd251861",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.482480559,
+      "original_end_s": 16.498914494,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184417-90339c2a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.361445921,
+      "original_end_s": 16.377964154,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184441-e939c985",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.674723729,
+      "original_end_s": 15.69245926,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184510-4b5a92c2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.295239988,
+      "original_end_s": 16.314719184,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184535-da36076b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.660089494,
+      "original_end_s": 17.674246198,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184601-b6ecf321",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.249991834,
+      "original_end_s": 15.268310129,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184626-b002a1a8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.238167975,
+      "original_end_s": 16.255076125,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184649-722bc250",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.378339246,
+      "original_end_s": 16.398381806,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184713-4ffb1598",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.046951189,
+      "original_end_s": 15.066683398,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184734-79ad44f1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.493455061,
+      "original_end_s": 15.508125268,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184757-81157489",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.760254793,
+      "original_end_s": 14.782388836,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184819-db2b0617",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.340932913,
+      "original_end_s": 16.355776711,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184843-da9242e9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.311060378,
+      "original_end_s": 17.329044053,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184910-1d2411a0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.430767871,
+      "original_end_s": 15.445080839,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184932-34248eff",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.953680883,
+      "original_end_s": 15.972727036,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T184956-91b2e7d8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.316208972,
+      "original_end_s": 16.337795897,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185021-fd5fb370",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.411271199,
+      "original_end_s": 14.429896768,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185043-76cc6916",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.524369649,
+      "original_end_s": 15.5445469,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185108-aa12b66f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.008552155,
+      "original_end_s": 15.026867511,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185129-3cec0686",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.088522241,
+      "original_end_s": 15.113903468,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185153-819d6a40",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.052240037,
+      "original_end_s": 16.067026209,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185217-7270db6f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.544367194,
+      "original_end_s": 17.565756884,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185245-ec0cb740",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.923694588,
+      "original_end_s": 14.940860132,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185308-a7620857",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.581358409,
+      "original_end_s": 15.601307455,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185331-4173248d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.128377435,
+      "original_end_s": 15.145894916,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185354-99f5361d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.284409113,
+      "original_end_s": 15.314043524,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185416-0d69587f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.001509132,
+      "original_end_s": 15.014353605,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185438-8d074745",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.91971261,
+      "original_end_s": 14.936661972,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185501-6df2d2a4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.792386743,
+      "original_end_s": 14.80346116,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185525-286fa3b0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.737690809,
+      "original_end_s": 16.756028752,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185555-8ca07063",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.576412778,
+      "original_end_s": 15.585878804,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185625-bf754107",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.156125327,
+      "original_end_s": 15.1712233,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185647-998bfce2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.534676702,
+      "original_end_s": 15.551025157,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T185709-d91940d5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.67530576,
+      "original_end_s": 14.693282353,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T190407-adcbda21",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.756017266,
+      "original_end_s": 15.857487585,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T190433-591f6b74",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.255690764,
+      "original_end_s": 17.277545885,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T190459-14f671c9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.608288035,
+      "original_end_s": 16.620319006,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T190523-6853ae21",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.306243042,
+      "original_end_s": 16.32385462,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T190546-701137eb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.336815495,
+      "original_end_s": 15.357391508,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T190609-63465554",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.300638378,
+      "original_end_s": 17.320463332,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T190635-7f7519e8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.920923183,
+      "original_end_s": 14.939930808,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T190758-234044ce",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.262506716,
+      "original_end_s": 15.366018876,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T190819-8ea61ff8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.96512408,
+      "original_end_s": 14.976173392,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T190841-5854d486",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.022362499,
+      "original_end_s": 16.037185318,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T190911-a75713d2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.736320617,
+      "original_end_s": 15.755699213,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T190934-05a9f3bb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.181348716,
+      "original_end_s": 14.204051143,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T190954-ac34969c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.262339245,
+      "original_end_s": 16.284027283,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T191019-ae292d90",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.407661011,
+      "original_end_s": 16.431262013,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T191042-6152caee",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.589478622,
+      "original_end_s": 14.607479732,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T191103-fc65f62f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.258625931,
+      "original_end_s": 14.272064201,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T191126-d3321186",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.654029197,
+      "original_end_s": 17.666503528,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T191152-a6d89e39",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.46405291,
+      "original_end_s": 16.480977263,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T191232-1653ebfa",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.829756183,
+      "original_end_s": 17.852562128,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T191258-5b7dde9a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.281889288,
+      "original_end_s": 17.299799148,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T191331-2f3aa387",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.82465426,
+      "original_end_s": 16.844825009,
+      "reason": "Complete operator-kept gear-carrier-pin task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    }
+  ],
+  "crop_rationale": "Overhead isolates the tabletop parts and assembly area. Wider wrist crops retain the approach, gear pickup, pin insertion and contact positions across the session; wrist-to-arm assignment remains unverified.",
+  "source_kind": "operator_kept_regular_recordings",
+  "annotation_source": "Complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+}

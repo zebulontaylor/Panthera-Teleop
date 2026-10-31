@@ -1,0 +1,215 @@
+{
+  "previous_original": {
+    "episodes": 227,
+    "frames": 73074,
+    "duration_seconds": 3653.7,
+    "joints_velocity": {
+      "p95": 0.955042839050293,
+      "p99": 1.3320356607437134,
+      "max": 2.839999198913574
+    },
+    "joints_acceleration": {
+      "p95": 7.037167996168137,
+      "p99": 11.812389319762588,
+      "max": 55.54336607456207
+    },
+    "grippers_velocity": {
+      "p95": 2.563539743423462,
+      "p99": 4.121770423650742,
+      "max": 7.464423179626465
+    },
+    "grippers_acceleration": {
+      "p95": 21.865484695881605,
+      "p99": 39.96105194091797,
+      "max": 135.4654710739851
+    }
+  },
+  "new_reference": {
+    "episodes": 28,
+    "frames": 11171,
+    "duration_seconds": 558.55,
+    "joints_velocity": {
+      "p95": 0.7665491104125977,
+      "p99": 1.0932743418961763,
+      "max": 1.9100886583328247
+    },
+    "joints_acceleration": {
+      "p95": 5.780523419380188,
+      "p99": 9.55044972896576,
+      "max": 28.148676455020905
+    },
+    "grippers_velocity": {
+      "p95": 2.4127429723739624,
+      "p99": 3.543716460466385,
+      "max": 5.994160175323486
+    },
+    "grippers_acceleration": {
+      "p95": 18.84958505630493,
+      "p99": 32.81831905245779,
+      "max": 117.87256896495819
+    }
+  },
+  "previous_retimed": {
+    "episodes": 227,
+    "frames": 76273,
+    "duration_seconds": 3813.65,
+    "joints_velocity": {
+      "p95": 0.7999998331069946,
+      "p99": 0.8000004291534424,
+      "max": 1.331409215927124
+    },
+    "joints_acceleration": {
+      "p95": 4.982328787446022,
+      "p99": 7.843269407749187,
+      "max": 20.638728141784668
+    },
+    "grippers_velocity": {
+      "p95": 2.4465861320495574,
+      "p99": 3.0000001192092896,
+      "max": 6.2831854820251465
+    },
+    "grippers_acceleration": {
+      "p95": 17.246191203594208,
+      "p99": 29.36930418014527,
+      "max": 101.62980034947395
+    }
+  },
+  "added_duration_seconds": 159.95000000000027,
+  "added_duration_percent": 4.37775405753073,
+  "p95_relative_difference_from_new_reference": {
+    "joints_velocity": 0.04363806863775754,
+    "joints_acceleration": -0.13808345266071975,
+    "grippers_velocity": 0.014026840016985176,
+    "grippers_acceleration": -0.08506255431731158
+  },
+  "protected_source_seconds": 1409.8500000000001,
+  "stretched_source_intervals": 8863,
+  "stretched_source_interval_percent": 12.128800941511345,
+  "stretched_original_duration_seconds": 443.15,
+  "max_protected_interval_duration_error_seconds": 2.8449465006019636e-15,
+  "limits": {
+    "joint_velocity": 0.8,
+    "joint_acceleration": 20.0,
+    "gripper_velocity": 3.0,
+    "gripper_acceleration": 40.0,
+    "protect_joint_speed": 0.15,
+    "protect_gripper_speed": 0.3,
+    "max_iterations": 40,
+    "max_scale": 4.0
+  },
+  "residual_exceedances": {
+    "joint_velocity": {
+      "protected": 31,
+      "editable_or_seam": 2
+    },
+    "gripper_velocity": {
+      "protected": 234,
+      "editable_or_seam": 7
+    },
+    "joint_acceleration": {
+      "protected": 0,
+      "editable_or_seam": 1
+    },
+    "gripper_acceleration": {
+      "protected": 75,
+      "editable_or_seam": 15
+    }
+  },
+  "intervals_at_iterative_scale_cap": 33,
+  "max_actual_interval_scale": 4.984474894142039,
+  "max_camera_source_alignment_seconds": 0.06276085406257437,
+  "verification": {
+    "new_reference": {
+      "passed": true,
+      "checked_observations": 11171,
+      "decoded_images": 33513,
+      "episode_boundary_padding_verified": true
+    },
+    "new_reference_50_step_chunks": {
+      "passed": true,
+      "native_loader_50_action_chunk_checks": 84
+    },
+    "new_reference_numeric_statistics": {
+      "passed": true,
+      "global_statistic_checks": 81
+    },
+    "previous_retimed": {
+      "passed": true,
+      "checked_observations": 76273,
+      "identical_source_jpeg_checks": 228819,
+      "native_loader_50_action_chunk_checks": 681,
+      "exact_protected_interval_durations_verified": true,
+      "numeric_metadata_verified": true
+    }
+  },
+  "numeric_statistics": {
+    "new_reference": {
+      "version": 1,
+      "numeric_features": [
+        "observation.state",
+        "action",
+        "observation.velocity",
+        "observation.effort",
+        "timestamp",
+        "frame_index",
+        "episode_index",
+        "index",
+        "task_index"
+      ],
+      "episodes": 28,
+      "frames": 11171,
+      "method": "Exact min/max and float64 centered population mean/std; exact numpy linear quantiles from stored values, per episode and globally.",
+      "image_statistics_preserved": true,
+      "data_rows_modified": false
+    },
+    "previous_retimed": {
+      "version": 1,
+      "numeric_features": [
+        "observation.state",
+        "action",
+        "observation.velocity",
+        "observation.effort",
+        "timestamp",
+        "frame_index",
+        "episode_index",
+        "index",
+        "task_index"
+      ],
+      "episodes": 227,
+      "frames": 76273,
+      "method": "Exact min/max and float64 centered population mean/std; exact numpy linear quantiles from stored values, per episode and globally.",
+      "image_statistics_preserved": true,
+      "data_rows_modified": false
+    }
+  },
+  "dataset_roots": {
+    "previous_original": "/home/robotics/Desktop/panthera-teleop/data/processed/panthera-oct22-onward-curated-20hz",
+    "new_reference": "/home/robotics/Desktop/panthera-teleop/data/processed/panthera-oct28-reference-20hz",
+    "previous_retimed": "/home/robotics/Desktop/panthera-teleop/data/processed/panthera-oct22-onward-retimed-oct28-reference-20hz"
+  },
+  "numeric_sha256": {
+    "previous_original": "2e19f319432cd2276fc5c27652b7994ffbeb25820add6d40db01fd5085fea42c",
+    "new_reference": "a9c05b6f740de46a722b7b837c41bd4cdb061b0cc2bd95fa1709d7b41652f613",
+    "previous_retimed": "a0e859c0cc6e1a04a1ba55c78f73f3cb6dc267c7df25a9f7f9eadf895eb7325d"
+  },
+  "code_and_config_sha256": {
+    "scripts/summarize_retiming_exports.py": "9ab308b41ec11f5eb416830fdcacb1e3249bef539f94df39358ce60d7942872c",
+    "scripts/trajectory_retiming.py": "1e7f972af138b82f2522b48fb3b05fb698644979c95d7ba299141ab2b5b8ced6",
+    "scripts/export_retimed_dataset.py": "3ab5789455bb783ab92f6b2eb200e0b67358c3b96e53c73c74281ce7726e4249",
+    "scripts/verify_retimed_dataset.py": "a19a05e9d698ad41d1b0470ea352ed8f43286196ad520f08475a797624c2ade7",
+    "scripts/prepare_retiming_reference.py": "64ca3578753f678da3ffdedddc1f1e4e663fe3133b4f6690773396e436050e54",
+    "scripts/compare_retiming_candidates.py": "30976e0639c1f9d24477e9d2b4fd965e55d0eb1d124eb041ee753589814d2d8a",
+    "config/retiming-oct28-reference.json": "578824e87ac3f186a7a7feda9a45559f87771b8ff3720d7e906530160bfd53ea"
+  },
+  "actual_matches_selected_numeric_prediction": true,
+  "training_changed": false,
+  "published": false,
+  "limitations": [
+    "Acceleration is a 20Hz finite-difference estimate, not physical or continuously bounded acceleration.",
+    "Protected map durations are exact; output grid phase shifts by less than one frame.",
+    "Slow intervals and saved insertion windows are protected; other contact is not independently detected.",
+    "Residual protected/seam exceedances are retained and reported, not silently clipped.",
+    "Different task-phase composition limits interpretation of pooled percentile matching.",
+    "Cameras repeat existing source JPEGs; terminal image clamps can add up to one source tick of lag."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "joint_velocity": 0.8,
+  "joint_acceleration": 20.0,
+  "gripper_velocity": 3.0,
+  "gripper_acceleration": 40.0,
+  "protect_joint_speed": 0.15,
+  "protect_gripper_speed": 0.3,
+  "max_iterations": 40,
+  "max_scale": 4.0
+}

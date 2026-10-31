@@ -1,0 +1,1696 @@
+{
+  "processing_version": 2,
+  "recording_session_local_date": "2026-10-22 through 2026-10-23",
+  "recording_timezone": "America/Chicago",
+  "task": "put the gear in the carrier and put a pin in it",
+  "fps": 20,
+  "image_size": 256,
+  "image_crops_xyxy": {
+    "overhead": [
+      80,
+      0,
+      560,
+      480
+    ],
+    "wrist_port2": [
+      80,
+      0,
+      560,
+      480
+    ],
+    "wrist_port3": [
+      80,
+      0,
+      560,
+      480
+    ]
+  },
+  "image_resize": "Fixed centered 480-square crops from 640x480 sources, LANCZOS resized to 256; broad work area for October camera setup.",
+  "image_encoding": "embedded RGB JPEG, quality=95, chroma_subsampling=0",
+  "sampling": "Regular 50ms host-monotonic grid; nearest measured state and nearest frame per camera within the annotated crop; ties select earlier samples. No interpolation, numerical low-pass filter, or duplicated synthetic states. Some camera frames repeat because achieved capture rate is below 20 Hz; counts are reported per episode.",
+  "action_semantics": "absolute measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad at the NEXT grid tick (t+0.05s). Kinesthetic next-pose proxy, not sent motor commands. Final observation is omitted if its next state would leave the crop.",
+  "state_semantics": "measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad. Both joint and gripper values remain native radians.",
+  "state_names": [
+    "left.joint1",
+    "left.joint2",
+    "left.joint3",
+    "left.joint4",
+    "left.joint5",
+    "left.joint6",
+    "left.gripper_rad",
+    "right.joint1",
+    "right.joint2",
+    "right.joint3",
+    "right.joint4",
+    "right.joint5",
+    "right.joint6",
+    "right.gripper_rad"
+  ],
+  "max_state_alignment_s": 0.01,
+  "max_camera_alignment_s": 0.04,
+  "camera_assignment": "Wrist-to-arm assignments are unverified; preserve USB-port names rather than inventing left/right labels.",
+  "timing": "Host receive timestamps, not hardware exposure timestamps. Offline nearest-frame alignment may choose a frame slightly later than the grid tick; all actual offsets are retained.",
+  "trim_method": "Kept task episodes exclude terminal pedal classification tails. Every retained review recording has one conservative contiguous error-cropped partial-task interval from detailed three-camera1s review and0.25s boundary refinement; exact error onset can remain occluded. No discontinuous stitching.",
+  "trim_uncertainty_s": 0.25,
+  "episodes": [
+    {
+      "id": "20261022T170024-d0c16ab8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.849484701,
+      "original_end_s": 19.866767391,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170054-82f86946",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 20.25750014,
+      "original_end_s": 20.274742193,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170129-22311e84",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 20.289668199,
+      "original_end_s": 20.299728862,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170159-e0f8056d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 21.099854767,
+      "original_end_s": 21.12022143,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170232-8bc49e59",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 23.539615381,
+      "original_end_s": 23.562809684,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170349-77ed3f1f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 23.121686909,
+      "original_end_s": 23.142149943,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170425-67793553",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 21.007430784,
+      "original_end_s": 21.023247108,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170458-a53c70d5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.947527926,
+      "original_end_s": 18.971668943,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170538-fea9c395",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 23.264674587,
+      "original_end_s": 23.284473074,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170616-ae7f206f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 25.153965215,
+      "original_end_s": 25.171643208,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170655-770dab38",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 20.917612176,
+      "original_end_s": 20.936571504,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170730-6b3f71c9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 21.007053183,
+      "original_end_s": 21.025222326,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170803-c865755a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 21.683487619,
+      "original_end_s": 21.703252825,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170840-28788d65",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 21.475009464,
+      "original_end_s": 21.489661362,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170913-c58d3db7",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 22.975162225,
+      "original_end_s": 22.993057538,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T170949-7a8e8a55",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.567828154,
+      "original_end_s": 19.58575637,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T203832-a5a458c8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 22.03688801,
+      "original_end_s": 23.10411856,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T213452-aa07f7c1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 26.055504667,
+      "original_end_s": 27.281942884,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T213702-130467ff",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 36.700551965,
+      "original_end_s": 37.796389801,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T215437-c3e34641",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 20.354276654,
+      "original_end_s": 21.66145705,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T215505-064d2fc7",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 25.106417213,
+      "original_end_s": 26.123822291,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T215537-09776dbd",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 23.232917278,
+      "original_end_s": 24.009374266,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T222347-0150daa1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.741427963,
+      "original_end_s": 19.800363152,
+      "reason": "Camera samples show the bimanual gear/carrier/pin task sequence; success not independently certified.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T222502-6321638f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.017106989,
+      "original_end_s": 19.843974376,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T222636-6067c981",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.157794569,
+      "original_end_s": 19.239411015,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T222701-0df6b237",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.921696269,
+      "original_end_s": 18.960815485,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T222727-f2d177cb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.39360285,
+      "original_end_s": 18.686953732,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T222909-cf3156b9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.147899262,
+      "original_end_s": 18.714723353,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T222935-9a1585fa",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.893994655,
+      "original_end_s": 20.470771607,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T223004-50b9ef40",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.389700768,
+      "original_end_s": 19.327528385,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T223034-fa96590a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.847535255,
+      "original_end_s": 20.834088021,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T223104-69390891",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.889113956,
+      "original_end_s": 19.683275821,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T223135-859fc557",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.063111702,
+      "original_end_s": 18.074995967,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T223224-39ac9c45",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.265422954,
+      "original_end_s": 19.974774132,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T223254-96e1384f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.489147211,
+      "original_end_s": 20.447690311,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T223324-a7937d03",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.371542452,
+      "original_end_s": 18.362966452,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T223355-582761f2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.409690204,
+      "original_end_s": 20.421176775,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T223424-a0f60992",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.911429339,
+      "original_end_s": 17.94446316,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T223451-5045d283",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.14957481,
+      "original_end_s": 19.926391378,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T223520-5abbe0de",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.178991149,
+      "original_end_s": 18.000306885,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T223545-c3dc8bb3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.934704716,
+      "original_end_s": 21.291091806,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T223615-ef9ff3c6",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.319179905,
+      "original_end_s": 17.513154702,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T223903-d1cf2f3d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.142021513,
+      "original_end_s": 19.238186486,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T224046-7ba0bc22",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 21.044057175,
+      "original_end_s": 22.047852584,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T224117-90839bd9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.627175117,
+      "original_end_s": 18.528061825,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T224149-c0fc07f2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.45790972,
+      "original_end_s": 20.567939817,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T224228-a41f71b3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 20.417459257,
+      "original_end_s": 21.228824715,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T224301-0c33a434",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.369787681,
+      "original_end_s": 18.124049792,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T224407-e6499944",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 22.677415612,
+      "original_end_s": 23.283821345,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T224443-243b1529",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.043296903,
+      "original_end_s": 17.953811594,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T224520-f4cb0874",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.616697717,
+      "original_end_s": 16.294882218,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T224707-f3d3d759",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.539131339,
+      "original_end_s": 20.343245306,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T224741-be331592",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 21.081143271,
+      "original_end_s": 21.934792215,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T224811-26d972c2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.86093948,
+      "original_end_s": 17.895118597,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T224923-33f6c558",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.809247752,
+      "original_end_s": 19.734390321,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T224953-3588de4d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.572109149,
+      "original_end_s": 18.688266281,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225030-92f0b1c1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.16524441,
+      "original_end_s": 18.122674723,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225103-14a4a6d7",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.159632223,
+      "original_end_s": 18.139156753,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225129-30396c31",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 20.852210301,
+      "original_end_s": 22.141770884,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225159-b0365426",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.946871263,
+      "original_end_s": 17.988887994,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225223-01cd5779",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.267637074,
+      "original_end_s": 19.753157571,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225330-0d6f2519",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.538788572,
+      "original_end_s": 18.008532709,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225358-cbfd0f58",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.630611562,
+      "original_end_s": 18.717986137,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225425-06c4f2da",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.288914209,
+      "original_end_s": 19.610748168,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225501-4dcea465",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.65896363,
+      "original_end_s": 18.046699836,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225605-e9da3d8d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.732876362,
+      "original_end_s": 18.643465665,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225633-e4ee1b9f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.306074014,
+      "original_end_s": 20.72377351,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225703-bf10d1cf",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.833254616,
+      "original_end_s": 17.851920404,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225730-a604f7d8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.083293883,
+      "original_end_s": 18.433078571,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225838-4e532eee",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.087117202,
+      "original_end_s": 18.415533692,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225908-4d2ff95f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.242693514,
+      "original_end_s": 18.343219847,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T225937-d3ec101e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.712858529,
+      "original_end_s": 20.94022794,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T230007-44182d47",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.577136338,
+      "original_end_s": 19.455789828,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T180449-ff39c29c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.678524773,
+      "original_end_s": 19.540999389,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T180519-3afec970",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.770694462,
+      "original_end_s": 18.715701459,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T180549-d03b19e9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.700133125,
+      "original_end_s": 17.545418472,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T180617-ad40916b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.851963872,
+      "original_end_s": 16.533654547,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T180642-d7e4fd1b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.098885021,
+      "original_end_s": 16.96845352,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T180718-47e74c70",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.298293068,
+      "original_end_s": 15.03998572,
+      "reason": "Six samples show deliberate bimanual manipulation at the gear/carrier work area, followed by a second insertion-like motion and withdrawal; consistent with the task demonstration, with no obvious test or accidental trigger. Success is not asserted from thumbnails.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T180743-f0f40e90",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.479965228,
+      "original_end_s": 15.505682512,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T180808-2fb26c41",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.777808131,
+      "original_end_s": 16.567075716,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T180834-1106c36c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.277613989,
+      "original_end_s": 16.986387245,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T181358-0cf692fb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.773872089,
+      "original_end_s": 16.828477959,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T181425-9c8eabe3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.810551212,
+      "original_end_s": 16.999876165,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T181449-320a66bd",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.71430176,
+      "original_end_s": 15.796290833,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T181514-57dfa44c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.652646151,
+      "original_end_s": 17.478424369,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T181541-362f69ba",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.659603556,
+      "original_end_s": 16.552234075,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T181606-157a6c26",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.558953057,
+      "original_end_s": 17.465138501,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T181632-de1ea928",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.244845216,
+      "original_end_s": 17.069270781,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T181658-d7077a7e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.400215334,
+      "original_end_s": 18.567863201,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T181752-612bd1a2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.707116505,
+      "original_end_s": 17.756604683,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T181819-0092166e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.724830496,
+      "original_end_s": 17.455543126,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T181929-2c4808b3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.613562974,
+      "original_end_s": 17.600488052,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T181956-5952ac9b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.015748244,
+      "original_end_s": 16.889812012,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182037-65ab8000",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.431408352,
+      "original_end_s": 17.327705272,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182103-e88389a9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.004210724,
+      "original_end_s": 15.808970965,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182131-79f036cc",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.520561147,
+      "original_end_s": 18.268009041,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182209-e0565591",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.158751313,
+      "original_end_s": 16.876741784,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182237-d37d79cc",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.581940127,
+      "original_end_s": 17.23024622,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182302-c510a01e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.235977492,
+      "original_end_s": 18.00081354,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182357-4aa5dedf",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.185807643,
+      "original_end_s": 18.39051787,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182424-eee22e84",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.561877088,
+      "original_end_s": 17.374374596,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182451-c8980509",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.84224626,
+      "original_end_s": 16.909685303,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182651-02d544bb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.134326792,
+      "original_end_s": 15.204667762,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182713-1a24792d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.230950253,
+      "original_end_s": 16.024260785,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182737-5f79ac83",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.843853774,
+      "original_end_s": 16.665873522,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182802-43c10deb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.715283143,
+      "original_end_s": 18.545950026,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182829-0dcf89f1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.87276169,
+      "original_end_s": 16.769537646,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T182909-a7173d70",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.572005271,
+      "original_end_s": 16.279209452,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T183009-6c740675",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.293292633,
+      "original_end_s": 17.512562824,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T183042-89204ff7",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.078621074,
+      "original_end_s": 15.86640454,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T183107-1f6ef39d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.84193819,
+      "original_end_s": 15.698756001,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T183205-d6dff5f5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.73764069,
+      "original_end_s": 19.528491766,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T183525-be534bfb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.590262094,
+      "original_end_s": 19.183903775,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T183553-6c4b2643",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.452856579,
+      "original_end_s": 16.263630016,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T183620-1a04a0ae",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.990185255,
+      "original_end_s": 16.948084904,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T183647-b9636598",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.385990071,
+      "original_end_s": 15.151315244,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T183743-04322856",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.989468151,
+      "original_end_s": 15.826019019,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T183811-7c7fdd8a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.020616877,
+      "original_end_s": 17.926196531,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T185530-e96bc4e9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.82498014,
+      "original_end_s": 15.441656143,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T185603-ecdd2d4a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.829230567,
+      "original_end_s": 16.719188749,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T185644-bc585ae1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.779137419,
+      "original_end_s": 17.570007115,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T185713-37a0ac26",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.933143204,
+      "original_end_s": 15.769337896,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T185744-97cf167e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.497957483,
+      "original_end_s": 19.558962402,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T185829-03611367",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.492435323,
+      "original_end_s": 15.341303445,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T185903-a214baa8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.869701806,
+      "original_end_s": 15.74597883,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T185931-da9b0bcb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 13.936634389,
+      "original_end_s": 14.791901354,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T185958-d76c9dc9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.88280621,
+      "original_end_s": 15.630386934,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T190022-471091cd",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.350641145,
+      "original_end_s": 16.911809637,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T190050-4495a292",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.296057678,
+      "original_end_s": 18.837482216,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T190124-a3647c1e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.370940428,
+      "original_end_s": 15.131560525,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T190152-95799da9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.613239155,
+      "original_end_s": 16.288009656,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T190256-3a47f167",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.450856937,
+      "original_end_s": 15.944727142,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T190323-95b626d2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.739679348,
+      "original_end_s": 15.636900133,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T190351-c48971fb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.271259955,
+      "original_end_s": 15.054561536,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T190725-ae28de93",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 13.937907704,
+      "original_end_s": 14.947637471,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T190748-9e03f35c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.554680445,
+      "original_end_s": 16.351203405,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T190815-731f9f5d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.662565188,
+      "original_end_s": 15.370213281,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T190837-beac795a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.248411997,
+      "original_end_s": 14.92341683,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T190903-4d6ffa94",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.827601896,
+      "original_end_s": 15.514421573,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T190934-7a76f76c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.053993935,
+      "original_end_s": 14.823845254,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T191003-4d3ab388",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.412118424,
+      "original_end_s": 16.342154104,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T191034-275408be",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 13.499048584,
+      "original_end_s": 14.451560223,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T191057-8b2f377d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.887814427,
+      "original_end_s": 15.752139956,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T191226-b8b6f2d8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.729119236,
+      "original_end_s": 16.412064231,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling. A person is visible in the background, without evident interruption of the foreground task.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T191254-38cc719a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.538958022,
+      "original_end_s": 15.047883702,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T191320-7841ec0b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 13.406907641,
+      "original_end_s": 14.248667818,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T191343-617d867b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.241414615,
+      "original_end_s": 17.320728859,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T191411-018bac7f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.703659079,
+      "original_end_s": 16.552806982,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T191442-409bfd47",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.696545462,
+      "original_end_s": 15.554559653,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T191508-176345c0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 13.609017432,
+      "original_end_s": 14.389683838,
+      "reason": "Six samples show the regular task setup, coordinated gripper manipulation at the carrier/gear work area, then withdrawal; consistent with an actual gear-and-pin demonstration. Fine insertion success is not resolved by contact-sheet sampling.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T191532-b2cec534",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.797383475,
+      "original_end_s": 15.844987841,
+      "reason": "Six sampled frames show the normal gear/carrier manipulation sequence followed by arm withdrawal; actual task attempt.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261023T191558-8385042e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.013993647,
+      "original_end_s": 14.740905996,
+      "reason": "Six sampled frames show the normal gear/carrier manipulation sequence followed by arm withdrawal; actual task attempt.",
+      "annotation_source": "Six time-distributed overhead samples per episode; dense three-view review for ambiguous long recordings. Task relevance only, not success certification."
+    },
+    {
+      "id": "20261022T165917-e3819672",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 14.75,
+      "end_s": 20.5,
+      "original_end_s": 24.988513484,
+      "reason": "Keep pin pickup, transport and first insertion-contact phase after repeated early gear-gripper reopening/repositioning. Stop before later opening/recontact ambiguity; insertion success is not asserted.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "medium",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261022T165952-af2035ce",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 12.0,
+      "end_s": 17.75,
+      "original_end_s": 22.289197332,
+      "reason": "Keep pin pickup, transport and first insertion-contact phase after early repeated gear manipulation; stop before pin release/recontact ambiguity. No claim of physically verified insertion success.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "medium",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261022T170305-a6ea7a38",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.05,
+      "end_s": 9.5,
+      "original_end_s": 22.543433856,
+      "reason": "Retain independently useful carrier grasp, gear pickup, side-slot approach and release prefix; omit later uncertain pin handling. Images do not verify exact gear seating.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "medium",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261022T214623-7f713d16",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.05,
+      "end_s": 6.5,
+      "original_end_s": 37.661149779,
+      "reason": "Retain carrier stabilization and initial gear grasp/lift only. Exclude repeated subsequent retreats and renewed placement motions; physical error onset cannot be precisely established from occluded contact.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "medium",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261022T222418-abc18da6",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.0,
+      "end_s": 5.0,
+      "original_end_s": 30.10253323,
+      "reason": "Retain only independently useful initial carrier/gear pickup prefix. All three cameras were inspected at 1s across episode, and2\u20135s at .25s to validate first acquisition. Later user-known error is not precisely localizable, so the entire later manipulation/placement phase is conservatively excluded; error_interval_s denotes this excluded uncertain range, not a claimed exact error onset. No recovery suffix is confidently validated. Pending foot-pedal metadata alone is not evidence of task correctness.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "medium",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261022T222528-8e4f403c",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.0,
+      "end_s": 4.5,
+      "original_end_s": 27.948668517,
+      "reason": "Retain only independently useful initial carrier/gear pickup prefix. All three cameras were inspected at 1s across episode, and2\u20135s at .25s to validate first acquisition. Later user-known error is not precisely localizable, so the entire later manipulation/placement phase is conservatively excluded; error_interval_s denotes this excluded uncertain range, not a claimed exact error onset. No recovery suffix is confidently validated. Pending foot-pedal metadata alone is not evidence of task correctness.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "medium",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261022T223649-e71916f0",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.0,
+      "end_s": 5.0,
+      "original_end_s": 20.889311599,
+      "reason": "Retain only independently useful initial carrier/gear pickup prefix. All three cameras were inspected at 1s across episode, and2\u20135s at .25s to validate first acquisition. Later user-known error is not precisely localizable, so the entire later manipulation/placement phase is conservatively excluded; error_interval_s denotes this excluded uncertain range, not a claimed exact error onset. No recovery suffix is confidently validated. Pending foot-pedal metadata alone is not evidence of task correctness.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "medium",
+      "partial_demonstration": true,
+      "source_was_complete": false
+    },
+    {
+      "id": "20261022T223833-f0abd3c8",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.0,
+      "end_s": 4.25,
+      "original_end_s": 19.768997263,
+      "reason": "Retain only independently useful initial carrier/gear pickup prefix. All three cameras were inspected at 1s across episode, and2\u20135s at .25s to validate first acquisition. Later user-known error is not precisely localizable, so the entire later manipulation/placement phase is conservatively excluded; error_interval_s denotes this excluded uncertain range, not a claimed exact error onset. No recovery suffix is confidently validated. Pending foot-pedal metadata alone is not evidence of task correctness.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "medium",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261022T223943-60f18899",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.0,
+      "end_s": 5.0,
+      "original_end_s": 21.276060041,
+      "reason": "Retain only independently useful initial carrier/gear pickup prefix. All three cameras were inspected at 1s across episode, and2\u20135s at .25s to validate first acquisition. Later user-known error is not precisely localizable, so the entire later manipulation/placement phase is conservatively excluded; error_interval_s denotes this excluded uncertain range, not a claimed exact error onset. No recovery suffix is confidently validated. Pending foot-pedal metadata alone is not evidence of task correctness.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "medium",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261022T224015-a1fa9dc1",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.1,
+      "end_s": 8.75,
+      "original_end_s": 20.085928375,
+      "reason": "Retain the independently useful initial carrier pickup, gear grasp and gear placement stage; stop before pin pickup/insertion. No clearly verified clean recovery suffix follows the prolonged pin seating/repositioning attempts. The retained gear stage is visually consistent across both wrists; exact seating depth is partly hidden by the carrier. The specific error is not confidently localized: repeated pin alignment can include legitimate adjustment, so the entire later pin phase is excluded conservatively.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "medium",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261022T224333-8ac122d4",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.1,
+      "end_s": 8.75,
+      "original_end_s": 24.068955182,
+      "reason": "Retain the independently useful initial carrier pickup, gear grasp and gear placement stage; stop before pin pickup/insertion. No clearly verified clean recovery suffix follows the prolonged pin seating/repositioning attempts. The retained gear stage is visually consistent across both wrists; exact seating depth is partly hidden by the carrier. The specific error is not confidently localized: repeated pin alignment can include legitimate adjustment, so the entire later pin phase is excluded conservatively.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "medium",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261022T224633-16539f10",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.1,
+      "end_s": 8.75,
+      "original_end_s": 23.717012406,
+      "reason": "Retain the independently useful initial carrier pickup, gear grasp and gear placement stage; stop before pin pickup/insertion. No clearly verified clean recovery suffix follows the prolonged pin seating/repositioning attempts. The retained gear stage is visually consistent across both wrists; exact seating depth is partly hidden by the carrier. The specific error is not confidently localized: repeated pin alignment can include legitimate adjustment, so the entire later pin phase is excluded conservatively.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "medium",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261022T224846-8a069995",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.1,
+      "end_s": 8.75,
+      "original_end_s": 22.379872595,
+      "reason": "Retain the independently useful initial carrier pickup, gear grasp and gear placement stage; stop before pin pickup/insertion. No clearly verified clean recovery suffix follows the prolonged pin seating/repositioning attempts. The retained gear stage is visually consistent across both wrists; exact seating depth is partly hidden by the carrier. The specific error is not confidently localized: repeated pin alignment can include legitimate adjustment, so the entire later pin phase is excluded conservatively.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "medium",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261022T225534-bda03001",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.1,
+      "end_s": 8.75,
+      "original_end_s": 19.920233433,
+      "reason": "Retain the independently useful initial carrier pickup, gear grasp and gear placement stage; stop before pin pickup/insertion. No clearly verified clean recovery suffix follows the prolonged pin seating/repositioning attempts. The retained gear stage is visually consistent across both wrists; exact seating depth is partly hidden by the carrier. The specific error is not confidently localized: repeated pin alignment can include legitimate adjustment, so the entire later pin phase is excluded conservatively.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "medium",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261022T225800-1d9bff90",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.0,
+      "end_s": 5.25,
+      "original_end_s": 24.365468279,
+      "reason": "Retain conservative task prefix containing carrier pickup and gear grasp/lift/transport before release/contact whose outcome is visually uncertain. Episode is user-flagged erroneous, but reviewed views do not independently establish the exact error. No later manipulation included.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "high for clean pickup/transport prefix; low for error localization",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261023T180900-d5a0430d",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.0,
+      "end_s": 5.25,
+      "original_end_s": 15.862380386,
+      "reason": "Retain conservative task prefix containing carrier pickup and gear grasp/lift/transport before release/contact whose outcome is visually uncertain. Episode is user-flagged erroneous, but reviewed views do not independently establish the exact error. No later manipulation included.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "high for clean pickup/transport prefix; low for error localization",
+      "partial_demonstration": true,
+      "source_was_complete": false
+    },
+    {
+      "id": "20261023T181724-20ea69c1",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.0,
+      "end_s": 4.75,
+      "original_end_s": 18.47670387,
+      "reason": "Retain conservative task prefix containing carrier pickup and gear grasp/lift/transport before release/contact whose outcome is visually uncertain. Episode is user-flagged erroneous, but reviewed views do not independently establish the exact error. No later manipulation included.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "high for clean pickup/transport prefix; low for error localization",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261023T182330-cd37f44f",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.0,
+      "end_s": 5.5,
+      "original_end_s": 16.17669473,
+      "reason": "Retain conservative task prefix containing carrier pickup and gear grasp/lift/transport before release/contact whose outcome is visually uncertain. Episode is user-flagged erroneous, but reviewed views do not independently establish the exact error. No later manipulation included.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "high for clean pickup/transport prefix; low for error localization",
+      "partial_demonstration": true,
+      "source_was_complete": true
+    },
+    {
+      "id": "20261023T182936-093bee96",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.0,
+      "end_s": 5.75,
+      "original_end_s": 17.716290202,
+      "reason": "Retain conservative task prefix containing carrier pickup and gear grasp/lift/transport before release/contact whose outcome is visually uncertain. Episode is user-flagged erroneous, but reviewed views do not independently establish the exact error. No later manipulation included.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": "high for clean pickup/transport prefix; low for error localization",
+      "partial_demonstration": true,
+      "source_was_complete": false
+    },
+    {
+      "id": "20261023T190223-76b70b55",
+      "source_category": "review",
+      "review_approved": true,
+      "start_s": 0.0,
+      "end_s": 3.25,
+      "original_end_s": 19.818341801,
+      "reason": "Gear drops from first grasp at 3.5-3.75 s and robot regrasp follows. Keep clean prefix through 3.25 s containing carrier grasp and gear approach. Later pin insertion remains occluded; no suffix certified.",
+      "annotation_source": "Detailed three-camera review by subagent at1s with0.25s boundary refinement; conservative contiguous partial demonstration; see review-recoveries.json.",
+      "recovery_confidence": 0.96,
+      "partial_demonstration": true,
+      "source_was_complete": true
+    }
+  ],
+  "crop_rationale": "Overhead isolates the tabletop parts and assembly area. Wider wrist crops retain the approach, gear pickup, pin insertion and contact positions across the session; wrist-to-arm assignment remains unverified.",
+  "source_kind": "task_kept_and_error_cropped_review_recordings"
+}

@@ -1,0 +1,116 @@
+{
+  "status": "stopped_per_user_exclude_hitl",
+  "request": "Stop weighted run, revert to original8500, continue sameHITL corpus without additional weighting.",
+  "weighted_run": "aws-mixed600-hitl81-2x-8500-20261027",
+  "weighted_run_stopped": true,
+  "new_run": "aws-mixed600-hitl81-1x-8500-20261027",
+  "resume_step": 8500,
+  "observed_step": 8502,
+  "hitl_weight": 1.0,
+  "sampling_interpretation": "HITL frames have the average original-corpus per-frame weight; preserve existing70:30 conditional restyled:real mixture. Ordinary unweighted loss retained.",
+  "training_corpus": "/mnt/pi05/mixed600-hitl81-1x-20261027",
+  "standalone_hitl_dataset": "/home/robotics/Desktop/panthera-teleop/data/processed/hitl-review-20261027-20hz",
+  "dataset_shards_reused_unchanged": true,
+  "lightweight_tests_passed": 23,
+  "wandb_url": "https://wandb.ai/foxnerdsaysmoo/panthera-pi05/runs/e350d9ca9a321171",
+  "runtime_verification": {
+    "passed": true,
+    "verified_at_unix": 1793150298.0962162,
+    "run": "aws-mixed600-hitl81-1x-8500-20261027",
+    "wandb_url": "https://wandb.ai/foxnerdsaysmoo/panthera-pi05/runs/e350d9ca9a321171",
+    "observed_step": 8502,
+    "sampling": {
+      "restyled_frame_weight": 1.05,
+      "real_frame_weight": 0.9,
+      "hitl_frame_weight": 1.0,
+      "within_domain": "uniform_frames",
+      "replacement": true,
+      "sampler": "panthera-hitl-1x-v1"
+    },
+    "first_logical_batch_domain_counts": {
+      "restyled": 84,
+      "real": 40,
+      "hitl": 4
+    },
+    "hitl_probability": 0.028072020113162566,
+    "dataset_manifest_sha256": "8980713791154c59b13344829f899b5f4aeb9e1c6e02c25cebcb6f5d1f7e6505",
+    "episodes": 681,
+    "frames": 192113,
+    "parent_checkpoint": "/mnt/pi05/runs/aws-mixed70-real30-6500-108dedd99f/checkpoints/008500",
+    "initial_progress": {
+      "schema": 1,
+      "step": 8500,
+      "frames": 192113,
+      "samples_seen": 1088000,
+      "global_batch_size": 128,
+      "sampler": {
+        "epoch": 0,
+        "start_index": 0
+      },
+      "decay_segment": {
+        "start_step": 2500,
+        "start_samples": 320000,
+        "start_lr": [
+          1.535104193057446e-05
+        ],
+        "target_samples": 1920000,
+        "min_lr": 2.5e-06
+      }
+    },
+    "gradient_checks": {
+      "vision_encoder": 0.019567085430026054,
+      "vision_projector": 0.028484322130680084,
+      "language_backbone": 0.008007974363863468,
+      "action_expert": 0.0007347720675170422,
+      "action_projection": 0.06524541974067688
+    },
+    "log_freq": 1,
+    "metric_commit": true,
+    "weighted_processes_stopped": true,
+    "inference": {
+      "passed": true,
+      "status": "ready",
+      "checkpoint": "/mnt/pi05/inference/checkpoints/mixed70-real30-008500/pretrained_model",
+      "dataset_manifest_sha256": "b1058e4f20cd93100b814078aa6dbcc1e4411db1990fd49bb742ba815e7c2475",
+      "restored_service_sha256": "72a411eccb6ef25224e9953711e13a9d3efab4e4de8bb7117798ce1c71e7c09c",
+      "contract_sha256": "20bd012866817f19fa76b5d863d69dab40c0e0784d709dbb08dd7e6f35854b73",
+      "verified_at_unix": 1793150097.0512922,
+      "robot_motion_commanded": false,
+      "dashboard_session_refresh_required": true
+    },
+    "data_verification": {
+      "passed": true,
+      "checked_rows": 192113,
+      "encoded_images_unchanged": true,
+      "numeric_payloads_unchanged": true,
+      "normalization_unchanged": true,
+      "manifest_hash": "8980713791154c59b13344829f899b5f4aeb9e1c6e02c25cebcb6f5d1f7e6505",
+      "hitl_probability": 0.028072020113162566,
+      "hitl_frame_weight": 1.0,
+      "reused_unchanged_parent_corpus": "/mnt/pi05/mixed600-hitl81-2x-20261027",
+      "hardlinked_files": 174,
+      "all_shard_checksums_revalidated": true
+    }
+  },
+  "dashboard_state": {
+    "mode": "fault_hold",
+    "playing": false,
+    "checkpoint": "/mnt/pi05/inference/checkpoints/mixed600-hitl81-2x-009000/pretrained_model",
+    "control_source": "hold",
+    "hold_status": "failed",
+    "error": "right: motor 6 feedback stale for >0.5 seconds; hold command failed: right: motor 6 feedback stale for >0.5 seconds. Powered hold is not reliable. Support both arms, check USB/power, then use Reconnect."
+  },
+  "dashboard_reconnect_required": true,
+  "reconnect_note": "Support both arms before Reconnect; reconnect releases powered hold. Reconnect loads restored checkpoint identity.",
+  "wandb_cloud_verification": {
+    "passed": true,
+    "state": "running",
+    "first_history_step": 8501,
+    "first_loss": 0.020532619208097458,
+    "first_grad_norm": 0.34342536330223083,
+    "first_lr": 9.32737102931697e-06,
+    "summary_step": 8502,
+    "summary_loss": 0.02458004094660282
+  },
+  "superseded_by": "/home/robotics/Desktop/panthera-teleop/docs/training-nohitl-20261027.json"
+}

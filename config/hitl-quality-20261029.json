@@ -1,0 +1,140 @@
+{
+  "processing_version": 3,
+  "recording_timezone": "America/Chicago",
+  "task": "put the gear in the carrier and put a pin in it",
+  "fps": 20,
+  "image_size": 256,
+  "image_crops_xyxy": {
+    "overhead": [
+      120,
+      80,
+      520,
+      480
+    ],
+    "wrist_port2": [
+      80,
+      0,
+      560,
+      480
+    ],
+    "wrist_port3": [
+      80,
+      0,
+      560,
+      480
+    ]
+  },
+  "image_resize": "Recrop original640x480 RGB camera images to overhead400x400[120,80,520,480] and both wrist480x480[80,0,560,480], then Pillow LANCZOS resize to256x256 and JPEG95/no chroma subsampling. Fixed current-inference crops; no padding, time warp, or image interpolation across time.",
+  "image_encoding": "embedded RGB JPEG, quality=95, chroma_subsampling=0",
+  "sampling": "Regular20Hz active-recording clock grid, nearest measured states and original camera images. Source timestamps retained; repeated source images counted. No image interpolation or time warp.",
+  "action_semantics": "Next measured pose proxy with bounded symmetric3tap low-pass on12 joint targets only. Measured observations and gripper targets unchanged. Raw next measured state is retained separately.",
+  "state_semantics": "measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad. Both joint and gripper values remain native radians.",
+  "state_names": [
+    "left.joint1",
+    "left.joint2",
+    "left.joint3",
+    "left.joint4",
+    "left.joint5",
+    "left.joint6",
+    "left.gripper_rad",
+    "right.joint1",
+    "right.joint2",
+    "right.joint3",
+    "right.joint4",
+    "right.joint5",
+    "right.joint6",
+    "right.gripper_rad"
+  ],
+  "max_state_alignment_s": 0.01,
+  "max_camera_alignment_s": 0.05,
+  "camera_assignment": "Wrist-to-arm assignments are unverified; preserve USB-port names rather than inventing left/right labels.",
+  "timing": "Host receive timestamps, not hardware exposure timestamps. Offline nearest-frame alignment may choose a frame slightly later than the grid tick; all actual offsets are retained.",
+  "trim_method": "Visual accept decisions plus quiet-edge trimming and splitting at extended inactivity, state gaps or camera offsets beyond50ms. Minimum2 measured action transitions; no duration/horizon quality cutoff.",
+  "trim_uncertainty_s": 0,
+  "episodes": [],
+  "crop_rationale": "Overhead isolates the tabletop parts and assembly area. Wider wrist crops retain the approach, gear pickup, pin insertion and contact positions across the session; wrist-to-arm assignment remains unverified.",
+  "repo_id": "ZebTaylor/panthera-hitl-reviewed-clean-20261029-20hz",
+  "camera_alignment_rationale": "Accepted-interval audit:8.50\u20139.80% nearest camera offsets exceed40ms but only0.46\u20130.54% exceed50ms across6141 grid knots per camera. Source95th-percentile gaps~100.16ms.50ms is one20Hz tick and approximately half a common100ms saved-frame gap. This acknowledges capture reuse without inventing images; larger offsets split intervals.",
+  "camera_alignment_evidence": "work/hitl-quality-20261029/camera_offset_audit.json",
+  "image_crop_normalization": {
+    "approved": true,
+    "method": "recrop_original_640x480",
+    "target_crops_xyxy": {
+      "overhead": [
+        120,
+        80,
+        520,
+        480
+      ],
+      "wrist_port2": [
+        80,
+        0,
+        560,
+        480
+      ],
+      "wrist_port3": [
+        80,
+        0,
+        560,
+        480
+      ]
+    },
+    "allowed_source_crops_xyxy": [
+      {
+        "overhead": [
+          80,
+          0,
+          560,
+          480
+        ],
+        "wrist_port2": [
+          80,
+          0,
+          560,
+          480
+        ],
+        "wrist_port3": [
+          80,
+          0,
+          560,
+          480
+        ]
+      },
+      {
+        "overhead": [
+          120,
+          80,
+          520,
+          480
+        ],
+        "wrist_port2": [
+          80,
+          0,
+          560,
+          480
+        ],
+        "wrist_port3": [
+          80,
+          0,
+          560,
+          480
+        ]
+      }
+    ],
+    "target_contract_path": "infra/inference/contract.json",
+    "target_contract_sha256": "5bb0a4d18130b1bee4f4b842e63060bccabfb501a1c7d83e700b99fd343f0fed",
+    "rationale": "Explicit offline normalization approved during HITL review.69 source rollouts used centered480 square all cameras;20 used current400 square overhead and centered480 wrists. Reprocess original640x480 files to current inference geometry rather than inherit unrelated Sept30 crops. Per-source original inference crops remain provenance."
+  },
+  "activity_detection": {
+    "net_displacement_rad": 0.004,
+    "window_ticks": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "window_max_s": 0.25,
+    "method": "Any native coordinate net displacement>0.004rad across1..5ticks marks every spanned transition active. Retains smooth slow nudges; visual approval determines usefulness. Threshold describes recorded motion and is not a task-success/safety criterion."
+  }
+}

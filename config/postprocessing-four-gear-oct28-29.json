@@ -1,0 +1,595 @@
+{
+  "processing_version": 2,
+  "recording_timezone": "America/Chicago",
+  "task": "put the four gears in the carrier and put a pin in each gear",
+  "fps": 20,
+  "image_size": 256,
+  "image_crops_xyxy": {
+    "overhead": [
+      120,
+      80,
+      520,
+      480
+    ],
+    "wrist_port2": [
+      80,
+      0,
+      560,
+      480
+    ],
+    "wrist_port3": [
+      80,
+      0,
+      560,
+      480
+    ]
+  },
+  "image_resize": "Overhead fixed400x400 source crop [120,80,520,480]; each wrist fixed480x480 source crop [80,0,560,480]. Pillow LANCZOS resize each to256x256, preserving square geometry without padding.",
+  "image_encoding": "embedded RGB JPEG, quality=95, chroma_subsampling=0",
+  "sampling": "Regular 50ms host-monotonic grid; nearest measured state and nearest frame per camera within the annotated crop; ties select earlier samples. No interpolation, numerical low-pass filter, or duplicated synthetic states. Some camera frames repeat because achieved capture rate is below 20 Hz; counts are reported per episode.",
+  "action_semantics": "absolute measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad at the NEXT grid tick (t+0.05s). Kinesthetic next-pose proxy, not sent motor commands. Final observation is omitted if its next state would leave the crop.",
+  "state_semantics": "measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad. Both joint and gripper values remain native radians.",
+  "state_names": [
+    "left.joint1",
+    "left.joint2",
+    "left.joint3",
+    "left.joint4",
+    "left.joint5",
+    "left.joint6",
+    "left.gripper_rad",
+    "right.joint1",
+    "right.joint2",
+    "right.joint3",
+    "right.joint4",
+    "right.joint5",
+    "right.joint6",
+    "right.gripper_rad"
+  ],
+  "max_state_alignment_s": 0.01,
+  "max_camera_alignment_s": 0.04,
+  "camera_assignment": "Wrist-to-arm assignments are unverified; preserve USB-port names rather than inventing left/right labels.",
+  "timing": "Host receive timestamps, not hardware exposure timestamps. Offline nearest-frame alignment may choose a frame slightly later than the grid tick; all actual offsets are retained.",
+  "trim_method": "Stop at earliest terminal-opening cue or classification-state timestamp; preserve all earlier motion and pauses. Metadata/pedal boundary only; no visual task-success claim.",
+  "trim_uncertainty_s": 0.25,
+  "episodes": [
+    {
+      "id": "20261028T231736-b5ed2489",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 106.099468633,
+      "original_end_s": 106.117507262,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261028T232218-14de8183",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 94.769997119,
+      "original_end_s": 94.784248346,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261028T235546-1a753687",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 103.512715096,
+      "original_end_s": 103.528319647,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T000506-6b54f6c6",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 100.233207329,
+      "original_end_s": 100.246707876,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T002816-0ca142e9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 85.11868758,
+      "original_end_s": 85.14125628,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T003200-1d70162c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 80.568152915,
+      "original_end_s": 80.589161046,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T003352-83f4d1b3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 81.259932312,
+      "original_end_s": 81.276529725,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T003548-f7952f47",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 80.085727859,
+      "original_end_s": 80.10546777,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T004056-90d0fdd1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 84.837561957,
+      "original_end_s": 84.85705407,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T004406-a5bedf21",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 83.768378235,
+      "original_end_s": 83.785975975,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T004552-c592a2a1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 71.886854313,
+      "original_end_s": 71.903726128,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T005102-b4b75aad",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 75.819094523,
+      "original_end_s": 75.834582461,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T005403-64907751",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 77.546986369,
+      "original_end_s": 77.564720891,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T005610-ecb9d7eb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 77.967416366,
+      "original_end_s": 77.983219205,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T005808-db135922",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 64.706345014,
+      "original_end_s": 64.719091253,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T005941-12373975",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 65.410861538,
+      "original_end_s": 65.425332807,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T010112-90b8313c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 64.178358003,
+      "original_end_s": 64.18754369,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T010236-e4d44c98",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 72.103483191,
+      "original_end_s": 72.117413577,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T010411-3442bd9b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 63.7098702,
+      "original_end_s": 63.724251425,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T010539-317a213c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 67.123524838,
+      "original_end_s": 67.139498964,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T010822-4169d4eb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 69.637080312,
+      "original_end_s": 69.644788345,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T203609-32b6ea7b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 85.690120237,
+      "original_end_s": 85.713054764,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T203755-3ce852cc",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 79.721436185,
+      "original_end_s": 79.739908846,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T203945-72c5f400",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 83.541876733,
+      "original_end_s": 83.562484798,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T204505-d3dc539f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 80.390395727,
+      "original_end_s": 80.412852495,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T204650-16766240",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 77.449628737,
+      "original_end_s": 77.464599202,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T204831-ace4d29c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 79.890254488,
+      "original_end_s": 79.909926989,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T205110-69db165e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 86.326130244,
+      "original_end_s": 86.348194078,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T205305-999f3be3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 83.533506299,
+      "original_end_s": 83.55228667,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T205508-13fc268a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 86.751078324,
+      "original_end_s": 86.764925816,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T205703-d92d421c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 83.732915149,
+      "original_end_s": 83.75456942,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T210009-f9e3b9aa",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 87.720933886,
+      "original_end_s": 87.743783541,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T210244-8d47da3c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 88.727684844,
+      "original_end_s": 88.747040021,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T210438-05d9f656",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 80.943857887,
+      "original_end_s": 80.966535853,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T210633-cc2b9e10",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 81.719631708,
+      "original_end_s": 81.738780919,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T210846-3919f7ee",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 82.459776196,
+      "original_end_s": 82.471693373,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T211031-9126438b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 74.16757068,
+      "original_end_s": 74.1765375,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T211217-7a128415",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 78.627582421,
+      "original_end_s": 78.649558527,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T211401-c60b9c2b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 83.589044642,
+      "original_end_s": 83.611251224,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T211645-56559cd3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 80.90339761,
+      "original_end_s": 80.92522035,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T211835-0e531f54",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 73.979216315,
+      "original_end_s": 73.997427084,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T212014-b01d1c45",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 67.539934519,
+      "original_end_s": 67.553934655,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T212146-4b517a36",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 73.773227189,
+      "original_end_s": 73.782437543,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T212330-f10ab988",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 79.492519706,
+      "original_end_s": 79.511846491,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T212520-2e78b32e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 78.502172941,
+      "original_end_s": 78.530483065,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T212930-d9046017",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 74.991995588,
+      "original_end_s": 75.004035158,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T214054-01ff6aa6",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 72.153735047,
+      "original_end_s": 72.170201344,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T214607-ced2e016",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 74.910317821,
+      "original_end_s": 74.931387177,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T214744-1c6b2411",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 71.67164431,
+      "original_end_s": 71.688250505,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T214919-e3a2858b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 72.174846457,
+      "original_end_s": 72.188967673,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T215058-fb71d9e1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 69.076251881,
+      "original_end_s": 69.090517504,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T215615-66188e47",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 66.315751048,
+      "original_end_s": 66.333273225,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T220145-8d927c1f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 65.610284627,
+      "original_end_s": 65.622961989,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T220449-b6857be0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 68.060951815,
+      "original_end_s": 68.071462949,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T220622-8bd0e85d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 64.420327351,
+      "original_end_s": 64.437113613,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T220942-326ebdf4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 67.58126994,
+      "original_end_s": 67.599653154,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T221109-d22aa1bd",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 63.861767305,
+      "original_end_s": 63.887033112,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T221244-b7023b38",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 75.89217915,
+      "original_end_s": 75.904579413,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    },
+    {
+      "id": "20261029T221549-447454e2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 63.683900104,
+      "original_end_s": 63.698946326,
+      "reason": "Complete operator-kept four-gear assembly; remove terminal classification tail only.",
+      "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup."
+    }
+  ],
+  "crop_rationale": "User-reviewed October26 overhead crop; wrist crops and encoded wrist bytes preserved.",
+  "source_kind": "operator_kept_four_gear_assembly",
+  "overhead_crop_audit": "processing/crop_audit/overhead-crop-audit.md",
+  "annotation_source": "Complete operator-kept four-gear task recordings selected by local collection date, excluding previously published single-insertion references and single_bolt mode; start/mid/end overhead contact sheets checked for task setup.",
+  "recording_session_local_dates": [
+    "2026-10-28",
+    "2026-10-29"
+  ]
+}

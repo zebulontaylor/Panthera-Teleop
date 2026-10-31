@@ -1,0 +1,1006 @@
+{
+  "processing_version": 2,
+  "recording_session_local_date": "2026-10-29",
+  "recording_timezone": "America/Chicago",
+  "task": "put the four gears in the carrier and put a pin in each gear",
+  "fps": 20,
+  "image_size": 256,
+  "image_crops_xyxy": {
+    "overhead": [
+      120,
+      80,
+      520,
+      480
+    ],
+    "wrist_port2": [
+      80,
+      0,
+      560,
+      480
+    ],
+    "wrist_port3": [
+      80,
+      0,
+      560,
+      480
+    ]
+  },
+  "image_resize": "Overhead fixed400x400 source crop [120,80,520,480]; each wrist fixed480x480 source crop [80,0,560,480]. Pillow LANCZOS resize each to256x256, preserving square geometry without padding.",
+  "image_encoding": "embedded RGB JPEG, quality=95, chroma_subsampling=0",
+  "sampling": "Regular 50ms host-monotonic grid; nearest measured state and nearest frame per camera within the annotated crop; ties select earlier samples. No interpolation, numerical low-pass filter, or duplicated synthetic states. Some camera frames repeat because achieved capture rate is below 20 Hz; counts are reported per episode.",
+  "action_semantics": "absolute measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad at the NEXT grid tick (t+0.05s). Kinesthetic next-pose proxy, not sent motor commands. Final observation is omitted if its next state would leave the crop.",
+  "state_semantics": "measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad. Both joint and gripper values remain native radians.",
+  "state_names": [
+    "left.joint1",
+    "left.joint2",
+    "left.joint3",
+    "left.joint4",
+    "left.joint5",
+    "left.joint6",
+    "left.gripper_rad",
+    "right.joint1",
+    "right.joint2",
+    "right.joint3",
+    "right.joint4",
+    "right.joint5",
+    "right.joint6",
+    "right.gripper_rad"
+  ],
+  "max_state_alignment_s": 0.01,
+  "max_camera_alignment_s": 0.04,
+  "camera_assignment": "Wrist-to-arm assignments are unverified; preserve USB-port names rather than inventing left/right labels.",
+  "timing": "Host receive timestamps, not hardware exposure timestamps. Offline nearest-frame alignment may choose a frame slightly later than the grid tick; all actual offsets are retained.",
+  "trim_method": "Stop at earliest terminal-opening cue or classification-state timestamp; preserve all earlier motion and pauses. Metadata/pedal boundary only; no visual task-success claim.",
+  "trim_uncertainty_s": 0.25,
+  "episodes": [
+    {
+      "id": "20261029T222745-959004d8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.923529927,
+      "original_end_s": 10.942286403,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T222858-bc728ad5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.174273811,
+      "original_end_s": 10.192551413,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T222933-65ac681b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.344729143,
+      "original_end_s": 9.3612557,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T223019-fdb5b379",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.091205704,
+      "original_end_s": 10.112221368,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T223331-7abc4f07",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 7.793882116,
+      "original_end_s": 7.806544798,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T223400-98d1ebd2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 7.530182161,
+      "original_end_s": 7.541163535,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T223424-7db42ef2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.951577015,
+      "original_end_s": 9.970506922,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T223452-44f4bba2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.048943219,
+      "original_end_s": 8.062856696,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T223520-136ca4b8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.065603313,
+      "original_end_s": 8.083856118,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T223543-521f93d1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.763729418,
+      "original_end_s": 9.833815041,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T223609-56c48b64",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.88865798,
+      "original_end_s": 8.907205708,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T223640-642b9252",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.684184682,
+      "original_end_s": 8.698372904,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T223705-1e0dfa3d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 11.222124691,
+      "original_end_s": 11.241164405,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T223729-02fe33dd",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.555174239,
+      "original_end_s": 8.5722063,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T223750-80d5973e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.511574094,
+      "original_end_s": 9.525676187,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T223823-ca870b17",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.734891859,
+      "original_end_s": 9.749610697,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T223944-4590573c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.063154213,
+      "original_end_s": 10.078978433,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T224104-0ffd0d21",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.679444252,
+      "original_end_s": 9.693020828,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T224326-973e0540",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 11.179663707,
+      "original_end_s": 11.195656098,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T224425-c66ea18f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 7.053664556,
+      "original_end_s": 7.067923775,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T224457-b2c68205",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.333237788,
+      "original_end_s": 9.347800987,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T224517-99922640",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.63690958,
+      "original_end_s": 9.655077066,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T224537-0e639b92",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.984376128,
+      "original_end_s": 9.000783542,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T224618-6750f165",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.814475558,
+      "original_end_s": 8.830095536,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T224643-2e0484be",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 7.078373213,
+      "original_end_s": 7.091368772,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T233914-27b92b10",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.577817518,
+      "original_end_s": 9.59372123,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T233948-b0917700",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 12.004914739,
+      "original_end_s": 12.336666426,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T234303-705ed3cf",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 12.247342043,
+      "original_end_s": 12.267516813,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T234329-3c73e2f5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.915550619,
+      "original_end_s": 14.937627019,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T234438-cc8a17d3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 13.297436298,
+      "original_end_s": 13.317291325,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T234511-e1b6b5e1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 12.430476858,
+      "original_end_s": 12.447578535,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T234539-e2d1f5c7",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.905338759,
+      "original_end_s": 9.920416812,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T234603-afa4d5c9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.636428671,
+      "original_end_s": 10.654010828,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T234632-5f38a679",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.193233295,
+      "original_end_s": 9.206290825,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T234659-56c56bba",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.670588453,
+      "original_end_s": 9.689532377,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T234721-756b4b31",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.506793877,
+      "original_end_s": 10.525634855,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T234746-5dafbb63",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.611712829,
+      "original_end_s": 9.629861208,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T234808-dcf4f56b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.886287465,
+      "original_end_s": 9.904452939,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T234854-d3a142b0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 11.265944179,
+      "original_end_s": 11.285597223,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T234921-0ae48e32",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.878515574,
+      "original_end_s": 8.892360182,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T234942-582c6693",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.665241997,
+      "original_end_s": 9.682072141,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T235003-fac92df4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.046078833,
+      "original_end_s": 10.071133361,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T235105-a5bb4af0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.798613401,
+      "original_end_s": 8.817851365,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T235257-8bf999fb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.74099662,
+      "original_end_s": 9.750268792,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T235453-76abe475",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 7.467160737,
+      "original_end_s": 7.484846687,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T235557-35912a9c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 7.488509555,
+      "original_end_s": 7.504230482,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T235626-c9522d75",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.080597837,
+      "original_end_s": 10.095502435,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T235700-37a18a98",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.948938036,
+      "original_end_s": 9.96583453,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T235833-9f794ff4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.175619094,
+      "original_end_s": 8.191065448,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T235917-4c3e1877",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.031721426,
+      "original_end_s": 10.049858556,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T235937-43fe0265",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.340543545,
+      "original_end_s": 9.358871059,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261029T235956-b74a4833",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.964388094,
+      "original_end_s": 9.980610142,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000033-5ca8ed01",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.045431372,
+      "original_end_s": 9.058093493,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000105-1edffd1a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.869262833,
+      "original_end_s": 9.881854647,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000131-37e55854",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.605729857,
+      "original_end_s": 10.624927654,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000425-38f55f2d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 6.728687401,
+      "original_end_s": 6.742040584,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000444-d01177e0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 7.486444591,
+      "original_end_s": 7.498090805,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000514-3ba23f97",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.052650089,
+      "original_end_s": 8.07000387,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000532-9ee1a940",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 11.419874835,
+      "original_end_s": 11.435956879,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000601-a4f3e306",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.040873381,
+      "original_end_s": 10.057705272,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000625-6a37258c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 11.186891157,
+      "original_end_s": 11.204965462,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000647-fe2a5731",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.932982884,
+      "original_end_s": 9.952496789,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000712-8042c3e5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.952514669,
+      "original_end_s": 8.971516338,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000735-a9d10830",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.937645897,
+      "original_end_s": 8.946190273,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000754-6659a931",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.221580538,
+      "original_end_s": 9.240910228,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000815-63bab1c9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.173762637,
+      "original_end_s": 10.192616134,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000904-7d34bd5c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 7.267706075,
+      "original_end_s": 7.281181853,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T000942-3af9de90",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.834052915,
+      "original_end_s": 8.843563428,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T001024-59906848",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.797174494,
+      "original_end_s": 10.821628756,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T001524-88b5a5b4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.355091229,
+      "original_end_s": 10.371271613,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T001606-5af90ed3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.485637446,
+      "original_end_s": 8.498452355,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T001627-7f80123c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 11.153269608,
+      "original_end_s": 11.169601378,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T001649-55b9f26b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.982165698,
+      "original_end_s": 8.997117565,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T001713-eb651b9e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 11.096656125,
+      "original_end_s": 11.111660946,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T001828-66caa054",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.895071604,
+      "original_end_s": 8.909904558,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T001925-b124e71d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 11.161128655,
+      "original_end_s": 11.181678913,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T002017-3358d5a7",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.59515949,
+      "original_end_s": 9.609531016,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T002037-8dd29746",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.937331241,
+      "original_end_s": 9.954443771,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T002057-90709d19",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.670989534,
+      "original_end_s": 10.684282796,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T002150-3e7952e8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.249112147,
+      "original_end_s": 10.267969882,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T002637-9e951b54",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 11.625435936,
+      "original_end_s": 11.642486067,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T003005-cc8d9fd4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 12.330367403,
+      "original_end_s": 12.34915401,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T003248-156dcf65",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.24619102,
+      "original_end_s": 10.261794632,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T003512-3087943c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.20470901,
+      "original_end_s": 9.218134463,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T003535-9641e8b8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.363812212,
+      "original_end_s": 9.379885707,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T003611-1bff09fd",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.019414337,
+      "original_end_s": 9.034626141,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T003632-fb08a121",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.863117232,
+      "original_end_s": 8.876355702,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T003651-09694b18",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 11.351790723,
+      "original_end_s": 11.36635869,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004033-d068d227",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.88595743,
+      "original_end_s": 9.90923152,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004052-fcd244d0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.122242787,
+      "original_end_s": 10.140292505,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004118-15265178",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.364348246,
+      "original_end_s": 8.378064405,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004137-3bc1e94e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.172431461,
+      "original_end_s": 8.190934241,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004155-a4199da9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.510752659,
+      "original_end_s": 9.522732244,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004214-67e8b093",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.883005464,
+      "original_end_s": 8.928229545,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004233-5e0923b0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.298461186,
+      "original_end_s": 8.318041921,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004255-ee7bd394",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 10.805027619,
+      "original_end_s": 10.821338168,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004320-795da04a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 6.96678293,
+      "original_end_s": 6.981741293,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004337-fb4cbbe1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.798796119,
+      "original_end_s": 9.810246254,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004401-b0df7c7d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.786545383,
+      "original_end_s": 9.799618765,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004425-4114f9ad",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 11.317540043,
+      "original_end_s": 11.335607508,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004451-92a8366c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.329808359,
+      "original_end_s": 9.34650333,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004523-8091a1dd",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 9.124155459,
+      "original_end_s": 9.137537417,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004600-0d19fd76",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.468813062,
+      "original_end_s": 8.483960992,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004621-8f735ef0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.112371673,
+      "original_end_s": 8.13002842,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261030T004641-8b3d1ff5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 8.121074086,
+      "original_end_s": 8.139209766,
+      "reason": "Complete operator-kept single-bolt task; exclude terminal classification tail only; preserve earlier pauses and motion.",
+      "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+    }
+  ],
+  "crop_rationale": "User-reviewed October26 overhead crop; wrist crops and encoded wrist bytes preserved.",
+  "source_kind": "operator_kept_single_bolt_recordings",
+  "overhead_crop_audit": "processing/crop_audit/overhead-crop-audit.md",
+  "annotation_source": "Complete operator-kept single_bolt recordings selected by metadata episode_mode and America/Chicago local collection date; exclude terminal classification tail only."
+}

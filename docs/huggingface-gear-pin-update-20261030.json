@@ -1,0 +1,16 @@
+{
+  "repo_id": "ZebTaylor/panthera-gear-carrier-pin-real-20hz",
+  "url": "https://huggingface.co/datasets/ZebTaylor/panthera-gear-carrier-pin-real-20hz",
+  "commit": "b39cac4e8dce723203687527cf0e7d9c5cac3327",
+  "public": true,
+  "remote_files_verified": 1726,
+  "remote_metadata_hashes_verified": true,
+  "remote_lfs_sha256_files_verified": 1179,
+  "remote_regular_git_blob_hashes_verified": 547,
+  "episodes": 439,
+  "observations": 142713,
+  "added_episodes": 212,
+  "previous_episodes": 227,
+  "all_local_checks_passed": true,
+  "shutdown_scheduled_local": "2026-10-30T15:30:58-05:00"
+}
