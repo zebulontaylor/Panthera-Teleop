@@ -1,0 +1,143 @@
+{
+  "runs": [
+    {
+      "root": "/home/robotics/Desktop/panthera-teleop/data/experiments/real2sim-default-table",
+      "table_offset_m": 0.0,
+      "frames": 2237,
+      "episodes": [
+        {
+          "episode": "20261022T222502-6321638f",
+          "frames": 396,
+          "arm_tracking_rmse_rad": 0.04871575653430539,
+          "arm_tracking_max_abs_rad": 0.15837304347723347,
+          "robot_table_frame_fraction": 0.8838383838383839,
+          "robot_table_max_penetration_m": 0.03993403301273349,
+          "fk_max_position_error_m": 3.2957919968262575e-16,
+          "arm_limit_violation_frame_fraction": 0.0
+        },
+        {
+          "episode": "20261022T223034-fa96590a",
+          "frames": 416,
+          "arm_tracking_rmse_rad": 0.06923340977199512,
+          "arm_tracking_max_abs_rad": 0.31909070316254906,
+          "robot_table_frame_fraction": 0.8846153846153846,
+          "robot_table_max_penetration_m": 0.025984819237875132,
+          "fk_max_position_error_m": 3.433175098891678e-16,
+          "arm_limit_violation_frame_fraction": 0.0
+        },
+        {
+          "episode": "20261022T224407-e6499944",
+          "frames": 465,
+          "arm_tracking_rmse_rad": 0.09195148694753673,
+          "arm_tracking_max_abs_rad": 0.26878493036904505,
+          "robot_table_frame_fraction": 0.9204301075268817,
+          "robot_table_max_penetration_m": 0.044329454541775115,
+          "fk_max_position_error_m": 3.2487068343022356e-16,
+          "arm_limit_violation_frame_fraction": 0.0
+        },
+        {
+          "episode": "20261023T180718-47e74c70",
+          "frames": 300,
+          "arm_tracking_rmse_rad": 0.06350293114383505,
+          "arm_tracking_max_abs_rad": 0.30070596234619207,
+          "robot_table_frame_fraction": 0.8433333333333334,
+          "robot_table_max_penetration_m": 0.03920395649600096,
+          "fk_max_position_error_m": 3.284083995358298e-16,
+          "arm_limit_violation_frame_fraction": 0.0
+        },
+        {
+          "episode": "20261023T181449-320a66bd",
+          "frames": 315,
+          "arm_tracking_rmse_rad": 0.06947923631626857,
+          "arm_tracking_max_abs_rad": 0.23101113719792,
+          "robot_table_frame_fraction": 0.8444444444444444,
+          "robot_table_max_penetration_m": 0.0317525870490341,
+          "fk_max_position_error_m": 3.5760557644884744e-16,
+          "arm_limit_violation_frame_fraction": 0.0
+        },
+        {
+          "episode": "20261023T182037-65ab8000",
+          "frames": 345,
+          "arm_tracking_rmse_rad": 0.06354469073999955,
+          "arm_tracking_max_abs_rad": 0.23389246494065907,
+          "robot_table_frame_fraction": 0.855072463768116,
+          "robot_table_max_penetration_m": 0.03879186813999644,
+          "fk_max_position_error_m": 3.3074585536510505e-16,
+          "arm_limit_violation_frame_fraction": 0.0
+        }
+      ],
+      "pooled_arm_tracking_rmse_rad": 0.07008806368915797,
+      "robot_table_frame_fraction": 0.8761734465802414
+    },
+    {
+      "root": "/home/robotics/Desktop/panthera-teleop/data/experiments/real2sim-table-at-base",
+      "table_offset_m": 0.05,
+      "frames": 2237,
+      "episodes": [
+        {
+          "episode": "20261022T222502-6321638f",
+          "frames": 396,
+          "arm_tracking_rmse_rad": 0.0037730141136019515,
+          "arm_tracking_max_abs_rad": 0.037539704270636465,
+          "robot_table_frame_fraction": 0.0,
+          "robot_table_max_penetration_m": 0.0,
+          "fk_max_position_error_m": 3.2957919968262575e-16,
+          "arm_limit_violation_frame_fraction": 0.0
+        },
+        {
+          "episode": "20261022T223034-fa96590a",
+          "frames": 416,
+          "arm_tracking_rmse_rad": 0.0035655052789779302,
+          "arm_tracking_max_abs_rad": 0.034062751202076025,
+          "robot_table_frame_fraction": 0.0,
+          "robot_table_max_penetration_m": 0.0,
+          "fk_max_position_error_m": 3.433175098891678e-16,
+          "arm_limit_violation_frame_fraction": 0.0
+        },
+        {
+          "episode": "20261022T224407-e6499944",
+          "frames": 465,
+          "arm_tracking_rmse_rad": 0.0036419373937598793,
+          "arm_tracking_max_abs_rad": 0.04008915250792011,
+          "robot_table_frame_fraction": 0.0,
+          "robot_table_max_penetration_m": 0.0,
+          "fk_max_position_error_m": 3.2487068343022356e-16,
+          "arm_limit_violation_frame_fraction": 0.0
+        },
+        {
+          "episode": "20261023T180718-47e74c70",
+          "frames": 300,
+          "arm_tracking_rmse_rad": 0.004291527534427135,
+          "arm_tracking_max_abs_rad": 0.03973299261560226,
+          "robot_table_frame_fraction": 0.0,
+          "robot_table_max_penetration_m": 0.0,
+          "fk_max_position_error_m": 3.284083995358298e-16,
+          "arm_limit_violation_frame_fraction": 0.0
+        },
+        {
+          "episode": "20261023T181449-320a66bd",
+          "frames": 315,
+          "arm_tracking_rmse_rad": 0.0039547335412675345,
+          "arm_tracking_max_abs_rad": 0.035863938133139484,
+          "robot_table_frame_fraction": 0.0,
+          "robot_table_max_penetration_m": 0.0,
+          "fk_max_position_error_m": 3.5760557644884744e-16,
+          "arm_limit_violation_frame_fraction": 0.0
+        },
+        {
+          "episode": "20261023T182037-65ab8000",
+          "frames": 345,
+          "arm_tracking_rmse_rad": 0.003697861185913107,
+          "arm_tracking_max_abs_rad": 0.03587691569620366,
+          "robot_table_frame_fraction": 0.0,
+          "robot_table_max_penetration_m": 0.0,
+          "fk_max_position_error_m": 3.3074585536510505e-16,
+          "arm_limit_violation_frame_fraction": 0.0
+        }
+      ],
+      "pooled_arm_tracking_rmse_rad": 0.0037976771014858936,
+      "robot_table_frame_fraction": 0.0
+    }
+  ],
+  "interpretation": "Oracle demonstration tracking and scene-registration ablation; no learned policy or task-success evaluation."
+}
