@@ -79,6 +79,35 @@ For a separate disconnected preview without switching dashboards:
 `scripts/start-pin-regrasp-dashboard.sh --port 8092`. Use the switching launcher
 before connecting if another dashboard owns the cameras or motor lease.
 
+### Pin alignment in simulation
+
+The companion [RobotArmTraining repository](https://github.com/zebulontaylor/RobotArmTraining)
+provides a simulation version of the local retreat/return collection pattern.
+From that checkout, with its actuator dependencies installed, run:
+
+```bash
+MUJOCO_GL=egl .venv-assembly/bin/python tools/collect_pin_regrasps.py \
+  --task alignment --output outputs/pin_alignment/first_run \
+  --episodes 3 --max-attempts 10 --image-size 128 --save-failures
+```
+
+Setup establishes a held-pin reference about 1 mm above the carrier hole.
+Recorded motion approaches that reference along the pickup's angled path from
+the arm-base side, then backs away and repeats. Both horizontal and vertical
+motion follow the same eased path. The grippers stay fixed, and the final return
+ends at the aligned reference. Between approaches, the right arm drags the
+carrier sideways on the table, then holds still while the pin approaches its
+new hole location. The alignment setup places the carrier on bare tabletop,
+clear of the fixed assembly fixture. Each reset offsets the pin and carrier
+together; the carrier grasp keeps its modeled contact position and recorded wrist
+orientation, with reachability and contact checks at each reset.
+Successful attempts label forward return motion; repositioning, retreat, and
+failed attempts are excluded from training. The controller uses privileged simulator geometry.
+Its actions are 14 normalized increments for both arms, distinct from the regrasp
+simulator's 13-value Cartesian targets and this dashboard's joint targets. See
+`sim/actuator/pin_regrasp.md` in the companion checkout for cycle settings,
+the dataset contract, and the preview command.
+
 ### Exporting pin regrasp episodes
 
 The retained collection has a separate LeRobot v3 export at
