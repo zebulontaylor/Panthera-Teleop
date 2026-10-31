@@ -1,0 +1,8 @@
+{
+  "repo_url": "https://huggingface.co/datasets/ZebTaylor/panthera-pin-insertion-failure-clips-20261027",
+  "video_url": "https://huggingface.co/datasets/ZebTaylor/panthera-pin-insertion-failure-clips-20261027/resolve/main/pin-insertion-failures-two-latest-attempts.mp4",
+  "public": true,
+  "sha256": "1d712548935acb4b1b5808dac30772f258e62381f3496855ec60938f11e7eb60",
+  "commit": "87010985f57642378e5027d3a2ad66178d964c2a",
+  "bytes": 17138587
+}

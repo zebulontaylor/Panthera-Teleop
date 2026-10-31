@@ -1,0 +1,10 @@
+{
+  "app/hand_guide.py": "5e57f175578e910ec7d86c755fcad60eb0435aa1045b75d1142cdcf6213827cf",
+  "app/alignment_assist.py": "345e35b90ae2933aa1e4256087d82b8dbe5a6a357838d6dc2fe01b8e140c2a5a",
+  "app/alignment_servo.py": "6224e2910339ae07b5a67ff14ff93e4176b431324f302fdb573af512981c78fc",
+  "app/dashboard.py": "f8cff407bb35618f26a2a89204cd134f6e11d3940a51943a3a6e4cbd8d8ec39b",
+  "app/web/index.html": "60fed24848dddf2bb955c0641196bcd7031fea475a0ff053c3ecffbb2676f133",
+  "config/recording.json": "11ef4b760867a9e973206512a5654c6c187f1deba71046878b01053aa24ead9f",
+  "config/calibration/gear-supervised-trial.json": "3cc7bb98f887748960422258b149a2ae2685da325a398252bc15577233ef36f5",
+  "start.sh": "fde14a84a62c2e9958415044ac780399eaa62b0b928db0cb14437a3af50c0866"
+}

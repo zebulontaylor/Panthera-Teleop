@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Panthera · Episode desk</title>
+<style>
+:root{color-scheme:dark;--bg:#111714;--panel:#1b231e;--line:#334039;--text:#edf4eb;--muted:#a4b3a8;--green:#b5f37b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,sans-serif}main{max-width:1480px;margin:auto;padding:32px}header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:22px}.brand{font-size:15px;letter-spacing:.15em;font-weight:700}.tag{font-size:12px;letter-spacing:.13em;color:var(--muted)}h1{font-size:clamp(32px,4vw,54px);font-weight:550;letter-spacing:-.035em;margin:16px 0}p{color:var(--muted);line-height:1.6}.pill{border:1px solid var(--line);border-radius:30px;padding:10px 15px;font-size:13px}.dot{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;margin-right:9px}.top{display:flex;justify-content:space-between;gap:25px;margin:32px 0}.counter{text-align:right;font-variant-numeric:tabular-nums;font-size:44px;min-width:180px}.counter small{display:block;font-size:12px;letter-spacing:.12em;color:var(--muted)}.cameras{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.camera{overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--panel)}.camera img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;background:#0b100d}.camera footer{display:flex;justify-content:space-between;padding:15px;font-size:13px}.health{color:var(--muted)}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}button{font:inherit;color:inherit;border:1px solid var(--line);border-radius:12px;padding:24px;text-align:left;background:var(--panel);cursor:pointer;transition:background .15s,transform .15s}button:hover:enabled{background:#2a382f;transform:translateY(-2px)}button:focus-visible{outline:3px solid var(--green);outline-offset:3px}button:disabled{opacity:.45;cursor:default}button strong{font-size:21px}button span{display:block;color:var(--muted);font-size:13px;margin-top:10px}kbd{float:right;border:1px solid #5e7164;border-radius:6px;padding:5px 12px;font:17px ui-monospace,monospace}#keep{border-color:#7fa45c}#discard{border-color:#71534d}.bottom{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;padding-top:10px}.stats{display:flex;gap:28px;font-size:14px}.stats b{display:block;font-size:26px;margin-bottom:4px}.stats span{color:var(--muted)}#message{min-height:25px;color:var(--green)}#error{padding:14px;border:1px solid #cb725a;background:#3b261f;border-radius:8px;display:none}#focus{color:#e4b66f}.footnote{border-top:1px solid var(--line);padding-top:20px;margin-top:24px;font-size:12px}#episode{font:13px ui-monospace,monospace;color:var(--muted)}@media(max-width:850px){main{padding:18px}.cameras{grid-template-columns:1fr}.actions{gap:8px}button{padding:16px}button strong{font-size:17px}.top{margin:18px 0}.counter{font-size:30px}.bottom{display:block}.stats{margin-top:20px}kbd{float:none;display:inline-block;margin-bottom:12px}}
+@media(max-width:600px){.top{flex-direction:column;gap:12px}.counter{text-align:left;min-width:0}.actions{grid-template-columns:1fr}button kbd{float:right;margin-bottom:0}h1{font-size:34px;margin:12px 0}.stats{justify-content:space-between}.brand{font-size:12px;letter-spacing:.1em}.pill{font-size:11px;padding:8px 10px}header{gap:12px}}
+.assist{margin:20px 0;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}.assist label{display:flex;align-items:center;gap:10px;font-weight:600}.assist input{width:20px;height:20px;accent-color:var(--green)}.assist p{margin:8px 0 0;font-size:13px}.assist-hint{color:var(--muted)}
+</style></head><body><main>
+<header><div class="brand">PANTHERA <span style="color:var(--green)">/</span> EPISODE DESK</div><div class="pill" id="mode">Connecting…</div></header>
+<section class="top"><div><div class="tag">GRAVITY ASSIST · TWO ARMS</div><h1 id="headline">Connecting to session</h1><p id="hint">Waiting for the local recorder.</p><div id="episode">No active episode</div></div><div class="counter"><div id="duration">00:00.0</div><small id="samples">0 STATE SAMPLES</small></div></section>
+<p id="pedal" role="status">Foot pedal: waiting</p>
+<div id="error" role="alert"></div>
+<section class="assist" aria-label="CNN alignment assistance">
+<label><input type="checkbox" id="alignment-assist" disabled> Enable CNN alignment nudges</label>
+<p id="alignment-status" role="status" aria-live="polite">Alignment assist off</p>
+<p class="assist-hint">Small alignment corrections while recording, only when both wrist cameras see nearby targets and a gripper holds the gear or pin.</p>
+<div id="supervised-trial" hidden>
+<p>Supervised gear trial: confirm the gear is retained, the carrier is clear, and the green gear / yellow target marks are correct below. Blue is the demonstrated gear height. Hold for one nudge, up to 0.3 seconds; release to stop.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><canvas id="alignment-left" width="640" height="480" style="width:100%"></canvas><canvas id="alignment-right" width="640" height="480" style="width:100%"></canvas></div>
+<button id="alignment-nudge" disabled style="touch-action:none;user-select:none">Hold for one test nudge</button>
+<p id="gear-grasp-status">Gear gripper passive</p>
+<p id="alignment-readiness">Waiting for trial readiness</p>
+<button id="gear-grasp-close" disabled>Close gear gripper slightly</button>
+<button id="gear-grasp-release" disabled>Release gear grip to passive</button>
+<p id="alignment-servo-status">CNN alignment hover off</p>
+<button id="alignment-servo-start" disabled>Start CNN alignment and hover</button>
+<button id="alignment-servo-stop" disabled>Release hover to gravity assistance</button>
+</div>
+</section>
+<section class="cameras" aria-label="Live camera feeds">
+<div class="camera"><img id="wrist_port2" alt="Wrist camera on USB port 2"><footer>Wrist · port 2 <span class="health" id="health-wrist_port2">Waiting</span></footer></div>
+<div class="camera"><img id="wrist_port3" alt="Wrist camera on USB port 3"><footer>Wrist · port 3 <span class="health" id="health-wrist_port3">Waiting</span></footer></div>
+<div class="camera"><img id="overhead" alt="Overhead workspace camera"><footer>Overhead <span class="health" id="health-overhead">Waiting</span></footer></div>
+</section>
+<section class="actions" aria-label="Finish and label episode">
+<button id="keep" disabled><kbd>K</kbd><strong>Keep episode</strong><span>Save episode and return both arms</span></button>
+<button id="review" disabled><kbd>R</kbd><strong>Flag for review</strong><span>Flag episode and return both arms</span></button>
+<button id="discard" disabled><kbd>D</kbd><strong>Discard episode</strong><span>Discard episode and return both arms</span></button>
+</section>
+<div class="bottom"><div><div id="message" role="status" aria-live="polite"></div><p style="margin:0">After the end cue: 1 pedal tap keeps, 2 flag for review, 3 delete. Pause 0.65 seconds after the final release to confirm. The first press immediately starts the arm reset; further taps select the saved label during the return.<br>Release the handles and clear the return path before tapping a decision or pressing a decision key. After the return, pull each handle to release that arm.</p><p id="focus">Keep this page focused to use the keyboard.</p></div><div class="stats"><div><b id="kept">0</b><span>Kept</span></div><div><b id="reviewed">0</b><span>For review</span></div><div><b id="discarded">0</b><span>Discarded</span></div></div></div>
+<p class="footnote">Joint + gripper feedback · sent gravity torques · motor health · tool poses · three timestamped camera streams. Cameras use host receive times; calibration is pending. K/R/D returns and holds both arms immediately, with no countdown. Pull each handle to release it. Support the arms before stopping the controller.</p>
+</main><script>
+let current=null, connected=false, busy=false, last=null, inFlight=false, assistBusy=false;
+let nudgePress=null, previewBusy=false;
+const el=id=>document.getElementById(id);
+function buttons(){
+ el('alignment-assist').disabled=!connected||!current?.alignment_assist||assistBusy;
+ ['keep','review','discard'].forEach(id=>el(id).disabled=!connected||!current?.active||busy||!current.control_active);
+ const trialReady=connected&&current?.active&&current?.phase==='recording'&&current?.control_active&&current?.alignment_assist?.mode==='operator_supervised';
+ el('alignment-nudge').disabled=!trialReady||!current?.alignment_assist?.enabled;
+ if(current?.alignment_servo?.active)el('alignment-nudge').disabled=true;
+ el('alignment-servo-start').disabled=!trialReady||!current?.gear_grasp?.settled||current?.alignment_servo?.active;
+ el('alignment-servo-stop').disabled=!connected||!current?.alignment_servo?.active;
+ el('gear-grasp-close').disabled=!trialReady||current?.gear_grasp?.active;
+ el('gear-grasp-release').disabled=!trialReady||!current?.gear_grasp?.active;
+ if(el('alignment-nudge').disabled)stopNudge();
+}
+async function decide(label){if(!connected||!current?.active||busy||!current.control_active)return;busy=true;buttons();try{const response=await fetch('/api/decision',{method:'POST',headers:{'Content-Type':'application/json','X-Session-Token':current.token},body:JSON.stringify({label,episode_id:current.active})});const data=await response.json();if(!response.ok)throw Error(data.error);el('message').textContent='Saving episode…';}catch(error){el('message').textContent=error.message;}finally{await poll();busy=false;buttons()}}
+function renderAlignmentAssist(){
+ const assist=current?.alignment_assist;
+ el('supervised-trial').hidden=assist?.mode!=='operator_supervised';
+ el('alignment-assist').checked=assist?.enabled===true;
+ el('alignment-status').textContent=!connected?'Alignment assist unavailable — disconnected':!assist?'Alignment assist unavailable':assist.error?`Alignment assist error: ${assist.error}`:assist.active?`Alignment assist nudging${assist.reason?' · '+assist.reason:''}`:assist.enabled?`Alignment assist enabled · ${assist.reason||'Waiting for alignment criteria'}`:'Alignment assist off';
+ if(connected&&assist?.last_trial){const trial=assist.last_trial;el('alignment-status').textContent+=` · Last press: ${trial.reason} · peak added torque ${trial.peak_torque_nm.toFixed(3)} Nm`}
+ el('gear-grasp-status').textContent=current?.gear_grasp_error?current.gear_grasp_error:current?.gear_grasp?.active?`Left gear gripper ${current.gear_grasp.settled?'holding':'settling'} · 0.15 Nm limit · right gripper unchanged`:'Gear gripper passive';
+ const servo=current?.alignment_servo;
+ el('alignment-servo-status').textContent=servo?.active?`CNN alignment: ${servo.reason} · ${servo.steps} steps · ${(servo.tool_travel_m*1000).toFixed(1)} mm travel / 30 mm limit`:`CNN alignment hover off${servo?.reason?' · '+servo.reason:''}`;
+ const ready=assist?.readiness;
+ el('alignment-readiness').textContent=ready?ready.active?'Ready for one bounded pulse':ready.reason==='aligned'?'Within the alignment deadband':`Waiting: ${ready.reason}${ready.target_distance_px?` · ${ready.blocking_camera}: ${ready.target_distance_px.toFixed(1)} px from reference (limit ${ready.max_error_px})` : ''}`:'Waiting for trial readiness';
+}
+async function toggleAlignmentAssist(){
+ if(!connected||assistBusy)return;
+ const enabled=el('alignment-assist').checked;assistBusy=true;buttons();
+ try{
+  const response=await fetch('/api/alignment-assist',{method:'POST',headers:{'Content-Type':'application/json','X-Session-Token':current.token},body:JSON.stringify({enabled})});
+  const data=await response.json();if(!response.ok)throw Error(data.error||'Could not change alignment assist');
+  el('alignment-status').textContent=enabled?'Enabling alignment assist…':'Disabling alignment assist…';
+ }catch(error){renderAlignmentAssist();el('alignment-status').textContent=error.message;}
+ finally{assistBusy=false;buttons();}
+}
+el('alignment-assist').onchange=toggleAlignmentAssist;
+async function sendNudge(press,held){
+ const response=await fetch('/api/alignment-nudge',{method:'POST',headers:{'Content-Type':'application/json','X-Session-Token':press.token},body:JSON.stringify({held,press_id:press.id,episode_id:press.episode}),signal:AbortSignal.timeout(500)});
+ if(!response.ok)throw Error('Nudge request rejected');
+}
+function stopNudge(){
+ const press=nudgePress;if(!press)return;nudgePress=null;clearInterval(press.timer);clearTimeout(press.limit);
+ sendNudge(press,false).catch(()=>{});
+}
+function startNudge(){
+ if(nudgePress||el('alignment-nudge').disabled)return;
+ const press={id:crypto.randomUUID(),episode:current.active,token:current.token,pending:false};nudgePress=press;
+ const renew=async()=>{if(nudgePress!==press||press.pending)return;press.pending=true;try{await sendNudge(press,true)}catch(error){stopNudge();el('alignment-status').textContent=error.message}finally{press.pending=false}};
+ renew();press.timer=setInterval(renew,60);press.limit=setTimeout(stopNudge,300);
+}
+el('alignment-nudge').addEventListener('pointerdown',event=>{if(event.button!==0)return;event.preventDefault();el('alignment-nudge').setPointerCapture(event.pointerId);startNudge()});
+['pointerup','pointercancel','lostpointercapture'].forEach(name=>el('alignment-nudge').addEventListener(name,stopNudge));
+el('alignment-nudge').addEventListener('keydown',event=>{if([' ','Enter'].includes(event.key)){event.preventDefault();if(!event.repeat)startNudge()}});
+el('alignment-nudge').addEventListener('keyup',event=>{if([' ','Enter'].includes(event.key))stopNudge()});
+window.addEventListener('blur',stopNudge);document.addEventListener('visibilitychange',()=>{if(document.hidden)stopNudge()});
+async function alignmentPreview(){
+ if(previewBusy||!connected||current?.alignment_assist?.mode!=='operator_supervised')return;previewBusy=true;
+ try{
+  const response=await fetch('/api/alignment-preview',{signal:AbortSignal.timeout(1500)});if(!response.ok)return;
+  const data=await response.json(),p=data.prediction?.predictions?.gear;if(data.prediction?.status!=='ready'||!p)return;
+  await Promise.all(['left','right'].map(async(side,index)=>{
+   const logical=side+'_wrist',physical=data.prediction.camera_mapping[logical],encoded=data.frames[physical];if(!encoded)return;
+   const image=new Image();image.src='data:image/jpeg;base64,'+encoded;await image.decode();
+   const canvas=el('alignment-'+side),ctx=canvas.getContext('2d');ctx.drawImage(image,0,0,640,480);
+   const ci=p.camera_names.indexOf(logical),points=p.keypoints_2d[ci];
+   for(const [name,color] of [['gear_center','#b5f37b'],['slot_center','#ffd25a']]){const [x,y]=points[p.landmark_names.indexOf(name)];ctx.strokeStyle=color;ctx.lineWidth=3;ctx.beginPath();ctx.arc(x,y,9,0,2*Math.PI);ctx.stroke()}
+   const target=points[p.landmark_names.indexOf('slot_center')],offset=current?.alignment_assist?.target_error_px;
+   if(offset){ctx.strokeStyle='#6acfff';ctx.beginPath();ctx.moveTo(0,target[1]+offset[index*2+1]);ctx.lineTo(640,target[1]+offset[index*2+1]);ctx.stroke()}
+  }));
+ }catch(error){}finally{previewBusy=false}
+}
+setInterval(alignmentPreview,350);
+async function gearGrasp(action){
+ if(!connected||!current?.active)return;
+ try{const response=await fetch('/api/gear-grasp',{method:'POST',headers:{'Content-Type':'application/json','X-Session-Token':current.token},body:JSON.stringify({action,episode_id:current.active})});const data=await response.json();if(!response.ok)throw Error(data.error||'Gear grasp rejected')}
+ catch(error){el('gear-grasp-status').textContent=error.message}
+}
+el('gear-grasp-close').onclick=()=>gearGrasp('close');el('gear-grasp-release').onclick=()=>gearGrasp('release');
+async function setAlignmentServo(enabled){
+ if(!connected)return;
+ try{const response=await fetch('/api/alignment-servo',{method:'POST',headers:{'Content-Type':'application/json','X-Session-Token':current.token},body:JSON.stringify({enabled})});const data=await response.json();if(!response.ok)throw Error(data.error||'Visual servo rejected')}
+ catch(error){el('alignment-servo-status').textContent=error.message}
+}
+el('alignment-servo-start').onclick=()=>setAlignmentServo(true);el('alignment-servo-stop').onclick=()=>setAlignmentServo(false);
+el('keep').onclick=()=>decide('kept');el('review').onclick=()=>decide('review');el('discard').onclick=()=>decide('discarded');
+document.addEventListener('keydown',event=>{if(event.repeat||event.ctrlKey||event.altKey||event.metaKey||['INPUT','TEXTAREA','SELECT'].includes(event.target.tagName))return;const labels={k:'kept',r:'review',d:'discarded'};const label=labels[event.key.toLowerCase()];if(label){event.preventDefault();decide(label)}});
+async function poll(){if(inFlight)return;inFlight=true;try{const response=await fetch('/api/status',{signal:AbortSignal.timeout(2500)});if(!response.ok)throw Error('Session unavailable');current=await response.json();connected=true;if(!assistBusy)renderAlignmentAssist();const pedal=current.foot_pedal;el('pedal').textContent=current.pedal_mode==='classification'?`Foot pedal: ${current.pedal_taps||0} taps · 1 keep / 2 review / 3 delete`:pedal?.connected?(pedal.downward_force_requested?'Foot pedal: DOWNWARD FORCE REQUESTED':'Foot pedal: released'):'Foot pedal: not connected';const phase=current.phase;el('mode').textContent=current.demo?'SIMULATION · NO MOTORS':current.control_active?(current.phase==='returning_to_neutral'?'● Returning to neutral':current.handoff_ready&&Object.values(current.handoff_ready).some(v=>!v)?`Left ${current.handoff_ready.left?'assisted':'held'} · Right ${current.handoff_ready.right?'assisted':'held'}`:'● Gravity assist active'):'Control inactive';el('headline').textContent=({starting:'Preparing the session',armed:'Move to begin an episode',recording:'Recording your demonstration',waiting_for_stillness:'Ready for the next take',returning_to_neutral:'Returning to your neutral pose',holding_neutral:'Holding until you grab the handles',stopped:'Session stopped',error:'Session needs attention'})[phase]||phase;el('hint').textContent=current.pedal_decision_pending?'Reset started. Keep tapping to select: 1 keep / 2 review / 3 delete; pause 0.65 seconds to save.':phase==='holding_neutral'?'Both arms stay raised. Grab a handle and gently pull to switch that arm to gravity assistance.':phase==='returning_to_neutral'?(current.return_stage==='countdown'?`Release the handles — return begins in ${Number(current.return_countdown_s??0).toFixed(1)} seconds.`:'Both arms are returning and grippers are opening. Recording is paused. Arms will hold at neutral until you pull the handles.'):phase==='recording'?(current.episode_end_detected?'End opening detected. Release the handles, then tap pedal: 1 keep / 2 review / 3 delete. First press starts reset; further taps select the label.':'Both arms and cameras are being recorded. Pedal annotates force until the end cue. K / R / D also finish.'):phase==='waiting_for_stillness'?'Move either arm to begin the next episode.':phase==='armed'?'Recording starts when an arm moves or the pedal is held, with 0.75 seconds of pre-roll.':'The recorder will arm when the controller is ready.';el('episode').textContent=current.active||'No active episode';const duration=current.duration||0;el('duration').textContent=String(Math.floor(duration/60)).padStart(2,'0')+':'+(duration%60).toFixed(1).padStart(4,'0');el('samples').textContent=(current.samples||0).toLocaleString()+' STATE SAMPLES';el('kept').textContent=current.counts.kept||0;el('reviewed').textContent=current.counts.review||0;el('discarded').textContent=current.counts.discarded||0;const failures=Object.entries(current.cameras).filter(([,c])=>!c.ok).map(([name,c])=>name+': '+(c.error||'no fresh frames'));const error=current.error||current.audio_error||current.return_error||current.return_gripper_error||failures.join(' · ');el('error').style.display=error?'block':'none';el('error').textContent=error||'';Object.entries(current.cameras).forEach(([name,c])=>{el('health-'+name).textContent=c.ok?'Live':'Unavailable';if(c.ok){const img=el(name);if(img.complete)img.src='/camera/'+name+'?t='+Date.now()}});if(current.last_decision?.id!==last&&current.last_decision){last=current.last_decision.id;el('message').textContent=({kept:'Episode kept.',review:'Episode flagged for review.',discarded:'Episode moved to recoverable trash.'})[current.last_decision.label];}}catch(error){connected=false;renderAlignmentAssist();el('mode').textContent='Disconnected';el('headline').textContent='Connection lost';el('error').style.display='block';el('error').textContent='Local recorder is unavailable. Episode controls are disabled.';}finally{inFlight=false;buttons()}}
+window.addEventListener('blur',()=>el('focus').textContent='Page is unfocused — click here before using keys.');window.addEventListener('focus',()=>el('focus').textContent='Keyboard ready · K keep / R review / D discard');poll();setInterval(poll,350);
+</script></body></html>

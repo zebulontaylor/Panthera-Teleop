@@ -1,0 +1,270 @@
+{
+  "video": "pin-insertion-failures-two-latest-attempts.mp4",
+  "fps": 20,
+  "timing": "Host receive timestamps within active segments; holds omitted; original observed motion speed. Camera views are approximately synchronized.",
+  "attempts": [
+    {
+      "source_id": "20261027T155447-6d9ceba2",
+      "video_start_s": 0.0,
+      "video_end_s": 20.6,
+      "segments": [
+        {
+          "segment": 19,
+          "control_source": "policy",
+          "data_time_start_s": 27.998207653,
+          "data_time_end_s": 28.745719697,
+          "host_episode_start_s": 158.296316967,
+          "host_episode_end_s": 159.870183263
+        },
+        {
+          "segment": 20,
+          "control_source": "policy",
+          "data_time_start_s": 28.754874318,
+          "data_time_end_s": 29.00385328,
+          "host_episode_start_s": 165.879900002,
+          "host_episode_end_s": 166.794640479
+        },
+        {
+          "segment": 21,
+          "control_source": "policy",
+          "data_time_start_s": 29.011540982,
+          "data_time_end_s": 29.256554755,
+          "host_episode_start_s": 167.823235805,
+          "host_episode_end_s": 168.448706396
+        },
+        {
+          "segment": 22,
+          "control_source": "policy",
+          "data_time_start_s": 29.268207647,
+          "data_time_end_s": 29.516162211,
+          "host_episode_start_s": 169.771163306,
+          "host_episode_end_s": 170.376335402
+        },
+        {
+          "segment": 23,
+          "control_source": "policy",
+          "data_time_start_s": 29.524874309,
+          "data_time_end_s": 29.772588073,
+          "host_episode_start_s": 173.481967386,
+          "host_episode_end_s": 174.107270971
+        },
+        {
+          "segment": 24,
+          "control_source": "policy",
+          "data_time_start_s": 29.781540973,
+          "data_time_end_s": 30.031540975,
+          "host_episode_start_s": 175.403091378,
+          "host_episode_end_s": 175.819845467
+        },
+        {
+          "segment": 25,
+          "control_source": "policy",
+          "data_time_start_s": 30.038207642,
+          "data_time_end_s": 30.288207648,
+          "host_episode_start_s": 178.677863455,
+          "host_episode_end_s": 179.222578921
+        },
+        {
+          "segment": 26,
+          "control_source": "policy",
+          "data_time_start_s": 30.294874315,
+          "data_time_end_s": 30.53862528,
+          "host_episode_start_s": 180.988962285,
+          "host_episode_end_s": 181.472914421
+        },
+        {
+          "segment": 27,
+          "control_source": "policy",
+          "data_time_start_s": 30.551540985,
+          "data_time_end_s": 30.797331186,
+          "host_episode_start_s": 183.078343896,
+          "host_episode_end_s": 183.5625701
+        },
+        {
+          "segment": 28,
+          "control_source": "policy",
+          "data_time_start_s": 30.808207652,
+          "data_time_end_s": 31.055715225,
+          "host_episode_start_s": 185.121663194,
+          "host_episode_end_s": 185.787222135
+        },
+        {
+          "segment": 29,
+          "control_source": "policy",
+          "data_time_start_s": 31.064874318,
+          "data_time_end_s": 31.314874316,
+          "host_episode_start_s": 188.300973164,
+          "host_episode_end_s": 189.189730238
+        },
+        {
+          "segment": 30,
+          "control_source": "policy",
+          "data_time_start_s": 31.321540983,
+          "data_time_end_s": 31.569458342,
+          "host_episode_start_s": 190.76001597,
+          "host_episode_end_s": 191.278158555
+        },
+        {
+          "segment": 31,
+          "control_source": "policy",
+          "data_time_start_s": 31.578207643,
+          "data_time_end_s": 31.825075808,
+          "host_episode_start_s": 192.400036203,
+          "host_episode_end_s": 192.986079217
+        },
+        {
+          "segment": 32,
+          "control_source": "policy",
+          "data_time_start_s": 31.834874311,
+          "data_time_end_s": 32.080105954,
+          "host_episode_start_s": 193.937736268,
+          "host_episode_end_s": 194.542773027
+        },
+        {
+          "segment": 33,
+          "control_source": "policy",
+          "data_time_start_s": 32.091540977,
+          "data_time_end_s": 32.339421694,
+          "host_episode_start_s": 195.46214084,
+          "host_episode_end_s": 196.029258137
+        },
+        {
+          "segment": 34,
+          "control_source": "policy",
+          "data_time_start_s": 32.348207642,
+          "data_time_end_s": 32.59204971,
+          "host_episode_start_s": 198.032987128,
+          "host_episode_end_s": 198.559344594
+        },
+        {
+          "segment": 35,
+          "control_source": "policy",
+          "data_time_start_s": 32.604874313,
+          "data_time_end_s": 32.854874315,
+          "host_episode_start_s": 200.078658351,
+          "host_episode_end_s": 200.643461996
+        },
+        {
+          "segment": 36,
+          "control_source": "policy",
+          "data_time_start_s": 32.861540982,
+          "data_time_end_s": 33.10945196,
+          "host_episode_start_s": 201.544004581,
+          "host_episode_end_s": 202.150897335
+        },
+        {
+          "segment": 37,
+          "control_source": "policy",
+          "data_time_start_s": 33.118207651,
+          "data_time_end_s": 33.363724198,
+          "host_episode_start_s": 204.383772926,
+          "host_episode_end_s": 204.854318028
+        },
+        {
+          "segment": 38,
+          "control_source": "policy",
+          "data_time_start_s": 33.374874315,
+          "data_time_end_s": 33.870296574,
+          "host_episode_start_s": 207.247509505,
+          "host_episode_end_s": 208.35834601
+        },
+        {
+          "segment": 39,
+          "control_source": "policy",
+          "data_time_start_s": 33.881540976,
+          "data_time_end_s": 34.37569032,
+          "host_episode_start_s": 209.400249092,
+          "host_episode_end_s": 210.875954534
+        },
+        {
+          "segment": 40,
+          "control_source": "policy",
+          "data_time_start_s": 34.388207648,
+          "data_time_end_s": 34.887039343,
+          "host_episode_start_s": 217.819301098,
+          "host_episode_end_s": 219.314099331
+        },
+        {
+          "segment": 41,
+          "control_source": "policy",
+          "data_time_start_s": 34.894874314,
+          "data_time_end_s": 35.394874311,
+          "host_episode_start_s": 220.864690872,
+          "host_episode_end_s": 221.469939893
+        },
+        {
+          "segment": 42,
+          "control_source": "policy",
+          "data_time_start_s": 35.401540978,
+          "data_time_end_s": 35.899752142,
+          "host_episode_start_s": 223.73689335,
+          "host_episode_end_s": 224.719106469
+        }
+      ]
+    },
+    {
+      "source_id": "20261027T155906-04975fdb",
+      "video_start_s": 20.6,
+      "video_end_s": 30.4,
+      "segments": [
+        {
+          "segment": 13,
+          "control_source": "policy",
+          "data_time_start_s": 22.017622662,
+          "data_time_end_s": 22.514073871,
+          "host_episode_start_s": 75.963109402,
+          "host_episode_end_s": 76.966355113
+        },
+        {
+          "segment": 14,
+          "control_source": "policy",
+          "data_time_start_s": 22.524289328,
+          "data_time_end_s": 23.02001389,
+          "host_episode_start_s": 81.694616806,
+          "host_episode_end_s": 82.624333201
+        },
+        {
+          "segment": 15,
+          "control_source": "policy",
+          "data_time_start_s": 23.030956002,
+          "data_time_end_s": 23.52965245,
+          "host_episode_start_s": 84.081976542,
+          "host_episode_end_s": 85.192112379
+        },
+        {
+          "segment": 16,
+          "control_source": "policy",
+          "data_time_start_s": 23.53762267,
+          "data_time_end_s": 24.036890531,
+          "host_episode_start_s": 92.138185071,
+          "host_episode_end_s": 93.155356942
+        },
+        {
+          "segment": 17,
+          "control_source": "policy",
+          "data_time_start_s": 24.044289341,
+          "data_time_end_s": 24.542215578,
+          "host_episode_start_s": 95.211576396,
+          "host_episode_end_s": 96.140169511
+        },
+        {
+          "segment": 18,
+          "control_source": "policy",
+          "data_time_start_s": 24.550956009,
+          "data_time_end_s": 25.05030467,
+          "host_episode_start_s": 104.528125633,
+          "host_episode_end_s": 105.902130651
+        },
+        {
+          "segment": 19,
+          "control_source": "policy",
+          "data_time_start_s": 25.057622675,
+          "data_time_end_s": 25.552041922,
+          "host_episode_start_s": 107.702565321,
+          "host_episode_end_s": 108.936642893
+        }
+      ]
+    }
+  ],
+  "duration_s": 30.4
+}
