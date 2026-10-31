@@ -19,6 +19,13 @@ takeover, faults and reconnect discard the old plan. EXPO collection remains
 unguided. Existing position validation, speed/acceleration bounds, tracking
 checks and powered hold behavior still apply.
 
+Tracking deviation checks in both local inference clients apply only to the
+twelve arm joints, with a 0.1-rad threshold. Gripper target-versus-feedback error
+does not cancel playback: a held object can prevent the fingers reaching the
+commanded position. Arm target and feedback joint limits, gripper target clamps,
+gripper encoder tolerance, motor faults and the 0.5-Nm gripper torque cap remain
+enforced. Arm tracking errors identify the side, joint and error in radians.
+
 Prefixes are absolute physical actions on the wire. The server uses checkpoint
 **action** normalization before padding them for the model, and guidance only
 constrains the 14 physical action dimensions. Guidance changes denoising itself;

@@ -143,6 +143,33 @@ class ChunkSafetyTests(unittest.TestCase):
         self.assertEqual(corrections, [])
 
 
+class ArmTrackingTests(unittest.TestCase):
+    def test_loaded_grippers_do_not_trigger_arm_tracking_fault(self):
+        target = np.zeros(14)
+        measured = target.copy()
+        measured[[6, 13]] = [1., -1.]
+        remote.check_arm_tracking(target, measured)
+
+    def test_every_arm_joint_still_rejects_excessive_deviation(self):
+        for index in (0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12):
+            for direction in (-1, 1):
+                with self.subTest(index=index, direction=direction):
+                    target = np.zeros(14)
+                    measured = target.copy()
+                    measured[index] = direction * (remote.CONTRACT['max_tracking_error_rad'] + .01)
+                    side = 'left' if index < 7 else 'right'
+                    joint = index % 7 + 1
+                    with self.assertRaisesRegex(RuntimeError,
+                                                rf'Arm tracking deviation: {side}\.joint{joint}'):
+                        remote.check_arm_tracking(target, measured)
+
+    def test_arm_joint_deviations_at_tracking_limit_are_accepted(self):
+        target = np.zeros(14)
+        measured = np.full(14, remote.CONTRACT['max_tracking_error_rad'])
+        remote.check_arm_tracking(target, measured)
+        remote.check_arm_tracking(target, -measured)
+
+
 class ServerClampingTests(unittest.TestCase):
     def test_server_clamps_grippers_and_reports_raw_corrections(self):
         spec = importlib.util.spec_from_file_location('inference_server',

@@ -12,7 +12,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'app'))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 from hitl_demo import DemoHardware, demo_request
-from inference_dashboard import Controller, LEASE_SECONDS, RobotHardware
+from inference_dashboard import Controller, LEASE_SECONDS, RobotHardware, CONTRACT
 from prepare_hitl import select_intervals
 
 
@@ -53,6 +53,49 @@ class HandoffTests(unittest.TestCase):
         self.controller.collection('begin', dict(operator='tester', scene='test'))
         wait_for(lambda: self.controller.snapshot()['rollout_active'])
         wait_for(lambda: self.controller.recorder.snapshot()['active'] is not None)
+
+    def test_pedal_toggle_records_then_pauses_and_intervention_ends_in_hold(self):
+        self.controller.heartbeat(dict(operator='pedal tester', scene='pedal scene', count=2, blend=3))
+        self.controller.pedal_gesture('double')
+        wait_for(lambda: self.controller.snapshot()['playing'])
+        wait_for(lambda: self.controller.snapshot()['steps_completed'] >= 1)
+        self.assertTrue(self.controller.snapshot()['rollout_active'])
+        self.controller.recorder.events.join()
+        active = self.controller.recorder.snapshot()['active']
+        metadata = json.loads((Path(self.tmp.name)/'raw/pending'/active/'metadata.json').read_text())
+        self.assertEqual(metadata['context']['rollout']['operator'], 'pedal tester')
+        self.assertEqual(metadata['context']['rollout']['actions_per_step'], 2)
+        self.assertEqual(metadata['context']['rollout']['blend_actions'], 3)
+        self.controller.pedal_gesture('double')
+        wait_for(lambda: self.controller.snapshot()['mode'] == 'holding' and
+                 not self.controller.pause_event.is_set())
+        self.assertFalse(self.controller.snapshot()['playing'])
+        self.controller.pedal_gesture('single')
+        wait_for(lambda: self.controller.snapshot()['mode'] == 'takeover_hold')
+        self.controller.pedal_gesture('double')
+        self.assertFalse(self.controller.snapshot()['playing'])
+        self.pull()
+        wait_for(lambda: self.controller.snapshot()['mode'] == 'human')
+        self.controller.pedal_gesture('single')
+        wait_for(lambda: self.controller.snapshot()['mode'] == 'holding')
+        self.assertFalse(self.controller.snapshot()['playing'])
+        pose = self.controller.hardware.position.copy()
+        time.sleep(.03)
+        self.assertTrue((self.controller.hardware.position == pose).all())
+        self.controller.pedal_gesture('double')
+        wait_for(lambda: self.controller.snapshot()['playing'])
+
+    def test_pedal_ignores_stale_browser_and_pending_changes(self):
+        self.controller.heartbeat_at = time.monotonic() - LEASE_SECONDS - 1
+        for gesture in ('single', 'double'):
+            self.controller.pedal_gesture(gesture)
+        self.assertTrue(self.controller.collection_commands.empty())
+        self.assertTrue(self.controller.commands.empty())
+        self.controller.heartbeat()
+        self.controller.update(collection_pending=True)
+        self.controller.pedal_gesture('single')
+        self.controller.pedal_gesture('double')
+        self.assertTrue(self.controller.collection_commands.empty())
 
     def test_finish_saves_milestones_before_reset_and_stop_interrupts_reset(self):
         self.begin()
@@ -267,11 +310,11 @@ class HandoffTests(unittest.TestCase):
         self.assertEqual(metadata['start_monotonic_ns'], metadata['handoff_events'][0]['monotonic_ns'])
         self.assertEqual(self.controller.snapshot()['handoff_ready'], {})
 
-    def test_gripper_motion_starts_its_arm_without_handle_force(self):
+    def test_gripper_force_change_starts_its_arm_without_handle_force(self):
         self.controller.collection('intervene', dict(operator='tester', scene='gripper'))
         wait_for(lambda: self.controller.snapshot()['handoff_baseline_ready'])
         pose = self.controller.hardware.position.copy()
-        self.controller.hardware.position[13] += .1
+        self.controller.hardware.gripper_torque['right'] += .25
         time.sleep(.03)
         self.assertFalse(self.controller.snapshot()['rollout_active'])
         np.testing.assert_array_equal(self.controller.hardware.position[:6], pose[:6])
@@ -284,12 +327,13 @@ class HandoffTests(unittest.TestCase):
         directory = next((Path(self.tmp.name)/'raw/kept').iterdir())
         metadata = json.loads((directory/'metadata.json').read_text())
         event = metadata['handoff_events'][0]
-        self.assertEqual(event['event'], 'gripper_motion_release')
+        self.assertEqual(event['event'], 'gripper_force_change_release')
         self.assertEqual(event['side'], 'right')
         states = [json.loads(line) for line in (directory/'states.jsonl').read_text().splitlines()]
         self.assertEqual(states[0]['control_source_by_arm'], dict(left='hold', right='human'))
         self.assertEqual(metadata['start_monotonic_ns'], event['monotonic_ns'])
-        self.assertGreater(states[0]['arms']['right']['gripper']['position'], pose[13])
+        self.assertEqual(states[0]['arms']['right']['gripper']['torque'], .25)
+        self.assertGreaterEqual(states[0]['arms']['right']['gripper']['position'], pose[13])
         stopped = self.controller.hardware.position.copy()
         time.sleep(.03)
         np.testing.assert_array_equal(self.controller.hardware.position, stopped)
@@ -334,7 +378,7 @@ class HandoffTests(unittest.TestCase):
 
 
 class HardwareHandoffTests(unittest.TestCase):
-    def test_held_joints_use_position_and_both_grippers_are_passive_when_armed(self):
+    def test_waiting_gripper_holds_while_released_gripper_is_passive(self):
         hardware = RobotHardware()
         hardware.robots = {side: Mock() for side in ('left', 'right')}
         target = np.arange(14, dtype=float)/10
@@ -348,10 +392,12 @@ class HardwareHandoffTests(unittest.TestCase):
         np.testing.assert_array_equal(left.pos_vel_tqe_kp_kd.call_args.args[2], [.1]*6)
         left.gripper_control_MIT.assert_called_once_with(0, 0, 0, 0, 0)
         right.pos_vel_tqe_kp_kd.assert_not_called()
-        right.gripper_control_MIT.assert_called_once_with(0, 0, 0, 0, 0)
+        right.gripper_control_MIT.assert_not_called()
         right.Joint_Pos_Vel.assert_called_once()
         np.testing.assert_array_equal(right.Joint_Pos_Vel.call_args.args[0], target[7:13])
-        right.gripper_control.assert_not_called()
+        right.gripper_control.assert_called_once_with(float(target[13]),
+            CONTRACT['gripper_speed_rad_s'], CONTRACT['gripper_torque_limit_nm'])
+        self.assertEqual(arms['right']['gripper']['control_mode'], 'position_hold')
         self.assertEqual(arms['left']['gripper']['control_mode'], 'passive')
         self.assertEqual(arms['right']['control_mode'], 'position_hold')
 

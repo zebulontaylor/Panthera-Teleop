@@ -28,7 +28,10 @@ class RolloutStore(EpisodeStore):
         if changed:
             transitions.append(dict(source=source, monotonic_ns=payload['monotonic_ns'],
                                     sequence=payload['sequence']))
-            self.active['metadata']['human_interventions'] = sum(t['source'] == 'human' for t in transitions)
+            interventions = sum(t['source'] == 'human' for t in transitions)
+            self.active['metadata']['human_interventions'] = interventions
+            self.active['metadata']['review_recommended'] = interventions > 0
+            self.update(human_interventions=interventions, review_recommended=interventions > 0)
         if source == 'hold':
             self.previous = None
             self.update(collecting=False, pause_reason='both_arms_held', data_clock_rate=0.)
@@ -98,6 +101,11 @@ class RolloutStore(EpisodeStore):
                 raise RuntimeError('A rollout is already recording')
             self.pre_roll.clear()
             self.context = dict(self.context, rollout=payload['details'])
+            # The export contract describes this episode's language condition.
+            # Copy it so selecting a task never changes the server contract.
+            if 'task' in payload['details']:
+                self.context['contract'] = dict(self.context.get('contract', {}),
+                                                task=payload['details']['task'])
             self.start(payload['sample'])
             self.clock_ns = 0
             self.previous = self.last_written = None
@@ -107,13 +115,20 @@ class RolloutStore(EpisodeStore):
             self.active['metadata'].update(schema_version=2, start_data_monotonic_ns=self.active['start_ns'],
                 data_timing='Active control only; policy trajectory time during policy execution, host time during human guidance',
                 timing='Original host receive timestamps in monotonic_ns; training clock in data_monotonic_ns')
-            self.update(collecting=False, pause_reason='both_arms_held', data_clock_rate=0.)
+            self.update(collecting=False, pause_reason='both_arms_held', data_clock_rate=0.,
+                        human_interventions=0, review_recommended=False)
             return
         if kind == 'rollout_end':
             if self.active:
-                self.active['metadata']['outcome'] = payload
+                assisted = self.active['metadata'].get('human_interventions', 0) > 0
+                self.active['metadata']['outcome'] = dict(payload, human_assisted=assisted,
+                    policy_success=bool(payload.get('success')) and not assisted)
                 self.finish(payload['label'], payload.get('reason', 'operator'),
                             complete=payload.get('complete', True))
+                self.audio.play(payload['label'])
+                if payload.get('decision_id'):
+                    self.update(last_decision=dict(self.snapshot()['last_decision'],
+                                                   decision_id=payload['decision_id']))
             return
         if kind == 'handoff_event':
             if self.active:

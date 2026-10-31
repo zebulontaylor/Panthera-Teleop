@@ -1,5 +1,6 @@
 """Hardware-free exercise of policy/human handoffs and the raw recording path."""
 import io
+import base64
 import json
 import threading
 import time
@@ -60,6 +61,7 @@ class DemoHardware:
         self.config = json.loads((ROOT / 'config/recording.json').read_text())
         self.config['takeover_hold'] = self.config.pop('neutral_return')
         self.pull_torque = {s: [0.]*6 for s in ('left', 'right')}
+        self.gripper_torque = {s: 0. for s in ('left', 'right')}
         self.auto_pull = True
         self.handoff_started = None
         self.config['minimum_free_bytes'] = 0
@@ -82,7 +84,7 @@ class DemoHardware:
                 self.pull_torque[side] = [.9 if elapsed >= delay else 0.] + [0.]*5
         arms = {side: dict(position_rad=self.position[offset:offset+6].tolist(),
             velocity_rad_s=[0.]*6, measured_torque_nm=list(self.pull_torque[side]), gravity_model_torque_nm=[0.]*6,
-            gripper=dict(position=float(self.position[offset+6]), velocity=0., torque=0.))
+            gripper=dict(position=float(self.position[offset+6]), velocity=0., torque=self.gripper_torque[side]))
             for side, offset in (('left', 0), ('right', 7))}
         cameras = {name: dict(ok=True, age_s=0.) for name in self.config['cameras']}
         return self.position.copy(), arms, cameras
@@ -90,16 +92,24 @@ class DemoHardware:
     def images(self):
         return {}
 
+    def inference_images(self):
+        with self.cameras.lock:
+            raw = {name: base64.b64encode(jpeg).decode('ascii')
+                   for name, jpeg in self.cameras.latest.items()}
+        return {}, {'simulation': True}, raw
+
     def command(self, target):
         self.position = target.copy()
 
     def guide(self, arms, target, released):
         for side, offset in (('left', 0), ('right', 7)):
-            arms[side]['gripper'].update(control_mode='passive', command=[0.]*5)
             if released[side]:
+                arms[side]['gripper'].update(control_mode='passive', command=[0.]*5)
                 self.position[offset:offset+7] += .0003
             else:
-                self.position[offset:offset+6] = target[offset:offset+6]
+                self.position[offset:offset+7] = target[offset:offset+7]
+                arms[side]['gripper'].update(control_mode='position_hold',
+                    command=dict(mode='position_velocity', position_rad=float(target[offset+6])))
 
     def recording_context(self, checkpoint):
         return dict(mode='human_in_the_loop_simulation', simulated=True,

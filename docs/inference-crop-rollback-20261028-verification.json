@@ -1,0 +1,219 @@
+{
+  "local-changes": {
+    "overhead_crop": [
+      80,
+      0,
+      560,
+      480
+    ],
+    "trainer_metadata_change_reverted": true,
+    "new_crop_tests_archived": "work/crop-rollback-20261028/test_inference_camera_preprocessing.corrected-crop.py",
+    "checkpoint": "/mnt/pi05/inference/checkpoints/mixed70-real30-nohitl-011500/pretrained_model",
+    "recording_saved_to_review": "20261028T184300-6a14071f",
+    "remote_inference_tests_passed": 31
+  },
+  "remote-receipt": {
+    "utc": "20261028T184501Z",
+    "backup": "/mnt/pi05/inference/backups/crop-rollback-20261028T184501Z",
+    "crop": [
+      80,
+      0,
+      560,
+      480
+    ],
+    "metadata_restored": [
+      "/mnt/pi05/inference/checkpoints/mixed70-real30-nohitl-012000/pretrained_model/deployment.json",
+      "/mnt/pi05/inference/checkpoints/mixed70-real30-008000/pretrained_model/deployment.json",
+      "/mnt/pi05/inference/checkpoints/mixed70-real30-nohitl-011500/pretrained_model/deployment.json",
+      "/mnt/pi05/inference/checkpoints/mixed70-real30-008500/pretrained_model/deployment.json",
+      "/mnt/pi05/inference/checkpoints/mixed70-real30-007500/pretrained_model/deployment.json",
+      "/mnt/pi05/inference/checkpoints/mixed70-real30-006500/pretrained_model/deployment.json",
+      "/mnt/pi05/runs/aws-mixed70-real30-6500-108dedd99f-smoke/checkpoints/006502/pretrained_model/deployment.json",
+      "/mnt/pi05/runs/aws-mixed70-real30-nohitl-8500-20261027/checkpoints/012000/pretrained_model/deployment.json",
+      "/mnt/pi05/runs/aws-mixed70-real30-nohitl-8500-20261027/checkpoints/011500/pretrained_model/deployment.json",
+      "/mnt/pi05/runs/aws-mixed70-real30-6500-108dedd99f/checkpoints/008500/pretrained_model/deployment.json",
+      "/mnt/pi05/runs/aws-mixed70-real30-6500-108dedd99f/checkpoints/008000/pretrained_model/deployment.json"
+    ],
+    "weights_modified": false
+  },
+  "live-health": {
+    "status": "ready",
+    "error": null,
+    "checkpoint": "/mnt/pi05/inference/checkpoints/mixed70-real30-nohitl-011500/pretrained_model",
+    "contract": {
+      "fps": 20,
+      "task": "put the gear in the carrier and put a pin in it",
+      "dataset_repo": "ZebTaylor/panthera-gear-carrier-pin-latest200-restyled-20hz",
+      "dataset_revision": "95c9576e09682582611636eebb683304e9eebf4b",
+      "image_size": 256,
+      "image_crops_xyxy": {
+        "overhead": [
+          80,
+          0,
+          560,
+          480
+        ],
+        "wrist_port2": [
+          80,
+          0,
+          560,
+          480
+        ],
+        "wrist_port3": [
+          80,
+          0,
+          560,
+          480
+        ]
+      },
+      "max_observation_age_s": 2.0,
+      "max_camera_age_s": 0.2,
+      "max_joint_speed_rad_s": 1.0,
+      "max_joint_acceleration_rad_s2": 8.0,
+      "max_target_jump_rad": 0.5,
+      "max_tracking_error_rad": 0.1,
+      "gripper_speed_rad_s": 5.0,
+      "gripper_acceleration_rad_s2": 30.0,
+      "gripper_torque_limit_nm": 0.5,
+      "torque_limits_nm": [
+        5,
+        8,
+        8,
+        3,
+        2,
+        2
+      ],
+      "dataset_manifest_sha256": "b1058e4f20cd93100b814078aa6dbcc1e4411db1990fd49bb742ba815e7c2475"
+    },
+    "names": [
+      "left.joint1",
+      "left.joint2",
+      "left.joint3",
+      "left.joint4",
+      "left.joint5",
+      "left.joint6",
+      "left.gripper_rad",
+      "right.joint1",
+      "right.joint2",
+      "right.joint3",
+      "right.joint4",
+      "right.joint5",
+      "right.joint6",
+      "right.gripper_rad"
+    ],
+    "rtc": {
+      "supported": true,
+      "protocol": "prefix-v1"
+    }
+  },
+  "synthetic-probe": {
+    "mock": false,
+    "actions": 50,
+    "latency_s": 3.8499847069997486,
+    "checkpoint": "/mnt/pi05/inference/checkpoints/mixed70-real30-nohitl-011500/pretrained_model",
+    "restored_contract_verified": true,
+    "physical_actions_executed": false
+  },
+  "controller-status": {
+    "mode": "holding",
+    "error": null,
+    "checkpoint": "/mnt/pi05/inference/checkpoints/mixed70-real30-nohitl-011500/pretrained_model",
+    "measured": [
+      -0.7885397672653198,
+      1.472150444984436,
+      0.5240176916122437,
+      -0.03518583998084068,
+      0.3845309615135193,
+      0.4787787199020386,
+      0.6433981657028198,
+      0.7734601497650146,
+      1.4646105766296387,
+      0.3983539640903473,
+      0.27143362164497375,
+      -0.35060176253318787,
+      -0.3462035059928894,
+      1.145424723625183
+    ],
+    "target": [
+      -0.789168119430542,
+      1.472150444984436,
+      0.5240176916122437,
+      -0.03518583998084068,
+      0.38578760623931885,
+      0.4787787199020386,
+      0.6433981657028198,
+      0.7734601497650146,
+      1.4652388095855713,
+      0.39898228645324707,
+      0.27206194400787354,
+      -0.35060176253318787,
+      -0.3462035059928894,
+      1.145424723625183
+    ],
+    "cameras": {
+      "wrist_port2": {
+        "device": "/dev/v4l/by-path/pci-0000:0e:00.0-usb-0:2.1.3:1.0-video-index0",
+        "ok": true,
+        "error": null,
+        "sequence": 23,
+        "age_s": 0.004164675
+      },
+      "wrist_port3": {
+        "device": "/dev/v4l/by-path/pci-0000:0e:00.0-usb-0:2.1.4:1.0-video-index0",
+        "ok": true,
+        "error": null,
+        "sequence": 45,
+        "age_s": 0.009699745
+      },
+      "overhead": {
+        "device": "/dev/v4l/by-path/pci-0000:11:00.0-usb-0:1:1.0-video-index0",
+        "ok": true,
+        "error": null,
+        "sequence": 49,
+        "age_s": 0.011610289
+      }
+    },
+    "prediction": null,
+    "action_index": 0,
+    "step_count": 15,
+    "steps_completed": 0,
+    "latency_s": null,
+    "playing": false,
+    "actions_per_step": 15,
+    "blend_actions": 10,
+    "blended_actions": 0,
+    "foot_pedal_connected": true,
+    "foot_pedal_error": null,
+    "hold_status": "commanded",
+    "control_source": "hold",
+    "rollout_active": false,
+    "recording": {
+      "phase": "starting",
+      "active": null,
+      "samples": 0,
+      "duration": 0,
+      "error": null,
+      "last_decision": null,
+      "counts": {
+        "kept": 1,
+        "review": 70,
+        "discarded": 3
+      },
+      "control_active": false,
+      "return_stage": null,
+      "return_error": null
+    },
+    "collection_pending": false,
+    "handoff_ready": {},
+    "handoff_baseline_ready": false,
+    "handoff_gripper_enabled": true,
+    "blending_method": "rtc",
+    "simulation": false,
+    "connected": true,
+    "recovering": false,
+    "fps": 20,
+    "speed_limit": 1.0,
+    "gripper_speed_limit": 5.0
+  },
+  "status": "previous_crop_restored_live"
+}

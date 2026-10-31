@@ -1,0 +1,87 @@
+{
+  "status": "ready",
+  "error": null,
+  "checkpoint": "/mnt/pi05/inference/checkpoints/mixed600-hitl81-2x-009000/pretrained_model",
+  "contract": {
+    "fps": 20,
+    "task": "put the gear in the carrier and put a pin in it",
+    "dataset_repo": "ZebTaylor/panthera-gear-carrier-pin-latest200-restyled-20hz",
+    "dataset_revision": "95c9576e09682582611636eebb683304e9eebf4b",
+    "image_size": 256,
+    "image_crops_xyxy": {
+      "overhead": [
+        80,
+        0,
+        560,
+        480
+      ],
+      "wrist_port2": [
+        80,
+        0,
+        560,
+        480
+      ],
+      "wrist_port3": [
+        80,
+        0,
+        560,
+        480
+      ]
+    },
+    "max_observation_age_s": 2.0,
+    "max_camera_age_s": 0.2,
+    "max_joint_speed_rad_s": 1.0,
+    "max_joint_acceleration_rad_s2": 8.0,
+    "max_target_jump_rad": 0.5,
+    "max_tracking_error_rad": 0.1,
+    "gripper_speed_rad_s": 5.0,
+    "gripper_acceleration_rad_s2": 30.0,
+    "gripper_torque_limit_nm": 0.5,
+    "torque_limits_nm": [
+      5,
+      8,
+      8,
+      3,
+      2,
+      2
+    ],
+    "dataset_manifest_sha256": "c69ed233a7f66567363076dafb6b3f16427394cb13bc2ebda0d8d9e29b6472d7"
+  },
+  "names": [
+    "left.joint1",
+    "left.joint2",
+    "left.joint3",
+    "left.joint4",
+    "left.joint5",
+    "left.joint6",
+    "left.gripper_rad",
+    "right.joint1",
+    "right.joint2",
+    "right.joint3",
+    "right.joint4",
+    "right.joint5",
+    "right.joint6",
+    "right.gripper_rad"
+  ],
+  "rtc": {
+    "supported": true,
+    "protocol": "prefix-v1"
+  },
+  "verified_utc": "2026-10-28T01:03:41.987619+00:00",
+  "aws_host": "54.166.156.98",
+  "previous_checkpoint": "/mnt/pi05/inference/checkpoints/mixed70-real30-008500/pretrained_model",
+  "source_checkpoint": "/mnt/pi05/runs/aws-mixed600-hitl81-2x-8500-20261027/checkpoints/009000",
+  "backup": "/mnt/pi05/inference/backups/pre-hitl81-009000-20261028T010206Z",
+  "synthetic_probe": {
+    "mock": false,
+    "actions": 50,
+    "latency_s": 6.251541903999168
+  },
+  "rtc_synthetic_probe": {
+    "mock": false,
+    "actions": 50,
+    "overlap": 5,
+    "latency_s": 1.0091449760002433
+  },
+  "cuda_memory_fraction": 0.16
+}

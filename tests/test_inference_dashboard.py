@@ -8,7 +8,7 @@ import threading
 import tempfile
 import time
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
@@ -153,6 +153,32 @@ class SupervisorTests(unittest.TestCase):
         self.assertFalse(supervisor.snapshot()['connected'])
 
 
+class DashboardShutdownTests(unittest.TestCase):
+    def test_connected_dashboard_signal_exits_and_cleans_up(self):
+        controller = Mock()
+        controller.snapshot.return_value = {'connected': True}
+        server = Mock()
+        finished = threading.Event()
+        server.shutdown.side_effect = finished.set
+        handlers = {}
+
+        def serve_forever(**_):
+            handlers[signal.SIGTERM]()
+            handlers[signal.SIGINT]()  # Repeated signals do not start more cleanup.
+            self.assertTrue(finished.wait(2))
+
+        server.serve_forever.side_effect = serve_forever
+        with patch.object(sys, 'argv', ['inference_dashboard.py']), \
+             patch.object(dashboard, 'SessionSupervisor', return_value=controller), \
+             patch.object(dashboard, 'make_server', return_value=server), \
+             patch.object(dashboard.signal, 'signal', side_effect=lambda sig, fn: handlers.update({sig: fn})):
+            dashboard.main()
+        server.shutdown.assert_called_once_with()
+        server.server_close.assert_called_once_with()
+        self.assertGreaterEqual(controller.shutdown.call_count, 1)
+        controller.update.assert_not_called()
+
+
 class StepTests(unittest.TestCase):
     def test_blend_crossfades_aligned_tail_and_preserves_bounds(self):
         old = np.full((40, 14), .2)
@@ -212,6 +238,7 @@ class StepTests(unittest.TestCase):
 class CollectionResetTests(unittest.TestCase):
     def setUp(self):
         self.settings = json.loads((dashboard.ROOT / 'config/recording.json').read_text())['neutral_return']
+        self.settings['arms'] = ['left', 'right']
         self.lower = np.full(14, -3.)
         self.upper = np.full(14, 3.)
         self.lower[[6, 13]] = 0
@@ -267,6 +294,106 @@ class ControllerTests(unittest.TestCase):
     def connect(self):
         self.controller.connect()
         wait_for(lambda: self.controller.snapshot()['mode'] == 'holding')
+
+    def test_task_switch_requires_idle_hold_and_clears_prediction(self):
+        controller = self.controller
+        default = dashboard.CONTRACT['task']
+        controller.update(mode='holding', supported_tasks=[default, 'four gears'],
+                          prediction=[[0.] * 14], blended_actions=5)
+        for values in (dict(mode='predicting'), dict(mode='executing'), dict(playing=True),
+                       dict(rollout_active=True), dict(collection_pending=True)):
+            controller.update(**values)
+            with self.assertRaises(RuntimeError):
+                controller.select_task('four gears')
+            controller.update(mode='holding', playing=False, rollout_active=False, collection_pending=False)
+        with self.assertRaises(ValueError):
+            controller.select_task('unknown')
+        controller.select_task('four gears')
+        self.assertEqual(controller.snapshot()['task'], 'four gears')
+        self.assertIsNone(controller.snapshot()['prediction'])
+        self.assertEqual(controller.snapshot()['blended_actions'], 0)
+        self.assertEqual(controller.task_generation, 1)
+
+    def test_task_switch_without_reconnect_and_response_echo_validation(self):
+        default = dashboard.CONTRACT['task']
+        bodies = []
+        def request(base, path, body=None, timeout=3):
+            if path == '/health':
+                return dict(status='ready', contract=dashboard.CONTRACT, checkpoint='saved',
+                            supported_tasks=[default, 'four gears'])
+            bodies.append(body.copy())
+            result = self.request(base, path, body, timeout)
+            result['task'] = default if len(bodies) > 1 else body['task']
+            return result
+        with patch.object(dashboard, 'request', request):
+            self.connect()
+            self.controller.submit('predict')
+            wait_for(lambda: self.controller.snapshot()['prediction'] is not None)
+            self.controller.select_task('four gears')
+            self.controller.submit('step', 1)
+            wait_for(lambda: 'task differs' in (self.controller.snapshot()['error'] or ''))
+        self.assertEqual([body['task'] for body in bodies], [default, 'four gears'])
+        self.assertIn('task differs', self.controller.snapshot()['error'])
+        self.assertEqual(self.controller.snapshot()['steps_completed'], 0)
+
+    def test_default_actions_per_step_and_expo_override(self):
+        self.assertEqual(self.controller.snapshot()['actions_per_step'], 15)
+        self.assertEqual(self.controller.snapshot()['step_count'], 15)
+        expo = dashboard.Controller('unused', expo_record_dir='unused', expo_prefix_length=5)
+        self.assertEqual(expo.snapshot()['actions_per_step'], 5)
+        self.assertEqual(expo.snapshot()['blend_actions'], 0)
+
+    def test_play_pause_resume_preserves_configured_settings(self):
+        with patch.object(dashboard, 'request', self.request):
+            self.connect()
+            self.controller.configure(7, 4)
+            for _ in range(2):
+                completed = self.controller.snapshot()['steps_completed']
+                self.controller.heartbeat()
+                self.controller.submit('play')
+                wait_for(lambda: self.controller.snapshot()['steps_completed'] > completed)
+                self.assertEqual(self.controller.snapshot()['step_count'], 7)
+                self.controller.stop()
+                wait_for(lambda: self.controller.snapshot()['mode'] == 'holding' and
+                         not self.controller.pause_event.is_set())
+                self.assertEqual(self.controller.snapshot()['actions_per_step'], 7)
+                self.assertEqual(self.controller.snapshot()['blend_actions'], 4)
+            completed = self.controller.snapshot()['steps_completed']
+            self.controller.submit('step', blend=0)
+            wait_for(lambda: self.controller.snapshot()['steps_completed'] > completed)
+            self.assertEqual(self.controller.snapshot()['step_count'], 7)
+            self.assertEqual(self.controller.snapshot()['blend_actions'], 0)
+
+    def test_usb_pedal_double_tap_plays_and_disconnect_holds(self):
+        pedal = Mock()
+        pedal.devices = {42: set()}
+        events = []
+        initialized = threading.Event()
+        def sample():
+            batch = events[:]
+            events.clear()
+            initialized.set()
+            return dict(connected=True, downward_force_requested=False,
+                        sampled_monotonic_ns=time.monotonic_ns(), events=batch)
+        pedal.snapshot.side_effect = sample
+        with patch.object(dashboard, 'request', self.request), \
+             patch.object(dashboard, 'FootPedal', return_value=pedal):
+            self.connect()
+            initialized.wait(1)
+            self.controller.update(rollout_active=True)
+            now = time.monotonic_ns()
+            events.extend(dict(monotonic_ns=now+offset, pressed=pressed)
+                          for offset, pressed in [(-200_000_000, True), (-150_000_000, False),
+                                                  (-100_000_000, True), (-50_000_000, False)])
+            wait_for(lambda: self.controller.snapshot()['playing'])
+            self.assertTrue(self.controller.snapshot()['foot_pedal_connected'])
+            self.assertFalse(self.controller.snapshot()['collection_pending'])
+            pedal.snapshot.side_effect = RuntimeError('pedal unplugged')
+            wait_for(lambda: not self.controller.snapshot()['foot_pedal_connected'])
+            wait_for(lambda: self.controller.snapshot()['mode'] == 'holding')
+            self.assertFalse(self.controller.snapshot()['playing'])
+            self.assertIn('unplugged', self.controller.snapshot()['foot_pedal_error'])
+            pedal.close.assert_called_once()
 
     def test_play_repeats_fresh_steps_blends_and_applies_next_settings(self):
         observations = []
@@ -598,10 +725,22 @@ class WebTests(unittest.TestCase):
             with urlopen(Request(base + '/api/play', data=b'{"count":5,"blend":8}', headers=headers)) as response:
                 self.assertEqual(response.status, 202)
             submit.assert_called_once_with('play', 5, 8)
+        with patch.object(controller, 'submit') as submit:
+            with urlopen(Request(base + '/api/play', data=b'{}', headers=headers)) as response:
+                self.assertEqual(response.status, 202)
+            submit.assert_called_once_with('play', None, None)
         with patch.object(controller, 'configure') as configure:
             with urlopen(Request(base + '/api/configure', data=b'{"count":3,"blend":0}', headers=headers)) as response:
                 self.assertEqual(response.status, 202)
             configure.assert_called_once_with(3, 0)
+        controller.update(mode='holding', supported_tasks=[dashboard.CONTRACT['task'], 'four gears'])
+        with urlopen(Request(base + '/api/task', data=b'{"task":"four gears"}', headers=headers)) as response:
+            self.assertEqual(response.status, 202)
+        self.assertEqual(controller.snapshot()['task'], 'four gears')
+        controller.update(rollout_active=True)
+        with self.assertRaises(HTTPError) as error:
+            urlopen(Request(base + '/api/task', data=json.dumps({'task': dashboard.CONTRACT['task']}).encode(), headers=headers))
+        self.assertEqual(error.exception.code, 409)
         with patch.object(controller, 'stop') as stop:
             with urlopen(Request(base + '/api/pause', data=b'{}', headers=headers)) as response:
                 self.assertEqual(response.status, 202)

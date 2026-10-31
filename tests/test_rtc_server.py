@@ -38,6 +38,38 @@ class PrefixValidationTests(unittest.TestCase):
             with self.assertRaises(argparse.ArgumentTypeError):
                 server.cuda_memory_fraction(value)
 
+    def test_deployment_accepts_task_list_only_without_singular_task(self):
+        meta = {key: server.CONTRACT[key] for key in
+                ('fps', 'dataset_repo', 'dataset_revision',
+                 'dataset_manifest_sha256', 'dataset_mix') if key in server.CONTRACT}
+        meta.update(action_representation='absolute', image_crops={
+            f'observation.images.{name}': crop
+            for name, crop in server.CONTRACT['image_crops_xyxy'].items()})
+        task = server.CONTRACT['task']
+        server.validate_deployment(dict(meta, tasks=['another task', task]), server.CONTRACT)
+        server.validate_deployment(dict(meta, task=task, tasks=[]), server.CONTRACT)
+        for tasks in (None, [], ['another task'], task, {'task': task}):
+            with self.subTest(tasks=tasks), self.assertRaisesRegex(ValueError, 'mismatch: task'):
+                server.validate_deployment(dict(meta, tasks=tasks), server.CONTRACT)
+        for singular in (None, '', 'another task'):
+            with self.subTest(task=singular), self.assertRaisesRegex(ValueError, 'mismatch: task'):
+                server.validate_deployment(dict(meta, task=singular, tasks=[task]), server.CONTRACT)
+
+    def test_supported_tasks_preserve_legacy_and_validate_metadata(self):
+        task = server.CONTRACT['task']
+        self.assertEqual(server.deployment_tasks(dict(task=task, tasks=['extra'])), [task])
+        self.assertEqual(server.deployment_tasks(dict(tasks=[task, 'extra', task])), [task, 'extra'])
+        for tasks in ([task, None], [task, ''], [task, '   '], [task, 1]):
+            with self.subTest(tasks=tasks), self.assertRaises(ValueError):
+                server.deployment_tasks(dict(tasks=tasks))
+
+    def test_runtime_rejects_unsupported_tasks_before_reading_observations(self):
+        runtime = server.Runtime('mock', mock=True)
+        self.assertEqual(runtime.supported_tasks, [server.CONTRACT['task']])
+        for task in ('extra', None, [], 1, ''):
+            with self.subTest(task=task), self.assertRaisesRegex(ValueError, 'Unsupported task'):
+                runtime.infer(dict(task=task))
+
     def test_valid(self):
         actions, overlap = rtc.validate_prefix(dict(previous_actions=[[1.] * 14] * 3, overlap=3), 50)
         self.assertEqual((actions.shape, overlap), ((3, 14), 3))
@@ -152,7 +184,9 @@ class GuidanceTests(unittest.TestCase):
         runtime.mock = False
         runtime.torch = torch
         runtime.rtc = dict(supported=True, protocol='prefix-v1')
+        runtime.supported_tasks = [server.CONTRACT['task'], 'another task']
         calls = []
+        prompts = []
 
         class Policy:
             config = SimpleNamespace(chunk_size=50, max_action_dim=32)
@@ -162,6 +196,7 @@ class GuidanceTests(unittest.TestCase):
 
             def predict_action_chunk(self, batch, **kwargs):
                 calls.append((kwargs, torch.is_inference_mode_enabled()))
+                prompts.append(batch['task'])
                 return torch.zeros(1, 50, 14)
 
         runtime.policy = Policy()
@@ -181,6 +216,10 @@ class GuidanceTests(unittest.TestCase):
         independent = runtime.infer(payload)
         self.assertNotIn('rtc', independent)
         self.assertEqual(calls[1], ({}, True))
+        self.assertEqual(independent['task'], server.CONTRACT['task'])
+        selected = runtime.infer(dict(payload, task='another task'))
+        self.assertEqual(selected['task'], 'another task')
+        self.assertEqual(prompts, [server.CONTRACT['task'], server.CONTRACT['task'], 'another task'])
 
 
 if __name__ == '__main__':

@@ -2,7 +2,6 @@
 import argparse
 import base64
 from concurrent.futures import ThreadPoolExecutor
-import fcntl
 import io
 import json
 from pathlib import Path
@@ -47,6 +46,18 @@ def image_payload(jpeg, name):
         output = io.BytesIO()
         image.save(output, format='JPEG', quality=95, subsampling=0)
         return base64.b64encode(output.getvalue()).decode()
+
+
+def check_arm_tracking(target, measured):
+    """Check the twelve arm joints; a gripping object can block gripper travel."""
+    for side, offset in (('left', 0), ('right', 7)):
+        errors = np.abs(target[offset:offset+6] - measured[offset:offset+6])
+        joint = int(np.argmax(errors))
+        if errors[joint] > CONTRACT['max_tracking_error_rad']:
+            raise RuntimeError(
+                f'Arm tracking deviation: {side}.joint{joint+1} error '
+                f'{errors[joint]:.6f} rad exceeds '
+                f'{CONTRACT["max_tracking_error_rad"]:.6f} rad')
 
 
 def validate_chunk(response, sequence, initial, lower, upper, physical=True, action_count=None):
@@ -256,15 +267,9 @@ def main():
         return 0
     if health['status'] != 'ready':
         raise RuntimeError('Physical execution requires a loaded real policy')
-    from hand_guide import setup, feedback, stop_robots
+    from motor_client import MotorClient
     from dashboard import Cameras
-    from usb_stability import keep_usb_awake
-    import yaml
-    configs = setup.prepare()
-    lock_path = ROOT / 'logs/control.lock'
-    lock_path.parent.mkdir(exist_ok=True)
-    lock = lock_path.open('a')
-    fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    client = MotorClient('remote-inference')
     robots = {}
     cameras = None
     stopping = False
@@ -285,27 +290,18 @@ def main():
         config = json.loads((ROOT / 'config/recording.json').read_text())
         cameras = Cameras(CameraSink(), config)
         cameras.wait_ready()
-        sys.path.insert(0, str(setup.SDK / 'scripts'))
-        from Panthera_lib import Panthera
-        for side in ('left', 'right'):
-            mapping = json.loads((setup.CONFIG / 'arm-mapping.json').read_text())[side]
-            expected = yaml.safe_load((setup.CONFIG / f'{side}-motors.yaml').read_text())['robot']['Serial_Type']
-            if str(setup.resolve_board(mapping)) != expected:
-                raise RuntimeError('USB mapping changed')
-            keep_usb_awake(expected)
-            robots[side] = Panthera(str(configs[side]))
-            setup.wait_for_joint_feedback(robots[side], side)
+        client.open()
+        robots = client.robots
         lower = np.concatenate([np.r_[robots[s].joint_limits['lower'], robots[s].gripper_limits['lower']]
                                 for s in ('left', 'right')])
         upper = np.concatenate([np.r_[robots[s].joint_limits['upper'], robots[s].gripper_limits['upper']]
                                 for s in ('left', 'right')])
-        stale = {}
         target = None
         trajectory = None
         stream = InferenceChunkStream()
         started = last_tick = time.monotonic()
         deadline = started + args.seconds
-        print('PHYSICAL POLICY CONTROL ACTIVE. Ctrl-C stops both arms.', flush=True)
+        print('PHYSICAL POLICY CONTROL ACTIVE. Ctrl-C releases control to backend hold.', flush=True)
         with (ROOT / 'logs/inference-actions.jsonl').open('a') as log:
             while not stopping and time.monotonic() < deadline:
                 now = time.monotonic()
@@ -313,7 +309,7 @@ def main():
                 last_tick = now
                 if dt > 0.1:
                     raise RuntimeError('Local control loop missed its deadline')
-                arms = {s: feedback(r, s, stale)[1] for s, r in robots.items()}
+                arms = {s: arm for s, (_, arm) in client.read().items()}
                 measured = np.asarray([v for s in ('left', 'right') for v in
                                        arms[s]['position_rad'] + [arms[s]['gripper']['position']]])
                 # Recorded feedback can be slightly negative at the closed stop.
@@ -324,8 +320,7 @@ def main():
                 if target is None:
                     target = measured.copy()
                     target[[6, 13]] = np.clip(target[[6, 13]], lower[[6, 13]], upper[[6, 13]])
-                if np.max(np.abs(target-measured)) > CONTRACT['max_tracking_error_rad']:
-                    raise RuntimeError('Arm tracking deviation')
+                check_arm_tracking(target, measured)
                 if not all(c['ok'] and c['age_s'] < CONTRACT['max_camera_age_s']
                            for c in cameras.status().values()):
                     raise RuntimeError('Camera stream missing or stale')
@@ -354,13 +349,13 @@ def main():
                     if not r.gripper_control(float(target[offset+6]), CONTRACT['gripper_speed_rad_s'],
                                              CONTRACT['gripper_torque_limit_nm']):
                         raise RuntimeError(f'{side}: gripper command rejected')
+                client.flush()
                 time.sleep(max(0, 1/config['control_hz']-(time.monotonic()-now)))
     finally:
-        stop_robots(robots)
+        client.close()
         if cameras:
             cameras.close()
         pool.shutdown(wait=False, cancel_futures=True)
-        lock.close()
     return 0
 
 

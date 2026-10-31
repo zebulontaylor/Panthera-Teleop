@@ -38,6 +38,15 @@ class RecordingClockTests(unittest.TestCase):
         return {kind: [json.loads(l) for l in (directory / f'{kind}.jsonl').read_text().splitlines()]
                 for kind in ('states', 'frames')}
 
+    def test_episode_contract_records_selected_task_without_mutating_server_contract(self):
+        self.send('rollout_end', dict(label='discarded'))
+        contract = {'task': 'single gear', 'fps': 20}
+        self.store.context['contract'] = contract
+        self.send('rollout_begin', dict(sample=dict(monotonic_ns=2_000_000_000),
+                                      details=dict(task='four gears')))
+        self.assertEqual(self.store.active['metadata']['context']['contract']['task'], 'four gears')
+        self.assertEqual(contract['task'], 'single gear')
+
     def test_frames_preserve_receive_time_and_map_to_the_policy_clock(self):
         for i in range(101):
             self.sample(i)

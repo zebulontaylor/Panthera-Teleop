@@ -1,0 +1,268 @@
+{
+  "status": "verified_live",
+  "contract": {
+    "fps": 20,
+    "task": "put the gear in the carrier and put a pin in it",
+    "dataset_repo": "ZebTaylor/panthera-gear-carrier-pin-latest200-restyled-20hz",
+    "dataset_revision": "95c9576e09682582611636eebb683304e9eebf4b",
+    "image_size": 256,
+    "image_crops_xyxy": {
+      "overhead": [
+        120,
+        80,
+        520,
+        480
+      ],
+      "wrist_port2": [
+        80,
+        0,
+        560,
+        480
+      ],
+      "wrist_port3": [
+        80,
+        0,
+        560,
+        480
+      ]
+    },
+    "max_observation_age_s": 2.0,
+    "max_camera_age_s": 0.2,
+    "max_joint_speed_rad_s": 1.0,
+    "max_joint_acceleration_rad_s2": 8.0,
+    "max_target_jump_rad": 0.5,
+    "max_tracking_error_rad": 0.1,
+    "gripper_speed_rad_s": 5.0,
+    "gripper_acceleration_rad_s2": 30.0,
+    "gripper_torque_limit_nm": 0.5,
+    "torque_limits_nm": [
+      5,
+      8,
+      8,
+      3,
+      2,
+      2
+    ],
+    "dataset_manifest_sha256": "b1058e4f20cd93100b814078aa6dbcc1e4411db1990fd49bb742ba815e7c2475"
+  },
+  "sampled_training_pixel_checks": [
+    {
+      "source_episode": 40,
+      "frame_index": 40,
+      "mean_absolute_pixel_error": 0.0
+    },
+    {
+      "source_episode": 85,
+      "frame_index": 40,
+      "mean_absolute_pixel_error": 0.0
+    },
+    {
+      "source_episode": 100,
+      "frame_index": 40,
+      "mean_absolute_pixel_error": 0.0
+    },
+    {
+      "source_episode": 180,
+      "frame_index": 40,
+      "mean_absolute_pixel_error": 0.0
+    },
+    {
+      "source_episode": 205,
+      "frame_index": 40,
+      "mean_absolute_pixel_error": 0.0
+    },
+    {
+      "source_episode": 225,
+      "frame_index": 40,
+      "mean_absolute_pixel_error": 0.0
+    }
+  ],
+  "tests": {
+    "camera_and_metadata": 8,
+    "remote_inference": 28,
+    "inference_dashboard": 34
+  },
+  "checkpoint": "/mnt/pi05/inference/checkpoints/mixed70-real30-nohitl-012000/pretrained_model",
+  "server_health": {
+    "status": "ready",
+    "error": null,
+    "checkpoint": "/mnt/pi05/inference/checkpoints/mixed70-real30-nohitl-012000/pretrained_model",
+    "contract": {
+      "fps": 20,
+      "task": "put the gear in the carrier and put a pin in it",
+      "dataset_repo": "ZebTaylor/panthera-gear-carrier-pin-latest200-restyled-20hz",
+      "dataset_revision": "95c9576e09682582611636eebb683304e9eebf4b",
+      "image_size": 256,
+      "image_crops_xyxy": {
+        "overhead": [
+          120,
+          80,
+          520,
+          480
+        ],
+        "wrist_port2": [
+          80,
+          0,
+          560,
+          480
+        ],
+        "wrist_port3": [
+          80,
+          0,
+          560,
+          480
+        ]
+      },
+      "max_observation_age_s": 2.0,
+      "max_camera_age_s": 0.2,
+      "max_joint_speed_rad_s": 1.0,
+      "max_joint_acceleration_rad_s2": 8.0,
+      "max_target_jump_rad": 0.5,
+      "max_tracking_error_rad": 0.1,
+      "gripper_speed_rad_s": 5.0,
+      "gripper_acceleration_rad_s2": 30.0,
+      "gripper_torque_limit_nm": 0.5,
+      "torque_limits_nm": [
+        5,
+        8,
+        8,
+        3,
+        2,
+        2
+      ],
+      "dataset_manifest_sha256": "b1058e4f20cd93100b814078aa6dbcc1e4411db1990fd49bb742ba815e7c2475"
+    },
+    "names": [
+      "left.joint1",
+      "left.joint2",
+      "left.joint3",
+      "left.joint4",
+      "left.joint5",
+      "left.joint6",
+      "left.gripper_rad",
+      "right.joint1",
+      "right.joint2",
+      "right.joint3",
+      "right.joint4",
+      "right.joint5",
+      "right.joint6",
+      "right.gripper_rad"
+    ],
+    "rtc": {
+      "supported": true,
+      "protocol": "prefix-v1"
+    }
+  },
+  "synthetic_probe": {
+    "mock": false,
+    "actions": 50,
+    "latency_s": 4.450528176999796,
+    "checkpoint": "/mnt/pi05/inference/checkpoints/mixed70-real30-nohitl-012000/pretrained_model",
+    "corrected_contract_verified": true,
+    "physical_actions_executed": false
+  },
+  "local_controller": {
+    "mode": "holding",
+    "error": null,
+    "checkpoint": "/mnt/pi05/inference/checkpoints/mixed70-real30-nohitl-012000/pretrained_model",
+    "measured": [
+      0.0,
+      0.24630087614059448,
+      0.24755752086639404,
+      0.0,
+      0.0,
+      0.0,
+      1.200088381767273,
+      0.0,
+      0.24630087614059448,
+      0.24692919850349426,
+      0.0,
+      -0.00062831852119416,
+      -0.00062831852119416,
+      1.1969468593597412
+    ],
+    "target": [
+      0.0,
+      0.24692919850349426,
+      0.24755752086639404,
+      0.0,
+      0.0,
+      0.0,
+      1.200088381767273,
+      0.0,
+      0.24692919850349426,
+      0.24755752086639404,
+      0.0,
+      -0.00062831852119416,
+      -0.00062831852119416,
+      1.1969468593597412
+    ],
+    "cameras": {
+      "wrist_port2": {
+        "device": "/dev/v4l/by-path/pci-0000:0e:00.0-usb-0:2.1.3:1.0-video-index0",
+        "ok": true,
+        "error": null,
+        "sequence": 11,
+        "age_s": 0.002009755
+      },
+      "wrist_port3": {
+        "device": "/dev/v4l/by-path/pci-0000:0e:00.0-usb-0:2.1.4:1.0-video-index0",
+        "ok": true,
+        "error": null,
+        "sequence": 23,
+        "age_s": 0.007308796
+      },
+      "overhead": {
+        "device": "/dev/v4l/by-path/pci-0000:11:00.0-usb-0:1:1.0-video-index0",
+        "ok": true,
+        "error": null,
+        "sequence": 29,
+        "age_s": 0.006985617
+      }
+    },
+    "prediction": null,
+    "action_index": 0,
+    "step_count": 15,
+    "steps_completed": 0,
+    "latency_s": null,
+    "playing": false,
+    "actions_per_step": 15,
+    "blend_actions": 10,
+    "blended_actions": 0,
+    "foot_pedal_connected": true,
+    "foot_pedal_error": null,
+    "hold_status": "commanded",
+    "control_source": "hold",
+    "rollout_active": false,
+    "recording": {
+      "phase": "starting",
+      "active": null,
+      "samples": 0,
+      "duration": 0,
+      "error": null,
+      "last_decision": null,
+      "counts": {
+        "kept": 1,
+        "review": 58,
+        "discarded": 1
+      },
+      "control_active": false,
+      "return_stage": null,
+      "return_error": null
+    },
+    "collection_pending": false,
+    "handoff_ready": {},
+    "handoff_baseline_ready": false,
+    "handoff_gripper_enabled": true,
+    "blending_method": "rtc",
+    "simulation": false,
+    "connected": true,
+    "recovering": false,
+    "fps": 20,
+    "speed_limit": 1.0,
+    "gripper_speed_limit": 5.0
+  },
+  "checkpoint_weights_changed": false,
+  "training_restarted": false,
+  "remaining_note": "Running trainer imported the old metadata writer before source correction; newly emitted checkpoint metadata may require the same verified-manifest repair before deployment. Corrected inference contract and existing deployment validation reject stale crop metadata rather than silently using480. Trainer source on local and remote is fixed for next launch."
+}

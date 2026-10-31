@@ -1,0 +1,69 @@
+{
+  "checkpoint": "mixed70-real30-nohitl-011500",
+  "overhead_crop_before": [
+    80,
+    0,
+    560,
+    480
+  ],
+  "overhead_crop_after": [
+    120,
+    80,
+    520,
+    480
+  ],
+  "output_size": [
+    256,
+    256
+  ],
+  "resampling": "LANCZOS",
+  "training_reference": "work/pin-grasp-audit/training-crop-verification.json",
+  "verified_source_episodes": [
+    40,
+    85,
+    100,
+    180,
+    205,
+    225
+  ],
+  "verification": "Actual remote_inference.image_payload decoded RGB equals all six archived training images; maximum pixel error zero",
+  "aws_backup": "/mnt/pi05/inference/backups/overhead-crop-correction-20261030T235534Z",
+  "changed": [
+    "local inference contract",
+    "AWS inference contract",
+    "AWS checkpoint deployment metadata"
+  ],
+  "weights_modified": false,
+  "robot_motion": false,
+  "aws_status": "ready",
+  "rtc_synthetic_probes": [
+    {
+      "sequence": 0,
+      "guided": false,
+      "latency_s": 3.285477652998452,
+      "acknowledged_overlap": 0,
+      "within_request_age_limit": false
+    },
+    {
+      "sequence": 1,
+      "guided": true,
+      "latency_s": 0.7062579489993368,
+      "acknowledged_overlap": 10,
+      "within_request_age_limit": true
+    },
+    {
+      "sequence": 2,
+      "guided": true,
+      "latency_s": 0.703239806000056,
+      "acknowledged_overlap": 10,
+      "within_request_age_limit": true
+    },
+    {
+      "sequence": 3,
+      "guided": true,
+      "latency_s": 0.7120350969998981,
+      "acknowledged_overlap": 10,
+      "within_request_age_limit": true
+    }
+  ]
+}

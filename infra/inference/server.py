@@ -26,10 +26,21 @@ def cuda_memory_fraction(value):
     return fraction
 
 
+def deployment_tasks(meta):
+    """Read the checkpoint's prompts, preserving singular legacy metadata."""
+    tasks = [meta['task']] if 'task' in meta else meta.get('tasks')
+    if (not isinstance(tasks, list) or not tasks or
+            any(not isinstance(task, str) or not task.strip() for task in tasks)):
+        raise ValueError('Checkpoint deployment mismatch: task')
+    return list(dict.fromkeys(tasks))
+
+
 def validate_deployment(meta, contract):
-    for key in ('fps', 'task', 'dataset_repo', 'dataset_revision'):
+    for key in ('fps', 'dataset_repo', 'dataset_revision'):
         if meta.get(key) != contract[key]:
             raise ValueError(f'Checkpoint deployment mismatch: {key}')
+    if contract['task'] not in deployment_tasks(meta):
+        raise ValueError('Checkpoint deployment mismatch: task')
     if meta.get('action_representation') != 'absolute':
         raise ValueError('Only absolute joint actions are supported')
     expected_crops = {f'observation.images.{name}': crop
@@ -77,6 +88,7 @@ class Runtime:
         self.cuda_memory_fraction = cuda_memory_fraction
         self.status = 'mock' if mock else 'waiting_for_training'
         self.error = None
+        self.supported_tasks = [CONTRACT['task']] if mock else []
         self.rtc = dict(supported=False, protocol='prefix-v1',
                         error='RTC is unavailable in transport mock mode' if mock else 'Policy is not loaded')
         self.lock = threading.Lock()
@@ -96,6 +108,7 @@ class Runtime:
             self.checkpoint = str(Path(self.checkpoint).resolve(strict=True))
             meta = json.loads((Path(self.checkpoint) / 'deployment.json').read_text())
             validate_deployment(meta, CONTRACT)
+            self.supported_tasks = deployment_tasks(meta)
             if self.cuda_memory_fraction is not None:
                 torch.cuda.set_per_process_memory_fraction(self.cuda_memory_fraction)
             self.policy = load_policy(self.checkpoint)
@@ -118,6 +131,9 @@ class Runtime:
             self.status = 'failed'
 
     def infer(self, payload):
+        task = payload.get('task', CONTRACT['task'])
+        if not isinstance(task, str) or task not in self.supported_tasks:
+            raise ValueError('Unsupported task')
         import numpy as np
         from PIL import Image
         prefix = None
@@ -144,7 +160,7 @@ class Runtime:
                 actions = np.tile(state, (50, 1))
             else:
                 batch = {'observation.state': self.torch.from_numpy(state),
-                         'task': CONTRACT['task']}
+                         'task': task}
                 batch.update({f'observation.images.{n}': self.torch.from_numpy(v)
                               .permute(2, 0, 1).float() / 255 for n, v in images.items()})
                 # RTC locally enables input gradients for the denoiser VJP.
@@ -164,7 +180,7 @@ class Runtime:
                 raise RuntimeError('Invalid model output')
             actions, corrections = clamp_gripper_actions(actions)
             result = dict(sequence=payload['sequence'], actions=actions.tolist(),
-                          checkpoint=self.checkpoint, fps=20, mock=self.mock,
+                          checkpoint=self.checkpoint, fps=20, mock=self.mock, task=task,
                           limit_corrections=corrections)
             if prefix is not None:
                 result['rtc'] = dict(overlap=overlap)
@@ -199,7 +215,7 @@ def main():
                 return self.send(404, {})
             self.send(200, dict(status=runtime.status, error=runtime.error,
                                 checkpoint=runtime.checkpoint, contract=CONTRACT, names=NAMES,
-                                rtc=runtime.rtc))
+                                rtc=runtime.rtc, supported_tasks=runtime.supported_tasks))
 
         def do_POST(self):
             if self.path != '/infer':

@@ -18,28 +18,55 @@ from urllib.parse import urlsplit
 import numpy as np
 
 from remote_inference import (CONTRACT, ROOT, GRIPPER_ENCODER_TOLERANCE_RAD,
-                              SmoothActionTrajectory, image_payload, request, validate_chunk)
+                              SmoothActionTrajectory, check_arm_tracking, image_payload, request, validate_chunk)
 
 from hitl_recording import RolloutStore
 from expo_recording import ExplorationRolloutStore
 from takeover_hold import TakeoverHold
 from rtc_chunking import supports_rtc, prepare_rtc, confirm_rtc
+from foot_pedal import FootPedal
+from inference_pedal import InferencePedal
 
 LEASE_SECONDS = 2.0
+DEFAULT_ACTIONS_PER_STEP = 15
+
+
+def validate_server_contract(contract):
+    """Require runtime compatibility while allowing training provenance to vary."""
+    if not isinstance(contract, dict):
+        raise RuntimeError('Inference server returned an invalid robot contract')
+    provenance = {'dataset_manifest_sha256', 'dataset_mix'}
+    mismatched = sorted(key for key in (CONTRACT.keys() | contract.keys()) - provenance
+                        if key not in CONTRACT or key not in contract
+                        or CONTRACT[key] != contract[key])
+    if mismatched:
+        raise RuntimeError('Inference server robot contract differs: ' + ', '.join(mismatched))
+
+
+def measured_hold_target(measured, target, lower, upper, released):
+    """Hold arms where they are, preserving squeeze on grippers still under control."""
+    result = np.clip(measured, lower, upper)
+    for side, index in (('left', 6), ('right', 13)):
+        if not released.get(side, False):
+            result[index] = target[index]
+    return result
 
 
 class CollectionReset:
     """Collection's measured-start trajectory, capped to inference speeds."""
     def __init__(self, settings, lower, upper, initial, now):
         from neutral_return import NeutralReturn
-        self.settings = dict(settings, release_delay_seconds=0,
+        # Teleop's selected-arm toggle does not apply to inference resets.
+        self.settings = dict(settings, arms=['left', 'right'], release_delay_seconds=0,
                              max_joint_speed_rad_s=min(settings['max_joint_speed_rad_s'],
                                                        CONTRACT['max_joint_speed_rad_s']))
         limits = {s: (lower[o:o+6], upper[o:o+6]) for s, o in [('left', 0), ('right', 7)]}
         self.neutral = NeutralReturn(self.settings, limits, now)
         self.gripper_settings = settings['gripper_open']
         fraction = self.gripper_settings['travel_fraction']
-        self.gripper_targets = lower[[6, 13]] + fraction * (upper[[6, 13]] - lower[[6, 13]])
+        self.gripper_indices = [6 if side == 'left' else 13 for side in self.neutral.targets]
+        indices = self.gripper_indices
+        self.gripper_targets = lower[indices] + fraction * (upper[indices] - lower[indices])
         self.started = now
 
     def tick(self, now, dt, measured, target):
@@ -50,15 +77,17 @@ class CollectionReset:
         if joints is None:
             return target.copy(), False
         result = target.copy()
-        for side, offset in [('left', 0), ('right', 7)]:
-            result[offset:offset+6] = joints[side]
+        for side, positions in joints.items():
+            offset = 0 if side == 'left' else 7
+            result[offset:offset+6] = positions
         speed = min(self.gripper_settings['speed_rad_s'], CONTRACT['gripper_speed_rad_s'])
-        result[[6, 13]] += np.clip(self.gripper_targets-target[[6, 13]], -speed*dt, speed*dt)
-        opened = np.all(np.abs(measured[[6, 13]]-self.gripper_targets) <=
+        indices = self.gripper_indices
+        result[indices] += np.clip(self.gripper_targets-target[indices], -speed*dt, speed*dt)
+        opened = np.all(np.abs(measured[indices]-self.gripper_targets) <=
                         self.gripper_settings['arrival_tolerance_rad'])
         if not opened and now-self.started > self.gripper_settings['timeout_seconds']:
             raise RuntimeError('Collection reset grippers did not reach their opening; reset stopped')
-        commanded_open = np.allclose(result[[6, 13]], self.gripper_targets, atol=1e-8, rtol=0)
+        commanded_open = np.allclose(result[indices], self.gripper_targets, atol=1e-8, rtol=0)
         return result, bool(settled and opened and commanded_open)
 
 
@@ -102,165 +131,11 @@ class ActionStep(SmoothActionTrajectory):
         super().__init__(selected, started)
 
 
-class RobotHardware:
-    """All SDK/camera access belongs to the single control worker."""
-    def __init__(self):
-        self.robots = {}
-        self.cameras = None
-        self.lock_file = None
-        self.stale = {}
-        self.hold_targets = {}
-        self.check_active = lambda: None
-
-    def open(self):
-        from hand_guide import setup
-        from dashboard import Cameras
-        from usb_stability import keep_usb_awake
-        import yaml
-
-        (ROOT / 'logs').mkdir(exist_ok=True)
-        self.lock_file = (ROOT / 'logs/control.lock').open('a')
-        try:
-            fcntl.flock(self.lock_file, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except BlockingIOError:
-            raise RuntimeError('Another robot controller is running; stop it first')
-        configs = setup.prepare()
-        self.configs = configs
-        self.check_active()
-        self.config = json.loads((ROOT / 'config/recording.json').read_text())
-        self.cameras = Cameras(type('Sink', (), {'submit': lambda *_: None})(), self.config)
-        self.cameras.wait_ready()
-        self.check_active()
-        sys.path.insert(0, str(setup.SDK / 'scripts'))
-        from Panthera_lib import Panthera
-        mappings = json.loads((setup.CONFIG / 'arm-mapping.json').read_text())
-        for side in ('left', 'right'):
-            self.check_active()
-            expected = yaml.safe_load((setup.CONFIG / f'{side}-motors.yaml').read_text())['robot']['Serial_Type']
-            if str(setup.resolve_board(mappings[side])) != expected:
-                raise RuntimeError('Robot USB mapping changed during startup')
-            keep_usb_awake(expected)
-            self.robots[side] = Panthera(str(configs[side]))
-            setup.wait_for_joint_feedback(self.robots[side], side)
-            self.check_active()
-        self.lower = np.concatenate([np.r_[self.robots[s].joint_limits['lower'],
-                                           self.robots[s].gripper_limits['lower']]
-                                     for s in ('left', 'right')])
-        self.upper = np.concatenate([np.r_[self.robots[s].joint_limits['upper'],
-                                           self.robots[s].gripper_limits['upper']]
-                                     for s in ('left', 'right')])
-
-    def read(self):
-        from hand_guide import feedback
-        arms = {s: feedback(r, s, self.stale)[1] for s, r in self.robots.items()}
-        measured = np.asarray([v for s in ('left', 'right') for v in
-                               arms[s]['position_rad'] + [arms[s]['gripper']['position']]])
-        for i in (6, 13):
-            if not self.lower[i] - GRIPPER_ENCODER_TOLERANCE_RAD <= measured[i] <= self.upper[i] + GRIPPER_ENCODER_TOLERANCE_RAD:
-                raise RuntimeError('Gripper feedback outside encoder tolerance')
-        camera_state = self.cameras.status()
-        return measured, arms, camera_state
-
-    def images(self):
-        with self.cameras.lock:
-            return {n: image_payload(self.cameras.latest[n]['jpeg'], n)
-                    for n in CONTRACT['image_crops_xyxy']}
-
-    def expo_images(self):
-        """Return each exact inference JPEG together with its source frame receipt."""
-        with self.cameras.lock:
-            frames = {n: self.cameras.latest[n] for n in CONTRACT['image_crops_xyxy']}
-            return ({n: image_payload(frame['jpeg'], n) for n, frame in frames.items()},
-                    {n: {k: v for k, v in frame.items() if k != 'jpeg'}
-                     for n, frame in frames.items()})
-
-    def command(self, target):
-        for offset, side in ((0, 'left'), (7, 'right')):
-            self.command_arm(side, offset, target)
-
-    def command_arm(self, side, offset, target, hold_gripper=True):
-        robot = self.robots[side]
-        if not robot.Joint_Pos_Vel(target[offset:offset + 6],
-                                   np.full(6, CONTRACT['max_joint_speed_rad_s']),
-                                   max_tqu=CONTRACT['torque_limits_nm'], iswait=False):
-            raise RuntimeError(f'{side}: joint command rejected')
-        if hold_gripper and not robot.gripper_control(float(target[offset + 6]),
-                                     CONTRACT['gripper_speed_rad_s'],
-                                     CONTRACT['gripper_torque_limit_nm']):
-            raise RuntimeError(f'{side}: gripper command rejected')
-
-    def recording_context(self, checkpoint):
-        from hand_guide import setup, TORQUE_LIMIT
-        import yaml
-        return dict(mode='human_in_the_loop', checkpoint=checkpoint, contract=CONTRACT,
-                    torque_limits_nm=TORQUE_LIMIT.tolist(),
-                    calibration=json.loads((ROOT / 'config/calibration/setup.json').read_text()),
-                    arm_mapping=json.loads((setup.CONFIG / 'arm-mapping.json').read_text()),
-                    robot_configs={s: yaml.safe_load(p.read_text()) for s, p in self.configs.items()},
-                    motor_configs={s: yaml.safe_load((setup.CONFIG / f'{s}-motors.yaml').read_text())
-                                   for s in self.configs},
-                    urdf_sources={s: Path(yaml.safe_load(p.read_text())['urdf']['file_path']).read_text()
-                                  for s, p in self.configs.items()})
-
-    def guide(self, arms, target, released):
-        from hand_guide import ZERO
-        from reset_grippers import command_gripper
-        for side, robot in self.robots.items():
-            if not released[side]:
-                self.command_arm(side, 0 if side == 'left' else 7, target, hold_gripper=False)
-                command_gripper(robot, arms[side])
-                arms[side]['control_mode'] = 'position_hold'
-                continue
-            torque = np.asarray(arms[side]['gravity_model_torque_nm'])
-            if not robot.pos_vel_tqe_kp_kd(ZERO, ZERO, torque, ZERO, ZERO):
-                raise RuntimeError(f'{side}: gravity command rejected')
-            command_gripper(robot, arms[side])
-            arms[side]['control_mode'] = 'gravity_assist'
-            arms[side]['gravity_torque_command_nm'] = torque.tolist()
-            arms[side]['command'] = dict(mode='gravity_assist', torque_nm=torque.tolist())
-
-    def validate_reset_path(self, initial, targets):
-        from hand_guide import validate_return_path
-        for side, offset in [('left', 0), ('right', 7)]:
-            validate_return_path(self.robots[side], initial[offset:offset+6], targets[side], side)
-
-    def hold_available(self):
-        """Preserve even a partially opened session after a startup fault."""
-        from hand_guide import feedback
-        errors = []
-        for side, robot in self.robots.items():
-            try:
-                if side not in self.hold_targets:
-                    arm = feedback(robot, side, self.stale)[1]
-                    q = np.asarray(arm['position_rad'], dtype=float)
-                    if (not np.isfinite(q).all() or np.any(q < robot.joint_limits['lower']) or
-                            np.any(q > robot.joint_limits['upper'])):
-                        raise RuntimeError('Cannot establish a valid measured hold')
-                    self.hold_targets[side] = q
-                if not robot.Joint_Pos_Vel(self.hold_targets[side],
-                                           np.full(6, CONTRACT['max_joint_speed_rad_s']),
-                                           max_tqu=CONTRACT['torque_limits_nm'], iswait=False):
-                    raise RuntimeError('Hold command rejected')
-            except BaseException as exc:
-                errors.append(f'{side}: {exc}')
-        if errors:
-            raise RuntimeError('; '.join(errors))
-
-    def close(self):
-        from hand_guide import stop_robots
-        stop_robots(self.robots)
-        try:
-            if self.cameras:
-                self.cameras.close()
-        finally:
-            self.robots.clear()
-            if self.lock_file:
-                self.lock_file.close()
-
+from robot_hardware import RobotHardware
 
 class Controller:
     def __init__(self, url, hardware_factory=RobotHardware, log_path=None, data_dir=None, expo_record_dir=None,
-                 expo_objective='gear_and_pin', expo_prefix_length=1):
+                 expo_objective='gear_and_pin', expo_prefix_length=1, critic_options=None):
         self.url = url
         self.data_dir = Path(data_dir) if data_dir else ROOT / 'data/hitl'
         self.recorder = None
@@ -274,19 +149,30 @@ class Controller:
         self.hardware_factory = hardware_factory
         self.log_path = log_path or ROOT / 'logs/inference-steps.jsonl'
         self.lock = threading.Lock()
+        self.critic_options = critic_options
+        self.critic = None
+        self._critic_observation = None
+        self._critic_counter = 0
+        self._critic_history_start = None
+        self._critic_rollout_key = secrets.token_hex(8)
         self.stop_event = threading.Event()
         self.pause_event = threading.Event()
         self.commands = queue.Queue(maxsize=1)
         self.worker = None
         self.hardware = None
         self.heartbeat_at = 0
-        self.state = dict(mode='stopped', error=None, checkpoint=None, measured=None,
+        self.pedal_context = {}
+        self.task_generation = 0
+        self.state = dict(task=CONTRACT['task'], supported_tasks=[CONTRACT['task']], mode='stopped', error=None, checkpoint=None, measured=None,
                           target=None, cameras={}, prediction=None, action_index=0,
-                          step_count=1, steps_completed=0, latency_s=None,
-                          playing=False, actions_per_step=1, blend_actions=10,
-                          blended_actions=0,
+                          step_count=DEFAULT_ACTIONS_PER_STEP, steps_completed=0, latency_s=None,
+                          playing=False, actions_per_step=DEFAULT_ACTIONS_PER_STEP, blend_actions=10,
+                          blended_actions=0, foot_pedal_connected=False, foot_pedal_error=None,
                           hold_status='unverified', control_source='hold', rollout_active=False,
                           recording=None, collection_pending=False, handoff_ready={}, handoff_baseline_ready=False, handoff_gripper_enabled=True)
+        self.state['critic'] = dict(status='idle' if critic_options is not None else 'disabled')
+        self.state['critic_history'] = []
+        self.state['critic_samples'] = 0
         if self.expo_record_dir is not None:
             self.state.update(actions_per_step=self.expo_prefix_length, step_count=self.expo_prefix_length,
                               blend_actions=0, expo_recording_enabled=True, expo_prefix_length=self.expo_prefix_length,
@@ -303,8 +189,79 @@ class Controller:
         return hardware.images(), dict(camera_frame_metadata_exact=False, status=cameras)
 
     def update(self, **values):
+        if 'prediction' in values and values['prediction'] is None:
+            self.clear_critic()
         with self.lock:
             self.state.update(values)
+
+    def clear_critic(self):
+        with self.lock:
+            self._critic_observation = None
+            self.state['critic'] = dict(status='idle' if self.critic_options is not None else 'disabled')
+        if self.critic is not None:
+            self.critic.invalidate()
+
+    def reset_critic_history(self, started_at=None):
+        self.clear_critic()
+        with self.lock:
+            self._critic_history_start = started_at
+            self._critic_rollout_key = secrets.token_hex(8)
+            self.state['critic_history'] = []
+            self.state['critic_samples'] = 0
+
+    def capture_observation(self, hardware, cameras):
+        if self.critic_options is not None and hasattr(hardware, 'inference_images'):
+            return hardware.inference_images()
+        images, receipts = self.expo_images(hardware, cameras)
+        return images, receipts, None
+
+    def _critic_result(self, result):
+        with self.lock:
+            if result.get('observation_key') != self._critic_observation or self._critic_observation is None:
+                return
+            self.state['critic'] = dict(result, received_at=time.time())
+            if result.get('status') == 'ok' and all(
+                    isinstance(result.get(key), (int, float)) and np.isfinite(result[key])
+                    for key in ('q', 'current_v', 'delta')):
+                sampled_at = result.get('sampled_at', time.time())
+                if self._critic_history_start is None:
+                    self._critic_history_start = sampled_at
+                point = dict(t=max(0., sampled_at - self._critic_history_start),
+                             q=result['q'], current_v=result['current_v'], delta=result['delta'],
+                             sequence=result.get('sequence'))
+                self.state['critic_history'].append(point)
+                self.state['critic_samples'] += 1
+                if len(self.state['critic_history']) > 1200:
+                    self.state['critic_history'] = self.state['critic_history'][::2]
+        try:
+            path = Path(self.log_path).with_name('inference-critic.jsonl')
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with path.open('a') as stream:
+                stream.write(json.dumps(dict(result, unix_ns=time.time_ns()), allow_nan=False) + '\n')
+        except (OSError, ValueError):
+            pass  # Diagnostic storage must not affect control.
+
+    def score_prediction(self, images, state, actions, fps, sequence, executed_count):
+        if self.critic_options is None:
+            return
+        with self.lock:
+            self._critic_counter += 1
+            observation_key = f'{os.getpid()}:{self._critic_counter}'
+            self._critic_observation = observation_key
+            self.state['critic'] = dict(status='scoring', sequence=sequence)
+        try:
+            if images is None:
+                raise ValueError('Full-frame camera observation unavailable')
+            if self.critic is None:
+                from action_critic_monitor import ActionCriticMonitor
+                self.critic = ActionCriticMonitor(callback=self._critic_result, **self.critic_options)
+            self.critic.submit(images, state, actions, fps=fps, observation_key=observation_key,
+                               rollout_key=self._critic_rollout_key,
+                               sequence=sequence, executed_count=executed_count,
+                               scope='proposed_one_second_policy_trajectory',
+                               sampled_at=time.time())
+        except Exception as exc:
+            self._critic_result(dict(status='error', reason=str(exc), observation_key=observation_key))
 
     def snapshot(self):
         with self.lock:
@@ -316,9 +273,53 @@ class Controller:
                 state['expo_recording'] = self.expo_recorder.snapshot()
             return state
 
-    def heartbeat(self):
+    def cue(self, name):
+        if self.recorder:
+            self.recorder.audio.play(name)
+
+    def heartbeat(self, pedal_context=None):
         with self.lock:
             self.heartbeat_at = time.monotonic()
+            if isinstance(pedal_context, dict):
+                self.pedal_context = dict(pedal_context)
+
+    def pedal_gesture(self, gesture):
+        """Route pedal gestures through the same guards as dashboard controls."""
+        with self.lock:
+            mode = self.state['mode']
+            playing = self.state['playing']
+            active = self.state['rollout_active']
+            pending = self.state['collection_pending']
+            context = dict(self.pedal_context)
+            count = context.get('count', self.state['actions_per_step'])
+            blend = context.get('blend', self.state['blend_actions'])
+            stale = time.monotonic() - self.heartbeat_at > LEASE_SECONDS
+        if stale or self.pause_event.is_set() or pending:
+            return
+        names = {key: context.get(key, '') for key in ('operator', 'scene')}
+        if gesture == 'review':
+            if not active:
+                raise RuntimeError('No active rollout to save for Review')
+            outcome = dict(label='review', success=False, quality=context.get('quality', 2),
+                           notes=context.get('notes', ''), milestones=context.get('milestones', {}),
+                           reason='foot_pedal_review', reset_after_finish=True)
+            if self.expo_record_dir is not None:
+                outcome['review_approved'] = True
+            self.collection('finish', outcome)
+        elif gesture == 'single':
+            self.collection('resume' if mode in ('takeover_hold', 'human') else 'intervene', names)
+        elif gesture == 'double':
+            if playing:
+                self.stop()
+            elif mode == 'holding':
+                count, blend = action_count(count), blend_count(blend)
+                self.check_expo_configuration(count, blend)
+                if active:
+                    self.submit('play', count, blend)
+                else:
+                    # Begin recording before playback, just as browser Play does.
+                    self.collection('begin', dict(names, pedal_play=dict(count=count, blend=blend)))
+
 
     def connect(self, reset_pose=True):
         with self.lock:
@@ -350,14 +351,30 @@ class Controller:
                 raise RuntimeError('Connect and wait for the arms to hold before configuring playback')
             self.state.update(actions_per_step=count, blend_actions=blend)
 
-    def submit(self, kind, count=1, blend=10):
+    def select_task(self, task):
+        with self.lock:
+            if not isinstance(task, str) or task not in self.state['supported_tasks']:
+                raise ValueError('Choose a task supported by the connected checkpoint')
+            if (self.state['mode'] != 'holding' or self.state['playing'] or
+                    self.state['rollout_active'] or self.state['collection_pending'] or
+                    not self.commands.empty() or not self.collection_commands.empty()):
+                raise RuntimeError('Pause in hold and finish the rollout before changing tasks')
+            if task == self.state['task']:
+                return
+            self.state.update(task=task, prediction=None, action_index=0, blended_actions=0,
+                              latency_s=None)
+            self.task_generation += 1
+        self.reset_critic_history()
+
+    def submit(self, kind, count=None, blend=None):
         if kind not in ('step', 'play', 'predict', 'reset'):
             raise ValueError('Unknown inference command')
-        count = action_count(count)
-        blend = blend_count(blend)
-        if kind in ('step', 'play'):
-            self.check_expo_configuration(count, blend)
         with self.lock:
+            # A resume without new settings keeps the operator's last selection.
+            count = action_count(self.state['actions_per_step'] if count is None else count)
+            blend = blend_count(self.state['blend_actions'] if blend is None else blend)
+            if kind in ('step', 'play'):
+                self.check_expo_configuration(count, blend)
             if kind == 'reset' and self.state['rollout_active']:
                 raise RuntimeError('Finish the rollout before resetting')
             if (self.state['mode'] != 'holding' or self.state['playing'] or self.stop_event.is_set() or
@@ -377,6 +394,8 @@ class Controller:
             self.state['playing'] = kind == 'play'
             if kind in ('step', 'play'):
                 self.state.update(actions_per_step=count, blend_actions=blend)
+        if kind == 'play':
+            self.cue('policy_play')
 
     def collection(self, action, payload=None):
         payload = payload or {}
@@ -436,12 +455,19 @@ class Controller:
     def stop(self):
         """Cancel motion, retaining the connection and powered position hold."""
         with self.lock:
+            audible = self.state['playing'] or self.state['mode'] in ('queued', 'predicting', 'executing')
             self.state['playing'] = False
             self.pause_event.set()
+        if audible:
+            self.cue('policy_pause')
+        self.clear_critic()
 
     def shutdown(self):
         """Release resources only for a deliberate controller shutdown."""
         self.stop_event.set()
+        self.clear_critic()
+        if self.critic is not None:
+            self.critic.close()
 
     def check_active(self):
         if self.stop_event.is_set():
@@ -480,19 +506,29 @@ class Controller:
         sample_sequence = 0
         last_policy_clock = None
         expo_feedback_pending = False
+        pending_finish_reset = None
         human = rollout = False
         handoff = None
         released = {}
         takeover_details = {}
         completed = self.state['steps_completed']
+        pedal = None
+        gestures = InferencePedal()
         try:
             health = request(self.url, '/health')
             if health['status'] != 'ready':
                 raise RuntimeError(health.get('error') or 'AWS inference is not ready')
-            if health['contract'] != CONTRACT:
-                raise RuntimeError('AWS inference has a different robot contract')
+            validate_server_contract(health['contract'])
             checkpoint = health['checkpoint']
             rtc_enabled = supports_rtc(health)
+            task_echo_required = 'supported_tasks' in health
+            supported_tasks = health.get('supported_tasks', [CONTRACT['task']])
+            if (not isinstance(supported_tasks, list) or not supported_tasks or
+                    any(not isinstance(task, str) or not task.strip() for task in supported_tasks) or
+                    CONTRACT['task'] not in supported_tasks):
+                raise RuntimeError('Inference server returned invalid supported tasks')
+            self.update(task=CONTRACT['task'], supported_tasks=list(dict.fromkeys(supported_tasks)))
+            task_generation = self.task_generation
             self.update(blending_method='rtc' if rtc_enabled else 'crossfade')
             if (self.expo_record_dir is not None and health.get('chunk_size') is not None and
                     health['chunk_size'] != self.expo_prefix_length):
@@ -509,7 +545,7 @@ class Controller:
             if self.expo_record_dir is not None:
                 self.expo_recorder = ExplorationRolloutStore(self.expo_record_dir,
                     dict(checkpoint=checkpoint, checkpoint_id=health.get('checkpoint_id'),
-                         processor_id=health.get('processor_id'), contract=CONTRACT,
+                         processor_id=health.get('processor_id'), contract=health['contract'],
                          policy_bundle_id=health.get('policy_bundle_id'), server_url=self.url,
                          policy_identity=expo_policy_identity, server_health=health,
                          training_objective=self.expo_objective,
@@ -518,10 +554,17 @@ class Controller:
             self.update(checkpoint=checkpoint)
             self.check_active()
             hardware.open()
+            try:
+                pedal = FootPedal(hardware.config.get('foot_pedal'),
+                                  enabled=not getattr(hardware, 'simulated', False))
+                self.update(foot_pedal_connected=bool(pedal.devices), foot_pedal_error=None)
+            except RuntimeError as exc:
+                self.update(foot_pedal_connected=False, foot_pedal_error=str(exc))
             self.check_active()
             if hardware.cameras is not None:
-                self.recorder = RolloutStore(self.data_dir, hardware.config,
-                                            hardware.recording_context(checkpoint))
+                recording_context = hardware.recording_context(checkpoint)
+                recording_context['contract'] = health['contract']
+                self.recorder = RolloutStore(self.data_dir, hardware.config, recording_context)
                 hardware.cameras.store = self.recorder
             measured, arms, cameras = hardware.read()
             target = measured.copy()
@@ -536,11 +579,25 @@ class Controller:
             with self.log_path.open('a') as log:
                 while not self.stop_event.is_set():
                     now = time.monotonic()
+                    with self.lock:
+                        if task_generation != self.task_generation:
+                            previous_tail = None
+                            task_generation = self.task_generation
                     dt = now - last_tick
                     last_tick = now
                     self.check_active()
                     measured, arms, cameras = hardware.read()
                     measured_at = time.monotonic_ns()
+                    gesture = None
+                    if pedal is not None:
+                        try:
+                            gesture = gestures.update(pedal.snapshot())
+                        except RuntimeError as exc:
+                            self.stop()
+                            pedal.close()
+                            pedal = None
+                            gestures.reset()
+                            self.update(foot_pedal_connected=False, foot_pedal_error=str(exc))
                     expo_next_images = None
                     expo_next_observation_id = None
                     # This feedback reflects the preceding command, including
@@ -549,7 +606,18 @@ class Controller:
                     last_policy_clock = None
                     with self.lock:
                         browser_lost = time.monotonic() - self.heartbeat_at > LEASE_SECONDS
+                    if gesture and not browser_lost:
+                        try:
+                            self.pedal_gesture(gesture)
+                        except (RuntimeError, ValueError) as exc:
+                            self.update(foot_pedal_error=str(exc))
+                            self.cue('cancel')
+                        else:
+                            self.update(foot_pedal_error=None)
                     if self.pause_event.is_set() or browser_lost:
+                        gestures.reset()
+                        gesture = None
+                        pending_finish_reset = None
                         if self.expo_recorder:
                             self.expo_recorder.boundary('browser_connection_lost' if browser_lost else 'operator_stop')
                             if browser_lost:
@@ -561,7 +629,7 @@ class Controller:
                             future.cancel()
                             sequence += 1
                         if human:
-                            target = np.clip(measured, hardware.lower, hardware.upper)
+                            target = measured_hold_target(measured, target, hardware.lower, hardware.upper, released)
                         human = False
                         handoff = None
                         released = {}
@@ -587,16 +655,19 @@ class Controller:
                         if (rollout or human or reset is not None or step is not None or future is not None or not self.commands.empty()) and not all(
                                 c['ok'] and c['age_s'] < CONTRACT['max_camera_age_s'] for c in cameras.values()):
                             raise RuntimeError('Camera stream missing or stale; motion canceled')
-                        if not human and np.max(np.abs(target - measured)) > CONTRACT['max_tracking_error_rad']:
-                            target = np.clip(measured, hardware.lower, hardware.upper)
-                            raise RuntimeError('Arm tracking deviation; holding measured pose')
+                        if not human:
+                            try:
+                                check_arm_tracking(target, measured)
+                            except RuntimeError as exc:
+                                target = np.clip(measured, hardware.lower, hardware.upper)
+                                raise RuntimeError(f'{exc}; holding measured pose') from exc
                         if self.recorder and self.recorder.failure:
                             raise RuntimeError(f'Recording failed: {self.recorder.failure}')
                         if self.expo_recorder and self.expo_recorder.failure:
                             raise RuntimeError(f'EXPO recording failed: {self.expo_recorder.failure}')
                         if expo_feedback_pending:
-                            next_images, next_cameras = self.expo_images(hardware, cameras)
-                            expo_next_images = (next_images, next_cameras)
+                            next_images, next_cameras, next_critic = self.capture_observation(hardware, cameras)
+                            expo_next_images = (next_images, next_cameras, next_critic)
                             expo_next_observation_id = self.expo_recorder.completed(
                                 measured.tolist(), next_images, measured_at, next_cameras)
                             expo_feedback_pending = False
@@ -608,6 +679,9 @@ class Controller:
                         if change:
                             policy_clock = None
                             action, details = change
+                            details = dict(details, task=self.state['task'])
+                            if action == 'finish' and details.get('reset_after_finish', False):
+                                details = dict(details, decision_id=secrets.token_hex(12))
                             if self.expo_recorder:
                                 if action == 'begin':
                                     self.expo_recorder.begin(details, measured_at)
@@ -622,11 +696,15 @@ class Controller:
                             future = step = None
                             previous_tail = None
                             self.clear_commands()
-                            target = np.clip(measured, hardware.lower, hardware.upper)
+                            target = measured_hold_target(measured, target, hardware.lower, hardware.upper, released)
                             if action == 'begin':
+                                self.reset_critic_history(started_at=time.time())
+                                if details.get('pedal_play'):
+                                    self.update(actions_per_step=details['pedal_play']['count'],
+                                                blend_actions=details['pedal_play']['blend'])
                                 self.recorder.submit('rollout_begin', dict(
                                     sample=dict(monotonic_ns=measured_at),
-                                    details=dict(details, actions_per_step=self.state['actions_per_step'],
+                                    details=dict(details, task=self.state['task'], actions_per_step=self.state['actions_per_step'],
                                                  blend_actions=self.state['blend_actions'])))
                                 rollout = True
                             elif action == 'intervene':
@@ -653,33 +731,46 @@ class Controller:
                                         handoff_ready=released, handoff_baseline_ready=False,
                                         rollout_active=rollout, control_source='hold',
                                         prediction=None, action_index=0, error=None, collection_pending=False)
+                            if action in ('intervene', 'resume'):
+                                self.cue('intervention_start' if action == 'intervene' else 'intervention_end')
+                            if action == 'begin' and details.get('pedal_play'):
+                                self.submit('play', **details['pedal_play'])
                             if (action == 'finish' and details.get('reset_after_finish', False)
                                     and not self.pause_event.is_set()):
+                                # Let the writer confirm the outcome is saved before moving.
+                                pending_finish_reset = details['decision_id']
+                                self.update(mode='saving')
+                        if pending_finish_reset is not None:
+                            saved = self.recorder.snapshot().get('last_decision') or {}
+                            if saved.get('decision_id') == pending_finish_reset:
+                                pending_finish_reset = None
                                 self.check_active()
-                                reset = self.collection_reset(hardware, measured)
-                                if reset is None:
-                                    raise RuntimeError('Recording finished, but collection reset is not configured')
+                                if not self.pause_event.is_set():
+                                    reset = self.collection_reset(hardware, measured)
+                                    if reset is None:
+                                        raise RuntimeError('Recording finished, but collection reset is not configured')
                         if human:
                             previous_ready = released.copy()
                             released = handoff.tick(now, arms)
                             for side, offset in (('left', 0), ('right', 7)):
-                                # Waiting grippers are passive, just like normal collection.
-                                target[offset+6] = np.clip(measured[offset+6], hardware.lower[offset+6], hardware.upper[offset+6])
+                                # Keep the policy's grip until this arm is explicitly released.
                                 if released[side]:
                                     target[offset:offset+7] = np.clip(measured[offset:offset+7],
                                         hardware.lower[offset:offset+7], hardware.upper[offset:offset+7])
                             if any(released.values()) and not rollout and self.recorder:
+                                self.reset_critic_history(started_at=time.time())
                                 names = {key: (takeover_details.get(key, '').strip()[:120] or 'unspecified')
                                          if isinstance(takeover_details.get(key, ''), str) else 'unspecified'
                                          for key in ('operator', 'scene')}
                                 self.recorder.submit('rollout_begin', dict(sample=dict(monotonic_ns=measured_at),
-                                    details=dict(names, recording_start='human_takeover',
-                                        handoff='handle_pull_or_gripper', handoff_settings=dict(handoff.settings, **handoff.motion_settings),
+                                    details=dict(names, task=self.state['task'], recording_start='human_takeover',
+                                        handoff='handle_pull_or_gripper_torque_change', handoff_settings=dict(handoff.settings, **handoff.motion_settings),
                                         actions_per_step=self.state['actions_per_step'],
                                         blend_actions=self.state['blend_actions'])))
                                 rollout = True
                             for side in released:
                                 if released[side] and not previous_ready[side]:
+                                    self.cue('handoff')
                                     event = dict(event=handoff.diagnostics[side]['trigger']+'_release', side=side, monotonic_ns=measured_at,
                                                  **handoff.diagnostics[side])
                                     log.write(json.dumps(event) + '\n')
@@ -697,6 +788,7 @@ class Controller:
                                 log.flush()
                                 reset = None
                                 self.update(mode='holding')
+                                self.cue('end')
                         if not human and reset is None and future is None and step is None:
                             command = None
                             try:
@@ -709,6 +801,9 @@ class Controller:
                                 kind, count = command
                                 with self.lock:
                                     blend = self.state['blend_actions']
+                                    if task_generation != self.task_generation:
+                                        previous_tail = None
+                                        task_generation = self.task_generation
                                     if kind == 'play':
                                         count = self.state['actions_per_step']
                                 if kind != 'play':
@@ -719,12 +814,13 @@ class Controller:
                                         raise RuntimeError('Collection reset is not configured')
                                 else:
                                     if self.expo_recorder and kind in ('step', 'play'):
-                                        images, request_cameras = (expo_next_images if expo_next_images is not None
-                                                                  else self.expo_images(hardware, cameras))
+                                        images, request_cameras, critic_images = (expo_next_images if expo_next_images is not None
+                                                                  else self.capture_observation(hardware, cameras))
                                     else:
-                                        images = hardware.images()
+                                        images, request_cameras, critic_images = self.capture_observation(hardware, cameras)
                                     observed_at = time.monotonic()
-                                    inference_body = dict(sequence=sequence, state=measured.tolist(), images=images)
+                                    inference_body = dict(sequence=sequence, state=measured.tolist(), images=images,
+                                                          task=self.state['task'])
                                     rtc_body = None
                                     if rtc_enabled and kind == 'play' and not self.expo_recorder:
                                         rtc_body = prepare_rtc(previous_tail, blend)
@@ -745,6 +841,9 @@ class Controller:
                                 result = future.result()
                                 if self.expo_recorder and kind in ('step', 'play'):
                                     self.expo_recorder.responded(result)
+                                if ((task_echo_required or 'task' in result) and
+                                        result.get('task') != inference_body['task']):
+                                    raise RuntimeError('Inference response task differs from the selected task')
                                 if result['checkpoint'] != checkpoint:
                                     raise RuntimeError('AWS checkpoint changed; reconnect before moving')
                                 if self.expo_recorder and any(result.get(key) != value
@@ -752,7 +851,7 @@ class Controller:
                                     raise RuntimeError('EXPO policy identity changed; reconnect before moving')
                                 latency = time.monotonic() - observed_at
                                 log.write(json.dumps(dict(unix_ns=time.time_ns(), kind=kind, count=count,
-                                                          latency_s=latency, measured=measured.tolist(),
+                                                          latency_s=latency, task=inference_body['task'], measured=measured.tolist(),
                                                           response=result)) + '\n')
                                 log.flush()
                                 raw_actions = validate_chunk(result, sequence, target, hardware.lower, hardware.upper,
@@ -772,6 +871,8 @@ class Controller:
                                     actions, overlap = blend_predictions(raw_actions, tail, blend if kind == 'play' else 0)
                                 self.update(prediction=actions.tolist(), latency_s=latency,
                                             blended_actions=overlap)
+                                self.score_prediction(critic_images, inference_body['state'], actions.tolist(),
+                                                      result['fps'], sequence, count if kind in ('step', 'play') else 0)
                                 if kind == 'play':
                                     log.write(json.dumps(dict(unix_ns=time.time_ns(), event='play_blend',
                                                               sequence=sequence, count=count,
@@ -805,6 +906,8 @@ class Controller:
                             else:
                                 self.update(action_index=step.index + 1)
                     except Exception as exc:
+                        gestures.reset()
+                        pending_finish_reset = None
                         if self.expo_recorder:
                             try:
                                 self.expo_recorder.boundary('control_fault: ' + str(exc))
@@ -817,7 +920,7 @@ class Controller:
                         if future is not None:
                             future.cancel()
                         if human:
-                            target = np.clip(measured, hardware.lower, hardware.upper)
+                            target = measured_hold_target(measured, target, hardware.lower, hardware.upper, released)
                         human = False
                         handoff = None
                         released = {}
@@ -854,11 +957,10 @@ class Controller:
                                     position_rad=target[offset:offset+6].tolist(),
                                     speed_limit_rad_s=CONTRACT['max_joint_speed_rad_s'],
                                     torque_limit_nm=CONTRACT['torque_limits_nm'])
-                                if not human:
-                                    arms[side]['gripper']['command'] = dict(mode='position_velocity',
-                                        position_rad=float(target[offset+6]),
-                                        speed_limit_rad_s=CONTRACT['gripper_speed_rad_s'],
-                                        torque_limit_nm=CONTRACT['gripper_torque_limit_nm'])
+                                arms[side]['gripper']['command'] = dict(mode='position_velocity',
+                                    position_rad=float(target[offset+6]),
+                                    speed_limit_rad_s=CONTRACT['gripper_speed_rad_s'],
+                                    torque_limit_nm=CONTRACT['gripper_torque_limit_nm'])
                         self.recorder.submit('sample', dict(monotonic_ns=measured_at,
                             unix_ns=time.time_ns(), sequence=sample_sequence, arms=arms,
                             control_source=source, command_target_rad=None if source == 'human' else target.tolist(),
@@ -893,14 +995,14 @@ class Controller:
                 except RuntimeError:
                     pass  # Writer failure preserves Review/pending for recovery.
             print(f'Policy session fault: {exc}', flush=True)
-            # A failed policy, camera, or log must never tear down an established
-            # powered hold. Keep SDK objects and the control lock alive.
+            # The backend retains motor ownership when the frontend faults.
+            # Legacy test/hardware adapters retain their existing hold path.
             if target is not None or getattr(hardware, 'robots', {}):
                 self.update(mode='fault_hold', hold_status='unverified',
                             error=f'{exc}; motion blocked. Reconnect after supporting both arms.')
                 while not self.stop_event.is_set():
                     try:
-                        if target is None:
+                        if target is None or getattr(hardware, 'motor_client', None) is not None:
                             hardware.hold_available()
                         else:
                             hardware.command(target)
@@ -911,6 +1013,9 @@ class Controller:
                                     'then use Reconnect.')
                     self.stop_event.wait(1 / hardware.config['control_hz'])
         finally:
+            if pedal is not None:
+                pedal.close()
+            self.update(foot_pedal_connected=False)
             try:
                 if self.expo_recorder:
                     self.expo_recorder.close('session_stopped')
@@ -927,24 +1032,26 @@ class Controller:
 
 
 def session_process(pipe, url, hardware_factory, health_request=None, data_dir=None, expo_record_dir=None,
-                    expo_objective='gear_and_pin', expo_prefix_length=1):
+                    expo_objective='gear_and_pin', expo_prefix_length=1, critic_options=None):
     """SDK faults, native aborts and blocked calls stay outside the web process."""
-    # Ctrl-C reaches the whole foreground process group. Only the web process
-    # decides whether shutdown may release a connected arm session.
+    # Ctrl-C reaches the whole foreground process group. The web process requests
+    # orderly cleanup; the independent motor backend retains powered hold.
     signal.signal(signal.SIGINT, signal.SIG_IGN)
     signal.signal(signal.SIGTERM, signal.SIG_IGN)
     if health_request is not None:
         global request
         request = health_request
     controller = Controller(url, hardware_factory, data_dir=data_dir, expo_record_dir=expo_record_dir,
-                            expo_objective=expo_objective, expo_prefix_length=expo_prefix_length)
+                            expo_objective=expo_objective, expo_prefix_length=expo_prefix_length,
+                            critic_options=critic_options)
     try:
         while True:
             method, args = pipe.recv()
             if method == 'shutdown':
                 controller.shutdown()
                 if controller.worker:
-                    controller.worker.join(timeout=2)
+                    # Recording stores can take up to 16 seconds to flush.
+                    controller.worker.join(timeout=20)
                 # Native destructors can send on invalid serial descriptors.
                 # Process exit closes all descriptors without running them again.
                 os._exit(0)
@@ -962,7 +1069,7 @@ def session_process(pipe, url, hardware_factory, health_request=None, data_dir=N
 
 class SessionSupervisor:
     def __init__(self, url, hardware_factory=RobotHardware, health_request=None, data_dir=None, expo_record_dir=None,
-                 expo_objective='gear_and_pin', expo_prefix_length=1):
+                 expo_objective='gear_and_pin', expo_prefix_length=1, critic_options=None):
         self.url = url
         self.hardware_factory = hardware_factory
         self.health_request = health_request
@@ -970,12 +1077,13 @@ class SessionSupervisor:
         self.expo_record_dir = expo_record_dir
         self.expo_objective = expo_objective
         self.expo_prefix_length = expo_prefix_length
+        self.critic_options = critic_options
         self.lock = threading.RLock()
         self.recovery_cancel = threading.Event()
         self.recovery_worker = None
         self.process = self.pipe = None
         self.state = Controller(url, expo_record_dir=expo_record_dir, expo_objective=expo_objective,
-                                expo_prefix_length=expo_prefix_length).snapshot()
+                                expo_prefix_length=expo_prefix_length, critic_options=critic_options).snapshot()
         self.spawn()
 
     def spawn(self):
@@ -984,7 +1092,7 @@ class SessionSupervisor:
         self.process = context.Process(target=session_process,
                                        args=(child_pipe, self.url, self.hardware_factory,
                                              self.health_request, self.data_dir, self.expo_record_dir,
-                                             self.expo_objective, self.expo_prefix_length), daemon=True)
+                                             self.expo_objective, self.expo_prefix_length, self.critic_options), daemon=True)
         self.process.start()
         child_pipe.close()
 
@@ -1028,10 +1136,10 @@ class SessionSupervisor:
                 raise RuntimeError('Connection recovery is already running')
             self.rpc('connect')
 
-    def heartbeat(self):
+    def heartbeat(self, pedal_context=None):
         with self.lock:
             if not (self.recovery_worker and self.recovery_worker.is_alive()):
-                self.rpc('heartbeat')
+                self.rpc('heartbeat', pedal_context)
 
     def configure(self, count, blend):
         with self.lock:
@@ -1039,7 +1147,13 @@ class SessionSupervisor:
                 raise RuntimeError('Wait for recovery before configuring playback')
             self.rpc('configure', count, blend)
 
-    def submit(self, kind, count=1, blend=10):
+    def select_task(self, task):
+        with self.lock:
+            if self.recovery_worker and self.recovery_worker.is_alive():
+                raise RuntimeError('Wait for recovery before changing tasks')
+            self.rpc('select_task', task)
+
+    def submit(self, kind, count=None, blend=None):
         with self.lock:
             if self.recovery_worker and self.recovery_worker.is_alive():
                 raise RuntimeError('Wait for recovery before taking a step')
@@ -1080,15 +1194,15 @@ class SessionSupervisor:
             self.recovery_worker = threading.Thread(target=self.finish_recovery, daemon=True)
             self.recovery_worker.start()
 
-    def release_process(self):
-        # Used only after explicit support confirmation, or ordinary shutdown of
-        # a disconnected dashboard. Never automatically replace a powered session.
+    def release_process(self, timeout=3):
+        # Frontend cleanup releases its motion lease. The independent motor
+        # backend continues holding the arms throughout a dashboard switch.
         if self.process and self.process.is_alive():
             try:
                 self.pipe.send(('shutdown', ()))
             except (OSError, ValueError):
                 pass
-            self.process.join(timeout=3)
+            self.process.join(timeout=timeout)
             if self.process.is_alive():
                 self.process.kill()
                 self.process.join(timeout=3)
@@ -1115,7 +1229,7 @@ class SessionSupervisor:
         self.recovery_cancel.set()
         if self.recovery_worker:
             self.recovery_worker.join(timeout=8)
-        self.release_process()
+        self.release_process(timeout=23)
 
 
 def make_server(controller, port):
@@ -1153,6 +1267,9 @@ def make_server(controller, port):
                 return self.send(200, dict(controller.snapshot(), token=token, fps=CONTRACT['fps'],
                                            speed_limit=CONTRACT['max_joint_speed_rad_s'],
                                            gripper_speed_limit=CONTRACT['gripper_speed_rad_s']))
+            if path == '/reference/gear-pin-overhead.jpg':
+                return self.send(200, (ROOT / 'app/web/reference/gear-pin-overhead.jpg').read_bytes(),
+                                 'image/jpeg')
             if path.startswith('/camera/'):
                 name = path.rsplit('/', 1)[-1]
                 if name not in CONTRACT['image_crops_xyxy']:
@@ -1175,7 +1292,7 @@ def make_server(controller, port):
                 if path in ('/api/stop', '/api/pause'):
                     controller.stop()
                 elif path == '/api/heartbeat':
-                    controller.heartbeat()
+                    controller.heartbeat(payload)
                 elif path == '/api/connect':
                     controller.connect()
                 elif path == '/api/recover':
@@ -1184,10 +1301,12 @@ def make_server(controller, port):
                     controller.submit('reset')
                 elif path.startswith('/api/collection/'):
                     controller.collection(path.rsplit('/', 1)[-1], payload)
+                elif path == '/api/task':
+                    controller.select_task(payload.get('task'))
                 elif path == '/api/configure':
                     controller.configure(payload.get('count'), payload.get('blend'))
                 elif path in ('/api/predict', '/api/step', '/api/play'):
-                    controller.submit(path.rsplit('/', 1)[-1], payload.get('count', 1), payload.get('blend', 10))
+                    controller.submit(path.rsplit('/', 1)[-1], payload.get('count'), payload.get('blend'))
                 else:
                     return self.send(404, {})
                 self.send(202, {'accepted': True})
@@ -1200,7 +1319,7 @@ def make_server(controller, port):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--port', type=int, default=8091)
-    parser.add_argument('--url', default='http://127.0.0.1:8765')
+    parser.add_argument('--url', default='http://127.0.0.1:8766')
     parser.add_argument('--data-dir', type=Path, help='Raw rollout directory (default data/hitl)')
     parser.add_argument('--expo-record-dir', type=Path,
                         help='Optional separate EXPO decision ledger; fixed action prefix and 0 blending')
@@ -1209,29 +1328,41 @@ def main():
     parser.add_argument('--expo-objective', choices=('gear_and_pin', 'gear_insertion'), default='gear_and_pin',
                         help='Fixed EXPO outcome objective; base pi0.5 task prompt is unchanged')
     parser.add_argument('--demo', action='store_true', help='Simulated policy, arms and cameras; no devices opened')
+    parser.add_argument('--critic', action=argparse.BooleanOptionalAction, default=True,
+                        help='Asynchronous local action-value diagnostic (default enabled)')
+    parser.add_argument('--critic-checkpoint', type=Path, default=ROOT/'work/action-critic-mixed-20261029/run/best.pt')
+    parser.add_argument('--critic-python', type=Path, default=ROOT/'work/state-critic-20261028/venv/bin/python')
+    parser.add_argument('--critic-device', choices=('auto', 'cpu', 'cuda'), default='auto')
     args = parser.parse_args()
+    critic_options = dict(checkpoint=args.critic_checkpoint, python=args.critic_python,
+                          device=args.critic_device) if args.critic else None
     if args.demo:
         from hitl_demo import DemoHardware, demo_request
         import tempfile
         data_dir = args.data_dir or Path(tempfile.mkdtemp(prefix='panthera-hitl-demo-'))
         controller = SessionSupervisor(args.url, DemoHardware, demo_request, data_dir, args.expo_record_dir,
-                                       args.expo_objective, args.expo_prefix_length)
+                                       args.expo_objective, args.expo_prefix_length, critic_options)
         print(f'SIMULATION — recordings: {data_dir}', flush=True)
     else:
         controller = SessionSupervisor(args.url, data_dir=args.data_dir, expo_record_dir=args.expo_record_dir,
-                                       expo_objective=args.expo_objective, expo_prefix_length=args.expo_prefix_length)
+                                       expo_objective=args.expo_objective, expo_prefix_length=args.expo_prefix_length,
+                                       critic_options=critic_options)
     server = make_server(controller, args.port)
+    shutting_down = threading.Event()
+
     def shutdown(*_):
-        state = controller.snapshot()
-        if not args.demo and (state['connected'] or state.get('recovering')):
-            try:
-                controller.stop()
-            except RuntimeError:
-                pass
-            controller.update(error='Shutdown deferred: arms remain connected and held')
+        if shutting_down.is_set():
             return
-        controller.shutdown()
-        threading.Thread(target=server.shutdown, daemon=True).start()
+        shutting_down.set()
+
+        def finish_shutdown():
+            try:
+                controller.shutdown()
+            finally:
+                server.shutdown()
+
+        # Keep blocking RPCs and recording flushes out of the signal handler.
+        threading.Thread(target=finish_shutdown, daemon=True).start()
     signal.signal(signal.SIGTERM, shutdown)
     signal.signal(signal.SIGINT, shutdown)
     print(f'Policy step controls: http://127.0.0.1:{args.port}', flush=True)
