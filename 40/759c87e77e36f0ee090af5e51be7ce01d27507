@@ -1,0 +1,19 @@
+README.md
+  s_e36e7c790244f5::t_9b31c138e16466 82-110
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "40759c87e77e36f0ee090af5e51be7ce01d27507",
+  "prompts": {},
+  "sessions": {
+    "s_e36e7c790244f5": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1931f-fbff-7570-ac0b-ed76ebbc4b7f",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Zeb Taylor <zceboys@gmail.com>"
+    }
+  }
+}
