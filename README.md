@@ -7,16 +7,101 @@ Switch between dashboards from the repository root:
 ```bash
 ./start-teleop.sh
 ./start-inference.sh
+./start-regrasp.sh
 ```
 
-Each launcher stops this checkout's running teleop or inference dashboard, lets
+Each launcher stops this checkout's running teleop, inference, or regrasp dashboard, lets
 recording cleanup finish, and starts the selected dashboard at
 http://127.0.0.1:8093. The independent motor backend keeps running. Launchers run
 in the foreground; Ctrl+C stops the dashboard. Extra arguments are forwarded,
-for example `./start-teleop.sh --port 8090`. Inference starts disconnected; use
+for example `./start-teleop.sh --port 8090`. Inference and regrasp start disconnected; use
 its Connect button when ready. `--help` leaves the current session running.
 
 On an already configured machine, run `./start.sh` from the repository root. A fresh clone also needs the manufacturer's [Panthera-HT SDK](https://github.com/HighTorque-Robotics/Panthera-HT_SDK) and a Python environment: the local `work/` folder is excluded from Git.
+
+### Autonomous pin regrasp collection
+
+`./start-regrasp.sh` opens the pin collection dashboard on port 8093, switching
+away from the current dashboard while retaining the independent backend hold.
+The controller adapts RobotArmTraining commit `0607a3c` to real hardware.
+Connect, select **Adjust by hand**, place the left tool at the table-supported
+pin grasp position and angle, then **Capture reference** and **Start / resume**.
+The right arm holds its captured pose. Reference capture does not move the robot.
+
+The inference pedal classifier is reused: **single tap** always freezes/holds the
+measured arm pose, **double tap** pauses/resumes, and **hold** pauses. Use the
+dashboard’s **Adjust by hand** button for gravity assistance. A single tap also
+ends hand adjustment and holds position; it never starts or resumes motion. Resuming
+from hand adjustment captures the new measured reference automatically. Pausing
+holds the measured pose and resumes the remaining trajectory; a browser heartbeat
+loss also pauses. Settings apply to the next cycle. The default **Toward base
+(upward)** retreat points toward the arm base at **40° elevation above horizontal**,
+with an **8° cone half-angle**. The forward approach comes from the base side and
+down toward the grasp. The fixed captured grasp position sets the horizontal
+bearing independently of wrist angle. Elevation is adjustable from 0° to 90° for
+this base-relative mode. Legacy ±X/±Y/±Z tool retreat axes remain available and use
+the captured tool orientation. Wrist jitter uses the captured tool orientation;
+placement jitter stays centered on the initial position across cycles. The axis
+selector specifies the **retreat** direction; the forward approach runs back
+toward the pin.
+
+Each cycle releases with a bounded linear opening ramp, with no minimum release
+dwell; retreat begins on the next tick after the full-open command. Opening speed
+is independent of closing speed and defaults to 4.0 rad/s (adjustable 0.1–5.0 rad/s).
+A full 2 rad opening stroke takes 0.5 s at this default, versus the prior 1.875 s.
+Closing behavior is unchanged. The arm approaches with the gripper open until the
+remaining distance is at most 0.02 m, checked against both planned and measured
+tool positions. Closing is linear and timed to reach the calibrated lower limit
+at arrival; if the selected gripper speed is too low, it continues steadily after
+arrival. The fingers do not close fully before reaching the pin. This avoids restarting an easing curve
+or adding a minimum dwell, before lifting, placing, and settling. Cartesian speed
+remains 0.015 m/s by default with a 0.15 m/s ceiling; placement jitter remains zero
+by default with a 0.10 m maximum. Joint speed defaults to 0.15 rad/s (adjustable
+0.01–0.6 rad/s), and gripper closing speed defaults to 2.0 rad/s (adjustable
+0.1–5.0 rad/s). Speed settings are ceilings, not guaranteed achieved rates: IK
+bounds can keep motion below them. The
+existing gripper torque limit remains in effect. Local IK and joint/speed limits
+are checked before execution. This supervised hardware mode has no simulated
+contact, support, or lift-success sensor; monitor the left wrist view and pause
+if a grasp fails. Saved episodes are labeled `unverified`, never automatically
+successful.
+
+Only autonomous **approach (`return`) and close** are saved, as separate episodes
+under `data/pin-regrasp-forward/<episode-id>/`: `left_wrist.avi`, timestamped
+`state`/`action` samples in `samples.jsonl`, and `metadata.json`. Only the configured
+left wrist camera is opened. Human adjustment, release, retreat, lift, and placement
+are excluded. Pause/intervention finishes a partial episode; resumed forward motion
+starts a new episode marked `resumed_mid_forward`. Original camera timestamps and
+sequence numbers distinguish reused frames when capture is slower than 30 Hz.
+These files use their own schema and are not automatically added to HITL datasets.
+
+For a separate disconnected preview without switching dashboards:
+`scripts/start-pin-regrasp-dashboard.sh --port 8092`. Use the switching launcher
+before connecting if another dashboard owns the cameras or motor lease.
+
+### Exporting pin regrasp episodes
+
+The retained collection has a separate LeRobot v3 export at
+`data/processed/panthera-pin-regrasp-100-20hz`, published at
+[ZebTaylor/panthera-pin-regrasp-100-20hz](https://huggingface.co/datasets/ZebTaylor/panthera-pin-regrasp-100-20hz)
+(100 episodes, 4,222 samples). It uses real left wrist images
+(`wrist_port3`) and real measured state/next-state actions on a 20 Hz grid.
+Overhead and right-wrist (`wrist_port2`) images are paired random donor views
+from heuristic pin-pickup windows in the single-bolt insertion dataset. These
+auxiliary views are deliberately unrelated to the new episode's motion; per-frame
+source identities and image hashes are in `processing/alignment/`. Grasp success
+is unverified. Original source recordings and discarded episodes are unchanged.
+
+Use `work/postprocess-venv/bin/python` with these scripts:
+
+- `scripts/select_pin_grasp_donors.py` selects and previews pickup-stage donor frames.
+- `scripts/export_pin_regrasp_dataset.py --source data/pin-regrasp-forward --donor-manifest logs/pin-regrasp-donor-manifest.json --output <new-directory>` creates a new export and refuses an existing destination.
+- `scripts/verify_pin_regrasp_dataset.py --dataset <export-directory>` checks every state, next-state action and image against source files, verifies native LeRobot loading, and creates a preview.
+
+Camera captures must align within 60 ms. Stale heads/tails are trimmed only in the
+export and disclosed in its report; internal camera gaps reject export. Discarded,
+incomplete, or erroneous episodes are excluded. The export's dataset card explains
+the exact action, camera-substitution, and sampling conventions.
 
 ### Single-arm hand guidance
 

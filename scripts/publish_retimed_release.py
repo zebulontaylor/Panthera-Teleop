@@ -144,7 +144,7 @@ def publish(args):
             allow_patterns=[f'{name}/**' if name in {'data','meta','processing'} else name for name in PAYLOAD_ROOTS],
             ignore_patterns=['**/.cache/**','**/__pycache__/**','**/*.pyc'],
             parent_commit=state['parent_commit'],
-            commit_message=f'Publish verified retimed Panthera dataset ({manifest["totals"]["episodes"]} episodes)')
+            commit_message=f'Publish verified Panthera dataset ({manifest["totals"]["episodes"]} episodes)')
         revision = commit.oid
         state.update(phase='uploaded', commit=revision)
         write(args.state, state)
@@ -164,7 +164,8 @@ def publish(args):
         url=f'https://huggingface.co/datasets/{args.repo_id}',
         remote_files_verified=len(files), remote_lfs_sha256_files_verified=lfs_checks,
         remote_regular_sha256_files_verified=regular_checks,
-        episodes=manifest['totals']['episodes'], frames=manifest['totals']['observations'])
+        episodes=manifest['totals']['episodes'],
+        frames=manifest['totals'].get('observations', manifest['totals'].get('frames')))
     write(args.state, state)
     write(root/'publication.json', {k:v for k,v in state.items() if k not in {'parent_commit','inventory_sha256'}})
     print(json.dumps({k:v for k,v in state.items() if k not in {'parent_commit','inventory_sha256'}}, indent=2), flush=True)

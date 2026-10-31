@@ -6,7 +6,7 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-FRONTENDS = ('hand_guide.py', 'inference_dashboard.py')
+FRONTENDS = ('hand_guide.py', 'inference_dashboard.py', 'pin_regrasp_dashboard.py')
 
 
 def frontend_pids():
@@ -51,7 +51,11 @@ def stop_frontends():
 def main():
     mode = sys.argv[1]
     extra = sys.argv[2:]
-    launcher = ROOT / ('start.sh' if mode == 'teleop' else 'scripts/start-inference-dashboard.sh')
+    launchers = {'teleop': 'start.sh', 'inference': 'scripts/start-inference-dashboard.sh',
+                 'regrasp': 'scripts/start-pin-regrasp-dashboard.sh'}
+    if mode not in launchers:
+        raise RuntimeError('Unknown dashboard mode')
+    launcher = ROOT / launchers[mode]
     # Help must not interrupt a running session.
     if '--help' not in extra and '-h' not in extra:
         stop_frontends()
