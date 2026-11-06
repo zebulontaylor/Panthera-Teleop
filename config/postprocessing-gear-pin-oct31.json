@@ -1,0 +1,1005 @@
+{
+  "processing_version": 2,
+  "recording_session_local_date": "2026-10-31",
+  "recording_timezone": "America/Chicago",
+  "task": "put the gear in the carrier and put a pin in it",
+  "fps": 20,
+  "image_size": 256,
+  "image_crops_xyxy": {
+    "overhead": [
+      120,
+      80,
+      520,
+      480
+    ],
+    "wrist_port2": [
+      80,
+      0,
+      560,
+      480
+    ],
+    "wrist_port3": [
+      80,
+      0,
+      560,
+      480
+    ]
+  },
+  "image_resize": "Overhead fixed400x400 source crop [120,80,520,480]; each wrist fixed480x480 source crop [80,0,560,480]. Pillow LANCZOS resize each to256x256, preserving square geometry without padding.",
+  "image_encoding": "embedded RGB JPEG, quality=95, chroma_subsampling=0",
+  "sampling": "Regular 50ms host-monotonic grid; nearest measured state and nearest frame per camera within the annotated crop; ties select earlier samples. No interpolation, numerical low-pass filter, or duplicated synthetic states. Some camera frames repeat because achieved capture rate is below 20 Hz; counts are reported per episode.",
+  "action_semantics": "absolute measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad at the NEXT grid tick (t+0.05s). Kinesthetic next-pose proxy, not sent motor commands. Final observation is omitted if its next state would leave the crop.",
+  "state_semantics": "measured left joints 1..6, left gripper rad, right joints 1..6, right gripper rad. Both joint and gripper values remain native radians.",
+  "state_names": [
+    "left.joint1",
+    "left.joint2",
+    "left.joint3",
+    "left.joint4",
+    "left.joint5",
+    "left.joint6",
+    "left.gripper_rad",
+    "right.joint1",
+    "right.joint2",
+    "right.joint3",
+    "right.joint4",
+    "right.joint5",
+    "right.joint6",
+    "right.gripper_rad"
+  ],
+  "max_state_alignment_s": 0.01,
+  "max_camera_alignment_s": 0.04,
+  "camera_assignment": "Wrist-to-arm assignments are unverified; preserve USB-port names rather than inventing left/right labels.",
+  "timing": "Host receive timestamps, not hardware exposure timestamps. Offline nearest-frame alignment may choose a frame slightly later than the grid tick; all actual offsets are retained.",
+  "trim_method": "Manual visual review of both wrist-camera tails, assisted by gripper position and tool-motion plots; conservative contact-boundary cuts before the assembly becomes unsupported. No automatic contact sensor or exact release event exists.",
+  "trim_uncertainty_s": 0.15,
+  "episodes": [
+    {
+      "id": "20261031T151147-13daf73f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.558176838,
+      "original_end_s": 19.574423053,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151241-4c5737e3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.681050401,
+      "original_end_s": 17.702295634,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151309-86af0e2d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.229470596,
+      "original_end_s": 17.260477307,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151333-2c76a422",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.519775289,
+      "original_end_s": 15.540366874,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151357-936d7b43",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.784152705,
+      "original_end_s": 17.806628459,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151421-4b521e92",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.153267546,
+      "original_end_s": 16.172401767,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151444-9f4b02d3",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.011915837,
+      "original_end_s": 16.03188569,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151506-23fb8eef",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.720522514,
+      "original_end_s": 17.732051376,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151531-e8e74d69",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.313732883,
+      "original_end_s": 18.33119194,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151557-836d6759",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.546118534,
+      "original_end_s": 15.564761247,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151620-e391bf80",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.585167221,
+      "original_end_s": 17.598152767,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151645-0c795e6f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.195883576,
+      "original_end_s": 18.217209604,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151710-5c71fb79",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.985408442,
+      "original_end_s": 15.000886861,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151732-cbcb98b8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.854449458,
+      "original_end_s": 15.877345307,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151755-7286aea4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.673119849,
+      "original_end_s": 16.692506325,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151818-8c1f86e4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.536735323,
+      "original_end_s": 17.557710913,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151842-f6c784aa",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.683689668,
+      "original_end_s": 16.704461073,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T151906-a1110ddd",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.506986093,
+      "original_end_s": 16.526313245,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152035-e465cc01",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.154035879,
+      "original_end_s": 16.169852761,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152057-27eaa16e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.454288412,
+      "original_end_s": 16.474297808,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152119-4efdd55e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.859697456,
+      "original_end_s": 15.881559751,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152141-1c456e9b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.53786541,
+      "original_end_s": 15.560266296,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152203-ceefef9c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.127796403,
+      "original_end_s": 17.14894375,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152227-d8165988",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.384870154,
+      "original_end_s": 16.404525548,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152249-c39e269a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.956229347,
+      "original_end_s": 14.973759661,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152311-a72b8cd1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.494414233,
+      "original_end_s": 14.519570805,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152332-8429c54c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.109060568,
+      "original_end_s": 16.120691057,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152355-8ce20208",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.593149495,
+      "original_end_s": 16.609501875,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152417-93528f04",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.797485216,
+      "original_end_s": 15.813896856,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152439-ae1fd300",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.294853673,
+      "original_end_s": 15.307123826,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152501-a2fb0233",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.398224088,
+      "original_end_s": 17.415693131,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152525-bc3e64a9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.433525086,
+      "original_end_s": 16.452047509,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152548-c1703c53",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.858374344,
+      "original_end_s": 15.878880217,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152610-74c1994b",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.429499665,
+      "original_end_s": 17.444908418,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152635-3a518cc4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.435095173,
+      "original_end_s": 18.448969151,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152704-dbf31ca9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.975685686,
+      "original_end_s": 15.993358256,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152728-386df91f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.032920951,
+      "original_end_s": 18.046433657,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152754-f31faa97",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.964928922,
+      "original_end_s": 15.989256383,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152817-c7edf604",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.233519771,
+      "original_end_s": 16.25267819,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152842-dd8845cd",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.809641355,
+      "original_end_s": 15.832056201,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152927-4c8b1d18",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.280493879,
+      "original_end_s": 14.309632683,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T152948-e726e16f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.501865373,
+      "original_end_s": 15.524213376,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153011-8a0197d4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.449549435,
+      "original_end_s": 16.471250171,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153035-bb5ce09f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.475899253,
+      "original_end_s": 15.495522308,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153058-791b23fb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 20.128668607,
+      "original_end_s": 20.152447123,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153130-0ec472f8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.613929245,
+      "original_end_s": 16.645247086,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153154-2203afef",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.452044503,
+      "original_end_s": 17.470739359,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153219-8bcacc72",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.204597383,
+      "original_end_s": 15.221820925,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153242-7063cc80",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.150437251,
+      "original_end_s": 16.172161786,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153311-e7bb2e4a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.282027391,
+      "original_end_s": 18.30398925,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153335-a7c3015c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.35379764,
+      "original_end_s": 15.371000861,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153400-4f0fa5b5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.087475807,
+      "original_end_s": 16.103383618,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153422-47412bb2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.523394961,
+      "original_end_s": 16.541082028,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153452-7cd519cb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.96662462,
+      "original_end_s": 15.989075364,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153516-2cc57fef",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.431005326,
+      "original_end_s": 16.452825732,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153928-7819a6e1",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.133111551,
+      "original_end_s": 17.160417622,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T153954-76b67ff9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.626584159,
+      "original_end_s": 16.642301926,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154016-ac7fe558",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.759728877,
+      "original_end_s": 16.780873225,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154040-07531fff",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.923307829,
+      "original_end_s": 16.94424161,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154108-661882db",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.025735336,
+      "original_end_s": 15.04302041,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154131-9a33bc40",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.624408447,
+      "original_end_s": 15.643158059,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154210-0df146b4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.276715268,
+      "original_end_s": 16.294031791,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154234-aa24d2ad",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.794179469,
+      "original_end_s": 15.815143514,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154616-c9521567",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.604638321,
+      "original_end_s": 15.628418978,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154640-10e1e1ed",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.817102833,
+      "original_end_s": 14.833134059,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154701-d38b6f95",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.57357673,
+      "original_end_s": 15.59182166,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154727-286875e5",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.037123026,
+      "original_end_s": 17.053498086,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154756-8e0901ff",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.284756921,
+      "original_end_s": 16.301715236,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154823-206a45e4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.456681126,
+      "original_end_s": 16.473277209,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154850-bf524cf7",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.792407977,
+      "original_end_s": 15.80938311,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154915-28255091",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.594439666,
+      "original_end_s": 16.614358714,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T154939-fe293af6",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.397736526,
+      "original_end_s": 16.414257089,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155003-666de1d8",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.062014855,
+      "original_end_s": 18.079718474,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155031-7ad9c4e7",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.303366277,
+      "original_end_s": 16.319251597,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155057-fe103646",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.309869461,
+      "original_end_s": 16.322742593,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155128-ae22439e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.92160146,
+      "original_end_s": 17.944014733,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155159-fad64f81",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.137165237,
+      "original_end_s": 17.160210865,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155224-d7999767",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.377017387,
+      "original_end_s": 16.398816676,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155247-496a0860",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.619484527,
+      "original_end_s": 15.643898782,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155308-cdc58b72",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.835060285,
+      "original_end_s": 15.85004851,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155331-c8add3a0",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.581612483,
+      "original_end_s": 16.592277025,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155355-79ad8da2",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.971138409,
+      "original_end_s": 16.988627135,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155425-bf5b2305",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.022262532,
+      "original_end_s": 18.039622987,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155454-313aeff4",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.372245771,
+      "original_end_s": 17.383611727,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155527-c975738f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.935306363,
+      "original_end_s": 16.957358946,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155554-bf968949",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.644525601,
+      "original_end_s": 16.663629931,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155618-fd3ad331",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.374313216,
+      "original_end_s": 16.396701589,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155645-ebe488bb",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.485373022,
+      "original_end_s": 15.496757706,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155710-250f6e2e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 18.838570885,
+      "original_end_s": 18.84970215,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155739-1d465c49",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.107896716,
+      "original_end_s": 16.121405808,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155801-43da398d",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.178286681,
+      "original_end_s": 16.198766554,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155827-1cfdc861",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.451580013,
+      "original_end_s": 17.471471943,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155851-f0bb5116",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 19.958056055,
+      "original_end_s": 19.979361715,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T155919-85376e3c",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 17.762343471,
+      "original_end_s": 17.780416774,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T160006-4f9821b9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.670295306,
+      "original_end_s": 15.695320036,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T162232-c9808a60",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.809019699,
+      "original_end_s": 16.836667935,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T162256-22778100",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.423855595,
+      "original_end_s": 14.440958506,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T162317-0083e2fa",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.009825183,
+      "original_end_s": 15.036927517,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T162338-5ecdd20a",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.970677067,
+      "original_end_s": 14.991052624,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T162400-fa8db584",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.086847496,
+      "original_end_s": 15.106509732,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T162421-6f6f0d4f",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 14.245139656,
+      "original_end_s": 14.259973339,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T162441-cc5b7051",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.106049589,
+      "original_end_s": 15.125151111,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T162823-6b739f84",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.07018969,
+      "original_end_s": 15.142101691,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T162845-8467e8e9",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 15.642661574,
+      "original_end_s": 15.664228655,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    },
+    {
+      "id": "20261031T162906-0055bc5e",
+      "source_category": "kept",
+      "start_s": 0,
+      "end_s": 16.521901118,
+      "original_end_s": 16.544454918,
+      "reason": "Candidate operator-kept recording; exclude terminal classification tail only; preserve earlier pauses and motion. Task identity pending confirmation.",
+      "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+    }
+  ],
+  "crop_rationale": "Overhead isolates the tabletop parts and assembly area. Wider wrist crops retain the approach, gear pickup, pin insertion and contact positions across the session; wrist-to-arm assignment remains unverified.",
+  "source_kind": "operator_kept_regular_recordings",
+  "annotation_source": "Candidate complete operator-kept regular recordings selected by metadata episode_mode and America/Chicago local collection date; task identity pending confirmation; exclude terminal classification tail only."
+}

@@ -1,5 +1,11 @@
 # AWS policy inference
 
+For the current AWS server and dashboard, use the [automated startup workflow](../../docs/start-aws-inference.md):
+`python3 scripts/start-aws-inference.py 54.161.106.103` from the repository root.
+It selects the latest complete checkpoint, starts inference, updates the tunnel,
+tests prediction, and refreshes an idle dashboard. The historical deployment
+details below describe earlier servers and checkpoints.
+
 AWS: `admin@3.83.15.102` (existing SSH config/key). The pinned LeRobot runtime
 already lives at `/mnt/pi05/lerobot/.venv`; deployment does not replace it.
 The selected model is pi0.5 at step 35,000, resumed on the October 5 original-camera
@@ -168,7 +174,7 @@ every intermediate action.
 the browser heartbeat for two seconds cancels motion while retaining powered
 position hold. Cancellation remains independent of the inference request worker.
 Playback never resumes automatically; explicitly press Play or Execute after
-resolving the cause. Hardware faults require the supported-arm recovery below. The web server is loopback-only, validates Host
+resolving the cause. Hardware faults require the connection recovery below. The web server is loopback-only, validates Host
 and Origin, and requires a session token for commands. Step predictions and
 completion events are saved to `logs/inference-steps.jsonl`.
 
@@ -213,26 +219,25 @@ must still match this deployment contract.
 
 Inference connection now resets to the collection neutral pose from `config/recording.json` (`[0, 0.25, 0.25, 0, 0, 0]` radians for both arms, grippers 60% open). The shared `NeutralReturn` trajectory and collection path-clearance check are used, with joint speed capped at 0.6 rad/s and gripper speed at 0.8 rad/s. The dashboard shows `resetting` and blocks prediction/steps until measured arrival. `Reset collection pose` repeats the reset between runs; browser loss, Stop, tracking faults, or a gripper arrival timeout cancel motion and retain position hold.
 
-Policy-limit rejection, inference errors, Stop, browser closure, and heartbeat loss retain the SDK connection and powered hold. Rejected chunks execute no actions. The **Zero arms (collection pose)** button returns to the collection pose; resets occur on connection, not between policy steps. Hardware feedback/command failures block further movement and retain SDK objects with best-effort hold, but an actual USB/power failure or killed process can prevent holding. SIGINT/SIGTERM defer shutdown while a robot session exists. The user-service drop-in `hold.conf` sets `TimeoutStopSec=infinity` and `SendSIGKILL=no`; a service stop/restart while connected therefore waits instead of releasing the arms. Physically support the arms before deliberately ending the process or removing power.
+Policy-limit rejection, inference errors, Stop, browser closure, and heartbeat loss retain powered hold in the independent motor backend. Rejected chunks execute no actions. The **Zero arms (collection pose)** button returns to the collection pose; resets occur on connection, not between policy steps. Hardware feedback/command failures block further movement and request best-effort hold, but an actual USB/power failure can prevent holding. SIGINT/SIGTERM close the frontend session while the independent motor backend retains motor ownership and powered hold.
 
 
 ### Recovering failed robot connections
 
-The dashboard runs the SDK session in a separate process so a native SDK crash
-or blocked serial call does not freeze the browser server. **Reconnect robot
-connections** is available after a hardware fault or while holding. First
-physically support both arms and confirm the prompt: recovery releases powered
-hold, closes the old session (terminating it if cleanup hangs), and opens fresh
-connections only after the old process exits. It checks the current AWS policy
-contract and current USB mapping, then holds the freshly measured pose. Recovery
-never resets to the collection pose or replays a pending action. Use **Zero arms
-(collection pose)** separately after checking clearance. **Stop motion & hold**
-cancels an in-progress recovery; if the old connection has been released, both
-arms must stay supported until a new connection is explicitly established.
+The dashboard uses a separate frontend session connected to the independent
+motor backend, so a frontend failure does not stop powered hold. **Reconnect
+robot connections** is available after a hardware fault or while holding.
+Recovery closes the old frontend session (terminating it if cleanup hangs) and
+opens a fresh connection after the old process exits. The independent motor
+backend retains powered hold throughout the reconnect. Recovery checks the
+current AWS policy contract and USB mapping, then holds the measured pose.
+Recovery never resets to the collection pose or replays a pending action. Use
+**Zero arms (collection pose)** separately after checking clearance. **Stop
+motion & hold** cancels an in-progress recovery.
 
 A failed hold command is displayed as **Hold command failed**, rather than
 implying that retained SDK objects establish a powered hold. If recovery fails,
 check board power and USB cabling and retry Reconnect after correcting the cause.
 No automatic recovery moves the robot. Reconnecting also refreshes the checkpoint
-identity after an AWS model update. The web process still defers ordinary shutdown
-while a robot session is alive; support the arms before deliberately releasing it.
+identity after an AWS model update. Frontend shutdown leaves the independent motor
+backend running in powered hold.
