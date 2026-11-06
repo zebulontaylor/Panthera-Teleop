@@ -4,11 +4,21 @@ This module cannot open motors; all arm objects are command-staging clients.
 """
 import json
 import base64
+import time
 from pathlib import Path
 import numpy as np
 
 from motor_client import MotorClient
 from remote_inference import CONTRACT, ROOT, GRIPPER_ENCODER_TOLERANCE_RAD, image_payload
+
+
+class GuardedLoadStopped(RuntimeError):
+    """A verified motor-side guard stop, with the fresh pose already held there."""
+    def __init__(self, guard_stop, measured_state14):
+        super().__init__('Independent motor guard stopped load: '+str(guard_stop.get('reason')))
+        self.guard_stop = dict(guard_stop)
+        self.measured_state14 = np.asarray(measured_state14, dtype=float).copy()
+
 
 class RobotHardware:
     """Frontend cameras and motor-client adapter; no SDK ownership."""
@@ -74,6 +84,62 @@ class RobotHardware:
             self.command_arm(side, offset, target)
         if self.motor_client:
             self.motor_client.flush()
+
+    @property
+    def supports_guarded_load(self):
+        return bool(self.motor_client and
+                    getattr(self.motor_client, 'capabilities', {}).get('guarded_cartesian_load'))
+
+    @property
+    def guarded_load_limits(self):
+        return dict(getattr(self.motor_client, 'guarded_load_limits', {}) or {}) if self.motor_client else {}
+
+    @property
+    def guarded_load_status(self):
+        return getattr(self.motor_client, 'guard_stop', None) if self.motor_client else None
+
+    def command_guarded_load(self, arms, target, assist_torque_nm, guard):
+        """Stage LEFT guarded torque assistance and RIGHT hold atomically.
+
+        The independent motor process adds gravity compensation and enforces
+        the measured travel, velocity, torque and command-age guard. Both
+        grippers retain their existing commanded squeeze.
+        """
+        if not self.supports_guarded_load:
+            raise RuntimeError('Motor process must support guarded load before force control')
+        assist = np.asarray(assist_torque_nm, dtype=float)
+        target = np.asarray(target, dtype=float)
+        if assist.shape != (6,) or target.shape != (14,) or not np.isfinite(assist).all() or not np.isfinite(target).all():
+            raise ValueError('Finite six-joint assistance and fourteen-value hold target required')
+        left = self.robots['left']
+        if not left.guarded_gravity(assist.tolist(), guard):
+            raise RuntimeError('Left guarded load command rejected')
+        if not left.gripper_control(float(target[6]), CONTRACT['gripper_speed_rad_s'],
+                                    CONTRACT['gripper_torque_limit_nm']):
+            raise RuntimeError('Left gripper hold rejected')
+        self.command_arm('right', 7, target)
+        try:
+            self.motor_client.flush()
+        except RuntimeError as original:
+            # A guard may trip between this tick's read and command submission.
+            # Verify that exact session's stop; transport/other failures retain
+            # the ordinary fault behavior rather than being silently swallowed.
+            try:
+                status = self.motor_client.rpc('status')
+                stopped = status.get('guard_stop') or {}
+                if status.get('error') or stopped.get('id') != guard['id']:
+                    raise original
+                age_ns = time.monotonic_ns() - int(status['sampled_monotonic_ns'])
+                if not 0 <= age_ns <= 100_000_000:
+                    raise original
+                measured = np.asarray([v for side in ('left', 'right') for v in
+                    status['arms'][side]['position_rad'] +
+                    [status['arms'][side]['gripper']['position']]], dtype=float)
+                if measured.shape != (14,) or not np.isfinite(measured).all():
+                    raise original
+            except (RuntimeError, ValueError, TypeError, KeyError):
+                raise original
+            raise GuardedLoadStopped(stopped, measured) from original
 
     def command_arm(self, side, offset, target, hold_gripper=True):
         robot = self.robots[side]
