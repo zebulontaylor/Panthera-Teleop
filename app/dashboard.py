@@ -10,6 +10,7 @@ from urllib.parse import urlsplit
 import cv2
 
 from robot_commands import LEGACY_ROUTES, RobotCommands
+from camera_gain import gain_status, set_gain
 
 
 class Cameras:
@@ -20,6 +21,8 @@ class Cameras:
         self.lock = threading.Lock()
         self.latest = {}
         self.errors = {}
+        self.gains = {}
+        self.gain_lock = threading.Lock()
         self.threads = []
         for name, device in config['cameras'].items():
             thread = threading.Thread(target=self.capture, args=(name, device), daemon=True, name=name)
@@ -36,6 +39,9 @@ class Cameras:
             cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.config['camera_resolution'][1])
             cap.set(cv2.CAP_PROP_FPS, self.config['camera_fps'])
             cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+            gain = gain_status(device)
+            with self.lock:
+                self.gains[name] = gain
             sequence = 0
             while not self.stop.is_set():
                 started = time.monotonic()
@@ -67,9 +73,20 @@ class Cameras:
                                ok=name in self.latest and name not in self.errors and
                                   (now-self.latest[name]['monotonic_ns']) < 1_000_000_000,
                                error=self.errors.get(name),
+                               gain=dict(self.gains.get(name, {})),
                                sequence=self.latest.get(name, {}).get('sequence', 0),
                                age_s=(now-self.latest[name]['monotonic_ns'])/1e9 if name in self.latest else None)
                     for name, device in self.config['cameras'].items()}
+
+    def set_gain(self, name, value):
+        if not isinstance(name, str) or name not in self.config['cameras']:
+            raise ValueError('Unknown camera')
+        # A separate V4L2 descriptor avoids concurrent access to VideoCapture.
+        with self.gain_lock:
+            status = set_gain(self.config['cameras'][name], value)
+            with self.lock:
+                self.gains[name] = status
+        return status
 
     def jpeg(self, name):
         with self.lock:

@@ -12,7 +12,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'app'))
 from recording import atomic_json
-from hitl_recording import data_timestamp, data_origin
+from hitl_recording import data_timestamp, data_origin, CONTROL_SOURCES, OPERATOR_SOURCES
 
 
 def rows(path):
@@ -29,10 +29,20 @@ def select_intervals(metadata, states):
     if any(b <= a for a, b in zip(times, times[1:])):
         raise ValueError('State timestamps must increase')
     sources = [s.get('control_source') for s in states]
-    if any(s not in ('human', 'policy', 'hold') for s in sources):
+    if any(s not in CONTROL_SOURCES for s in sources):
         raise ValueError('Missing or invalid control ownership')
     if 'human' not in sources:
-        if metadata.get('outcome', {}).get('success') is True and 'policy' in sources:
+        outcome = metadata.get('outcome', {})
+        assisted = (bool(outcome.get('human_assisted') or outcome.get('operator_assisted')) or
+            any(metadata.get(k, 0) > 0 for k in
+                ('human_interventions', 'operator_interventions', 'assistance_interventions')) or
+            any(v > 0 for v in metadata.get('operator_intervention_counts', {}).values()) or
+            any(s in OPERATOR_SOURCES for s in sources) or
+            any('frozen_hold' in s.get('control_source_by_arm', {}).values() for s in states))
+        # Legacy recordings predate policy_success; their success flag remains
+        # eligible only when neither metadata nor measured rows show assistance.
+        policy_success = outcome.get('policy_success', outcome.get('success')) is True
+        if policy_success and not assisted and 'policy' in sources:
             # Trim waiting before/after policy execution; retain inference holds in between.
             first = sources.index('policy')
             last = len(sources) - 1 - sources[::-1].index('policy')

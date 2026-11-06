@@ -8,41 +8,59 @@
 *{box-sizing:border-box}body{margin:0}main{max-width:1440px;margin:auto;padding:18px 24px 32px}
 header{display:flex;align-items:center;gap:16px;position:sticky;top:0;background:#10151d;z-index:5;padding:10px 0 14px}h1{font-size:1.4rem;letter-spacing:-.025em;line-height:1.2;margin:0}h2{font-size:1rem;margin:0}p{margin:0;color:var(--muted)}.title{margin-right:auto}.eyebrow{font-size:.72rem;letter-spacing:.14em;color:#86a4c9;text-transform:uppercase;margin-bottom:3px}
 button,input,select,textarea{font:inherit}button{border:1px solid #52647b;background:#26364a;color:#edf4ff;border-radius:8px;padding:11px 16px;cursor:pointer;font-weight:600;min-height:44px}button:hover:enabled{filter:brightness(1.14)}button:disabled{opacity:.4;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #9ecbff;outline-offset:3px}.primary{background:#3688ee;border-color:#3688ee;color:#071322}.takeover{background:#ebba62;border-color:#ebba62;color:#201706}.stop{background:#ad293b;border-color:#e05264}.keep{background:#205940;border-color:#52b78c}.review{background:#554327;border-color:#b99149}.delete{background:#39212a;border-color:#bb5267}.badge{font-size:.82rem;padding:6px 10px;border:1px solid #3c4a5e;border-radius:20px;white-space:nowrap;text-transform:capitalize}kbd{font:500 .75rem system-ui,sans-serif;border:1px solid currentColor;border-radius:4px;padding:1px 5px;opacity:.7;margin-left:5px}
-.panel{background:#18212d;border:1px solid var(--border);border-radius:12px;padding:16px}.connection{display:flex;align-items:center;gap:14px;margin-bottom:14px}.connection p{font-size:.82rem}.connection button{flex-shrink:0}.connection .status{margin-left:auto;text-align:right}.error{border:1px solid #e05260;background:#331e28;border-radius:8px;padding:12px;color:#ffc2c9;margin-bottom:14px;white-space:pre-wrap}.error[hidden]{display:none}
-.workspace{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:16px;align-items:start}.panel-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.panel-heading p{font-size:.8rem}.camera-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.camera{margin:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#0b1119}.feed{aspect-ratio:4/3;position:relative;display:grid;place-items:center;overflow:hidden;color:#8092aa;font-size:.8rem}.feed img{display:none;width:100%;height:100%;object-fit:contain;position:absolute;inset:0}.camera figcaption{padding:8px 10px;display:flex;justify-content:space-between;gap:5px;font-size:.8rem}.age{color:#9aacbf;font-size:.75rem}.camera span{padding:10px}.metrics{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px;color:var(--muted);font-size:.8rem}.metrics strong{color:#edf4ff;font-weight:600;margin-left:5px}.progress{height:4px;background:#293748;border-radius:4px;overflow:hidden;margin-top:12px}.progress div{height:100%;background:#63a9ff;width:0}.meta{font-size:.78rem;margin-top:10px;overflow-wrap:anywhere}
+.panel{background:#18212d;border:1px solid var(--border);border-radius:12px;padding:16px}.connection{display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:14px}.connection>div:first-child{flex:1 1 520px}.connection>div:first-child .row{margin-top:0}.connection #hold-status{flex:1 1 150px}.connection p{font-size:.82rem}.connection button{flex-shrink:0}.connection .status{margin-left:auto;text-align:right}.error{border:1px solid #e05260;background:#331e28;border-radius:8px;padding:12px;color:#ffc2c9;margin-bottom:14px;white-space:pre-wrap}.error[hidden]{display:none}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:16px;align-items:start}.panel-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.panel-heading p{font-size:.8rem}.camera-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.camera{margin:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#0b1119}.feed{aspect-ratio:4/3;position:relative;display:grid;place-items:center;overflow:hidden;color:#8092aa;font-size:.8rem}.feed img{display:none;width:100%;height:100%;object-fit:contain;position:absolute;inset:0}.camera figcaption{padding:8px 10px;display:flex;justify-content:space-between;gap:5px;font-size:.8rem}.age{color:#9aacbf;font-size:.75rem}.camera .feed span{padding:10px}.camera-gain{padding:8px 10px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:.78rem}.camera-gain label{flex:1}.camera-gain input{width:78px;min-height:34px;padding:5px 7px}.camera-gain button{min-height:34px;padding:5px 9px;font-size:.78rem}.camera-gain p{width:100%;font-size:.72rem;overflow-wrap:anywhere}.metrics{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px;color:var(--muted);font-size:.8rem}.metrics strong{color:#edf4ff;font-weight:600;margin-left:5px}.progress{height:4px;background:#293748;border-radius:4px;overflow:hidden;margin-top:12px}.progress div{height:100%;background:#63a9ff;width:0}.meta{font-size:.78rem;margin-top:10px;overflow-wrap:anywhere}
 .collection{display:grid;gap:14px}.motion-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}.motion-buttons #resume{grid-column:1/-1}.motion-buttons button{min-height:52px;padding:10px}.hint{font-size:.83rem;line-height:1.5;margin-top:10px}.recording{padding:10px 12px;background:#101924;border-radius:7px;font-size:.82rem;margin:12px 0;overflow-wrap:anywhere;color:#b9c9db}.decision-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.decision-buttons button{display:flex;align-items:center;justify-content:center;gap:4px;min-height:54px;padding:9px 4px}.decision-buttons kbd{margin:0}.trash-note{font-size:.75rem;margin-top:8px}.milestone-row{display:flex;align-items:center;gap:6px;margin-top:7px;font-size:.8rem}.milestone-row span{flex:1}.milestone-row button{padding:5px 9px;min-height:32px;font-size:.8rem}.milestone-row button[aria-pressed="true"]{outline:2px solid #9ecbff}.outcome-fields{margin-top:12px}.outcome-fields summary{font-size:.82rem;color:var(--muted)}
 details{border:1px solid var(--border);border-radius:10px;background:#141d29;margin-top:16px}summary{cursor:pointer;padding:13px 16px;font-weight:600;user-select:none}details[open]>summary{border-bottom:1px solid var(--border)}.details-body{padding:16px}.outcome-fields{border:0;background:transparent}.outcome-fields summary{padding:4px 0}.outcome-fields[open]>summary{border:0}.outcome-fields .details-body{padding:8px 0 0}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:5px}input,select,textarea{background:#101924;border:1px solid #52647b;border-radius:7px;color:#edf4ff;padding:9px 10px;width:100%;min-height:42px}textarea{resize:vertical;min-height:64px}.span-all{grid-column:1/-1}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.settings-grid h2{margin-bottom:12px}.row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:12px}.row p{flex:1;font-size:.8rem;min-width:160px}.preset{display:flex;gap:6px;margin-top:8px}.preset button{padding:5px 12px;min-height:32px;font-size:.8rem}.compact-note{font-size:.8rem;margin-top:10px}.plot{height:150px;width:100%;display:block;background:#101924;border-radius:8px}.legend{font-size:.8rem;color:var(--muted);margin-top:8px}.legend i{display:inline-block;width:18px;height:3px;background:#63a9ff;vertical-align:middle;margin-right:6px}.legend i.right{background:#efb45d;margin-left:18px}.table-wrap{overflow:auto;margin-top:14px}table{width:100%;border-collapse:collapse;font-size:.8rem}th,td{text-align:right;padding:8px;border-bottom:1px solid var(--border);white-space:nowrap}th:first-child,td:first-child{text-align:left}th{color:var(--muted);font-weight:500}.footer{font-size:.75rem;margin-top:14px;color:#8e9db0}
 @media(max-width:1120px){.workspace{grid-template-columns:1fr}.collection{grid-template-columns:1fr 1fr}.camera-grid .feed{max-height:none}.panel-heading{margin-bottom:10px}.connection{padding:12px}.camera-grid{gap:8px}.metrics{margin-top:10px}.panel{padding:14px}.collection .panel{min-width:0}}
 @media(max-width:640px){main{padding:10px 12px 24px}header{gap:8px;flex-wrap:wrap}h1{font-size:1.2rem}.badge{font-size:.7rem}.stop{padding:9px 11px;font-size:.82rem}.stop kbd{display:none}.connection{align-items:flex-start;flex-wrap:wrap}.connection .status{margin-left:0;text-align:left;width:100%}.collection,.settings-grid{grid-template-columns:1fr}.camera figcaption{font-size:.68rem;flex-wrap:wrap;padding:6px}.camera .age{font-size:.65rem}.camera-grid{gap:5px}.feed{font-size:.7rem}.field-grid{gap:8px}.metrics{gap:8px;font-size:.72rem}.decision-buttons button{min-height:54px}.footer{font-size:.7rem}}
-.critic{border-top:1px solid var(--border);margin-top:16px;padding-top:14px}.critic .panel-heading{margin-bottom:0}.critic .metrics{margin-top:8px}.critic-chart{margin:16px 0 0;min-width:0}.critic-chart svg{display:block;width:100%;height:auto;background:#101924;border-radius:8px}.critic-chart .legend{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px}.critic-chart .legend i.right{margin-left:12px}
-.placement-overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;display:none}.feed.has-live .placement-overlay{display:block}.placement-controls{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px;margin-top:12px;font-size:.8rem}.placement-controls label{display:flex;align-items:center;gap:7px}.placement-controls input[type=checkbox]{width:17px;min-height:17px;margin:0}.placement-controls input[type=range]{width:120px;min-height:30px;padding:0}.placement-controls button{padding:6px 10px;min-height:36px;font-size:.8rem}.camera-grid.overhead-large{grid-template-columns:repeat(2,minmax(0,1fr))}.camera-grid.overhead-large #overhead-camera{grid-column:1/-1}.placement-markers text{font:600 17px system-ui,sans-serif;paint-order:stroke;stroke:#10151d;stroke-width:5px;stroke-linejoin:round}.placement-markers circle{fill:none;stroke-width:3;stroke-dasharray:7 4}.placement-markers line{stroke-width:2}
+.alignment{border-top:1px solid var(--border);margin-top:16px;padding-top:16px}.alignment .panel-heading{align-items:flex-start}.alignment-heading{display:flex;align-items:center;gap:9px}.preview-label{font-size:.69rem;letter-spacing:.04em;color:#b8d4f9;border:1px solid #425b7c;border-radius:5px;padding:3px 6px;white-space:nowrap}.alignment-state{font-size:.8rem;color:var(--muted);max-width:48%;text-align:right}.alignment-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(210px,.8fr);gap:16px}.alignment-image{margin:0;min-width:0}.alignment-frame{position:relative;aspect-ratio:4/3;display:grid;place-items:center;background:#0b1119;border:1px solid var(--border);border-radius:8px;overflow:hidden}.alignment-frame img{display:none;width:100%;height:100%;object-fit:contain}.alignment-placeholder{padding:20px;text-align:center;color:#8fa2b9;font-size:.84rem}.alignment-caption{font-size:.74rem;color:var(--muted);margin-top:7px;overflow-wrap:anywhere}.alignment-legend{display:flex;flex-wrap:wrap;gap:7px 12px;font-size:.76rem;margin-top:7px}.alignment-legend i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#63d9f5;margin-right:5px}.alignment-legend .hole{background:#dc9cf3}.alignment-legend .arrow{background:#f4d34f;border-radius:0;width:13px;height:3px;vertical-align:middle}.alignment-zoom{font-size:.75rem;min-height:32px;padding:5px 9px;margin-top:8px}.alignment-frame.zoomed img{position:absolute;width:200%;height:200%;max-width:none;object-fit:fill}.alignment[data-stale="true"] .alignment-frame{opacity:.55}.alignment-readout{display:flex;flex-direction:column;gap:12px;min-width:0}.alignment-readout dl{display:grid;grid-template-columns:1fr auto;gap:7px 12px;font-size:.8rem;margin:0}.alignment-readout dt{color:var(--muted)}.alignment-readout dd{margin:0;font-variant-numeric:tabular-nums;text-align:right;overflow-wrap:anywhere}.nudge-preview{padding:12px;border-radius:8px;background:#101924}.nudge-preview h3{font-size:.8rem;font-weight:500;color:var(--muted);margin:0 0 8px}.nudge-values{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.nudge-values span{font-size:.72rem;color:var(--muted)}.nudge-values strong{display:block;font-size:1.05rem;color:#edf4ff;font-variant-numeric:tabular-nums;margin-top:2px}.alignment-note{font-size:.78rem;line-height:1.45}.alignment-error{font-size:.8rem;color:#ffc2c9;min-height:0}.alignment-error{min-height:1.45em}.alignment-manual-controls{margin-top:8px;padding:10px;border:1px solid #387c68;border-radius:7px}.alignment-manual-controls[hidden]{display:none}.alignment-manual-marker{position:absolute;width:19px;height:19px;border:2px solid #51efb1;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:2;box-shadow:0 0 0 1px #081a12}.alignment-manual-marker[hidden]{display:none}.alignment-manual-marker:before,.alignment-manual-marker:after{content:"";position:absolute;background:#51efb1}.alignment-manual-marker:before{width:25px;height:1px;top:7px;left:-5px}.alignment-manual-marker:after{height:25px;width:1px;left:7px;top:-5px}.alignment-bore-marker{position:absolute;z-index:3;transform:translate(-50%,-50%);border-radius:50%;background:#10151ddd;color:#fff;border:1px solid #dc9cf3;padding:1px 5px;font-size:.75rem;pointer-events:none}.alignment-bore-marker[hidden]{display:none}.alignment-frame.manual-select{cursor:crosshair}.alignment-pin-marker{border-color:#63d9f5}.alignment-pin-marker:before,.alignment-pin-marker:after{background:#63d9f5}.alignment-manual-controls button{font-size:.83rem;padding:8px 11px}.alignment-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.alignment-actions button{font-size:.83rem;padding:9px 12px}.alignment-actions .primary{flex:1;min-width:175px}.alignment-action-note{font-size:.79rem;margin-top:8px}.force-panel{border:1px solid var(--border);border-radius:10px;margin-top:15px;padding:13px;background:#141d29}.force-panel h3{margin:0;font-size:.94rem}.force-panel .field-grid{margin-top:12px;gap:10px 13px}.force-panel .alignment-check{margin-top:12px}.force-readout{display:flex;flex-wrap:wrap;gap:7px 15px;margin-top:12px;font-size:.8rem;color:var(--muted)}.force-readout strong{color:#edf4ff;font-variant-numeric:tabular-nums}.force-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.force-actions button{font-size:.82rem;padding:9px 11px}.force-actions .stop{margin-left:auto}.force-error{font-size:.8rem;color:#ffc2c9;margin-top:8px}.force-error:empty{display:none}.alignment-settings{margin-top:13px}.alignment-settings summary{font-size:.84rem;padding:10px 12px}.alignment-settings .details-body{padding:12px}.alignment-check{display:flex;align-items:center;gap:8px;font-size:.82rem;color:#d7e3f1}.alignment-check input[type=checkbox]{width:18px;min-height:18px;margin:0;flex-shrink:0}.alignment-settings .field-grid{gap:10px 14px}.alignment-settings .row button{font-size:.82rem;padding:8px 11px}.freeze-control{margin-top:12px;padding:11px 12px;border:1px solid var(--border);border-radius:8px;background:#101924}.freeze-control button{width:100%;font-size:.86rem}.freeze-control button[aria-pressed="true"]{background:#4c3d24;border-color:#d8ae64;color:#ffe4b1}.freeze-status{font-size:.78rem;margin-top:7px;line-height:1.45}.freeze-control[data-pending="true"]{border-color:#a78242}
+@media(max-width:740px){.alignment-grid{grid-template-columns:1fr}.alignment-readout{display:grid;grid-template-columns:1fr 1fr;gap:12px}.alignment-readout .alignment-note{grid-column:1/-1}.alignment-state{max-width:44%}.nudge-values strong{font-size:1rem}}@media(max-width:420px){.alignment-readout{grid-template-columns:1fr}.alignment-heading{gap:5px}.alignment-state{font-size:.72rem}.alignment-settings .field-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body><main>
 <header><div class="title"><p class="eyebrow">Panthera</p><h1 id="collection-title">Data collection</h1></div><span class="badge" id="mode" aria-live="polite">Connecting</span><button class="stop" id="stop">Stop &amp; hold <kbd>Esc</kbd></button></header>
 <div id="error" class="error" role="alert" hidden></div>
-<div class="panel connection"><button id="connect">Connect &amp; reset pose</button><p id="hold-status" aria-live="polite">Connect the arms to begin.</p><div class="status"><p id="session-summary">Full rollout recording starts with Play.</p></div></div>
+<div class="panel connection"><div><div class="row"><button id="reset" disabled>Reset collection pose</button><button id="recover" disabled>Reconnect arms</button></div><p class="compact-note">Reset connects the arms if needed. Clear the return path. Reconnect holds the current pose.</p><p class="compact-note">AWS is optional for insertion assist. Freeze RIGHT, then start load hold or Auto insert.</p></div><p id="hold-status" aria-live="polite">Reset collection pose or reconnect arms to begin.</p><div class="status"><p id="session-summary">Full rollout recording starts with Play.</p></div></div>
 <div class="workspace">
 <section class="panel" aria-label="Live cameras"><div class="panel-heading"><h2>Live views</h2><p>Overhead + both wrists</p></div>
 <div class="camera-grid">
-<figure class="camera" id="overhead-camera"><div class="feed" id="overhead-feed"><span>Camera offline</span><img data-camera="overhead" alt="Overhead camera"><svg class="placement-overlay" viewBox="0 0 640 480" preserveAspectRatio="xMidYMid meet" aria-label="Recorded gear, carrier, and dowel placement reference"><image id="placement-ghost" href="/reference/gear-pin-overhead.jpg" width="640" height="480" opacity="0.35"/><g id="placement-markers" class="placement-markers"><g stroke="#71dcff" fill="#71dcff"><circle cx="292" cy="396" r="12"/><line x1="292" y1="380" x2="280" y2="350"/><text x="270" y="339" text-anchor="end">Gear</text></g><g stroke="#d9a5ff" fill="#d9a5ff"><circle cx="263" cy="387" r="12"/><line x1="256" y1="374" x2="226" y2="340"/><text x="220" y="329" text-anchor="end">Dowel / pin</text></g><g stroke="#ffd479" fill="#ffd479"><circle cx="361" cy="397" r="24"/><line x1="361" y1="370" x2="380" y2="322"/><text x="385" y="311">Carrier / gearbox</text></g></g></svg></div><figcaption>Overhead <span class="age" id="age-overhead">Offline</span></figcaption></figure>
-<figure class="camera"><div class="feed"><span>Camera offline</span><img data-camera="wrist_port2" alt="Wrist camera on port 2"></div><figcaption>Wrist · port 2 <span class="age" id="age-wrist_port2">Offline</span></figcaption></figure>
-<figure class="camera"><div class="feed"><span>Camera offline</span><img data-camera="wrist_port3" alt="Wrist camera on port 3"></div><figcaption>Wrist · port 3 <span class="age" id="age-wrist_port3">Offline</span></figcaption></figure>
+<figure class="camera" id="overhead-camera"><div class="feed" id="overhead-feed"><span>Camera offline</span><img data-camera="overhead" alt="Overhead camera"></div><figcaption>Overhead <span class="age" id="age-overhead">Offline</span></figcaption><div class="camera-gain"><label for="gain-overhead">Gain</label><input id="gain-overhead" type="number" step="1" disabled aria-describedby="gain-status-overhead"><button id="gain-apply-overhead" disabled>Apply</button><p id="gain-status-overhead" role="status">Connect to adjust gain</p></div></figure>
+<figure class="camera"><div class="feed"><span>Camera offline</span><img data-camera="wrist_port2" alt="RIGHT wrist camera on port 2"></div><figcaption>RIGHT wrist · port 2 <span class="age" id="age-wrist_port2">Offline</span></figcaption><div class="camera-gain"><label for="gain-wrist_port2">Gain</label><input id="gain-wrist_port2" type="number" step="1" disabled aria-describedby="gain-status-wrist_port2"><button id="gain-apply-wrist_port2" disabled>Apply</button><p id="gain-status-wrist_port2" role="status">Connect to adjust gain</p></div></figure>
+<figure class="camera"><div class="feed"><span>Camera offline</span><img data-camera="wrist_port3" alt="LEFT wrist camera on port 3"></div><figcaption>LEFT wrist · port 3 <span class="age" id="age-wrist_port3">Offline</span></figcaption><div class="camera-gain"><label for="gain-wrist_port3">Gain</label><input id="gain-wrist_port3" type="number" step="1" disabled aria-describedby="gain-status-wrist_port3"><button id="gain-apply-wrist_port3" disabled>Apply</button><p id="gain-status-wrist_port3" role="status">Connect to adjust gain</p></div></figure>
 </div>
-<div class="placement-controls" aria-label="Overhead placement reference"><button id="enlarge-overhead" type="button" aria-pressed="false">Enlarge overhead</button><label><input id="show-placement-markers" type="checkbox" checked>Placement outlines</label><label><input id="show-placement-ghost" type="checkbox" checked>Training scene</label><label for="placement-opacity">Opacity <input id="placement-opacity" type="range" min="0" max="0.8" step="0.05" value="0.35"><output id="placement-opacity-value">35%</output></label></div>
-<p class="compact-note">Reference: one recorded gear-and-pin start scene. Align the camera and parts visually; matching this scene alone does not establish that the policy is in distribution. Overlay appears only with a live overhead feed.</p>
 <div class="metrics"><span>Actions <strong id="action">0 / 1</strong></span><span>Steps <strong id="completed">0</strong></span><span>Prediction <strong id="latency">—</strong></span></div>
 <div class="progress" role="progressbar" aria-label="Step progress" aria-valuemin="0" aria-valuemax="50" aria-valuenow="0"><div id="progress"></div></div>
 <p class="meta" id="checkpoint">No policy connected.</p>
-<div class="critic" aria-label="Local action value"><div class="panel-heading"><h2>Action value</h2><p id="critic-status" aria-live="polite">Waiting for a prediction</p></div>
-<div class="metrics"><span>Current <strong id="critic-current">—</strong></span><span>Proposed +1 s <strong id="critic-future">—</strong></span><span>Change <strong id="critic-delta">—</strong></span></div>
-<figure class="critic-chart"><svg id="critic-chart" viewBox="0 0 900 220" role="img" aria-label="Action value scores throughout the rollout"><text x="450" y="106" text-anchor="middle" fill="#aab7c8" font-size="15">No scored proposals yet</text></svg><figcaption class="legend"><span><i></i>Current<i class="right"></i>Proposed +1 s</span><span id="critic-samples">0 scored proposals</span></figcaption></figure>
-<p class="compact-note">Scores the first second of the proposed trajectory. Uncalibrated model scores; the executed step may be shorter or slower.</p><p class="meta" id="critic-detail">Local diagnostic · does not change robot actions</p></div></section>
+<section id="alignment-panel" class="alignment" aria-label="Pin and hole alignment preview">
+<div class="panel-heading"><div class="alignment-heading"><h2>Pin alignment</h2><span class="preview-label">PROPOSED NUDGE</span></div><p id="alignment-status" class="alignment-state" aria-live="polite">Waiting for analyzed frame</p></div>
+<div class="freeze-control"><label class="alignment-check"><input id="pin-nudge-detection" type="checkbox" disabled aria-describedby="pin-nudge-detection-note pin-nudge-detection-status">Detect persistent visual misalignment</label><p id="pin-nudge-detection-note" class="freeze-status">Advisory only: does not establish pin contact or start motion.</p><p id="pin-nudge-detection-status" class="freeze-status" aria-live="polite">Visual nudge detection is off.</p></div>
+<div class="alignment-grid">
+<figure class="alignment-image"><div id="alignment-frame" class="alignment-frame"><span id="alignment-placeholder" class="alignment-placeholder">Enable the preview to analyze a wrist frame.</span><img id="alignment-image" alt="Analyzed wrist frame with pin and hole markers"><img id="alignment-image-next" alt="Analyzed wrist frame with pin and hole markers"><span id="alignment-bore-marker-0" class="alignment-bore-marker" hidden>1</span><span id="alignment-bore-marker-1" class="alignment-bore-marker" hidden>2</span><span id="alignment-bore-marker-2" class="alignment-bore-marker" hidden>3</span><span id="alignment-bore-marker-3" class="alignment-bore-marker" hidden>4</span><span id="alignment-pin-marker" class="alignment-manual-marker alignment-pin-marker" aria-hidden="true" hidden></span><span id="alignment-hole-marker" class="alignment-manual-marker" aria-hidden="true" hidden></span><span id="alignment-manual-marker" class="alignment-manual-marker" aria-hidden="true" hidden></span></div><figcaption id="alignment-frame-detail" class="alignment-caption">No analyzed frame yet</figcaption><div class="alignment-legend"><span><i></i><span id="alignment-pin-label">Pin · CNN</span></span><span><i class="hole"></i><span id="alignment-hole-label">Hole · LEFT carrier CNN</span></span><span><i class="arrow"></i>Arrow → alignment direction</span></div><button id="alignment-zoom" class="alignment-zoom" type="button" aria-pressed="false" disabled>Zoom target</button></figure>
+<div class="alignment-readout"><div><p id="alignment-target-detail" class="alignment-note">Choose a target bore on the displayed frame.</p><div class="row"><button id="alignment-bore-0" type="button" disabled>Bore 1</button><button id="alignment-bore-1" type="button" disabled>Bore 2</button><button id="alignment-bore-2" type="button" disabled>Bore 3</button><button id="alignment-bore-3" type="button" disabled>Bore 4</button></div><p id="alignment-target-hint" class="alignment-note"></p></div><dl><dt>Pixel error</dt><dd id="alignment-error-px">—</dd><dt>Pin (u, v)</dt><dd id="alignment-pin">—</dd><dt>Hole (u, v)</dt><dd id="alignment-hole">—</dd><dt>Hole source</dt><dd id="alignment-cache">—</dd><dt>Held age</dt><dd id="alignment-held-age">—</dd></dl><div class="nudge-preview"><h3 id="alignment-nudge-heading">Left arm translation · mm</h3><div class="nudge-values"><span>Δx<strong id="alignment-dx">—</strong></span><span>Δy<strong id="alignment-dy">—</strong></span><span>Δz<strong id="alignment-dz">—</strong></span></div></div><p id="alignment-accumulation" class="alignment-note"></p><p id="alignment-geometry" class="alignment-note">Estimated geometry · metric scale unvalidated.</p><p class="alignment-note">Markers and values use the same analyzed frame. Apply one nudge moves once. Auto insert repeats corrections while applying downward load.</p></div>
+</div><div class="alignment-actions"><button id="alignment-nudge" class="primary" type="button" disabled>Apply one nudge</button><button id="alignment-capture" type="button" disabled>Capture tracked hole</button><button id="alignment-manual-pin" type="button" disabled>Set pin manually</button><button id="alignment-clear-pin" type="button" disabled>Clear pin</button><button id="alignment-manual" type="button" disabled>Set hole manually</button><button id="alignment-reset" type="button" disabled>Clear hole</button></div><div id="alignment-manual-controls" class="alignment-manual-controls" hidden><p id="alignment-manual-note" class="alignment-action-note">Click the actual hole center. The green crosshair is your selection, not a CNN estimate. Check it on the current image before confirming.</p><button id="alignment-manual-confirm" type="button" disabled>Confirm selected hole</button></div><p id="alignment-action-hint" class="alignment-action-note" aria-live="polite">Pause policy and freeze right arm.</p><p id="alignment-pin-detail" class="alignment-action-note"></p><p id="alignment-capture-detail" class="alignment-action-note">Capture selects a carrier hole; the LEFT wrist detector updates its image position.</p><p id="alignment-nudge-result" class="alignment-action-note" role="status"></p><p id="alignment-error" class="alignment-error" role="status"></p>
+<section class="force-panel" aria-label="Downward load and insertion assist"><div class="panel-heading"><h3>Insertion assist</h3><span id="force-phase" class="preview-label">OFF</span></div><p class="alignment-note">Commanded load in newtons · model based, no force/torque sensor. Visual XY corrections with downward base-Z load.</p>
+<p id="alignment-limits-note" class="compact-note">Current controller limits are loading.</p><div class="field-grid"><div class="field"><label for="force-newtons">Commanded downward load · N</label><input id="force-newtons" type="number" min="0.1" max="3" step="0.1" value="0.5"></div><div class="field"><label for="force-oscillation-amplitude">XY dither amplitude · mm (unused by auto insert)</label><input id="force-oscillation-amplitude" type="number" min="0" max="2" step="0.05" value="0.2"></div><div class="field"><label for="force-oscillation-frequency">XY dither frequency · Hz (unused by auto insert)</label><input id="force-oscillation-frequency" type="number" min="0" max="40" step="1" value="15"></div><div class="field"><label for="force-duration">Maximum duration · s</label><input id="force-duration" type="number" min="1" max="300" step="1" value="120"></div><div class="field"><label for="force-drop">Tool-drop threshold · mm</label><input id="force-drop" type="number" min="0.3" max="3" step="0.1" value="3"></div><div class="field"><label for="force-debounce">Drop debounce · s</label><input id="force-debounce" type="number" min="0.1" max="2" step="0.1" value="0.2"></div></div>
+<div class="freeze-control"><label class="alignment-check"><input id="auto-pin-contact" type="checkbox" disabled aria-describedby="auto-pin-contact-note auto-pin-contact-status">Automatically assist when pin presses carrier</label><p id="auto-pin-contact-note" class="freeze-status">Arming authorizes automatic handoff: policy pauses at detected pin contact and starts bounded load and nudges, even when visually aligned. Contact is inferred from motion. Turning this off stops assist without resuming policy.</p><p id="auto-pin-contact-status" class="freeze-status" aria-live="polite">Automatic contact assist is off.</p></div>
+<div class="force-readout"><span>Requested <strong id="force-requested">—</strong></span><span>Ramped command <strong id="force-ramped">—</strong></span><span>Downward travel <strong id="force-travel">—</strong></span><span><span id="force-speed-label">Guard tool speed</span> <strong id="force-guard-speed">—</strong></span><span>Guard speed limit <strong id="force-guard-limit">—</strong></span></div>
+<details class="force-speed-details"><summary>Speed estimate details</summary><div class="details-body"><p id="force-velocity-source" class="alignment-note">No guard velocity sample yet.</p><div class="force-readout"><span>Downward speed <strong id="force-down-speed">—</strong></span><span>Downward limit <strong id="force-down-limit">—</strong></span><span>Lateral travel <strong id="force-lateral-travel">—</strong></span><span>SDK raw speed <strong id="force-sdk-speed">—</strong></span></div></div></details><p id="force-motion-note" class="alignment-action-note">Auto insert makes 3 visual nudge passes, then moves toward the LEFT base at 2 mm/s up to 15 mm.</p><div class="force-actions"><button id="force-insert" class="primary" type="button" disabled>Auto insert · load + nudges</button><button id="force-start" type="button" disabled>Start load hold</button><button id="force-stop" class="stop" type="button" disabled>Stop load</button></div><p id="force-hint" class="alignment-action-note" aria-live="polite">Update/restart motor controller for guarded load.</p><p id="force-reason" class="alignment-action-note" role="status"></p><p id="force-error" class="force-error" role="alert"></p></section>
+<details class="alignment-settings"><summary>Alignment settings</summary><div class="details-body"><div class="field-grid">
+<label class="alignment-check span-all"><input id="alignment-enabled" type="checkbox" checked>Run pin / hole preview</label>
+<div class="field"><label for="alignment-frequency">Update rate · Hz</label><input id="alignment-frequency" type="number" min="0.2" max="20" step="0.1" value="20"></div>
+<div class="field"><label for="alignment-gain">Translation gain</label><input id="alignment-gain" type="number" min="0" max="2" step="0.05" value="0.5"></div>
+<div class="field"><label for="alignment-max-step">Maximum nudge step · mm</label><input id="alignment-max-step" type="number" min="0" max="5" step="0.1" value="5"></div>
+<div class="field"><label for="alignment-deadband">Pixel deadband · px</label><input id="alignment-deadband" type="number" min="0" max="100" step="1" value="3"></div>
+<label class="alignment-check span-all"><input id="alignment-fixed-carrier" type="checkbox" checked>Accumulate holes while both arms stay steady</label>
+<div class="field"><label for="alignment-hold">Stationary memory · s</label><input id="alignment-hold" type="number" min="0" max="120" step="1" value="30"></div>
+<div class="field"><label for="alignment-yaw">Preview frame yaw · °</label><input id="alignment-yaw" type="number" min="-180" max="180" step="1" value="0"></div>
+</div><div class="row"><button id="alignment-apply" type="button" disabled>Apply preview settings</button></div><p class="compact-note" id="alignment-config-note">Settings change the proposed nudge; they do not move the arm.</p></div></details>
+</section></section>
 <div class="collection">
 <section class="panel" aria-label="Policy and correction"><div class="panel-heading"><h2 id="policy-heading">Policy &amp; correction</h2></div>
 <div class="field"><label for="task">Policy task</label><select id="task" disabled aria-describedby="task-hint"></select><p class="hint" id="task-hint">Connect to load checkpoint tasks. Pause and finish the rollout before changing tasks.</p></div>
 <div id="expo-start" hidden><button class="primary" id="record-trial" disabled>Record trial</button><p class="hint" id="expo-chunk-hint">Set the starting scene, then Play to record automatically. Fixed training chunk · no blending.</p></div>
 <div class="motion-buttons"><button class="primary" id="play" disabled>Play policy</button><button class="takeover" id="intervene" disabled>Take over <kbd>H</kbd></button><button id="resume" disabled>End correction &amp; hold <kbd>P</kbd></button></div>
+<div id="freeze-control" class="freeze-control"><button id="freeze-right" type="button" aria-pressed="false" disabled>Freeze right arm</button><p id="freeze-right-status" class="freeze-status" aria-live="polite">Holds the right joints and current gripper hold during policy playback. The left arm continues.</p><label class="alignment-check" style="margin-top:10px"><input id="auto-freeze-right" type="checkbox" disabled aria-describedby="auto-freeze-right-status">Automatically freeze right arm and tighten its grip after 1 second of settling</label><p id="auto-freeze-right-status" class="freeze-status" aria-live="polite">Automatic freeze is off. The left arm continues when the right arm freezes.</p></div>
 <p class="hint" id="pedal-status">Foot pedal: single tap starts / ends intervention and holds; double tap plays / pauses policy. Hold 0.6 seconds to save Review &amp; reset.</p>
 <p class="hint" id="workflow-hint">Take over holds the joints and preserves the grip. After calibration, pull a handle or change the force on its gripper to start.</p><p class="hint" id="handoff-status" hidden></p><p class="hint" id="audio-status" hidden></p></section>
 <section class="panel" aria-label="Finish recording"><div class="panel-heading"><h2>Finish recording</h2></div><p id="recording-status" class="recording" aria-live="polite">No recording yet</p>
@@ -54,8 +72,8 @@ details{border:1px solid var(--border);border-radius:10px;background:#141d29;mar
 <details id="settings"><summary>Session &amp; playback settings</summary><div class="details-body settings-grid">
 <section><h2>Recording</h2><div class="field-grid"><div class="field"><label for="operator">Operator</label><input id="operator" maxlength="120" value="Zeb"></div><div class="field"><label for="scene">Scene / setup</label><input id="scene" maxlength="120" value="desk-oct05"></div></div>
 <div class="row" id="begin-row"><button id="begin" disabled>Record full rollout</button><p>Play automatically starts full rollout recording. You can also start recording here.</p></div>
-<div class="row"><button id="reset" disabled>Reset collection pose</button><button id="recover" disabled>Reconnect arms</button></div><p class="compact-note">Clear the return path before reset. Reconnect releases powered hold; support both arms first.</p></section>
-<section><h2>Playback</h2><div class="field-grid"><div class="field"><label for="count">Actions per step</label><input id="count" type="number" min="1" max="50" step="1" value="15" inputmode="numeric"><div class="preset"><button data-count="1">1</button><button data-count="5">5</button><button data-count="10">10</button><button data-count="15">15</button><button data-count="50">50</button></div></div><div class="field"><label for="blend" id="blend-label">Overlap actions</label><input id="blend" type="number" min="0" max="50" step="1" value="10" inputmode="numeric"><p class="compact-note" id="blend-hint">Overlap between predictions. 0 disables overlap guidance. Takeover disables it until you set a value and Apply settings.</p></div></div><p class="compact-note" id="duration">15 actions · 0.75 s of policy time</p>
+</section>
+<section><h2>Playback</h2><div class="field-grid"><div class="field"><label for="count">Actions per step</label><input id="count" type="number" min="1" max="50" step="1" value="10" inputmode="numeric"><div class="preset"><button data-count="1">1</button><button data-count="5">5</button><button data-count="10">10</button><button data-count="15">15</button><button data-count="50">50</button></div></div><div class="field"><label for="blend" id="blend-label">Overlap actions</label><input id="blend" type="number" min="0" max="50" step="1" value="10" inputmode="numeric"><p class="compact-note" id="blend-hint">Overlap between predictions. 0 disables overlap guidance. Takeover disables it until you set a value and Apply settings.</p></div></div><p class="compact-note" id="duration">10 actions · 0.50 s of policy time</p>
 <div class="row"><button id="configure" disabled>Apply settings</button><button id="step" disabled>Execute 15 actions</button><button id="predict" disabled>Preview prediction</button></div><p class="compact-note">Play replans from fresh cameras and positions. Each step ends in hold while the next prediction runs. Motion is bounded and may take longer than policy time.</p></section>
 </div></details>
 <details id="diagnostics"><summary>Prediction &amp; joint diagnostics</summary><div class="details-body"><svg id="plot" class="plot" viewBox="0 0 900 180" role="img" aria-label="Predicted joint changes relative to the measured pose"><text x="450" y="94" text-anchor="middle" fill="#aab7c8" font-size="16">Preview or execute to see a prediction</text></svg><div class="legend"><i></i>Left joints<i class="right"></i>Right joints · changes from measured pose, radians</div>
@@ -65,73 +83,532 @@ details{border:1px solid var(--border);border-radius:10px;background:#141d29;mar
 <script>
 let token=null,state=null,busy=false,clientError='',polling=false,lastCamera=0,playGeneration=0;
 const $=id=>document.getElementById(id);
-function updatePlacementReference(){
-  $('placement-ghost').style.visibility=$('show-placement-ghost').checked?'visible':'hidden';
-  $('placement-ghost').setAttribute('opacity',$('placement-opacity').value);
-  $('placement-markers').style.visibility=$('show-placement-markers').checked?'visible':'hidden';
-  $('placement-opacity-value').value=Math.round(Number($('placement-opacity').value)*100)+'%';
-}
-$('enlarge-overhead').onclick=()=>{
-  const expanded=document.querySelector('.camera-grid').classList.toggle('overhead-large');
-  $('enlarge-overhead').setAttribute('aria-pressed',String(expanded));
-  $('enlarge-overhead').textContent=expanded?'Show equal views':'Enlarge overhead';
-};
-for(const id of ['show-placement-markers','show-placement-ghost','placement-opacity'])$(id).addEventListener('input',updatePlacementReference);
-updatePlacementReference();
 const count=()=>Number($('count').value),blend=()=>Number($('blend').value);
 const validSettings=()=>$('count').value!==''&&Number.isInteger(count())&&count()>=1&&count()<=50&&$('blend').value!==''&&Number.isInteger(blend())&&blend()>=0&&blend()<=50;
 const fmt=v=>Number.isFinite(v)?v.toFixed(3):'—';
-let criticChartSignature='';
-function drawCritic(s){
-  const history=Array.isArray(s.critic_history)?s.critic_history:[];
-  const samples=Number.isFinite(s.critic_samples)?Math.max(0,Math.floor(s.critic_samples)):history.length;
-  const signature=JSON.stringify([samples,history]);
-  if(signature===criticChartSignature)return;
-  criticChartSignature=signature;
-  const points=history.filter(p=>Number.isFinite(p.t)&&Number.isFinite(p.q)&&Number.isFinite(p.current_v)&&p.t>=0);
-  $('critic-samples').textContent=`${samples} scored proposal${samples===1?'':'s'}${points.length<samples?` · ${points.length} plotted`:''}`;
-  const chart=$('critic-chart');
-  if(!points.length){chart.innerHTML='<text x="450" y="99" text-anchor="middle" fill="#aab7c8" font-size="15">No scored proposals yet</text><text x="450" y="123" text-anchor="middle" fill="#aab7c8" font-size="13">Scores appear as the policy proposes actions during a rollout.</text>';return;}
-  const left=48,right=876,top=24,bottom=176;
-  const duration=Math.max(1,...points.map(p=>p.t));
-  const x=t=>left+t/duration*(right-left),y=v=>bottom-Math.max(0,Math.min(1,v))*(bottom-top);
-  let svg='';
-  for(const value of [0,.5,1]){
-    const yy=y(value);svg+=`<line x1="${left}" y1="${yy}" x2="${right}" y2="${yy}" stroke="#303e50"/><text x="36" y="${yy+4}" text-anchor="end" fill="#aab7c8" font-size="12">${value.toFixed(1)}</text>`;
+let alignmentBusy=false,alignmentConfigDirty=false,alignmentShownId=null,alignmentImagePending=false,alignmentImageGeneration=0,alignmentObjectUrl=null,alignmentActiveImage='alignment-image',alignmentShownSnapshot=null,alignmentZoomed=false,alignmentAgeBase=null,alignmentAgeAt=0,alignmentLatest=null,alignmentLatestReceivedAt=0,forceBusy=false,forceFieldsDirty=false,alignmentUiError='',alignmentImageError='',alignmentManualActive=false,alignmentManualPoint=null,alignmentManualContext=null,alignmentManualFocus=null,alignmentManualTarget='hole';
+const alignmentFields={frequency_hz:'alignment-frequency',gain:'alignment-gain',max_step_mm:'alignment-max-step',deadband_px:'alignment-deadband',hold_s:'alignment-hold',frame_yaw_deg:'alignment-yaw'};
+const alignmentRanges={frequency_hz:[.2,20],gain:[0,2],max_step_mm:[0,5],deadband_px:[0,100],hold_s:[0,120],frame_yaw_deg:[-180,180]};
+const finiteVector=(value,length)=>Array.isArray(value)&&value.length===length&&value.every(Number.isFinite);
+const signed=(value,digits=2)=>Number.isFinite(value)?`${value>0?'+':''}${value.toFixed(digits)}`:'—';
+function alignmentMotionLimit(key,legacy){
+  const value=state?.alignment_limits?.[key];
+  return Number.isFinite(value)&&value>0?Math.min(10,value):legacy;
+}
+function alignmentRange(key){return key==='max_step_mm'?[0,Math.min(5,alignmentMotionLimit('max_nudge_mm',2))]:alignmentRanges[key];}
+function forceRange(key){
+  if(key==='max_duration_s')return [1,Math.min(300,state?.alignment_limits?.max_load_duration_s||300)];
+  return forceRanges[key];
+}
+function renderMotionLimits(){
+  const nudge=Math.min(5,alignmentMotionLimit('max_nudge_mm',2));
+  $('alignment-max-step').setAttribute('max',nudge); $('force-duration').setAttribute('max',forceRange('max_duration_s')[1]);
+  $('alignment-limits-note').textContent=`Controller limits: auto nudge ${Number.isFinite(state?.alignment_limits?.max_auto_nudge_mm)?state.alignment_limits.max_auto_nudge_mm:'—'} mm · auto nudge speed ${Number.isFinite(state?.alignment_limits?.auto_nudge_speed_mm_s)?state.alignment_limits.auto_nudge_speed_mm_s:'—'} mm/s · manual nudge ${nudge} mm · maximum load duration ${forceRange('max_duration_s')[1]} s.${state?.alignment_limits?'':' Updated controller required for the larger limits.'}`;
+}
+function alignmentConfig(){
+  const config={enabled:$('alignment-enabled').checked,fixed_carrier_hold:$('alignment-fixed-carrier').checked};
+  for(const [key,id] of Object.entries(alignmentFields)){
+    const value=Number($(id).value),[low,high]=alignmentRange(key);
+    if($(id).value.trim()===''||!Number.isFinite(value)||value<low||value>high)throw Error(`${$(id).previousElementSibling.textContent} must be between ${low} and ${high}.`);
+    config[key]=value;
   }
-  for(const fraction of [0,.25,.5,.75,1]){
-    const t=duration*fraction,xx=x(t);
-    svg+=`<text x="${xx}" y="196" text-anchor="middle" fill="#aab7c8" font-size="12">${t.toFixed(duration<10?1:0)} s</text>`;
+  return config;
+}
+const forceFields={force_n:'force-newtons',oscillation_amplitude_mm:'force-oscillation-amplitude',oscillation_frequency_hz:'force-oscillation-frequency',max_duration_s:'force-duration',drop_threshold_mm:'force-drop',drop_debounce_s:'force-debounce'};
+const forceRanges={force_n:[.1,3],oscillation_amplitude_mm:[0,2],oscillation_frequency_hz:[0,40],max_duration_s:[1,300],drop_threshold_mm:[.3,3],drop_debounce_s:[.1,2]};
+function loadIsActive(){return state?.alignment_force?.active===true||['force_holding','force_auto','force_queued'].includes(state?.mode);}
+function forceConfig(){
+  const config={};
+  for(const [key,id] of Object.entries(forceFields)){
+    const text=$(id).value,value=Number(text),[low,high]=forceRange(key);
+    if(text.trim()===''||!Number.isFinite(value)||value<low||value>high)throw Error(`${$(id).previousElementSibling.textContent} must be between ${low} and ${high}.`);
+    config[key]=value;
   }
-  svg+='<text x="462" y="215" text-anchor="middle" fill="#aab7c8" font-size="12">Rollout elapsed time</text>';
-  for(const [key,color] of [['current_v','#63a9ff'],['q','#efb45d']]){
-    svg+=`<polyline points="${points.map(p=>`${x(p.t)},${y(p[key])}`).join(' ')}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round"/>`;
-    for(const p of points){
-      const delta=Number.isFinite(p.delta)?p.delta:p.q-p.current_v;
-      svg+=`<circle cx="${x(p.t)}" cy="${y(p[key])}" r="3" fill="${color}"><title>${p.t.toFixed(2)} s · Current ${fmt(p.current_v)} · Proposed +1 s ${fmt(p.q)} · Change ${delta>=0?'+':''}${fmt(delta)}</title></circle>`;
+  return config;
+}
+function alignmentDisplayImage(){return $(alignmentActiveImage);}
+function alignmentContextKey(preview){return JSON.stringify([preview?.generation??null,preview?.context_id??null,preview?.grasp_id??null,preview?.camera_id??null,preview?.image_size_wh??null]);}
+function alignmentSameContext(a,b){
+  if(!a||!b)return false;
+  for(const key of ['generation','context_id','grasp_id','camera_id'])if(a[key]!==undefined&&a[key]!==null&&b[key]!==undefined&&b[key]!==null&&a[key]!==b[key])return false;
+  return !(finiteVector(a.image_size_wh,2)&&finiteVector(b.image_size_wh,2)&&a.image_size_wh.some((v,i)=>v!==b.image_size_wh[i]));
+}
+function alignmentActionWindow(preview=state?.alignment){
+  return Number.isFinite(preview?.config?.max_frame_age_ms)?Math.min(10,preview.config.max_frame_age_ms/1000):5;
+}
+function displayedAlignmentAge(){return alignmentAgeBase===null?null:alignmentAgeBase+(Date.now()-alignmentAgeAt)/1000;}
+function displayedAlignmentReason(){
+  const latest=state?.alignment;
+  if(!alignmentShownSnapshot||alignmentShownId===null)return 'Wait for a displayed analyzed frame.';
+  if(!latest||latest.config?.enabled===false||latest.status==='disabled')return 'Alignment preview is disabled.';
+  if(!alignmentSameContext(latest,alignmentShownSnapshot))return 'Waiting for analysis with the updated pin / hole reference.';
+  const age=displayedAlignmentAge();
+  if(age===null||age>alignmentActionWindow(latest))return 'Analyzed frame is stale. Wait for a fresh frame.';
+  return '';
+}
+function displayedAlignmentUsable(){return !displayedAlignmentReason();}
+function updateAlignmentError(){
+  const snapshot=alignmentShownSnapshot||alignmentLatest;
+  const reason=snapshot?.nudge_valid===false?(snapshot.nudge_blocked_reason||snapshot.reason||''):['stale','error'].includes(alignmentLatest?.status)?alignmentLatest.reason||'':'';
+  $('alignment-error').textContent=alignmentUiError||alignmentImageError||reason;
+}
+function alignmentManualReason(requirePoint=false,target=alignmentManualTarget){
+  const capability=target==='pin'?'alignment_manual_pin_supported':'alignment_manual_capture_supported';
+  if(state?.[capability]!==true)return `Controller restart required for manual ${target} selection.`;
+  if(!token||!state?.connected)return 'Dashboard is disconnected.';
+  if(busy||alignmentBusy||state?.recovering||state?.collection_pending)return 'Wait for the current action to finish.';
+  if(loadIsActive())return 'Stop load before selecting a hole.';
+  if(state?.mode!=='holding'||state?.playing||state?.right_arm_frozen!==true||state?.right_arm_freeze_supported!==true||state?.right_arm_freeze_pending)return 'Pause policy and freeze right arm.';
+  const captured=state?.alignment?.captured_hole||alignmentShownSnapshot?.captured_hole||state?.alignment?.cache?.mode==='captured';
+  if(target==='hole'&&captured)return 'Hole already captured. Clear it before selecting another location.';
+  const frameReason=displayedAlignmentReason();if(frameReason)return frameReason;
+  if(requirePoint&&!finiteVector(alignmentManualPoint,2))return `Click the actual ${target==='pin'?'pin contact point on the carrier':'hole center'} on the analyzed image.`;
+  return '';
+}
+function cancelManualHole(message=''){
+  alignmentManualActive=false;alignmentManualPoint=null;alignmentManualContext=null;alignmentManualFocus=null;
+  $('alignment-manual-controls').hidden=true;$('alignment-manual-marker').hidden=true;
+  $('alignment-frame').classList.remove('manual-select');$('alignment-manual').textContent='Set hole manually';$('alignment-manual-pin').textContent='Set pin manually';
+  if(message){alignmentUiError=message;updateAlignmentError();}
+}
+function updatePinnedPointOverlays(){
+  const preview=state?.alignment||{},pin=preview.camera_role==='left_wrist'&&preview.pin_source!=='operator_selected'?null:preview.captured_pin?.pin_px,hole=preview.captured_hole?.camera_role==='left_wrist'?null:preview.captured_hole?.hole_px;
+  const size=alignmentShownSnapshot?.image_size_wh;
+  for(const [id,point] of [['alignment-pin-marker',pin],['alignment-hole-marker',hole]]){
+    const visible=alignmentShownId!==null&&finiteVector(size,2)&&finiteVector(point,2);$(id).hidden=!visible;
+    if(visible){const image=alignmentDrawnImageRect(),frame=$('alignment-frame').getBoundingClientRect();$(id).style.left=`${image.left-frame.left-($('alignment-frame').clientLeft||0)+point[0]/size[0]*image.width}px`;$(id).style.top=`${image.top-frame.top-($('alignment-frame').clientTop||0)+point[1]/size[1]*image.height}px`;}
+  }
+  const analyzed=alignmentShownSnapshot||preview,inferred=analyzed.pin_source==='center_axis_inferred';
+  $('alignment-pin-label').textContent=finiteVector(pin,2)?'Pin · fixed manually':inferred?'Pin bottom · inferred':preview.pin_source==='unavailable'?'Pin · unavailable':'Pin · CNN';
+  const top=analyzed.pin_top_px,bottom=analyzed.pin_px;
+  $('alignment-pin-detail').textContent=finiteVector(pin,2)?'Pin fixed manually · update after moving':inferred&&finiteVector(top,2)&&finiteVector(bottom,2)?`TOP y ${top[1].toFixed(1)} px · ${analyzed.pin_endpoints?.top_visibility_verified===true||analyzed.top_visibility_verified===true?'observed':'estimated'}; BOTTOM y ${bottom[1].toFixed(1)} px · inferred. Both use the fixed gripper centerline.`:'';
+  const pinMemory=analyzed.pin_accumulation;
+  if(!finiteVector(pin,2)&&inferred&&pinMemory?.sample_count){
+    $('alignment-pin-label').textContent+=pinMemory.retained?' · retained':' · pooled';
+    $('alignment-pin-detail').textContent+=` ${pinMemory.sample_count} stationary estimates${pinMemory.retained&&Number.isFinite(pinMemory.last_seen_age_s)?' · last estimate '+pinMemory.last_seen_age_s.toFixed(1)+' s ago':''}.`;
+  }
+  if(finiteVector(pin,2))$('alignment-pin').textContent=pin.map(v=>v.toFixed(1)).join(', ');
+}
+function alignmentDrawnImageRect(){
+  const rect=alignmentDisplayImage().getBoundingClientRect(),size=alignmentShownSnapshot?.image_size_wh;
+  if(alignmentZoomed||!finiteVector(size,2))return rect;
+  const scale=Math.min(rect.width/size[0],rect.height/size[1]),width=size[0]*scale,height=size[1]*scale;
+  return {left:rect.left+(rect.width-width)/2,top:rect.top+(rect.height-height)/2,width,height};
+}
+function updateManualHoleOverlay(){
+  updatePinnedPointOverlays();
+  $('alignment-manual-controls').hidden=!alignmentManualActive;
+  $('alignment-frame').classList.toggle('manual-select',alignmentManualActive);
+  $('alignment-manual').textContent=alignmentManualActive&&alignmentManualTarget==='hole'?'Cancel hole selection':'Set hole manually';
+  $('alignment-manual-pin').textContent=alignmentManualActive&&alignmentManualTarget==='pin'?'Cancel pin selection':'Set pin manually';
+  const point=alignmentManualPoint,size=alignmentShownSnapshot?.image_size_wh;
+  $('alignment-manual-marker').hidden=!(alignmentManualActive&&finiteVector(point,2)&&finiteVector(size,2));
+  if(!$('alignment-manual-marker').hidden){
+    const image=alignmentDrawnImageRect(),frame=$('alignment-frame').getBoundingClientRect(),borderX=$('alignment-frame').clientLeft||0,borderY=$('alignment-frame').clientTop||0;
+    $('alignment-manual-marker').style.left=`${image.left-frame.left-borderX+point[0]/size[0]*image.width}px`;
+    $('alignment-manual-marker').style.top=`${image.top-frame.top-borderY+point[1]/size[1]*image.height}px`;
+  }
+  $('alignment-manual-confirm').textContent=`Confirm selected ${alignmentManualTarget}`;
+  $('alignment-manual-confirm').disabled=!alignmentManualActive||!!alignmentManualReason(true);
+  $('alignment-manual-note').textContent=finiteVector(point,2)?`Selected ${alignmentManualTarget} (${point[0].toFixed(1)}, ${point[1].toFixed(1)}) px · operator-selected. Check it on the current frame before confirming.`:`Click the actual ${alignmentManualTarget==='pin'?'pin contact point on the carrier':'hole center'}. The crosshair is your selection, not a CNN estimate. Check it before confirming.`;
+}
+function beginManualPoint(target){
+  if(alignmentManualActive&&alignmentManualTarget===target){cancelManualHole();updateAlignmentZoom();alignmentButtons();return;}
+  const reason=alignmentManualReason(false,target);if(reason){alignmentUiError=reason;updateAlignmentError();return;}
+  alignmentManualTarget=target;alignmentManualActive=true;alignmentManualPoint=null;alignmentManualContext=JSON.parse(JSON.stringify(state.alignment));
+  const snapshot=alignmentShownSnapshot,position=target==='pin'?snapshot.pin_px:snapshot.hole_px;
+  alignmentManualFocus=finiteVector(position,2)?position.slice():null;
+  alignmentUiError='';updateAlignmentError();updateAlignmentZoom();updateManualHoleOverlay();alignmentButtons();
+}
+$('alignment-manual').onclick=()=>beginManualPoint('hole');$('alignment-manual-pin').onclick=()=>beginManualPoint('pin');
+$('alignment-frame').onclick=event=>{
+  if(!alignmentManualActive)return;
+  const reason=alignmentManualReason();if(reason){alignmentUiError=reason;updateAlignmentError();return;}
+  const rect=alignmentDrawnImageRect(),size=alignmentShownSnapshot.image_size_wh;
+  if(rect.width<=0||rect.height<=0||!finiteVector(size,2))return;
+  const point=[(event.clientX-rect.left)/rect.width*size[0],(event.clientY-rect.top)/rect.height*size[1]];
+  if(!point.every((v,i)=>Number.isFinite(v)&&v>=0&&v<size[i]))return;
+  alignmentManualPoint=point;alignmentUiError='';updateAlignmentError();updateManualHoleOverlay();
+};
+$('alignment-manual-confirm').onclick=async()=>{
+  const reason=alignmentManualReason(true);if(reason){alignmentUiError=reason;updateAlignmentError();return;}
+  const target=alignmentManualTarget,body={frame_id:alignmentShownSnapshot.frame_id,[target==='pin'?'pin_px':'hole_px']:alignmentManualPoint.slice()};
+  cancelManualHole();return alignmentCommand(target==='pin'?'alignment/pin':'alignment/capture',body);
+};
+function forceActionReason(kind){
+  if(state?.alignment_force_supported!==true)return 'Update/restart motor controller for guarded load.';
+  if(!token)return 'Dashboard is disconnected.';
+  if(busy||alignmentBusy||forceBusy||state?.recovering||state?.collection_pending)return 'Wait for the current action to finish.';
+  if(state?.playing||state?.right_arm_frozen!==true||state?.right_arm_freeze_supported!==true||state?.right_arm_freeze_pending)return 'Pause policy and freeze right arm.';
+  if(['start','insert'].includes(kind)&&loadIsActive())return 'Stop the current load before starting another load hold.';
+  if(['start','insert'].includes(kind)&&state?.mode!=='holding')return 'Pause policy and freeze right arm.';
+  if(kind==='insert'){
+    if(state?.alignment_insert_supported!==true)return 'Controller restart required for Auto insert.';
+    if(state?.alignment?.status==='disabled')return 'Enable the alignment preview before auto insertion.';
+    if(alignmentConfigDirty)return 'Apply preview settings before auto insertion.';
+  }
+  if(alignmentManualActive)return 'Confirm or cancel the selected point before starting load.';
+  return '';
+}
+function forceButtons(){
+  const active=loadIsActive(),locked=active||forceBusy;
+  $('auto-pin-contact').disabled=busy||forceBusy||!token||state?.auto_pin_contact_supported!==true;
+  for(const id of Object.values(forceFields))$(id).disabled=locked;
+  for(const kind of ['insert','start']){const reason=forceActionReason(kind);$('force-'+kind).disabled=!!reason;$('force-'+kind).title=reason;}
+  $('force-stop').disabled=!token||!active;
+  $('force-hint').textContent=state?.mode==='force_auto'?(state?.alignment_force?.phase==='settling_contact'?'Holding continuous downward support · allowing 1.5 s for load transfer and settling before XY nudges.':state?.alignment_force?.phase==='approaching_contact'?'Lowering toward carrier at a 1 mm/s target with a smooth start · XY held · up to 20 mm / 30 s. Waiting for stable height under load before insertion nudges.':state?.alignment_force?.phase==='waiting_for_preview'?`${state?.alignment_force?.waiting_reason||'Waiting for a fresh supported preview'}. Downward load stays active.`:state?.alignment_force?.phase==='nudging'?`Auto insertion · ${state?.alignment_force?.nudge_count||0} / 3 visual nudge passes. Downward load stays active; passes are spaced 1 s apart.`:['axial_retry','axial_limit'].includes(state?.alignment_force?.phase)?`Axial movement toward LEFT base at 2 mm/s · ${(state?.alignment_force?.axial_retry_mm||0).toFixed(1)} / 15.0 mm commanded. Downward load stays active. ${state?.alignment_force?.phase==='axial_limit'?'Travel limit reached; holding target.':''}`:`Auto insertion · ${state?.alignment_force?.nudge_count||0} / 3 visual nudge passes, then toward-base movement at 2 mm/s up to 15 mm. Downward load stays active.`):state?.mode==='force_holding'?'Load holding. Apply XY nudge keeps Z loaded.':(forceActionReason('start')||'Auto insert applies downward load, makes 3 visual nudge passes, then moves toward the LEFT base at 2 mm/s up to 15 mm.');
+}
+function renderAutoPinContact(s){
+  const auto=s.auto_pin_contact,supported=s.auto_pin_contact_supported===true;
+  $('auto-pin-contact').checked=supported&&auto?.enabled===true;
+  if(!supported){$('auto-pin-contact-status').textContent='Automatic contact assist is unavailable on this server.';return;}
+  const status=auto?.enabled?String(auto.status||'Armed').replace(/_/g,' '):'Off';
+  const phase=typeof auto?.phase==='string'&&auto.phase?' · '+auto.phase.replace(/_/g,' '):'';
+  const reason=typeof auto?.reason==='string'&&auto.reason?' · '+auto.reason:'';
+  $('auto-pin-contact-status').textContent=`Automatic contact assist: ${status}${auto?.triggered?' · contact handoff triggered':''}${phase}${reason}`;
+}
+function renderForce(s){
+  renderAutoPinContact(s);
+  const force=s.alignment_force||{},active=loadIsActive();
+  if(active||(!forceFieldsDirty&&!forceBusy)){
+    for(const [key,id] of Object.entries(forceFields)){
+      const value=key==='force_n'?force.requested_force_n:force.config?.[key],[low,high]=forceRange(key);
+      if(Number.isFinite(value)&&(active||(value>=low&&value<=high)))$(id).value=value;
     }
   }
-  chart.innerHTML=svg;
+  $('force-phase').textContent=force.phase||'OFF';
+  $('force-requested').textContent=Number.isFinite(force.requested_force_n)?`${force.requested_force_n.toFixed(2)} N`:'—';
+  $('force-ramped').textContent=Number.isFinite(force.ramped_force_n)?`${force.ramped_force_n.toFixed(2)} N`:'—';
+  const diagnostics=force.diagnostics||{},millimetres=value=>Number.isFinite(value)?value*1000:null;
+  const travel=Number.isFinite(force.downward_travel_mm)?force.downward_travel_mm:millimetres(diagnostics.vertical_travel_m);
+  const speed=millimetres(diagnostics.tool_speed_m_s),limit=millimetres(diagnostics.max_tool_speed_m_s);
+  $('force-travel').textContent=Number.isFinite(travel)?`${travel.toFixed(2)} mm`:'—';
+  $('force-speed-label').textContent=active?'Measured tool speed':'Tool speed at stop';
+  $('force-guard-speed').textContent=Number.isFinite(speed)?`${speed.toFixed(2)} mm/s`:'—';
+  $('force-guard-limit').textContent=diagnostics.speed_guards_enabled===false?'Disabled':Number.isFinite(limit)?`${limit.toFixed(2)} mm/s`:'—';
+  for(const [id,value,unit] of [['force-down-speed',millimetres(diagnostics.down_speed_m_s),'mm/s'],['force-down-limit',millimetres(diagnostics.max_down_speed_m_s),'mm/s'],['force-lateral-travel',millimetres(diagnostics.lateral_travel_m),'mm'],['force-sdk-speed',millimetres(diagnostics.sdk_tool_speed_m_s),'mm/s']])$(id).textContent=Number.isFinite(value)?`${value.toFixed(2)} ${unit}`:'—';
+  if(diagnostics.speed_guards_enabled===false)$('force-down-limit').textContent='Disabled';
+  $('force-velocity-source').textContent=diagnostics.velocity_source?`Velocity estimate: ${diagnostics.velocity_source}${Number.isFinite(diagnostics.velocity_window_s)?' · '+(diagnostics.velocity_window_s*1000).toFixed(0)+' ms window':''}. SDK raw speed is shown separately.`:'No guard velocity sample yet.';
+  const code=force.reason_code||'',reason=force.reason||code;
+  $('force-reason').textContent=(reason==='tool_speed_exceeded'||(!reason&&code==='tool_speed_exceeded'))&&Number.isFinite(speed)&&Number.isFinite(limit)?`Tool speed exceeded: ${speed.toFixed(2)} mm/s · limit ${limit.toFixed(2)} mm/s${Number.isFinite(travel)?' · downward travel '+travel.toFixed(2)+' mm':''}.`:reason;
+
+  $('force-motion-note').textContent=force.phase==='approaching_contact'?'Automatic handoff first lowers the pin at fixed XY. Stable height under load is inferred carrier contact; insertion travel starts from that settled pose.':state?.mode==='force_auto'?'Auto insert applies the same loaded XY correction as Apply XY nudge for 3 passes, spaced 1 s apart, then moves toward the LEFT base at 2 mm/s up to 15 mm. Z remains loaded.':'Manual XY nudges keep Z loaded. Auto insert makes 3 visual nudge passes, then moves toward the LEFT base at 2 mm/s up to 15 mm.';
+  forceButtons();
 }
+for(const id of Object.values(forceFields))$(id).oninput=()=>{forceFieldsDirty=true;forceButtons();};
+$('auto-pin-contact').onchange=async()=>{
+  if($('auto-pin-contact').disabled||state?.auto_pin_contact_supported!==true)return;
+  const enabled=$('auto-pin-contact').checked;
+  let load;
+  if(enabled){
+    try{load=forceConfig();}catch(error){$('force-error').textContent=error.message;$('auto-pin-contact').checked=state?.auto_pin_contact?.enabled===true;return;}
+  }
+  forceBusy=true;$('force-error').textContent='';forceButtons();
+  try{await command('auto-pin-contact',enabled?{enabled,load}:{enabled});}
+  finally{forceBusy=false;forceButtons();}
+};
+async function forceCommand(kind){
+  if(!['start','insert','stop'].includes(kind))return;
+  if(kind==='stop'){
+    if(!token||!loadIsActive())return;
+    await command('alignment/force/stop');forceButtons();return;
+  }
+  const reason=forceActionReason(kind);
+  if(reason){$('force-error').textContent=reason;forceButtons();return;}
+  let config;try{config=forceConfig();}catch(error){$('force-error').textContent=error.message;return;}
+  const body={pin_on_carrier:true,max_duration_s:config.max_duration_s,drop_threshold_mm:config.drop_threshold_mm,drop_debounce_s:config.drop_debounce_s};
+  if(kind==='start')body.force_n=config.force_n;
+  else if(kind==='insert')Object.assign(body,{force_n:config.force_n,frame_id:alignmentShownSnapshot?.frame_id??null,oscillation_amplitude_mm:config.oscillation_amplitude_mm,oscillation_frequency_hz:config.oscillation_frequency_hz});
+  forceBusy=true;$('force-error').textContent='';forceButtons();
+  try{await command('alignment/force/'+kind,body);}finally{forceBusy=false;forceButtons();}
+}
+$('force-insert').onclick=()=>forceCommand('insert');
+$('force-start').onclick=()=>forceCommand('start');$('force-stop').onclick=()=>forceCommand('stop');
+function alignmentFrameActionReason(kind){
+  const capability=kind==='nudge'?'alignment_nudge_supported':'alignment_capture_supported';
+  if(state?.[capability]!==true)return kind==='nudge'?'Controller restart required for Apply nudge.':'Controller restart required for Capture hole.';
+  if(!token)return 'Dashboard is disconnected.';
+  if(busy||alignmentBusy||state?.recovering||state?.collection_pending)return 'Wait for the current action to finish.';
+  if(['queued','planning','executing'].includes(state?.alignment_nudge?.status))return 'Wait for the current nudge to finish.';
+  if(alignmentManualActive)return 'Confirm or cancel the selected point before applying or capturing.';
+  if(kind==='capture'&&loadIsActive())return 'Stop load before changing the captured hole.';
+  if(kind==='nudge'&&loadIsActive()&&state?.mode!=='force_holding')return 'Wait for load hold; manual nudges are disabled during auto insertion or load transitions.';
+  if(!(['holding',...(kind==='nudge'?['force_holding']:[])].includes(state?.mode))||state?.playing||state?.right_arm_frozen!==true||state?.right_arm_freeze_supported!==true)return 'Pause policy and freeze right arm.';
+  if(state?.right_arm_freeze_pending)return 'Wait for right-arm freeze to finish.';
+  const preview=alignmentShownSnapshot||state?.alignment;
+  const captured=!!preview?.captured_hole||['captured_demo_reference','captured_operator_reference'].includes(preview?.hole_source)||preview?.cache?.mode==='captured';
+  const accumulated=preview?.hole_source==='left_carrier_stationary_accumulated';
+  if(accumulated&&(preview?.accumulation?.stationary!==true||state?.alignment?.accumulation?.stationary!==true))return 'Accumulated holes require both arms to stay steady; wait for a fresh detection.';
+  const supportedHole=(accumulated&&preview?.nudge_valid===true)||captured||['demo_reference_tracked','demo_reference_held','left_carrier_cnn_observed','left_carrier_opencv_observed','left_carrier_layout_inferred'].includes(preview?.hole_source)||(['tracked','held'].includes(preview?.cache?.mode)&&preview?.hole_source!=='cnn_unverified_fallback');
+  if(!supportedHole)return 'Carrier reference not matched. Use Set hole manually to select the actual hole.';
+  const frameReason=displayedAlignmentReason();if(frameReason)return frameReason;
+  if(kind==='capture')return captured?'Hole already captured. Clear it before capturing another location.':'';
+  if(preview.nudge_valid!==true)return preview.nudge_blocked_reason||'No valid nudge is available for this frame.';
+  if(!finiteVector(preview.nudge_left_mm,3))return 'The proposed nudge is unavailable.';
+  const step=state?.mode==='force_holding'?Math.hypot(...preview.nudge_left_mm.slice(0,2)):Math.hypot(...preview.nudge_left_mm),maximum=Math.min(Math.min(5,alignmentMotionLimit('max_nudge_mm',2)),Number.isFinite(preview.config?.max_step_mm)?preview.config.max_step_mm:Math.min(5,alignmentMotionLimit('max_nudge_mm',2)));
+  if(step>maximum+1e-6)return 'The proposed nudge exceeds the current step limit.';
+  if(step<1e-6)return 'Within the pixel deadband · no nudge needed.';
+  return '';
+}
+function borePoint(index){const row=alignmentShownSnapshot?.carrier_holes?.[index];return row?.hole_px||row?.center_px||row?.xy||null;}
+function boreSelectionReason(index){
+  const reason=alignmentManualReason(false,'hole');if(reason)return reason;
+  if(state?.alignment_capture_supported!==true)return 'Controller restart required for Capture hole.';
+  if(alignmentManualActive)return 'Finish manual selection first.';
+  const row=alignmentShownSnapshot?.carrier_holes?.[index];
+  if(row?.accumulated===true&&(alignmentShownSnapshot?.accumulation?.stationary!==true||state?.alignment?.accumulation?.stationary!==true))return 'Retained bore requires both arms to stay steady.';
+  const point=borePoint(index),size=alignmentShownSnapshot?.image_size_wh;
+  if(!finiteVector(point,2)||!finiteVector(size,2)||!point.every((v,i)=>v>=0&&v<size[i]))return 'Bore is outside the displayed frame.';
+  return '';
+}
+function renderBoreSelection(){
+  const snapshot=alignmentShownSnapshot||{},selected=state?.alignment?.captured_hole?.hole_index??snapshot.hole_index??snapshot.target_hole_index;
+  const operator=!!state?.alignment?.captured_hole||snapshot.target_selection==='operator'||snapshot.target_selection?.mode==='operator';
+  $('alignment-target-detail').textContent=Number.isInteger(selected)?`Target bore ${selected+1} · ${operator?'selected by operator':'automatic'}`:'Choose a target bore on the displayed frame.';
+  $('alignment-target-hint').textContent=state?.alignment?.captured_hole?'Clear hole before changing the target.':'Choose the numbered bore to select it. This does not move the arm.';
+  for(let i=0;i<4;i++){
+    const row=snapshot.carrier_holes?.[i]||{},point=borePoint(i),button=$('alignment-bore-'+i),marker=$('alignment-bore-marker-'+i),reason=boreSelectionReason(i);
+    const evidence=row.accumulated===true||row.retained===true||row.source==='stationary_accumulated'?'retained':row.observed===true||row.source==='opencv_observed'?'observed':'inferred';
+    button.textContent=`Bore ${i+1} · ${evidence}`;button.disabled=!!reason;button.title=reason;button.setAttribute('aria-pressed',String(selected===i));
+    marker.hidden=!finiteVector(point,2)||alignmentShownId===null;
+    if(!marker.hidden){const image=alignmentDrawnImageRect(),frame=$('alignment-frame').getBoundingClientRect(),size=snapshot.image_size_wh;marker.style.left=`${image.left-frame.left+point[0]/size[0]*image.width}px`;marker.style.top=`${image.top-frame.top+point[1]/size[1]*image.height}px`;}
+  }
+}
+for(let i=0;i<4;i++)$('alignment-bore-'+i).onclick=()=>{
+  const reason=boreSelectionReason(i);if(reason){alignmentUiError=reason;updateAlignmentError();return;}
+  return alignmentCommand('alignment/capture',{frame_id:alignmentShownSnapshot.frame_id,hole_px:borePoint(i).slice()});
+};
+function alignmentButtons(){
+  renderBoreSelection();
+  renderMotionLimits();
+  const supported=!!state?.alignment?.config;
+  if(alignmentManualActive&&(!state?.connected||state?.mode!=='holding'||state?.playing||state?.right_arm_frozen!==true||state?.right_arm_freeze_pending||loadIsActive()||!alignmentSameContext(state?.alignment,alignmentManualContext)))cancelManualHole('Manual selection cancelled because the hold or image context changed.');
+  for(const [target,id] of [['hole','alignment-manual'],['pin','alignment-manual-pin']]){const reason=alignmentManualReason(false,target);$(id).disabled=!(alignmentManualActive&&alignmentManualTarget===target)&&!!reason;$(id).title=reason;}
+  $('alignment-clear-pin').disabled=!token||busy||alignmentBusy||loadIsActive()||state?.mode!=='holding'||state?.playing||state?.right_arm_frozen!==true||state?.alignment_manual_pin_supported!==true||!state?.alignment?.captured_pin;
+  $('alignment-apply').disabled=!token||alignmentBusy||!supported;
+  $('alignment-reset').disabled=!token||alignmentBusy||!supported||loadIsActive();
+  $('alignment-reset').title=loadIsActive()?'Stop load before clearing the captured hole.':'';
+  for(const kind of ['nudge','capture']){const reason=alignmentFrameActionReason(kind);$('alignment-'+kind).disabled=!!reason;$('alignment-'+kind).title=reason;}
+  const reason=alignmentFrameActionReason('nudge');
+  $('alignment-action-hint').textContent=reason||(state?.mode==='force_holding'?'Apply XY nudge corrects X/Y only; Z remains loaded.':'Apply one nudge moves the left arm once, then holds.');
+  const proposed=alignmentShownSnapshot?.nudge_left_mm;
+  const xy=state?.mode==='force_holding';
+  $('alignment-nudge').textContent=!reason&&finiteVector(proposed,3)?`${xy?'Apply XY nudge':'Apply one nudge'} · ${Math.hypot(...(xy?proposed.slice(0,2):proposed)).toFixed(2)} mm`:xy?'Apply XY nudge':'Apply one nudge';
+  forceButtons();
+  $('alignment-hold').disabled=!$('alignment-fixed-carrier').checked;
+  const canFreeze=!!state?.connected&&state?.right_arm_freeze_supported===true&&typeof state?.right_arm_frozen==='boolean'&&['holding','queued','predicting','executing'].includes(state?.mode);
+  $('freeze-right').disabled=busy||!canFreeze||!!state?.right_arm_freeze_pending;
+  $('auto-freeze-right').disabled=busy||!token||state?.right_arm_auto_freeze_supported!==true;
+  $('pin-nudge-detection').disabled=busy||!token||state?.pin_nudge_detection_supported!==true;
+  updateManualHoleOverlay();
+}
+function clearAlignmentImage(message){
+  alignmentImageGeneration++;alignmentShownId=null;cancelManualHole();
+  alignmentShownSnapshot=null;alignmentAgeBase=null;$('alignment-zoom').disabled=true;
+  for(const id of ['alignment-image','alignment-image-next'])$(id).style.display='none';alignmentActiveImage='alignment-image';
+  alignmentDisplayImage().style.display='none';$('alignment-placeholder').hidden=false;$('alignment-placeholder').textContent=message;
+  $('alignment-frame-detail').textContent='No analyzed frame yet';
+  for(const id of ['alignment-error-px','alignment-pin','alignment-hole','alignment-cache','alignment-held-age','alignment-dx','alignment-dy','alignment-dz'])$(id).textContent='—';
+}
+function updateAlignmentZoom(){
+  $('alignment-frame').classList.toggle('zoomed',alignmentZoomed);
+  $('alignment-zoom').setAttribute('aria-pressed',String(alignmentZoomed));
+  $('alignment-zoom').textContent=alignmentZoomed?'Show full frame':'Zoom target';
+  const snapshot=alignmentShownSnapshot||{},size=snapshot.image_size_wh;
+  const pin=finiteVector(snapshot.pin_px,2)?snapshot.pin_px:null,hole=finiteVector(snapshot.hole_px,2)?snapshot.hole_px:null;
+  const focus=alignmentManualActive&&finiteVector(alignmentManualFocus,2)?alignmentManualFocus:pin&&hole?pin.map((v,i)=>(v+hole[i])/2):hole||pin;
+  const center=focus&&finiteVector(size,2)?focus.map((v,i)=>Math.max(.25,Math.min(.75,v/size[i]))):[.5,.5];
+  alignmentDisplayImage().style.left=alignmentZoomed?`${(0.5-2*center[0])*100}%`:'';
+  alignmentDisplayImage().style.top=alignmentZoomed?`${(0.5-2*center[1])*100}%`:'';
+}
+$('alignment-zoom').onclick=()=>{alignmentZoomed=!alignmentZoomed;updateAlignmentZoom();updateManualHoleOverlay();};
+window.addEventListener('resize',updateManualHoleOverlay);
+function showAlignmentNudge(snapshot,available){
+  const valid=state?.mode!=='force_auto'&&available&&snapshot?.status==='ready'&&snapshot.nudge_valid===true&&finiteVector(snapshot.nudge_left_mm,3);
+  const delta=valid?snapshot.nudge_left_mm:[null,null,null];
+  for(const [i,id] of ['alignment-dx','alignment-dy','alignment-dz'].entries())$(id).textContent=signed(delta[i]);
+  if(state?.mode==='force_holding'&&valid)$('alignment-dz').textContent='Loaded';
+  $('alignment-nudge-heading').textContent=state?.mode==='force_holding'?'Left arm XY · Z remains loaded':'Left arm translation · mm';
+  $('alignment-geometry').textContent='Estimated geometry · metric scale unvalidated'+(snapshot?.geometry?.label?' · '+snapshot.geometry.label:'');
+}
+function alignmentSourceAge(snapshot){
+  if(Number.isFinite(snapshot?.analyzed_age_s))return snapshot.analyzed_age_s;
+  if(Number.isFinite(snapshot?.frame_age_s))return snapshot.frame_age_s;
+  return Number.isFinite(snapshot?.frame_age_ms)?snapshot.frame_age_ms/1000:null;
+}
+function updateAlignmentCaption(preview){
+  if(alignmentShownId===null)return;
+  if(String(preview?.frame_id)===alignmentShownId){
+    const age=alignmentSourceAge(preview);
+    if(age!==null){alignmentAgeBase=Math.max(0,age);alignmentAgeAt=Date.now();}
+  }
+  const age=alignmentAgeBase===null?'source age unavailable':`${(alignmentAgeBase+(Date.now()-alignmentAgeAt)/1000).toFixed(1)} s old`;
+  const current=displayedAlignmentUsable();
+  const side=alignmentShownSnapshot?.camera_role==='left_wrist'?'LEFT':'RIGHT';
+  for(const id of ['alignment-image','alignment-image-next'])$(id).alt=`Analyzed ${side}-wrist frame with pin and hole markers`;
+  $('alignment-frame-detail').textContent=`Analyzed ${side} wrist · frame ${alignmentShownId} · ${age}${current?(String(preview?.frame_id)!==alignmentShownId?' · retained fresh frame':''):' · LAST FRAME / not current'}`;
+}
+function commitAlignmentFrame(snapshot,url,targetId='alignment-image'){
+  const previousId=alignmentActiveImage,previousUrl=alignmentObjectUrl;
+  alignmentActiveImage=targetId;alignmentObjectUrl=url;alignmentShownId=String(snapshot.frame_id);alignmentShownSnapshot=snapshot;
+  const age=alignmentSourceAge(snapshot);
+  alignmentAgeBase=age===null?null:Math.max(0,age)+(Date.now()-(snapshot._received_ms||Date.now()))/1000;alignmentAgeAt=Date.now();
+  alignmentDisplayImage().style.display='block';if(previousId!==targetId)$(previousId).style.display='none';
+  if(previousUrl&&previousUrl!==url)URL.revokeObjectURL(previousUrl);$('alignment-placeholder').hidden=true;$('alignment-zoom').disabled=false;
+  if(finiteVector(snapshot.image_size_wh,2))$('alignment-frame').style.aspectRatio=snapshot.image_size_wh.join(' / ');
+  const pin=finiteVector(snapshot.pin_px,2)?snapshot.pin_px:null,hole=finiteVector(snapshot.hole_px,2)?snapshot.hole_px:null;
+  const error=Number.isFinite(snapshot.pixel_error_px)?snapshot.pixel_error_px:Number.isFinite(snapshot.error_px)?snapshot.error_px:pin&&hole?Math.hypot(hole[0]-pin[0],hole[1]-pin[1]):null;
+  $('alignment-error-px').textContent=Number.isFinite(error)?`${error.toFixed(1)} px`:'—';
+  $('alignment-pin').textContent=pin?pin.map(v=>v.toFixed(1)).join(', '):'—';
+  $('alignment-hole').textContent=hole?hole.map(v=>v.toFixed(1)).join(', '):'—';
+  const cache=snapshot.cache||{};
+  const fallback=snapshot.hole_source==='cnn_unverified_fallback';
+  const accumulated=snapshot.hole_source==='left_carrier_stationary_accumulated';
+  const leftCarrier=['left_carrier_cnn_observed','left_carrier_opencv_observed','left_carrier_layout_inferred','left_carrier_stationary_accumulated'].includes(snapshot.hole_source);
+  const detector=snapshot.hole_backend==='opencv'||snapshot.hole_source==='left_carrier_opencv_observed'?'OpenCV':'CNN';
+  $('alignment-cache').textContent=leftCarrier?`LEFT ${detector} · ${accumulated?'retained observation':snapshot.hole_source==='left_carrier_layout_inferred'?'layout inferred':'observed'}`:fallback?`${cache.mode||'Lost'} · CNN unverified`:cache.mode||'Unavailable';
+  $('alignment-hole-label').textContent=leftCarrier?(accumulated?'Hole · retained':detector==='OpenCV'?'Hole · OpenCV':'Hole · LEFT carrier CNN'):fallback?'Hole · CNN (unverified)':cache.mode==='captured'?'Hole · captured':cache.mode==='held'?'Hole · held carrier':'Hole · tracked carrier';
+  $('alignment-cache').title=cache.reference_id||cache.reason||cache.source||'';
+  const memory=snapshot.accumulation;
+  $('alignment-accumulation').textContent=memory?`${memory.stationary===true?'Stationary':'Moving · current frame only'} · ${memory.frames||0} frames · ${memory.point_count||0} points · ${memory.retained_count||0} retained${Number.isFinite(memory.age_s)?' · '+Math.max(0,memory.age_s).toFixed(1)+' s':''}${memory.reset_reason?' · '+memory.reset_reason:''}`:'';
+  $('alignment-held-age').textContent=Number.isFinite(cache.age_s)?`${Math.max(0,cache.age_s).toFixed(1)} s`:'—';
+  updateAlignmentCaption(alignmentLatest);
+  const current=displayedAlignmentUsable();
+  $('alignment-panel').dataset.stale=String(!current);
+  showAlignmentNudge(snapshot,current&&snapshot.status==='ready'&&snapshot.nudge_valid===true);updateAlignmentCaption(alignmentLatest);updateAlignmentZoom();alignmentButtons();
+}
+async function fetchAlignmentFrame(snapshot){
+  if(alignmentImagePending)return;
+  alignmentImagePending=true;const generation=alignmentImageGeneration,id=String(snapshot.frame_id);let url=null;
+  try{
+    const response=await fetch('/api/alignment/image?frame_id='+encodeURIComponent(id),{cache:'no-store'});
+    if(response.status===409)return;
+    if(!response.ok)throw Error('Analyzed image is unavailable');
+    const returned=response.headers?.get('X-Alignment-Frame-Id');
+    if(returned!==null&&returned!==undefined&&returned!==id)throw Error('Analyzed image frame did not match its values');
+    url=URL.createObjectURL(await response.blob());
+    const targetId=alignmentShownId===null?'alignment-image':alignmentActiveImage==='alignment-image'?'alignment-image-next':'alignment-image';
+    const image=$(targetId);image.style.display='none';
+    await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=()=>reject(Error('Analyzed image could not be decoded'));image.src=url;});
+    if(typeof image.decode==='function')await image.decode();
+    if(finiteVector(snapshot.image_size_wh,2)&&(image.naturalWidth!==snapshot.image_size_wh[0]||image.naturalHeight!==snapshot.image_size_wh[1]))throw Error('Analyzed image dimensions did not match its values');
+    if(generation!==alignmentImageGeneration){URL.revokeObjectURL(url);url=null;return;}
+    commitAlignmentFrame(snapshot,url,targetId);url=null;alignmentImageError='';updateAlignmentError();
+  }catch(error){if(generation===alignmentImageGeneration){alignmentImageError=error.message;updateAlignmentError();}}
+  finally{if(url)URL.revokeObjectURL(url);alignmentImagePending=false;}
+}
+function renderPinNudgeDetection(s){
+  const detection=s.pin_nudge_detection;
+  const supported=s.pin_nudge_detection_supported===true;
+  $('pin-nudge-detection').checked=supported&&detection?.enabled===true;
+  if(!supported){$('pin-nudge-detection-status').textContent='Visual nudge detection is unavailable on this server.';return;}
+  if(!detection?.enabled){$('pin-nudge-detection-status').textContent='Visual nudge detection is off.';return;}
+  const verdict=detection.needs_nudge===true?'Nudge suggested':detection.needs_nudge===false?'Visually aligned':'Waiting for visual evidence';
+  const reason=typeof detection.reason==='string'&&detection.reason?' · '+detection.reason:'';
+  const status=typeof detection.status==='string'&&detection.status?' · '+detection.status.replace(/_/g,' '):'';
+  const frames=Number.isFinite(detection.frame_count)?Math.max(0,Math.floor(detection.frame_count)):0;
+  const span=Number.isFinite(detection.span_s)?Math.max(0,detection.span_s):0;
+  $('pin-nudge-detection-status').textContent=`${verdict}${reason}${status} · ${frames} frames / ${span.toFixed(1)} s`;
+}
+function renderAutoRightFreeze(s){
+  const auto=s.right_arm_auto_freeze;
+  const supported=s.right_arm_auto_freeze_supported===true;
+  $('auto-freeze-right').checked=supported&&auto?.enabled===true;
+  if(!supported){$('auto-freeze-right-status').textContent='Automatic right-arm freeze is unavailable on this server.';return;}
+  const settle=Number.isFinite(auto?.settle_s)&&auto.settle_s>0?auto.settle_s:1;
+  const stable=Number.isFinite(auto?.stable_s)?Math.max(0,Math.min(settle,auto.stable_s)):0;
+  const status=auto?.enabled?String(auto.status||'Waiting').replace(/_/g,' '):'Off';
+  const reason=typeof auto?.reason==='string'&&auto.reason?' · '+auto.reason:'';
+  $('auto-freeze-right-status').textContent=`Automatic freeze: ${status}${auto?.enabled?` · settled ${stable.toFixed(1)} / ${settle.toFixed(1)} s`:''}${reason}`;
+}
+function renderAlignment(s){
+  renderAutoRightFreeze(s);
+  renderPinNudgeDetection(s);
+  const preview=s.alignment;alignmentLatest=preview;alignmentLatestReceivedAt=Date.now();
+  if(alignmentShownSnapshot&&String(preview?.frame_id)===alignmentShownId&&alignmentSameContext(preview,alignmentShownSnapshot)&&['ready','waiting_for_hole','waiting_for_pin'].includes(preview?.status))alignmentShownSnapshot={...alignmentShownSnapshot,...JSON.parse(JSON.stringify(preview)),_received_ms:Date.now()};
+  if(preview?.config&&!alignmentConfigDirty&&!alignmentBusy){
+    for(const [key,id] of Object.entries(alignmentFields))if(Number.isFinite(preview.config[key]))$(id).value=preview.config[key];
+    if(typeof preview.config.enabled==='boolean')$('alignment-enabled').checked=preview.config.enabled;
+    if(typeof preview.config.fixed_carrier_hold==='boolean')$('alignment-fixed-carrier').checked=preview.config.fixed_carrier_hold;
+  }
+  const status=preview?.config?.enabled===false?'disabled':preview?.status||'unavailable';
+  $('alignment-status').textContent=({ready:'Live analyzed preview',pending:'Analyzing…',waiting_for_hole:'Tracking pin · waiting for hole',waiting_for_pin:'Tracking carrier · waiting for pin',disabled:'Preview disabled',stale:'Preview stale',error:'Preview unavailable',unavailable:'Preview unavailable'})[status]||status;
+  $('alignment-status').title=preview?.reason||'';
+  if(!preview||status==='disabled'){
+    const message=status==='disabled'?'Preview is disabled.':'Waiting for the alignment preview service.';
+    if(alignmentShownId!==null||$('alignment-placeholder').textContent!==message)clearAlignmentImage(message);
+  }else if(preview.analyzed_image_available!==false&&['ready','waiting_for_hole','waiting_for_pin'].includes(status)&&preview.frame_id!==null&&preview.frame_id!==undefined&&String(preview.frame_id)!==alignmentShownId){
+    fetchAlignmentFrame({...JSON.parse(JSON.stringify(preview)),_received_ms:Date.now()});
+  }
+  updateAlignmentCaption(preview);
+  const current=displayedAlignmentUsable();
+  $('alignment-panel').dataset.stale=String(!current);
+  showAlignmentNudge(alignmentShownSnapshot,current&&alignmentShownSnapshot?.status==='ready'&&alignmentShownSnapshot?.nudge_valid===true);
+  updateAlignmentCaption(preview);
+  updateAlignmentError();
+  renderForce(s);
+  const captured=preview?.captured_hole;
+  const capturedMode=!!captured||['captured_demo_reference','captured_operator_reference'].includes(preview?.hole_source)||preview?.cache?.mode==='captured';
+  const capturedAge=Number.isFinite(captured?.age_s)?captured.age_s:capturedMode&&Number.isFinite(preview?.cache?.age_s)?preview.cache.age_s:null;
+  $('alignment-capture-detail').textContent=capturedMode?`${captured?.operator_selected||preview?.hole_source==='captured_operator_reference'?'Operator-selected hole':'Selected carrier hole'}${captured?.source_frame_id!==undefined?' · source frame '+captured.source_frame_id:''}${capturedAge===null?'':' · '+Math.max(0,capturedAge).toFixed(1)+' s old'} · selected until cleared or the grasp changes.`:'Capture selects a carrier hole; the LEFT wrist detector updates its image position.';
+  const nudge=s.alignment_nudge||{};
+  $('alignment-nudge-result').textContent=nudge.xy_only&&nudge.reason?`${nudge.reason}${Number.isFinite(nudge.tracking_error_mm)?` · XY error ${nudge.tracking_error_mm.toFixed(2)} mm`:''}`:({queued:'Nudge queued · preparing one left-arm move.',planning:'Checking the proposed nudge…',executing:'Applying one left-arm nudge…',done:'Nudge complete · holding.',rejected:'Nudge rejected'+(nudge.reason?': '+nudge.reason:'.')})[nudge.status]||'';
+  if(typeof s.right_arm_frozen==='boolean'&&s.right_arm_freeze_supported===true){
+    const pending=!!s.right_arm_freeze_pending;
+    $('freeze-control').dataset.pending=String(pending);
+    $('freeze-right').setAttribute('aria-pressed',String(s.right_arm_frozen));
+    $('freeze-right').textContent=s.right_arm_frozen?'Unfreeze right arm':'Freeze right arm';
+    $('freeze-right-status').textContent=pending?'Applying right-arm hold change at the next control tick…':s.right_arm_frozen?'Right side frozen for policy playback · gripper hold preserved.':'Right arm follows policy targets. Freeze holds its joints and current gripper hold.';
+    $('freeze-right-status').title=s.right_arm_freeze_reason||'';
+  }else $('freeze-right-status').textContent=typeof s.right_arm_frozen==='boolean'?'Controller restart required for right-arm freeze':'Right-arm freeze control is unavailable on this server.';
+  alignmentButtons();
+}
+for(const id of [...Object.values(alignmentFields),'alignment-enabled','alignment-fixed-carrier'])$(id).oninput=()=>{alignmentConfigDirty=true;$('alignment-config-note').textContent='Unsaved preview settings';alignmentButtons();};
+async function alignmentCommand(path,body={}){
+  alignmentBusy=true;alignmentUiError='';updateAlignmentError();alignmentButtons();
+  try{
+    await post(path,body);
+    if(path==='alignment/config'){alignmentConfigDirty=false;$('alignment-config-note').textContent='Preview settings saved.';}
+    if(['alignment/capture','alignment/pin','alignment/pin/clear'].includes(path)){alignmentImageGeneration++;cancelManualHole();}
+    if(path==='alignment/reset'){alignmentImageGeneration++;cancelManualHole();$('alignment-config-note').textContent=alignmentConfigDirty?'Unsaved preview settings · hole cache reset.':'Hole cache reset. Preview settings unchanged.';}
+  }
+  catch(error){alignmentUiError=error.message;updateAlignmentError();}
+  finally{alignmentBusy=false;await poll();alignmentButtons();}
+}
+$('alignment-apply').onclick=()=>{try{return alignmentCommand('alignment/config',alignmentConfig());}catch(error){alignmentUiError=error.message;updateAlignmentError();}};
+$('alignment-reset').onclick=()=>{if(!loadIsActive())return alignmentCommand('alignment/reset');};
+$('alignment-clear-pin').onclick=()=>{if(!$('alignment-clear-pin').disabled)return alignmentCommand('alignment/pin/clear');};
+async function alignmentFrameCommand(kind){
+  const reason=alignmentFrameActionReason(kind);
+  if(reason){alignmentUiError=reason;updateAlignmentError();alignmentButtons();return;}
+  const body={frame_id:alignmentShownSnapshot.frame_id};
+  if(kind==='nudge'){alignmentUiError='';updateAlignmentError();return command('alignment/nudge',body);}
+  return alignmentCommand('alignment/capture',body);
+}
+$('alignment-nudge').onclick=()=>alignmentFrameCommand('nudge');
+$('alignment-capture').onclick=()=>alignmentFrameCommand('capture');
+$('freeze-right').onclick=()=>{if(state?.right_arm_freeze_supported===true&&typeof state?.right_arm_frozen==='boolean')return command('freeze-right',{frozen:!state.right_arm_frozen});};
+$('auto-freeze-right').onchange=()=>{if(!$('auto-freeze-right').disabled&&state?.right_arm_auto_freeze_supported===true)return command('auto-freeze-right',{enabled:$('auto-freeze-right').checked});};
+$('pin-nudge-detection').onchange=()=>{if(!$('pin-nudge-detection').disabled&&state?.pin_nudge_detection_supported===true)return command('pin-nudge-detection',{enabled:$('pin-nudge-detection').checked});};
 function buttons(){
+  alignmentButtons();
   const available=!busy&&!state?.recovering&&!state?.collection_pending;
   const hold=available&&state?.mode==='holding'&&!state?.playing,active=!!state?.rollout_active;
   const moving=['holding','queued','predicting','executing'].includes(state?.mode);
-  const expo=!!state?.expo_recording_enabled;
-  $('task').disabled=!hold||active||(state?.supported_tasks?.length||0)<2;
-  $('play').disabled=!hold||!validSettings();
-  $('step').disabled=!hold||!validSettings()||(expo&&!active);
-  $('predict').disabled=!hold;
+  const expo=!!state?.expo_recording_enabled,policyReady=state?.policy_ready!==false;
+  $('task').disabled=!policyReady||!hold||active||(state?.supported_tasks?.length||0)<2;
+  $('play').disabled=!policyReady||!hold||!validSettings();
+  $('step').disabled=!policyReady||!hold||!validSettings()||(expo&&!active);
+  $('predict').disabled=!policyReady||!hold;
+  for(const id of ['play','step','predict'])$(id).title=policyReady?'':'AWS policy unavailable; local insertion assist is available. Reconnect arms to retry AWS.';
   $('intervene').disabled=!available||!moving||state?.handoff_ready===undefined;
   $('resume').disabled=!available||!['takeover_hold','human'].includes(state?.mode);
-  $('begin').disabled=!hold||active;
+  $('begin').disabled=!hold||active||(expo&&!policyReady);
   $('record-trial').disabled=$('begin').disabled;
-  $('reset').disabled=!hold||active;
+  $('reset').disabled=(!hold&&!(available&&!state?.connected&&state?.mode==='stopped'))||active;
   $('configure').disabled=expo||!available||!moving||!validSettings();
   $('count').disabled=expo;$('blend').disabled=expo;
   document.querySelectorAll('[data-count]').forEach(button=>{button.disabled=expo;});
-  $('connect').disabled=!!state?.connected||busy||!!state?.recovering;
-  $('connect').textContent=state?.connected?'Connected':'Connect & reset pose';
   $('recover').disabled=busy||!!state?.recovering||!!state?.playing||!['fault','fault_hold','holding','stopped'].includes(state?.mode);
   for(const id of ['finish-success','finish-failure','finish-discard']){
     $(id).disabled=!available||!active||!['holding','queued','predicting','executing','takeover_hold','human'].includes(state?.mode);
@@ -155,8 +632,32 @@ async function command(path,body={}){
   try{await post(path,body);}catch(e){clientError=e.message;}
   finally{busy=false;await poll();}
 }
+const gainPending=new Set(),gainDirty=new Set();
+function renderCameraGain(name,c,connected){
+  const input=$('gain-'+name),button=$('gain-apply-'+name),note=$('gain-status-'+name),g=c?.gain;
+  const available=connected&&c?.ok&&g?.supported&&!g?.error;
+  input.disabled=!available||gainPending.has(name);
+  button.disabled=input.disabled;
+  if(available){
+    input.min=g.min;input.max=g.max;input.step=g.step;
+    if(!gainDirty.has(name)&&!gainPending.has(name))input.value=String(g.value);
+    note.textContent=`Current ${g.value} · ${g.min}–${g.max} (step ${g.step})`;
+  }else note.textContent=!connected?'Connect to adjust gain':g?.error||'Manual gain unavailable';
+}
+for(const name of ['overhead','wrist_port2','wrist_port3']){
+  $('gain-'+name).oninput=()=>gainDirty.add(name);
+  $('gain-apply-'+name).onclick=async()=>{
+    const input=$('gain-'+name),raw=input.value.trim(),value=Number(raw),g=state?.cameras?.[name]?.gain;
+    if(!g?.supported||!raw||!Number.isInteger(value)||value<g.min||value>g.max||(value-g.min)%g.step!==0){
+      $('gain-status-'+name).textContent='Enter a gain within the supported range and step.';return;
+    }
+    clientError='';gainPending.add(name);renderCameraGain(name,state.cameras[name],state.connected);
+    try{await post('camera/gain',{camera:name,gain:value});gainDirty.delete(name);}
+    catch(e){clientError=e.message;}
+    finally{gainPending.delete(name);await poll();}
+  };
+}
 const recordingNames=()=>({operator:$('operator').value.trim(),scene:$('scene').value.trim()});
-$('connect').onclick=()=>command('connect');
 $('stop').onclick=()=>command('stop');
 async function playRecorded(){
   const generation=++playGeneration;
@@ -187,7 +688,7 @@ $('intervene').onclick=()=>command('collection/intervene',recordingNames());
 $('resume').onclick=()=>command('collection/resume');
 $('begin').onclick=()=>command('collection/begin',recordingNames());
 $('record-trial').onclick=()=>command('collection/begin',recordingNames());
-$('reset').onclick=()=>command('reset');
+$('reset').onclick=()=>command(state?.connected?'reset':'connect');
 $('configure').onclick=()=>command('configure',{count:count(),blend:blend()});
 $('step').onclick=()=>command('step',{count:count(),blend:blend()});
 $('predict').onclick=()=>command('predict');
@@ -216,9 +717,7 @@ for(const [id,label,success] of [['finish-success','kept',true],['finish-failure
     command('collection/finish',outcome);
   };
 }
-$('recover').onclick=()=>{
-  if(window.confirm('Reconnect releases powered hold. Support BOTH arms before continuing. Are both arms supported?'))command('recover',{arms_supported:true});
-};
+$('recover').onclick=()=>command('recover');
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){e.preventDefault();command('stop');return;}
   if(e.repeat||e.ctrlKey||e.metaKey||e.altKey||['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;
@@ -276,13 +775,13 @@ function render(s){
   const takeover=pullEnabled&&['takeover_hold','human'].includes(s.mode);
   $('handoff-status').hidden=!takeover;
   $('handoff-status').textContent=['left','right'].map(side=>`${side==='left'?'Left':'Right'}: ${s.handoff_ready?.[side]?'hand guidance':'held'}`).join(' · ');
-  $('workflow-hint').textContent=!pullEnabled&&s.connected?'Handle-pull update is ready. Support both arms and use Reconnect arms in Session settings to load it.':takeover?(!s.handoff_baseline_ready?'Hold still briefly while takeover detection calibrates.':s.mode==='takeover_hold'?gripperEnabled?'Pull a handle or change the force on its gripper to release that arm and start recording.':'Pull each handle to release that arm. Recording starts on the first release.':Object.values(s.handoff_ready).every(Boolean)?'Guide both arms and grippers by hand. End correction holds both arms; release the handles before Play.':gripperEnabled?'Guide the released arm; pull the other handle or change the force on its gripper to release it. End correction holds both arms.':'Guide the released arm by hand; pull the other handle to release it. End correction holds both arms.'):s.playing?'Policy running. Take over holds the joints, then a handle pull or change in gripper force starts your correction.':'Take over holds the joints and preserves the grip. After calibration, pull a handle or change the force on its gripper to start.';
-  if(pullEnabled&&!gripperEnabled&&s.connected)$('workflow-hint').textContent='Gripper-start update is ready. Reconnect arms in Session settings to load it.';
+  $('workflow-hint').textContent=!pullEnabled&&s.connected?'Handle-pull update is ready. Use Reconnect arms at the top of the page to load it.':takeover?(!s.handoff_baseline_ready?'Hold still briefly while takeover detection calibrates.':s.mode==='takeover_hold'?gripperEnabled?'Pull a handle or change the force on its gripper to release that arm and start recording.':'Pull each handle to release that arm. Recording starts on the first release.':Object.values(s.handoff_ready).every(Boolean)?'Guide both arms and grippers by hand. End correction holds both arms; release the handles before Play.':gripperEnabled?'Guide the released arm; pull the other handle or change the force on its gripper to release it. End correction holds both arms.':'Guide the released arm by hand; pull the other handle to release it. End correction holds both arms.'):s.playing?'Policy running. Take over holds the joints, then a handle pull or change in gripper force starts your correction.':'Take over holds the joints and preserves the grip. After calibration, pull a handle or change the force on its gripper to start.';
+  if(pullEnabled&&!gripperEnabled&&s.connected)$('workflow-hint').textContent='Gripper-start update is ready. Reconnect arms at the top of the page to load it.';
   if(expo)$('workflow-hint').textContent=takeover?'Human help interrupts this trial and excludes it from RL replay. Finish, then set up a new trial.':(gearInsertion?'Reset to the normal starting pose and restore the gear and carrier to their starting positions. Play starts recording and runs through gear pickup, transport, insertion, and release. Mark Gear seated only after full insertion and retention after policy release. Finish before pin handling, then reset for the next trial.':'Play starts recording automatically; let the policy run continuously. Mark full success only after actual insertion.')+' Use Failed trial for an unsuccessful attempt. Finish while waiting for the next prediction; a partially executed chunk is excluded.';
-  const mode=s.recovering?'Reconnecting':s.mode==='fault_hold'?'Fault · motion blocked':s.mode==='takeover_hold'?'Waiting for takeover':s.mode==='human'?'Human control':s.playing?'Policy running':s.mode==='holding'?'Holding':s.mode;
+  const mode=s.mode==='force_auto'?'Auto insertion':s.mode==='force_holding'?'Downward load holding':s.mode==='force_queued'?'Preparing downward load':s.mode==='nudge_queued'?'Nudge queued':s.mode==='nudging'?'Applying nudge':s.recovering?'Reconnecting':s.mode==='fault_hold'?'Fault · motion blocked':s.mode==='takeover_hold'?'Waiting for takeover':s.mode==='human'?'Human control':s.playing?'Policy running':s.mode==='holding'?'Holding':s.mode;
   $('mode').textContent=(s.simulation?'Simulation · ':'')+mode;
   $('mode').style.borderColor=s.mode.startsWith('fault')?'#e05260':s.mode==='human'?'#ebba62':s.playing?'#63a9ff':'#3c4a5e';
-  $('hold-status').textContent=s.mode==='takeover_hold'&&gripperEnabled?'Joints held · grippers passive':s.hold_status==='gravity_assist'?'Hand guidance · grippers passive':s.hold_status==='partial_hold'?'One arm in hand guidance · other arm held':s.hold_status==='failed'?'Hold failed — support both arms':s.hold_status==='commanded'?'Arms connected · '+(s.playing?'policy active':'position control'):s.connected?'Starting hardware connection…':'Connect the arms to begin.';
+  $('hold-status').textContent=s.mode==='takeover_hold'&&gripperEnabled?'Joints held · grippers passive':s.hold_status==='gravity_assist'?'Hand guidance · grippers passive':s.hold_status==='partial_hold'?'One arm in hand guidance · other arm held':s.hold_status==='failed'?'Hold failed — check connection':s.hold_status==='commanded'?'Arms connected · '+(s.playing?'policy active':'position control'):s.connected?'Starting hardware connection…':'Reset collection pose or reconnect arms to begin.';
   $('session-summary').textContent=s.simulation?'Simulation · no motor devices opened':`${$('operator').value||'Operator not set'} · ${$('scene').value||'Scene not set'}`;
   if(expo)$('session-summary').textContent='Separate EXPO ledger enabled · '+(gearInsertion?'gear insertion':'gear + pin')+` · fixed C=${expoPrefix} · blend=0`+(s.simulation?' · simulation':'');
   const error=clientError||s.error;$('error').hidden=!error;$('error').textContent=error||'';
@@ -292,8 +791,8 @@ function render(s){
   $('progress').style.width=`${Math.min(100,s.action_index/s.step_count*100)}%`;
   const bar=$('progress').parentElement;bar.setAttribute('aria-valuemax',s.step_count);bar.setAttribute('aria-valuenow',s.action_index);
   const checkpoint=s.checkpoint?.replace(/\/pretrained_model$/, '').split('/').pop();
-  $('checkpoint').textContent=checkpoint?`${checkpoint} · ${s.fps||20} Hz · ${s.actions_per_step} actions/step · blend ${s.blend_actions}`:'No policy connected.';
-  $('checkpoint').title=s.checkpoint||'';
+  $('checkpoint').textContent=s.policy_ready===false&&s.connected?'Local control · AWS policy unavailable · insertion assist available':checkpoint?`${checkpoint} · ${s.fps||20} Hz · ${s.actions_per_step} actions/step · blend ${s.blend_actions}`:'No policy connected.';
+  $('checkpoint').title=s.policy_error||s.checkpoint||'';
   const tasks=s.supported_tasks||[];
   if(JSON.stringify(tasks)!==$('task').dataset.tasks){
     $('task').replaceChildren(...tasks.map(task=>{const option=document.createElement('option');option.value=task;option.textContent=task;return option;}));
@@ -301,23 +800,13 @@ function render(s){
   }
   $('task').value=s.task||'';
   $('task').title=s.task||'';
-  const critic=s.critic||{status:'disabled'},ready=critic.status==='ok';
-  $('critic-current').textContent=ready?fmt(critic.current_v):'—';
-  $('critic-future').textContent=ready?fmt(critic.q):'—';
-  $('critic-delta').textContent=ready?`${critic.delta>=0?'+':''}${fmt(critic.delta)}`:'—';
-  const criticAge=ready&&critic.sampled_at?Math.max(0,Date.now()/1000-critic.sampled_at):null;
-  $('critic-status').textContent=ready?`${critic.device==='cuda'?'Local GPU':'Local CPU'} · ${critic.latency_ms.toFixed(0)} ms`:
-    critic.status==='scoring'?'Scoring proposal…':critic.status==='disabled'?'Disabled':
-    critic.status==='error'?'Unavailable':critic.status==='unavailable'?'Short proposal':'Waiting for a prediction';
-  $('critic-detail').textContent=ready?`Prediction ${critic.sequence} · ${criticAge===null?'':criticAge.toFixed(1)+' s ago · '}diagnostic only`:
-    critic.reason||'Local diagnostic · does not change robot actions';
-  $('critic-detail').title=critic.checkpoint||'';
-  drawCritic(s);
+  renderAlignment(s);
 
   for(const name of ['overhead','wrist_port2','wrist_port3']){
     const c=s.cameras[name],live=s.connected&&c?.ok;
+    renderCameraGain(name,c,s.connected);
     $('age-'+name).textContent=live?`${Math.round(c.age_s*1000)} ms`:'Offline';
-    const img=document.querySelector(`[data-camera="${name}"]`);if(name==='overhead')$('overhead-feed').classList.toggle('has-live',!!live);img.style.display=live?'block':'none';img.previousElementSibling.style.visibility=live?'hidden':'visible';
+    const img=document.querySelector(`[data-camera="${name}"]`);img.style.display=live?'block':'none';img.previousElementSibling.style.visibility=live?'hidden':'visible';
   }
   const rows=[];
   for(let i=0;i<14;i++){

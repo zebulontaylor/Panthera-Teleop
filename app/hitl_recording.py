@@ -3,6 +3,9 @@ from recording import EpisodeStore
 from bisect import bisect_left
 from collections import deque
 
+CONTROL_SOURCES = ('human', 'policy', 'hold', 'operator_nudge', 'operator_load')
+OPERATOR_SOURCES = ('operator_nudge', 'operator_load')
+
 
 def data_timestamp(row):
     return row.get('data_monotonic_ns', row['monotonic_ns'])
@@ -21,17 +24,41 @@ class RolloutStore(EpisodeStore):
 
     def collect(self, payload):
         source = payload['control_source']
-        if source not in ('human', 'policy', 'hold'):
+        if source not in CONTROL_SOURCES:
             raise ValueError('Invalid control ownership')
-        transitions = self.active['metadata'].setdefault('control_transitions', [])
+        metadata = self.active['metadata']
+        transitions = metadata.setdefault('control_transitions', [])
         changed = not transitions or transitions[-1]['source'] != source
         if changed:
             transitions.append(dict(source=source, monotonic_ns=payload['monotonic_ns'],
                                     sequence=payload['sequence']))
             interventions = sum(t['source'] == 'human' for t in transitions)
-            self.active['metadata']['human_interventions'] = interventions
-            self.active['metadata']['review_recommended'] = interventions > 0
-            self.update(human_interventions=interventions, review_recommended=interventions > 0)
+            metadata['human_interventions'] = interventions
+        # Nudge/load remain distinct from physical human guidance. Freezing an
+        # arm is assistance even while the other arm retains policy ownership;
+        # it must not change that policy's trajectory/data clock.
+        frozen = 'frozen_hold' in payload.get('control_source_by_arm', {}).values()
+        counts = metadata.setdefault('operator_intervention_counts',
+                                     dict(operator_nudge=0, operator_load=0, frozen_hold=0))
+        new_assistance = []
+        if changed and source in OPERATOR_SOURCES:
+            counts[source] += 1
+            new_assistance.append(source)
+        if frozen and not self.previous_frozen_hold:
+            counts['frozen_hold'] += 1
+            new_assistance.append('frozen_hold')
+        self.previous_frozen_hold = frozen
+        for assistance in new_assistance:
+            metadata.setdefault('operator_assistance_events', []).append(dict(
+                kind=assistance, control_source=source, monotonic_ns=payload['monotonic_ns'],
+                sequence=payload['sequence']))
+        operators = sum(counts.values())
+        assistance_count = metadata.get('human_interventions', 0) + operators
+        metadata.update(operator_interventions=operators, assistance_interventions=assistance_count,
+                        review_recommended=assistance_count > 0)
+        self.update(human_interventions=metadata.get('human_interventions', 0),
+                    operator_interventions=operators, operator_intervention_counts=dict(counts),
+                    assistance_interventions=assistance_count, review_recommended=assistance_count > 0)
         if source == 'hold':
             self.previous = None
             self.update(collecting=False, pause_reason='both_arms_held', data_clock_rate=0.)
@@ -112,16 +139,23 @@ class RolloutStore(EpisodeStore):
             self.segment = -1
             self.clock_history = deque()
             self.last_frames = {}
+            self.previous_frozen_hold = False
             self.active['metadata'].update(schema_version=2, start_data_monotonic_ns=self.active['start_ns'],
-                data_timing='Active control only; policy trajectory time during policy execution, host time during human guidance',
+                human_interventions=0, operator_interventions=0, assistance_interventions=0,
+                operator_intervention_counts=dict(operator_nudge=0, operator_load=0, frozen_hold=0),
+                review_recommended=False,
+                data_timing='Active control only; policy trajectory time during policy execution, host time during human/operator assistance',
                 timing='Original host receive timestamps in monotonic_ns; training clock in data_monotonic_ns')
             self.update(collecting=False, pause_reason='both_arms_held', data_clock_rate=0.,
-                        human_interventions=0, review_recommended=False)
+                        human_interventions=0, operator_interventions=0, assistance_interventions=0,
+                        operator_intervention_counts=dict(operator_nudge=0, operator_load=0, frozen_hold=0),
+                        review_recommended=False)
             return
         if kind == 'rollout_end':
             if self.active:
-                assisted = self.active['metadata'].get('human_interventions', 0) > 0
+                assisted = self.active['metadata'].get('assistance_interventions', 0) > 0
                 self.active['metadata']['outcome'] = dict(payload, human_assisted=assisted,
+                    operator_assisted=self.active['metadata'].get('operator_interventions', 0) > 0,
                     policy_success=bool(payload.get('success')) and not assisted)
                 self.finish(payload['label'], payload.get('reason', 'operator'),
                             complete=payload.get('complete', True))

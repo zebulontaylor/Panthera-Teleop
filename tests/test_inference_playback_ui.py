@@ -54,6 +54,20 @@ class PlaybackSettingsUITests(unittest.TestCase):
                                 capture_output=True, text=True, timeout=10)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_reconnect_posts_directly_without_confirmation(self):
+        self.run_js("""
+render(status());
+const requests=[];
+fetch=async(url,options={})=>{
+ if(options.method==='POST')requests.push({url,body:JSON.parse(options.body)});
+ return {ok:true,json:async()=>status()};
+};
+await $('recover').onclick();
+assert.equal(requests.length,1);
+assert.equal(requests[0].url,'/api/recover');
+assert.deepEqual(requests[0].body,{});
+""")
+
     def test_first_connected_status_loads_saved_settings_once(self):
         self.run_js("""
 render(status({connected:false,actions_per_step:1}));

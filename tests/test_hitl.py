@@ -40,6 +40,10 @@ class HandoffTests(unittest.TestCase):
         self.addCleanup(cleanup)
         self.controller.connect(False)
         wait_for(lambda: self.controller.snapshot()['mode'] == 'holding')
+        # Handoff tests exercise immediate recording on sub-second intervals;
+        # the operator's live setup delay must not alter their timing contract.
+        self.controller.hardware.config['start_delay_seconds'] = 0
+        self.controller.recorder.config['start_delay_seconds'] = 0
         self.controller.hardware.auto_pull = False
         self.controller.hardware.config['takeover_hold'].update(baseline_seconds=.05, pull_confirm_seconds=.06)
 
