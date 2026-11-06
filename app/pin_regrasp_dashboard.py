@@ -10,6 +10,7 @@ import secrets
 import signal
 import threading
 import time
+from urllib.parse import parse_qs, urlsplit
 
 import numpy as np
 import yaml
@@ -19,22 +20,60 @@ from dashboard_sequence import Cameras
 from foot_pedal import FootPedal
 from inference_pedal import InferencePedal
 from motor_client import MotorClient
-from pin_regrasp_motion import RegraspConfig, plan_regrasp, TRAINING_PHASES
+from pin_regrasp_motion import RegraspConfig, plan_regrasp, plan_alignment, TRAINING_PHASES
 from pin_regrasp_recording import PinRegraspEpisodeStore
 from robot_hardware import RobotHardware
 
 ROOT = Path(__file__).resolve().parents[1]
-EDITABLE = {'retreat_m', 'cone_deg', 'angle_jitter_deg', 'tool_axis', 'speed_m_s',
-            'lift_m', 'placement_jitter_m', 'base_elevation_deg',
+CAMERA_ROLES = ('left_wrist', 'right_wrist', 'overhead')
+
+EDITABLE = {'task', 'retreat_m', 'cone_deg', 'angle_jitter_deg', 'tool_axis', 'speed_m_s',
+            'lift_m', 'placement_jitter_m', 'carrier_jitter_m', 'base_elevation_deg', 'alignment_yaw_deg',
             'joint_speed_rad_s', 'gripper_speed_rad_s', 'opening_speed_rad_s'}
+
+
+def camera_health(mapping, cameras):
+    """Translate capture health to task roles without reading or opening devices."""
+    health = {}
+    for role, name in mapping.items():
+        receipt = cameras.get(name)
+        status = dict(receipt or {})
+        status.update(camera=role, source_camera=name, ok=bool(receipt and receipt.get('ok')),
+                      missing=receipt is None)
+        health[role] = status
+    return health
+
+
+def camera_failure(health):
+    failures = []
+    for role, status in health.items():
+        if status['ok']:
+            continue
+        details = []
+        if status['missing']:
+            details.append('missing stream status/receipt')
+        elif status.get('age_s') is None:
+            details.append('no captured frame receipt')
+        else:
+            details.append(f"frame age {status['age_s']:.3f}s (freshness limit 1.000s)")
+        if status.get('error'):
+            details.append('capture error: ' + str(status['error']))
+        failures.append(f"{role} ({status['source_camera']}): " + '; '.join(details))
+    return 'Collection camera is stale or unavailable: ' + ' | '.join(failures) if failures else None
 
 
 class RegraspHardware(RobotHardware):
     def open(self):
         self.config = json.loads((ROOT / 'config/recording.json').read_text())
-        name = self.config['alignment_assist']['camera_mapping']['left_wrist']
-        self.camera_name = name
-        self.config['cameras'] = {name: self.config['cameras'][name]}
+        roles = CAMERA_ROLES if getattr(self, 'task', 'regrasp') == 'alignment' else CAMERA_ROLES[:1]
+        mapping = self.config.get('alignment_assist', {}).get('camera_mapping', {})
+        self.camera_mapping = {role: mapping.get(role) for role in roles}
+        names = list(self.camera_mapping.values())
+        if (any(not isinstance(name, str) or not name or name not in self.config['cameras']
+                for name in names) or len(set(names)) != len(names)):
+            raise ValueError('Collection camera mapping requires distinct configured cameras for ' + ', '.join(roles))
+        self.camera_name = self.camera_mapping['left_wrist']
+        self.config['cameras'] = {name: self.config['cameras'][name] for name in names}
         self.cameras = Cameras(type('Sink', (), {'submit': lambda *_: None})(), self.config)
         self.cameras.wait_ready()
         self.motor_client = MotorClient('pin-regrasp')
@@ -45,9 +84,14 @@ class RegraspHardware(RobotHardware):
         self.upper = np.concatenate([np.r_[self.robots[s].joint_limits['upper'],
             self.robots[s].gripper_limits['upper']] for s in ('left', 'right')])
 
-    def frame(self):
+    def frames(self):
+        # Copy all receipts under one lock without mutating the capture cache.
         with self.cameras.lock:
-            return dict(self.cameras.latest[self.camera_name])
+            return {role: dict(self.cameras.latest[name], camera=role, source_camera=name)
+                    for role, name in self.camera_mapping.items()}
+
+    def frame(self):
+        return self.frames()['left_wrist']
 
 
 class Controller:
@@ -63,13 +107,21 @@ class Controller:
         self.shutdown = threading.Event()
         self.settings = {k: v for k, v in asdict(RegraspConfig()).items() if k in EDITABLE}
         self.state = dict(mode='disconnected', error=None, phase=None, cycle=0,
-                          anchor=None, pedal_connected=False)
+                          anchor=None, pedal_connected=False, camera_health={})
+
+    def output_directory(self):
+        if self.settings['task'] == 'alignment':
+            return (self.root.with_name('pin-alignment-forward')
+                    if self.root.name == 'pin-regrasp-forward' else self.root / 'alignment')
+        return self.root
 
     def snapshot(self):
         with self.lock:
             return dict(self.state, settings=dict(self.settings),
+                        camera_roles=list(CAMERA_ROLES if self.settings['task'] == 'alignment' else CAMERA_ROLES[:1]),
+                        carrier_frame_mapping='parallel_bases',
                         recording=self.recorder.snapshot() if self.recorder else None,
-                        directory=str(self.root))
+                        directory=str(self.output_directory()))
 
     def update(self, **values):
         with self.lock:
@@ -89,6 +141,11 @@ class Controller:
                     RegraspConfig(**values)  # Validate before changing live settings.
                 except (TypeError, ValueError) as exc:
                     raise ValueError('Invalid collection settings: ' + str(exc)) from exc
+                if values['task'] != self.settings['task']:
+                    if self.worker and self.worker.is_alive():
+                        raise ValueError('Disconnect before changing collection task')
+                    self.state.update(anchor=None, phase=None, cycle=0)
+                    self.recorder = None
                 self.settings = values
             return
         if action == 'connect':
@@ -110,15 +167,19 @@ class Controller:
             raise ValueError('Connect first')
         self.commands.put_nowait(action)
 
-    def jpeg(self):
+    def jpeg(self, camera='left_wrist'):
+        if camera not in CAMERA_ROLES:
+            raise ValueError('Unknown camera role')
         hw = self.hardware
-        return hw.cameras.jpeg(hw.camera_name) if hw and hw.cameras else None
+        name = getattr(hw, 'camera_mapping', {}).get(camera) if hw else None
+        return hw.cameras.jpeg(name) if name and hw.cameras else None
 
     def run(self):
         hw, pedal, pool = self.hardware_factory(), None, ThreadPoolExecutor(max_workers=1)
         self.hardware = hw
-        self.update(mode='connecting', error=None, anchor=None, cycle=0)
+        self.update(mode='connecting', error=None, anchor=None, cycle=0, camera_health={})
         anchor = target = None
+        right_kin = None
         plan, future, index, cycle = None, None, 0, 0
         planned_start = None
         mode = 'holding'
@@ -129,6 +190,10 @@ class Controller:
             if recording:
                 self.recorder.finish(complete, reason)
                 recording = False
+        def read_hardware():
+            measured, arms, cameras = hw.read()
+            self.update(camera_health=camera_health(hw.camera_mapping, cameras))
+            return measured, arms, cameras
         def bounded_pose(measured):
             pose = measured.copy()
             pose[[6, 13]] = np.clip(pose[[6, 13]], hw.lower[[6, 13]], hw.upper[[6, 13]])
@@ -140,17 +205,18 @@ class Controller:
             self.update(anchor=anchor.tolist())
         try:
             hw.check_active = lambda: self.check_active()
+            hw.task = self.settings['task']
             hw.open()
             kin = ToolKinematics(yaml.safe_load(hw.configs['left'].read_text()))
-            self.recorder = PinRegraspEpisodeStore(self.root, fps=30)
+            self.recorder = PinRegraspEpisodeStore(self.output_directory(), fps=30)
             pedal = FootPedal(hw.config.get('foot_pedal'))
             gestures = InferencePedal()
-            measured, arms, cameras = hw.read()
+            measured, arms, cameras = read_hardware()
             target = bounded_pose(measured)
             self.update(mode=mode, closed_gripper_rad=float(hw.lower[6]))
             while not self.shutdown.is_set():
                 started = time.monotonic()
-                measured, arms, cameras = hw.read()
+                measured, arms, cameras = read_hardware()
                 snapshot = pedal.snapshot()
                 self.update(pedal_connected=snapshot['connected'])
                 gesture = gestures.update(snapshot)
@@ -194,29 +260,48 @@ class Controller:
                         capture(measured)
                         target = anchor.copy()
                     if anchor is None:
-                        raise ValueError('Capture the starting grasp position and angle first')
+                        raise ValueError('Capture the task reference position and angle first')
                     mode = 'running'
                 sent = False
                 if mode == 'running':
-                    if not all(c['ok'] for c in cameras.values()):
-                        raise RuntimeError('Left wrist camera is stale or unavailable')
+                    failure = camera_failure(camera_health(hw.camera_mapping, cameras))
+                    if failure:
+                        raise RuntimeError(failure)
                     if plan is None:
                         if future is None:
                             with self.lock:
                                 cfg = RegraspConfig(**self.settings,
                                     open_gripper_rad=float(hw.upper[6]))
                             planned_start = target.copy()
-                            planned_start[7:] = anchor[7:]
+                            if cfg.task != 'alignment':
+                                planned_start[7:] = anchor[7:]
+                            planner_kwargs = {}
+                            if cfg.task == 'alignment' and (cfg.carrier_jitter_m or
+                                    not np.array_equal(planned_start[7:13], anchor[7:13])):
+                                # Parallel bases share axes; only displacement rotation is needed.
+                                transform = np.eye(4)
+                                if right_kin is None:
+                                    right_kin = ToolKinematics(yaml.safe_load(hw.configs['right'].read_text()))
+                                planner_kwargs = dict(right_kinematics=right_kin,
+                                    T_left_base_right_base=transform)
                             cycle_metadata = dict(seed=cycle, anchor=anchor.tolist(),
                                 cycle_start=planned_start.tolist(), settings=asdict(cfg),
-                                source_commit='0607a3c', closed_gripper_rad=float(hw.lower[6]))
-                            future = pool.submit(plan_regrasp, anchor.copy(), kin, hw.lower.copy(),
+                                source_commit='67ce4d4' if cfg.task == 'alignment' else '0607a3c',
+                                task=cfg.task, camera_mapping=dict(hw.camera_mapping), action_semantics='joint_position_targets_rad',
+                                closed_gripper_rad=float(hw.lower[6]),
+                                carrier_frame_mapping='parallel_bases',
+                                carrier_mapping_displacement_only=True,
+                                T_left_base_right_base=(planner_kwargs['T_left_base_right_base'].tolist()
+                                    if planner_kwargs else None))
+                            planner = plan_alignment if cfg.task == 'alignment' else plan_regrasp
+                            future = pool.submit(planner, anchor.copy(), kin, hw.lower.copy(),
                                                  hw.upper.copy(), seed=cycle, config=cfg,
-                                                 current14=planned_start.copy())
+                                                 current14=planned_start.copy(), **planner_kwargs)
                         if future.done():
                             plan, future, index = future.result(), None, 0
                             # Plan starts at the reference: no hidden jump after human intervention.
-                            if np.max(np.abs(measured[:6] - planned_start[:6])) > .04:
+                            planning_joints = np.r_[0:6, 7:13] if cfg.task == 'alignment' else np.arange(6)
+                            if np.max(np.abs(measured[planning_joints] - planned_start[planning_joints])) > .04:
                                 raise RuntimeError('Arm moved while planning; adjust and capture again')
                     if plan is not None:
                         phase, next_target = plan[index]
@@ -230,10 +315,17 @@ class Controller:
                         limits = np.full(14, cfg.joint_speed_rad_s / cfg.hz)
                         limits[[6, 13]] = (cfg.opening_speed_rad_s if phase == 'release'
                                             else cfg.gripper_speed_rad_s) / cfg.hz
-                        emitted = target + np.clip(next_target-target, -limits, limits)
+                        delta = next_target - target
+                        if cfg.task == 'alignment':
+                            # Keep both arms on the same segment while rejoining after a pause.
+                            moving = np.abs(delta) > 0
+                            scale = min(1., float(np.min(limits[moving] / np.abs(delta[moving])))) if np.any(moving) else 1.
+                            emitted = target + scale * delta
+                        else:
+                            emitted = target + np.clip(delta, -limits, limits)
                         # Use measured FK too: tracking lag must not close fingers
                         # before the physical tool reaches the last 2 cm.
-                        if phase in TRAINING_PHASES and emitted[6] < target[6]:
+                        if cfg.task == 'regrasp' and phase in TRAINING_PHASES and emitted[6] < target[6]:
                             actual_p, _ = kin.pose(measured[:6])
                             grasp_p, _ = kin.pose(planned_start[:6])
                             if np.linalg.norm(actual_p-grasp_p) > cfg.closing_distance_m:
@@ -244,12 +336,16 @@ class Controller:
                                 self.recorder.begin(dict(cycle_metadata, cycle=cycle,
                                     resumed_mid_forward=index > 0 and plan[index-1][0] in TRAINING_PHASES))
                                 recording = True
-                            frame = hw.frame()
-                            frame['camera'] = 'left_wrist'
+                            frames = hw.frames() if cfg.task == 'alignment' else None
+                            frame = None if frames is not None else hw.frame()
                             hw.command(emitted)
                             sent = True
-                            self.recorder.append(phase, measured.tolist(), emitted.tolist(),
-                                                 frame.pop('jpeg'), frame)
+                            if frames is not None:
+                                self.recorder.append_frames(phase, measured.tolist(), emitted.tolist(), frames)
+                            else:
+                                frame['camera'] = 'left_wrist'
+                                self.recorder.append(phase, measured.tolist(), emitted.tolist(),
+                                                     frame.pop('jpeg'), frame)
                         else:
                             finish('forward_complete', complete=True)
                         target = emitted.copy()
@@ -261,8 +357,12 @@ class Controller:
                             plan, index = None, 0
                             cycle += 1
                 if mode == 'adjusting':
-                    hw.guide(arms, target, {'left': True, 'right': False})
-                    target[:7] = bounded_pose(measured)[:7]
+                    alignment = self.settings['task'] == 'alignment'
+                    hw.guide(arms, target, {'left': True, 'right': alignment})
+                    if alignment:
+                        target = bounded_pose(measured)
+                    else:
+                        target[:7] = bounded_pose(measured)[:7]
                 elif not sent:
                     hw.command(target)
                 self.update(mode=mode)
@@ -305,13 +405,17 @@ def serve(controller, port):
         def do_GET(self):
             if not self.trusted():
                 return self.send(403, {'error': 'Invalid host'})
-            path = self.path.split('?')[0]
+            parsed = urlsplit(self.path)
+            path = parsed.path
             if path == '/':
                 self.send(200, html, 'text/html; charset=utf-8')
             elif path == '/api/state':
                 self.send(200, controller.snapshot())
             elif path == '/camera.jpg':
-                jpeg = controller.jpeg()
+                camera = parse_qs(parsed.query).get('camera', ['left_wrist'])[0]
+                if camera not in CAMERA_ROLES:
+                    return self.send(400, {'error': 'Unknown camera role'})
+                jpeg = controller.jpeg(camera)
                 self.send(200 if jpeg else 503, jpeg or b'', 'image/jpeg')
             else:
                 self.send(404, {'error': 'Not found'})

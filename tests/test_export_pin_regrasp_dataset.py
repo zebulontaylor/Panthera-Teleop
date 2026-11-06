@@ -77,6 +77,20 @@ class ExportTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             retained_episodes(discarded)
 
+    def test_alignment_excluded_and_legacy_regrasp_still_retained(self):
+        for name, task in [('alignment', 'alignment'), ('other', 'other'),
+                           ('regrasp', 'regrasp'), ('pin', 'pin'), ('legacy', None)]:
+            path = self.root / name
+            path.mkdir()
+            metadata = dict(label='unverified', complete=True)
+            if task is not None:
+                metadata['task'] = task
+            (path / 'metadata.json').write_text(json.dumps(metadata))
+        selected, excluded = retained_episodes(self.root)
+        self.assertEqual([path.name for path, _ in selected], ['legacy', 'pin', 'regrasp'])
+        self.assertEqual(excluded, [dict(source_id=name, reason='not_regrasp_task')
+                                    for name in ['alignment', 'other']])
+
     def test_donor_draw_is_repeatable_and_always_one_paired_row(self):
         candidates = [dict(episode_index=episode, frame_index=frame)
                       for episode in (2, 4) for frame in range(3)]

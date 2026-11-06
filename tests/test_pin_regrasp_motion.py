@@ -198,5 +198,215 @@ class PlannerTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 RegraspConfig(**kwargs)
 
+
+class AlignmentTests(unittest.TestCase):
+    setUp = PlannerTests.setUp
+    plan = PlannerTests.plan
+
+    def alignment(self, **kw):
+        from pin_regrasp_motion import plan_alignment
+        return plan_alignment(self.anchor, Kinematics(), self.lower, self.upper, **kw)
+
+    def test_alignment_yaw_clockwise_preserves_height_and_restores_anchor(self):
+        position = np.array([.3, .2, .1])
+        regrasp_axis = retreat_axis(position, np.eye(3), RegraspConfig())
+        zero = retreat_axis(position, np.eye(3),
+                            RegraspConfig(task='alignment', alignment_yaw_deg=0))
+        np.testing.assert_allclose(zero, regrasp_axis)
+        for yaw in (40., -40.):
+            config = RegraspConfig(task='alignment', alignment_yaw_deg=yaw, cone_deg=0)
+            axis = retreat_axis(position, np.eye(3), config)
+            signed_cross = zero[0]*axis[1]-zero[1]*axis[0]
+            self.assertLess(signed_cross*yaw, 0.)
+            cosine = np.dot(zero[:2], axis[:2])/(np.linalg.norm(zero[:2])*np.linalg.norm(axis[:2]))
+            self.assertAlmostEqual(cosine, np.cos(np.deg2rad(40.)))
+            self.assertAlmostEqual(axis[2], zero[2])
+            self.assertAlmostEqual(np.linalg.norm(axis), 1.)
+            np.testing.assert_allclose(retreat_axis(position, rotation_exp(np.array([.2, .3, -.4])), config), axis)
+            plan = self.alignment(config=config)
+            end_retreat = [q for phase, q in plan if phase == 'retreat'][-1]
+            expected = retreat_axis(self.anchor[:3], np.eye(3), config)
+            actual = end_retreat[:3]-self.anchor[:3]
+            np.testing.assert_allclose(actual/np.linalg.norm(actual), expected, atol=.002)
+            np.testing.assert_allclose(plan[-1][1], self.anchor, atol=2e-4)
+        self.assertEqual(RegraspConfig(task='alignment').alignment_yaw_deg, 40.)
+
+    def test_alignment_yaw_bounds_and_tool_axis_override(self):
+        for yaw in (-180., 180.):
+            RegraspConfig(alignment_yaw_deg=yaw)
+        for yaw in (-180.1, 180.1, float('nan'), float('inf')):
+            with self.assertRaisesRegex(ValueError, 'alignment_yaw_deg'):
+                RegraspConfig(alignment_yaw_deg=yaw)
+        rotation = rotation_exp(np.array([.2, -.3, .1]))
+        for task in ('alignment', 'regrasp'):
+            a = retreat_axis(self.anchor[:3], rotation,
+                             RegraspConfig(task=task, tool_axis='+z', alignment_yaw_deg=40))
+            b = retreat_axis(self.anchor[:3], rotation,
+                             RegraspConfig(task=task, tool_axis='+z', alignment_yaw_deg=-40))
+            np.testing.assert_allclose(a, rotation[:, 2])
+            np.testing.assert_array_equal(a, b)
+        a = retreat_axis(self.anchor[:3], rotation, RegraspConfig(alignment_yaw_deg=40))
+        b = retreat_axis(self.anchor[:3], rotation, RegraspConfig(alignment_yaw_deg=-40))
+        np.testing.assert_array_equal(a, b)
+
+    def test_alignment_fixed_grasps_and_hover(self):
+        plan = self.alignment()
+        self.assertEqual(list(dict.fromkeys(p for p, _ in plan)), ['retreat', 'return', 'verify'])
+        for _, q in plan:
+            np.testing.assert_array_equal(q[7:], self.anchor[7:])
+            self.assertEqual(q[6], self.anchor[6])
+            np.testing.assert_allclose(q[3:6], self.anchor[3:6], atol=2e-4)
+            self.assertGreaterEqual(q[2], self.anchor[2]-2e-5)
+        np.testing.assert_allclose(plan[-1][1], self.anchor, atol=2e-4)
+        targets = np.vstack([self.anchor]+[q for _, q in plan])
+        self.assertLessEqual(np.max(np.abs(np.diff(targets[:, :6], axis=0)))*30, .15001)
+
+    def test_alignment_drag_calibrated_rotated_bases(self):
+        transform = np.eye(4)
+        transform[:3, :3] = rotation_exp(np.array([0., 0., np.pi/2]))
+        config = RegraspConfig(task='alignment', carrier_jitter_m=.006)
+        plan = self.alignment(config=config, right_kinematics=Kinematics(), T_left_base_right_base=transform)
+        self.assertEqual(list(dict.fromkeys(p for p, _ in plan)),
+                         ['retreat', 'return', 'verify'])
+        end = plan[-1][1]
+        displacement = transform[:3, :3] @ (end[7:10]-self.anchor[7:10])
+        np.testing.assert_allclose(end[:3]-self.anchor[:3], displacement, atol=4e-5)
+        self.assertLessEqual(np.linalg.norm(displacement), .00602)
+        self.assertAlmostEqual(displacement[2], 0., places=5)
+        for _, q in plan:
+            np.testing.assert_array_equal(q[[6, 13]], self.anchor[[6, 13]])
+        all_q = np.vstack([self.anchor]+[q for _, q in plan])
+        self.assertLessEqual(np.max(np.abs(np.diff(all_q[:, 7:13], axis=0)))*30, .15001)
+
+    def test_alignment_retreat_moves_both_arms_on_shared_relative_path(self):
+        transform = np.eye(4)
+        rotation = rotation_exp(np.array([.3, -.2, 1.2]))
+        transform[:3, :3] = rotation
+        config = RegraspConfig(task='alignment', carrier_jitter_m=.02,
+                               cone_deg=0, angle_jitter_deg=0)
+        kwargs = dict(config=config, right_kinematics=Kinematics(),
+                      T_left_base_right_base=transform)
+        current = self.anchor.copy()
+        for seed in (4, 7):
+            plan = self.alignment(current14=current, seed=seed, **kwargs)
+            retreat = [q for phase, q in plan if phase == 'retreat']
+            end = retreat[-1]
+            left_delta = end[:3]-current[:3]
+            right_delta = rotation @ (end[7:10]-current[7:10])
+            relative_retreat = left_delta-right_delta
+            self.assertGreater(np.linalg.norm(right_delta), .001)
+            axis = retreat_axis(self.anchor[:3], np.eye(3), config)
+            np.testing.assert_allclose(relative_retreat/np.linalg.norm(relative_retreat), axis, atol=.003)
+            for tick, q in enumerate(retreat, 1):
+                t = tick/len(retreat)
+                u = t**3*(10+t*(-15+6*t))
+                np.testing.assert_allclose(q[:3]-current[:3], u*left_delta, atol=4e-5)
+                np.testing.assert_allclose(rotation @ (q[7:10]-current[7:10]), u*right_delta, atol=4e-5)
+                relative = q[:3]-current[:3]-rotation @ (q[7:10]-current[7:10])
+                np.testing.assert_allclose(relative, u*relative_retreat, atol=5e-5)
+                np.testing.assert_allclose(q[3:6], self.anchor[3:6], atol=2e-4)
+                np.testing.assert_allclose(q[10:13], self.anchor[10:13], atol=2e-4)
+            middle = retreat[len(retreat)//2]
+            self.assertGreater(np.linalg.norm(middle[:3]-current[:3]), .001)
+            self.assertGreater(np.linalg.norm(middle[7:10]-current[7:10]), .0005)
+            for phase, q in plan:
+                if phase in ('return', 'verify'):
+                    np.testing.assert_array_equal(q[7:], end[7:])
+            current = plan[-1][1]
+
+    def test_alignment_preflight_rejects_missing_frames_limits_and_changed_grasp(self):
+        config = RegraspConfig(task='alignment', carrier_jitter_m=.006)
+        with self.assertRaisesRegex(ValueError, 'calibrated'):
+            self.alignment(config=config, right_kinematics=Kinematics())
+        current = self.anchor.copy(); current[6] += .01
+        with self.assertRaisesRegex(ValueError, 'grippers'):
+            self.alignment(current14=current)
+        self.upper[2] = .005
+        with self.assertRaisesRegex(ValueError, 'IK joint limit'):
+            self.alignment(config=RegraspConfig(task='alignment', cone_deg=0))
+        with self.assertRaises(ValueError):
+            RegraspConfig(carrier_jitter_m=.101)
+
+    def test_alignment_right_ik_failure_is_preflighted(self):
+        class Unreachable(Kinematics):
+            def jacobian(self, q):
+                return np.zeros((6, 6))
+        with self.assertRaisesRegex(ValueError, 'unreachable'):
+            self.alignment(config=RegraspConfig(task='alignment', carrier_jitter_m=.006),
+                           right_kinematics=Unreachable(), T_left_base_right_base=np.eye(4))
+
+    def test_alignment_coordinated_retreat_honors_selected_speed(self):
+        transform = np.eye(4)
+        transform[:3, :3] = rotation_exp(np.array([0., 0., np.pi/2]))
+        durations = []
+        endpoints = []
+        for speed in (.005, .05):
+            config = RegraspConfig(task='alignment', carrier_jitter_m=.012,
+                                   speed_m_s=speed, joint_speed_rad_s=.6)
+            plan = self.alignment(config=config, seed=4, right_kinematics=Kinematics(),
+                                  T_left_base_right_base=transform)
+            drag = [q for phase, q in plan if phase == 'retreat']
+            durations.append(len(drag)/config.hz)
+            endpoints.append(drag[-1])
+            previous = self.anchor.copy()
+            for phase, q in plan:
+                joint_speed = np.abs(q-previous)*config.hz
+                self.assertLessEqual(np.max(joint_speed), config.joint_speed_rad_s*1.00001)
+                for index in (0, 7):
+                    before, _ = Kinematics().pose(previous[index:index+6])
+                    after, _ = Kinematics().pose(q[index:index+6])
+                    self.assertLessEqual(np.linalg.norm(after-before)*config.hz,
+                                         config.speed_m_s*1.00001)
+                self.assertEqual(q[6], self.anchor[6])
+                self.assertEqual(q[13], self.anchor[13])
+                previous = q
+        self.assertLess(durations[1], durations[0]/2)
+        np.testing.assert_allclose(endpoints[0][7:], endpoints[1][7:], atol=4e-5)
+
+    def test_alignment_cycles_have_continuity_and_no_random_walk(self):
+        transform = np.eye(4)
+        transform[:3, :3] = rotation_exp(np.array([.3, -.2, 1.2]))
+        # Translation must not enter displacement conversion.
+        transform[:3, 3] = [.4, -.3, .1]
+        config = RegraspConfig(task='alignment', carrier_jitter_m=.006)
+        kwargs = dict(right_kinematics=Kinematics(), T_left_base_right_base=transform)
+        current = self.anchor.copy()
+        for seed in (1, 2, 3, 1):
+            plan = self.alignment(config=config, current14=current, seed=seed, **kwargs)
+            samples = np.vstack([current]+[q for _, q in plan])
+            self.assertLessEqual(np.max(np.abs(np.diff(samples, axis=0)))*config.hz,
+                                 config.joint_speed_rad_s*1.00001)
+            for _, q in plan:
+                self.assertTrue(np.all(q >= self.lower))
+                self.assertTrue(np.all(q <= self.upper))
+            end = plan[-1][1]
+            drag = transform[:3, :3] @ (end[7:10]-self.anchor[7:10])
+            self.assertLessEqual(np.linalg.norm(drag), config.carrier_jitter_m+2e-5)
+            self.assertLess(abs(drag[2]), 2e-5)
+            np.testing.assert_allclose(end[:3]-self.anchor[:3], drag, atol=4e-5)
+            from_anchor = self.alignment(config=config, seed=seed, **kwargs)[-1][1]
+            np.testing.assert_allclose(end, from_anchor, atol=4e-5)
+            current = end
+        # Reducing jitter to zero restores both arm references continuously.
+        plan = self.alignment(config=RegraspConfig(task='alignment'), current14=current, **kwargs)
+        samples = np.vstack([current]+[q for _, q in plan])
+        self.assertLessEqual(np.max(np.abs(np.diff(samples, axis=0)))*config.hz,
+                             config.joint_speed_rad_s*1.00001)
+        np.testing.assert_allclose(plan[-1][1], self.anchor, atol=4e-5)
+
+    def test_alignment_carrier_limits_fail_before_plan_return(self):
+        # Both sides are independently bounded, including the optional drag.
+        self.lower[7:10] = self.anchor[7:10]-1e-5
+        self.upper[7:10] = self.anchor[7:10]+1e-5
+        with self.assertRaisesRegex(ValueError, 'IK joint limit'):
+            self.alignment(config=RegraspConfig(task='alignment', carrier_jitter_m=.006),
+                           right_kinematics=Kinematics(), T_left_base_right_base=np.eye(4))
+
+    def test_wrong_task_rejected(self):
+        with self.assertRaisesRegex(ValueError, 'alignment task'):
+            self.alignment(config=RegraspConfig())
+        with self.assertRaisesRegex(ValueError, 'regrasp task'):
+            self.plan(config=RegraspConfig(task='alignment'))
+
 if __name__ == '__main__':
     unittest.main()

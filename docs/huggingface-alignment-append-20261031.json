@@ -1,0 +1,20 @@
+{
+  "repo_id": "ZebTaylor/panthera-pin-regrasp-100-20hz",
+  "url": "https://huggingface.co/datasets/ZebTaylor/panthera-pin-regrasp-100-20hz",
+  "commit": "5466bc39089dc72305e9f16d693a088159ce7c28",
+  "previous_commit": "ac255c71c30bf46b300556fec8c873e9ca52cb36",
+  "episodes": 349,
+  "frames": 8106,
+  "retained_pin_pickup": 100,
+  "added_pin_alignment": 172,
+  "added_gear_alignment": 77,
+  "excluded_early_pin_alignment": 20,
+  "excluded_early_gear_alignment": 9,
+  "excluded_gear_pickup": 2,
+  "remote_files_verified": 373,
+  "remote_lfs_sha256_files_verified": 363,
+  "remote_git_blob_files_verified": 10,
+  "original_dataset_files_preserved": true,
+  "public": true,
+  "lerobot_v3_tag_verified": true
+}

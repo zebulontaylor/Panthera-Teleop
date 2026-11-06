@@ -23,6 +23,7 @@ class PinRegraspEpisodeStore:
         self.error = None
         self.complete = False
         self._writer = self._stream = None
+        self._writers = {}
 
     def snapshot(self):
         return dict(active=self.active, path=str(self.path) if self.path else None,
@@ -32,6 +33,13 @@ class PinRegraspEpisodeStore:
     def begin(self, metadata):
         if self.active:
             raise RuntimeError('Forward episode already active')
+        task = metadata.get('task', 'regrasp')
+        if task == 'pin':  # Legacy regrasp metadata.
+            task = 'regrasp'
+        if task not in ('regrasp', 'alignment'):
+            raise ValueError('Unknown collection task')
+        self._phases = ['return'] if task == 'alignment' else ['return', 'close']
+        self._task = task
         # Validate serialization before creating an episode.
         json.dumps(metadata, allow_nan=False)
         self.episode_id = uuid.uuid4().hex
@@ -42,11 +50,18 @@ class PinRegraspEpisodeStore:
         self.complete = False
         self._last_sequence = self._last_camera_ns = None
         self._size = None
+        self._writers = {}
+        self._camera_history = {}
         self._metadata = dict(metadata, schema_version=1, episode_id=self.episode_id,
-                              label='unverified', camera='left_wrist', phases=['return', 'close'],
+                              label='unverified', camera='left_wrist', task=task, phases=self._phases,
                               started_unix_ns=time.time_ns(), started_monotonic_ns=time.monotonic_ns(),
                               complete=False, reason='recording', samples=0,
                               video='left_wrist.avi', samples_file='samples.jsonl', fps=self.fps)
+        if task == 'alignment':
+            self._metadata.update(schema_version=2, cameras=['left_wrist', 'right_wrist', 'overhead'],
+                                  videos={name: name + '.avi' for name in ('left_wrist', 'right_wrist', 'overhead')})
+            self._metadata.pop('camera')
+            self._metadata.pop('video')
         self._write_metadata()
         self._stream = (self.path / 'samples.jsonl').open('w')
         self.active = True
@@ -61,8 +76,10 @@ class PinRegraspEpisodeStore:
         if not self.active:
             raise RuntimeError('No active forward episode')
         try:
-            if phase not in ('return', 'close'):
-                raise ValueError('Only return and close phases may be recorded')
+            if self._task == 'alignment':
+                raise ValueError('Alignment requires append_frames with all three cameras')
+            if phase not in self._phases:
+                raise ValueError('Phase is not a forward phase for this collection task')
             measured, target = list(measured14), list(target14)
             if any(len(v) != 14 or any(isinstance(x, bool) or not math.isfinite(float(x)) for x in v)
                    for v in (measured, target)):
@@ -110,6 +127,82 @@ class PinRegraspEpisodeStore:
             self.finish(False, 'recording_error: ' + self.error)
             raise
 
+    def append_frames(self, phase, measured14, target14, frames):
+        """Record one control sample with independent camera receipt timestamps.
+
+        The shared video_frame is a recording index, not a hardware synchronization claim.
+        Each mapping value contains JPEG bytes and its source receipt fields.
+        """
+        if not self.active:
+            raise RuntimeError('No active forward episode')
+        try:
+            if self._task != 'alignment':
+                raise ValueError('append_frames is only supported for alignment')
+            if phase not in self._phases:
+                raise ValueError('Phase is not a forward phase for this collection task')
+            measured, target = list(measured14), list(target14)
+            if any(len(v) != 14 or any(isinstance(x, bool) or not math.isfinite(float(x)) for x in v)
+                   for v in (measured, target)):
+                raise ValueError('Measured state and target must contain 14 finite values')
+            names = self._metadata['cameras']
+            if not isinstance(frames, dict) or set(frames) != set(names):
+                raise ValueError('All three alignment cameras required')
+            now = time.monotonic_ns()
+            decoded, receipts = {}, {}
+            # Validate every source before opening writers or writing any frames.
+            for name in names:
+                camera = dict(frames[name])
+                jpeg = camera.pop('jpeg', None)
+                if camera.get('camera') != name or camera.get('error') or camera.get('ok') is False:
+                    raise ValueError('Healthy ' + name + ' camera required')
+                sequence, captured, unix_ns = (camera.get(k) for k in ('sequence', 'monotonic_ns', 'unix_ns'))
+                if any(type(v) is not int or v < 0 for v in (sequence, captured, unix_ns)):
+                    raise ValueError(name + ' sequence and capture timestamps required')
+                if not 0 <= now - captured <= self.max_camera_age_ns:
+                    raise ValueError('Fresh ' + name + ' camera required')
+                previous = self._camera_history.get(name)
+                if previous and (sequence < previous['sequence'] or captured < previous['monotonic_ns']):
+                    raise ValueError(name + ' sequence or timestamp moved backwards')
+                if not isinstance(jpeg, bytes) or not jpeg.startswith(b'\xff\xd8'):
+                    raise ValueError(name + ' JPEG bytes required')
+                frame = cv2.imdecode(np.frombuffer(jpeg, dtype=np.uint8), cv2.IMREAD_COLOR)
+                if frame is None:
+                    raise ValueError('Invalid ' + name + ' JPEG')
+                size = (frame.shape[1], frame.shape[0])
+                if any(camera.get(k, expected) != expected for k, expected in zip(('width', 'height'), size)):
+                    raise ValueError(name + ' dimensions do not match JPEG')
+                if previous and size != (previous['width'], previous['height']):
+                    raise ValueError(name + ' dimensions changed within episode')
+                decoded[name] = frame
+                receipts[name] = dict(camera=name, sequence=sequence, monotonic_ns=captured,
+                                      unix_ns=unix_ns, width=size[0], height=size[1])
+                if 'source_camera' in camera:
+                    receipts[name]['source_camera'] = camera['source_camera']
+            for name in names:
+                if name not in self._writers:
+                    receipt = receipts[name]
+                    writer = cv2.VideoWriter(str(self.path / self._metadata['videos'][name]),
+                                             cv2.VideoWriter_fourcc(*'MJPG'), self.fps,
+                                             (receipt['width'], receipt['height']))
+                    self._writers[name] = writer
+                    if not writer.isOpened():
+                        raise RuntimeError('Cannot open ' + name + ' video writer')
+            row = dict(index=self.samples, phase=phase, monotonic_ns=now, unix_ns=time.time_ns(),
+                       state=[float(x) for x in measured], action=[float(x) for x in target],
+                       cameras=receipts, video_frame=self.samples)
+            serialized = json.dumps(row, allow_nan=False) + '\n'
+            for name in names:
+                self._writers[name].write(decoded[name])
+            self._stream.write(serialized)
+            self._stream.flush()
+            self.samples += 1
+            self._camera_history = receipts
+            return self.snapshot()
+        except Exception as exc:
+            self.error = str(exc)
+            self.finish(False, 'recording_error: ' + self.error)
+            raise
+
     def finish(self, complete=False, reason='interrupted'):
         if not self.active:
             return self.snapshot()
@@ -117,6 +210,9 @@ class PinRegraspEpisodeStore:
         if self._writer is not None:
             self._writer.release()
             self._writer = None
+        for writer in self._writers.values():
+            writer.release()
+        self._writers = {}
         self._stream.close()
         self._stream = None
         self.complete = bool(complete) and self.samples > 0 and not self.error

@@ -50,6 +50,9 @@ def retained_episodes(source):
         if not metadata_path.is_file():
             continue
         metadata = read_json(metadata_path)
+        if metadata.get('task', 'regrasp') not in ('regrasp', 'pin'):
+            excluded.append(dict(source_id=path.name, reason='not_regrasp_task'))
+            continue
         if (metadata.get('label') != 'unverified' or metadata.get('complete') is not True
                 or metadata.get('discarded') or metadata.get('error')):
             excluded.append(dict(source_id=path.name, reason='not_complete_unverified_retained'))
