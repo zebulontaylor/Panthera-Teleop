@@ -1,0 +1,45 @@
+{
+  "profile": "carrier_real_face_v4",
+  "reconstruction_version": 2,
+  "fidelity": "Photograph-based approximate visual reconstruction; not manufacturing CAD",
+  "source_step": "/home/zeb/Downloads/Wisco_Actuator_Corrected_Gears parts.step",
+  "source_step_sha256": "a961b1b04ea165b73c7b83a70bb5ab73249189a6adf568e4f814b6702c3793b7",
+  "source_photos": "Supplied WiscoHumanoids Actuator archive, Quad Planetary Gear Carrier photographs",
+  "relative_geometry_evidence": "outputs/pin_perception_camera_audit/carrier_geometry/relative_geometry.json",
+  "plate_outer_diameter_mm": 52.98,
+  "central_upper_bore_diameter_mm": 22.95,
+  "insertion_bore_diameter_mm": 8.24,
+  "insertion_bore_pitch_radius_mm": 17.9625,
+  "upper_plate_mouth_z_mm": 17.25,
+  "inner_threaded_holes": {
+    "count": 4,
+    "diameter_mm": 2.6,
+    "pitch_radius_mm": 13.37,
+    "phase_relative_to_insertion_bores_deg": -22.5,
+    "threads": "Smooth visual cylinders; helical threads omitted",
+    "evidence": "TRAIN-image ratio estimates: radius 12.5\u201314.5 mm, diameter 2\u20133.5 mm; phase approximately 18\u201322.5 degrees"
+  },
+  "raised_mounting_bosses": {
+    "count": 4,
+    "pitch_radius_mm": 23.300000000499843,
+    "radial_width_mm": 5.8,
+    "tangential_width_mm": 8.5,
+    "height_above_plate_mm": 4.0,
+    "height_evidence": "Assumed 4 mm visual height; no measured boss height. The ambiguous 7.99 mm caliper photograph was not used.",
+    "mounting_hole_diameter_mm": 3.0,
+    "threads": "Helical threads omitted"
+  },
+  "visual_bounds_m": [
+    [
+      -0.026489999771118166,
+      -0.026489999771118166,
+      0.0
+    ],
+    [
+      0.026489999771118166,
+      0.026489999771118166,
+      0.02125
+    ]
+  ],
+  "physics": "Only the existing visual geom uses this mesh; original 872 section collision pieces, separate table-contact hull, inertial properties, and insertion targets stay unchanged"
+}

@@ -1,0 +1,169 @@
+{
+  "created_utc": "2026-11-04T20:01:11.805731+00:00",
+  "status": "Offline geometry reconstruction, real adaptation and saved-demo evaluation complete; autonomous nudge execution not approved",
+  "setup": "Existing side_by_side/photo_20261027 environment, registered right wrist camera and planar bases, exact original native arm angles, original physical controller/contact meshes",
+  "carrier": {
+    "newly_reproduced": true,
+    "original_recovered_mesh": false,
+    "mesh_sha256": "21c88b81740e085d49447aeed6be69ee12defe89a5ddf19dd0424586fdf814a2",
+    "builder_source_sha256": "02df07df845b7f074e01a438fbcc3cf51b882a0e77aedd66d45df0376dfc6500",
+    "triangles": 16386,
+    "watertight": true,
+    "post_export_verified": true,
+    "bounds_m": [
+      [
+        -0.026489999771118166,
+        -0.026489999771118166,
+        0.0
+      ],
+      [
+        0.026489999771118166,
+        0.026489999771118166,
+        0.02125
+      ]
+    ],
+    "physics_modified": false,
+    "targets_modified": false,
+    "limitations": [
+      "New approximate visual reproduction, not recovered corrected STEP or manufacturing CAD.",
+      "4mm boss height and smooth unthreaded holes are documented appearance assumptions; no helical thread geometry.",
+      "Only upper visual plate uses8.24mm insertion bore diameter; original lower CAD, all collision pieces/contact hulls/inertias and target coordinates remain unchanged.",
+      "Visual radius4.12mm is separate from original collision geometry; this does not certify hardware insertion clearance."
+    ]
+  },
+  "validation": {
+    "combined_tests_passed": 127,
+    "git_diff_check_passed": true,
+    "hardware_commands_sent": false,
+    "sim_video_decode": {
+      "codec": "h264",
+      "decoded_frames": 41
+    }
+  },
+  "new_real_recording": {
+    "source_id": "20261104T193211-4db4b17f",
+    "train_blocks": [
+      "B1",
+      "B3"
+    ],
+    "validation_blocks": [
+      "B2"
+    ],
+    "test_blocks": [
+      "B4",
+      "B5"
+    ],
+    "same_recording_holdouts": true,
+    "train_frames": 39,
+    "validation_frames": 8,
+    "test_frames": 16,
+    "new_training_synthetic_replay": false
+  },
+  "new_test_native_px": {
+    "pin": 13.764174064232249,
+    "pin_labels": 6,
+    "hole": 7.285202560959711,
+    "hole_labels": 16,
+    "baseline_pin": 86.06517901732853,
+    "baseline_hole": 20.78742768086082
+  },
+  "limitations": [
+    "Visual reproduction is not manufacturing CAD; dimensions include assumptions from the recovered profile.",
+    "Registration is conditional image fitting, not certified metric calibration.",
+    "No new corrected-simulator training was claimed; the selected checkpoint was real-only adapted from the previous checkpoint.",
+    "At gate threshold0.8,2/4 new-test negatives activate falsely; autonomous gate remains unapproved.",
+    "Unverified causal cache worsens later-frame hole error9.00px vs current7.21px.",
+    "Corrected physical-sim diagnostic has poor CNN transfer: hole87.34px on16visible samples; zero externally valid pin labels.",
+    "Physical rim touch/hold completed but did not insert; no CNN control executed."
+  ],
+  "physics_diagnostic": {
+    "final_info": {
+      "part": "pin_2",
+      "gear": "gear_3",
+      "lateral_error_mm": 2.4429731630762985,
+      "axial_error_mm": 16.914379574202957,
+      "tilt_deg": 2.6127570931817585,
+      "through_carrier": false,
+      "through_gear": false,
+      "carrier_bore_error_mm": 2.58068506415951,
+      "gear_bore_error_mm": 3.7379017406338497,
+      "success": false,
+      "is_success": false,
+      "pin_delta_m": [
+        0.0018146100861726189,
+        0.001611238098275982,
+        0.016916721203636048
+      ],
+      "carrier_error_m": 0.0009293899963753955,
+      "pin_contact_load_n": 0.0,
+      "pinched": true,
+      "holder_pinched": true,
+      "carrier_supported": true,
+      "failure": null,
+      "ik_errors": {
+        "left": [
+          1.6834134012076528e-09,
+          1.0563403257414671e-09
+        ],
+        "right": [
+          2.2966281099373593e-08,
+          1.090909441702603e-09
+        ]
+      },
+      "seated_steps": 0
+    },
+    "regime_counts": {
+      "carrier_rim_contact": 9,
+      "hover_above_carrier": 29,
+      "unclassified_geometry": 3
+    },
+    "pin_position_error": {
+      "count": 0,
+      "mean": null,
+      "median": null
+    },
+    "hole_position_error": {
+      "count": 16,
+      "mean": 87.3374450984015,
+      "median": 85.22514251249294
+    }
+  },
+  "artifacts": {
+    "mesh": {
+      "path": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-real/reproduced-carrier-v4/reproduced_carrier_real_face_v4.stl",
+      "sha256": "21c88b81740e085d49447aeed6be69ee12defe89a5ddf19dd0424586fdf814a2"
+    },
+    "carrier_comparison": {
+      "path": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-real/carrier-visual-comparison/original-new-real-closeup.png",
+      "sha256": "97a9285d4766a20fdab6f2cf24c90cb3933c121ec19e1865ffc8c81ab0544dc2"
+    },
+    "matched_replay_video": {
+      "path": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-real/videos/reproduced-v4-carrier-real-sim.mp4",
+      "sha256": "575dc3dae1a7e5e2d52e70611f9b6dc79e6e2ca1c9b1a3563691b27093e75616"
+    },
+    "real_heatmap_video": {
+      "path": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-newdemo/heldout-blocks-cnn-memory-diagnostic.mp4",
+      "sha256": "27828fc793bb2608f136491bc215ff1bfb9cd8832265a486daf684cedfd3f61b"
+    },
+    "sim_heatmap_video": {
+      "path": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-photo/registered-contact-verified-heatmaps.mp4",
+      "sha256": "e3a38fb6b2263d44ef96db908647737f96eb2c442cc94d6a2f3b77997127beb2"
+    },
+    "selected_checkpoint": {
+      "path": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-newdemo/proprio.pt",
+      "sha256": "cdc34b08af947ddbe114a2e723b7a252133f214ec75df8e12b426d4fd4c5b73a"
+    },
+    "model_summary": {
+      "path": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-newdemo/model-summary.json",
+      "sha256": "498b4bf80ed164466f03143be24b17120ccd6b70b2696c2084f10f9f443c71c0"
+    },
+    "native_fk_audit": {
+      "path": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-newdemo/native-fk-audit.json",
+      "sha256": "b4e08eb3daae21f1d635cc9d0eab63a83f40e1e6bb241c3ccb5ec4edff1cab11"
+    },
+    "physics_invariance_audit": {
+      "path": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-real/registered-setup-physics-audit.json",
+      "sha256": "cf0171e3ad0e3bfe6fc2fa92ea7cff8e2a337307ab9b4d2a24772676b1fbaf84"
+    }
+  }
+}

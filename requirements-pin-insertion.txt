@@ -1,0 +1,16 @@
+# Offline rendering, CNN training, and saved-demo evaluation. Python 3.12 recommended.
+# Install the PyTorch CUDA build appropriate to the local GPU when training on CUDA.
+numpy>=2.2,<3
+torch>=2.6,<3
+# Match the existing photo-profile contact environment's runtime.
+mujoco==3.14.0
+gymnasium==1.2.3
+opencv-python-headless==5.0.0.93
+Pillow>=11,<14
+scipy>=1.13,<2
+imageio-ffmpeg>=0.6,<1
+pytest>=8,<10
+
+# Reproducible manifold CSG for the documented visual-only carrier reproduction.
+trimesh==5.2.0
+manifold3d==3.5.4

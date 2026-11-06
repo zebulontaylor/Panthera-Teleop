@@ -1,0 +1,147 @@
+{
+  "date": "2026-11-04",
+  "scope": "Inference dashboard pin alignment preview; user specifically reports errors when pin rests at far edge of carrier",
+  "checkpoint": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-newdemo/proprio.pt",
+  "checkpoint_sha256": "cdc34b08af947ddbe114a2e723b7a252133f214ec75df8e12b426d4fd4c5b73a",
+  "findings": [
+    {
+      "finding": "Confirmed carrier distractor confusion in user example",
+      "evidence": "The lower dark opening with bright stripe highlights remains visible in saved sequence frames0,10,20,30 before the pin arrives. It is stationary carrier structure. Moving shaft end in later frames is up-left of it.",
+      "physical_target": "User confirms bottom approx10-15px up-left of displayed cyan marker; no exact coordinate invented."
+    },
+    {
+      "finding": "Insufficient real endpoint supervision",
+      "evidence": "39 adaptation training images, 16 valid pin-tip labels, one validation pin-tip label; one recording and grasp/pose-block holdout rather than session-disjoint training selection",
+      "source": "work/pin-insertion-newdemo/model-summary.json"
+    },
+    {
+      "finding": "Far-side contact coverage is particularly weak",
+      "evidence": "Only three visible training tips are more than 20 native pixels image-up from target bore (221,608,678); all are clearly_away_or_withdrawn. Seven likely contact tips are 4 to 27 px below target bore. Image-up is a visual proxy, not a calibrated 3D far-side definition.",
+      "source": "work/pin-cnn-investigation/far-edge-audit.json"
+    },
+    {
+      "finding": "Endpoint and stationary carrier details are easily confused",
+      "evidence": "Independent label review removed six likely-contact B3 tips (535,763,810,825,843,857) because distal shaft termination could not reliably be separated from stationary bore/reflection. Only two valid contact tips remain in B3 (748,780).",
+      "source": "work/pin-insertion-newdemo/train-labels-independent-audit.json"
+    },
+    {
+      "finding": "Masked endpoint labels do not teach abstention",
+      "evidence": "Spatial softmax expectation always emits an in-bounds coordinate. No per-landmark visibility head. Runtime accepts every finite in-bounds pin and discards heatmap ambiguity. Gate is not endpoint confidence.",
+      "source": "app/pin_insertion_cnn.py; app/pin_alignment_worker.py"
+    },
+    {
+      "finding": "Endpoint detail is reduced",
+      "evidence": "Full 640x480 RGB becomes 160x160 input, then 40x40 heatmaps. One score-map cell corresponds to 16x12 native pixels; coordinates can interpolate between cells but fine visual detail is reduced.",
+      "source": "work/pin-insertion-newdemo/proprio.pt metadata; app/pin_insertion_cnn.py"
+    },
+    {
+      "finding": "No obvious decoding/RGB/coordinate-order defect found",
+      "evidence": "Training and runtime use full-frame RGB, square resizing, same coordinate order and native-pixel rescaling."
+    },
+    {
+      "finding": "No support for changing decoder alone",
+      "evidence": {
+        "n": 1,
+        "errors_px": {
+          "global": {
+            "mean": 3.815343945308092,
+            "max": 3.815343945308092
+          },
+          "argmax": {
+            "mean": 10.0,
+            "max": 10.0
+          },
+          "local_r1": {
+            "mean": 8.831101694768863,
+            "max": 8.831101694768863
+          },
+          "local_r2": {
+            "mean": 6.280533942811643,
+            "max": 6.280533942811643
+          },
+          "local_r3": {
+            "mean": 4.477611459810136,
+            "max": 4.477611459810136
+          }
+        },
+        "mean_std_px": 30.3171601196308,
+        "mean_zero_joint_shift_px": 0.2709902358046419
+      },
+      "limitations": "Only one validation pin; diagnostic comparison cannot establish general performance."
+    },
+    {
+      "finding": "Strong pose reliance is not apparent in existing labeled domain",
+      "evidence": "Zeroing joint inputs shifted pin coordinates by 0.43 px train mean and 0.27 px validation mean.",
+      "limitations": "Out-of-distribution ablation, not a deployment configuration."
+    }
+  ],
+  "recommended_work_in_order": [
+    "Audit training pin endpoint identities against the user-confirmed physical bottom using full approach/withdrawal sequences. Do not label carrier rim, cavity, highlight, shaft side or occlusion boundary as the endpoint. Preserve old manifest; make reviewed corrections in a versioned new manifest. Then add far-edge contact examples and same-carrier pin-withdrawn distractor negatives.",
+    "Use the supplied failure as a development/regression case, not an untouched independent test. Include physically reviewed far-edge contact clips in validation; reserve separate acquisition/grasp groups for final testing.",
+    "Persist exact raw source image, matched measured state, timestamp, model version and operator pin correction when Set pin manually is used. Current corrections are memory-only and are lost as training evidence.",
+    "Train a full-frame coarse model plus a higher-resolution carrier-and-pin crop refinement head, with shaft/axis or pin-mask supervision and endpoint visibility. Ensure crop can include the real tip even when the coarse point is wrong.",
+    "Use explicit visibility and calibrated rejection before treating a pin coordinate as localized. Do not interpret peak mass, heatmap width, or active gate alone as calibrated endpoint confidence.",
+    "Validate on complete held-out acquisition/grasp groups with multiple reviewed far-edge contact tips, reporting pin tail error, large-miss rate, and coverage after rejection. Preserve existing test sets; use new tests for final reporting after selection."
+  ],
+  "artifacts": {
+    "diagnose_decoding.py": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/diagnose_decoding.py",
+    "decoding-diagnostics.json": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/decoding-diagnostics.json",
+    "train-tip-coverage.jpg": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/train-tip-coverage.jpg",
+    "far-edge-selected.jpg": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/far-edge-selected.jpg",
+    "far-edge-current-predictions.jpg": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/far-edge-current-predictions.jpg",
+    "far-edge-audit.json": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/far-edge-audit.json",
+    "far-edge-predictions.json": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/far-edge-predictions.json",
+    "current-alignment-overlay.jpg": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/current-alignment-overlay.jpg",
+    "user-example-raw.png": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/user-example-raw.png",
+    "user-example-overlay.png": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/user-example-overlay.png",
+    "user-example-match.json": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/user-example-match.json",
+    "user-example-temporal-unmarked.jpg": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/user-example-temporal-unmarked.jpg",
+    "contact-label-comparison.png": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/contact-label-comparison.png",
+    "b1-temporal-label-audit.png": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/b1-temporal-label-audit.png",
+    "user-example-heatmaps.jpg": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/user-example-heatmaps.jpg",
+    "user-example-heatmaps.json": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/user-example-heatmaps.json"
+  },
+  "changes": "Offline diagnostics and report only; no application code, model weights, live configuration, or motion commands changed.",
+  "verification": {
+    "checkpoint_sha256_unchanged": true,
+    "decoder_experiment_frames": 47,
+    "decoder_experiment_test_images_read": false,
+    "far_edge_new_frames": 6,
+    "new_ground_truth_coordinates_invented": false
+  },
+  "limitations": [
+    "New far-edge frames are qualitative review examples with no certified endpoint ground truth, so no numeric accuracy claim is made on them.",
+    "Existing labels are AI visual annotations with stated uncertainty, not human-certified precision.",
+    "A visibility flag handles unobservability but does not itself improve localization of a visible endpoint.",
+    "Earlier pixel metrics measure agreement with AI annotations; wrong physical subfeature labels could produce good pixel metrics while missing the true bottom. Current evidence establishes a concrete failure, not a complete count of label errors."
+  ],
+  "user_confirmed_failure": {
+    "raw_image": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/user-example-raw.png",
+    "displayed_overlay": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/user-example-overlay.png",
+    "user_guidance_verbatim": "no it should be like 10-15 pixels to the up-left of the current cyan marker",
+    "exact_ground_truth_coordinate": null,
+    "confirmed_temporal_evidence": "The lower dark opening with bright stripe highlights remains visible in saved sequence frames0,10,20,30 before the pin arrives. It is stationary carrier structure. Moving shaft end in later frames is up-left of it.",
+    "diagnosis": "Pin/carrier-feature identity confusion at far-edge contact. The user-intended endpoint differs from the feature selected by the network.",
+    "source_match": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/user-example-match.json",
+    "temporal_comparison": "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/user-example-temporal-unmarked.jpg",
+    "training_label_audit": "Some original labels resemble the misleading subfeature, but B1 temporal evidence shows labeled bright feature moves with the shaft. Existing labels are suspect for endpoint semantics; it is NOT established that all or most mark stationary carrier holes.",
+    "correction_to_initial_visual_interpretation": "Lowest visible dark/striped circular feature is not automatically the pin bottom. Initial AI interpretation of that feature was wrong for the uploaded case. User physical identity and temporal absence evidence take precedence."
+  },
+  "paired_reference_proposal": {
+    "user_question": "Would a before image without pin and a current image, or their delta, improve detection?",
+    "assessment": "Promising specific hypothesis: reference identifies carrier features that existed before pin entered. No localization improvement demonstrated yet.",
+    "recommended_inputs": "Current RGB plus aligned clean-reference RGB; optionally signed/absolute RGB or learned feature difference as extra input. Preserve RGB appearance.",
+    "fixed_reference_vs_adjacent_frames": "A fixed clean reference retains added pin evidence when pin stops. Adjacent-frame difference can disappear at rest.",
+    "local_experiment": "Saved same-sequence frames20 and54 compared using absolute RGB difference. Pin and entering gripper are highlighted, but shadows, reflections and background differences remain. Simple Euclidean carrier registration only marginally reduced static-mask RGB difference; no endpoint accuracy measured.",
+    "model_change": "Current first convolution accepts3 channels. Pair concatenation requires6, or9 with an RGB difference, and training on paired examples. Do not feed a difference image to the unchanged checkpoint.",
+    "reference_lifecycle": "Capture clean carrier in current wrist/grasp context, verify geometric alignment, and refresh on regrasp/camera changes or degraded reference match. Do not update clean reference with pin-present images.",
+    "evaluation": "Compare current-only, current-plus-reference, and current-plus-reference-plus-difference on physically reviewed held-out far-edge endpoint labels. Separate acquisition/grasp groups; preserve exact endpoint identity.",
+    "artifacts": [
+      "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/reference-difference-example.jpg",
+      "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/reference-difference-example.json",
+      "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/reference-difference-aligned.jpg",
+      "/home/robotics/Desktop/panthera-teleop/work/pin-cnn-investigation/reference-difference-aligned.json"
+    ],
+    "changes": "Offline image comparisons only; model, live configuration and robot controls unchanged."
+  }
+}

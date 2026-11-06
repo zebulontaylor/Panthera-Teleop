@@ -1,0 +1,594 @@
+{
+  "model_camera_local_position_m": [
+    0.03345203609983828,
+    -0.001440913328537547,
+    0.09055375410721651
+  ],
+  "model_camera_local_rotation_mujoco": [
+    [
+      0.04003535621890454,
+      0.3490075272983721,
+      -0.936264340953719
+    ],
+    [
+      -0.9991276979949247,
+      0.025118762850993216,
+      -0.03336001876795341
+    ],
+    [
+      0.011874904285427219,
+      0.9367832159266689,
+      0.349708725951041
+    ]
+  ],
+  "fovy_deg": 64.4141933835545,
+  "right_gripper_opening_scale": 1.2,
+  "right_gripper_opening_offset_m": 0.0,
+  "schema_version": 1,
+  "kind": "own_right_finger_silhouette_registration_hypothesis",
+  "real_calibrated": false,
+  "metric_accuracy_validated": false,
+  "fixed_gripper_scale": 1.2,
+  "parameter_bounds_dimensionless": [
+    [
+      -3,
+      3
+    ],
+    [
+      -3,
+      3
+    ],
+    [
+      -3,
+      3
+    ],
+    [
+      -3,
+      3
+    ],
+    [
+      -3,
+      3
+    ],
+    [
+      -3,
+      3
+    ],
+    [
+      -1.2,
+      2.8
+    ]
+  ],
+  "parameters_at_bounds": [],
+  "per_frame_finger_opening_m": {
+    "cb54463f4ab24910b7e542032b363a15__0000": 0.02693224811553955,
+    "5095591de84344c2b8dcc9fee348b445__0000": 0.026404458045959475,
+    "05d41bff10c140ee87526f0cd828ec00__0000": 0.026404458045959475,
+    "a043359eb3914840b016bf4f20a20877__0000": 0.02693224811553955,
+    "6f7d177e8cef401fb22f147c4fed0e9f__0000": 0.02693224811553955
+  },
+  "mesh_mask_semantics": "Blackmount/pads/rightrobot occlusion rendered; mask exact disconnected white_digit component from original source STL facets; rearblackmount separatevisualmesh; collision/inertia/joints unchanged",
+  "selected_by": "mean independent validation mask chamfer+20*(1-IoU); no pin/carrier/test pixels",
+  "starts": [
+    {
+      "parameters": [
+        -0.471736433603958,
+        0.08862324906527769,
+        -0.6543407138831102,
+        -0.03537252435127127,
+        -0.05939461858965529,
+        0.006511403127342012,
+        -0.2682271423468183
+      ],
+      "profile": {
+        "model_camera_local_position_m": [
+          0.03556527132792084,
+          0.0017724649813055538,
+          0.0869131857223378
+        ],
+        "model_camera_local_rotation_mujoco": [
+          [
+            0.0015621163776364441,
+            0.328022752170878,
+            -0.9446685312058751
+          ],
+          [
+            -0.9999595755823154,
+            0.00887723546723098,
+            0.001428947757913906
+          ],
+          [
+            0.008854772366257114,
+            0.9446281113479008,
+            0.32802335931704574
+          ]
+        ],
+        "fovy_deg": 66.78127429183817,
+        "right_gripper_opening_scale": 1.2,
+        "right_gripper_opening_offset_m": 0.0
+      },
+      "objective": 5.045777129157643,
+      "success": true,
+      "nfev": 328,
+      "metrics": {
+        "train": [
+          {
+            "id": "cb54463f4ab24910b7e542032b363a15__0000",
+            "iou": 0.8375523584046621,
+            "chamfer_px": 1.741530179977417,
+            "score": 4.990483011884175
+          },
+          {
+            "id": "5095591de84344c2b8dcc9fee348b445__0000",
+            "iou": 0.837655222790358,
+            "chamfer_px": 1.7824095487594604,
+            "score": 5.029305092952301
+          },
+          {
+            "id": "05d41bff10c140ee87526f0cd828ec00__0000",
+            "iou": 0.837655222790358,
+            "chamfer_px": 1.7824095487594604,
+            "score": 5.029305092952301
+          }
+        ],
+        "validation": [
+          {
+            "id": "a043359eb3914840b016bf4f20a20877__0000",
+            "iou": 0.8375523584046621,
+            "chamfer_px": 1.741530179977417,
+            "score": 4.990483011884175
+          },
+          {
+            "id": "6f7d177e8cef401fb22f147c4fed0e9f__0000",
+            "iou": 0.8375523584046621,
+            "chamfer_px": 1.741530179977417,
+            "score": 4.990483011884175
+          }
+        ]
+      }
+    },
+    {
+      "parameters": [
+        -0.5773981950080859,
+        -0.07204566642687735,
+        -0.47231229463917473,
+        -0.04815255725311172,
+        0.0319266509473353,
+        0.15999750862619022,
+        -0.46548388470379154
+      ],
+      "profile": {
+        "model_camera_local_position_m": [
+          0.03345203609983828,
+          -0.001440913328537547,
+          0.09055375410721651
+        ],
+        "model_camera_local_rotation_mujoco": [
+          [
+            0.04003535621890454,
+            0.3490075272983721,
+            -0.936264340953719
+          ],
+          [
+            -0.9991276979949247,
+            0.025118762850993216,
+            -0.03336001876795341
+          ],
+          [
+            0.011874904285427219,
+            0.9367832159266689,
+            0.349708725951041
+          ]
+        ],
+        "fovy_deg": 64.4141933835545,
+        "right_gripper_opening_scale": 1.2,
+        "right_gripper_opening_offset_m": 0.0
+      },
+      "objective": 4.83191075986944,
+      "success": true,
+      "nfev": 992,
+      "metrics": {
+        "train": [
+          {
+            "id": "cb54463f4ab24910b7e542032b363a15__0000",
+            "iou": 0.8389102212470287,
+            "chamfer_px": 1.6828417778015137,
+            "score": 4.904637352860939
+          },
+          {
+            "id": "5095591de84344c2b8dcc9fee348b445__0000",
+            "iou": 0.8435486839683416,
+            "chamfer_px": 1.6180849075317383,
+            "score": 4.747111228164906
+          },
+          {
+            "id": "05d41bff10c140ee87526f0cd828ec00__0000",
+            "iou": 0.8435486839683416,
+            "chamfer_px": 1.6180849075317383,
+            "score": 4.747111228164906
+          }
+        ],
+        "validation": [
+          {
+            "id": "a043359eb3914840b016bf4f20a20877__0000",
+            "iou": 0.8389102212470287,
+            "chamfer_px": 1.6828417778015137,
+            "score": 4.904637352860939
+          },
+          {
+            "id": "6f7d177e8cef401fb22f147c4fed0e9f__0000",
+            "iou": 0.8389102212470287,
+            "chamfer_px": 1.6828417778015137,
+            "score": 4.904637352860939
+          }
+        ]
+      }
+    },
+    {
+      "parameters": [
+        0.20043670060179075,
+        1.0973658469802063,
+        -0.2757189068598288,
+        -0.3440863176579823,
+        0.37642281712098485,
+        -0.5983632806197193,
+        -0.11779381388438095
+      ],
+      "profile": {
+        "model_camera_local_position_m": [
+          0.049008734012035815,
+          0.02194731693960413,
+          0.09448562186280343
+        ],
+        "model_camera_local_rotation_mujoco": [
+          [
+            -0.14459494176524312,
+            0.43058481474789045,
+            -0.8908922606715308
+          ],
+          [
+            -0.985159308015489,
+            0.021507272729554754,
+            0.1702896798111364
+          ],
+          [
+            0.09248481305786795,
+            0.9022938293750332,
+            0.4210847952911501
+          ]
+        ],
+        "fovy_deg": 68.58647423338743,
+        "right_gripper_opening_scale": 1.2,
+        "right_gripper_opening_offset_m": 0.0
+      },
+      "objective": 7.716785638860067,
+      "success": true,
+      "nfev": 150,
+      "metrics": {
+        "train": [
+          {
+            "id": "cb54463f4ab24910b7e542032b363a15__0000",
+            "iou": 0.7697646859658033,
+            "chamfer_px": 2.93314790725708,
+            "score": 7.537854187941015
+          },
+          {
+            "id": "5095591de84344c2b8dcc9fee348b445__0000",
+            "iou": 0.7656620386048086,
+            "chamfer_px": 3.002347469329834,
+            "score": 7.689106697233662
+          },
+          {
+            "id": "05d41bff10c140ee87526f0cd828ec00__0000",
+            "iou": 0.7656620386048086,
+            "chamfer_px": 3.002347469329834,
+            "score": 7.689106697233662
+          }
+        ],
+        "validation": [
+          {
+            "id": "a043359eb3914840b016bf4f20a20877__0000",
+            "iou": 0.7697646859658033,
+            "chamfer_px": 2.93314790725708,
+            "score": 7.537854187941015
+          },
+          {
+            "id": "6f7d177e8cef401fb22f147c4fed0e9f__0000",
+            "iou": 0.7697646859658033,
+            "chamfer_px": 2.93314790725708,
+            "score": 7.537854187941015
+          }
+        ]
+      }
+    }
+  ],
+  "baseline_metrics": {
+    "train": [
+      {
+        "id": "cb54463f4ab24910b7e542032b363a15__0000",
+        "iou": 0.45827184784390884,
+        "chamfer_px": 8.33305549621582,
+        "score": 19.167618539337646
+      },
+      {
+        "id": "5095591de84344c2b8dcc9fee348b445__0000",
+        "iou": 0.44433609621322934,
+        "chamfer_px": 8.570886611938477,
+        "score": 19.684164687673892
+      },
+      {
+        "id": "05d41bff10c140ee87526f0cd828ec00__0000",
+        "iou": 0.44433609621322934,
+        "chamfer_px": 8.570886611938477,
+        "score": 19.684164687673892
+      }
+    ],
+    "validation": [
+      {
+        "id": "a043359eb3914840b016bf4f20a20877__0000",
+        "iou": 0.45827184784390884,
+        "chamfer_px": 8.33305549621582,
+        "score": 19.167618539337646
+      },
+      {
+        "id": "6f7d177e8cef401fb22f147c4fed0e9f__0000",
+        "iou": 0.45827184784390884,
+        "chamfer_px": 8.33305549621582,
+        "score": 19.167618539337646
+      }
+    ]
+  },
+  "selected_metrics": {
+    "train": [
+      {
+        "id": "cb54463f4ab24910b7e542032b363a15__0000",
+        "iou": 0.8389102212470287,
+        "chamfer_px": 1.6828417778015137,
+        "score": 4.904637352860939
+      },
+      {
+        "id": "5095591de84344c2b8dcc9fee348b445__0000",
+        "iou": 0.8435486839683416,
+        "chamfer_px": 1.6180849075317383,
+        "score": 4.747111228164906
+      },
+      {
+        "id": "05d41bff10c140ee87526f0cd828ec00__0000",
+        "iou": 0.8435486839683416,
+        "chamfer_px": 1.6180849075317383,
+        "score": 4.747111228164906
+      }
+    ],
+    "validation": [
+      {
+        "id": "a043359eb3914840b016bf4f20a20877__0000",
+        "iou": 0.8389102212470287,
+        "chamfer_px": 1.6828417778015137,
+        "score": 4.904637352860939
+      },
+      {
+        "id": "6f7d177e8cef401fb22f147c4fed0e9f__0000",
+        "iou": 0.8389102212470287,
+        "chamfer_px": 1.6828417778015137,
+        "score": 4.904637352860939
+      }
+    ]
+  },
+  "labels_sha256": "c056fb10b2e0b6c05b5b0a132142abf0bcdfdfb4eec438eaf2b0e35929367d87",
+  "environment": {
+    "environment": "sim.pin_insertion_env.BimanualPinInsertionEnv",
+    "setup_profile": "photo_20261027",
+    "runtime_versions": {
+      "mujoco": "3.14.0",
+      "gymnasium": "1.2.3",
+      "numpy": "2.5.4"
+    },
+    "required_mujoco_version": "3.14.0",
+    "layout": "side_by_side",
+    "source_root": "/home/robotics/Desktop/RobotArmTraining",
+    "source_sha256": {
+      "/home/robotics/Desktop/RobotArmTraining/sim/bimanual_actuator_env.py": "0b73ecc02138538e81f84bbbb440aed2355b33d1bf0ea8a02f3722af8807cf66",
+      "/home/robotics/Desktop/RobotArmTraining/sim/pin_insertion_env.py": "c49bb8faa651542fb2bb26acab8407ee0555821829dfb17790093a760254d311",
+      "/home/robotics/Desktop/RobotArmTraining/sim/real_setup.py": "f40f0d99dba2ab8d5146d077cf5833ce69bf0f4c480c2a684726f4a64c78adf8",
+      "/home/robotics/Desktop/RobotArmTraining/config/real_setup_20261027.json": "784763c51b9ff2d42d07ec7243a332b91b16af551b9ed412db4b493e538ee7e6",
+      "/home/robotics/Desktop/RobotArmTraining/sim/actuator/textures/bench_photo_20261027.png": "b9c4a856ebd3fb5beba988c3c991b78303a01add7bf0dc325296aa296d46e2e0",
+      "/home/robotics/Desktop/RobotArmTraining/requirements-actuator.txt": "6a18211726ea1554b20cbec0728a962af4cf87fc2aaa093bbdcac48780ec992c",
+      "/home/robotics/Desktop/RobotArmTraining/sim/actuator/scene_bimanual_photo_20261027.xml": "abbe378d723097ca1a8ab0021756e82bbc6506485fe812e700dfd0bd60140959"
+    },
+    "base_frames": {
+      "left": {
+        "name": "left_base",
+        "position_world_m": [
+          0.0,
+          0.29,
+          0.05
+        ],
+        "rotation_world": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "right": {
+        "name": "right_base",
+        "position_world_m": [
+          0.0,
+          -0.29,
+          0.05
+        ],
+        "rotation_world": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "cameras": {
+      "overhead": {
+        "parent": "world",
+        "position_parent_m": [
+          0.015,
+          0.0,
+          0.42
+        ],
+        "fovy_deg": 80.0
+      },
+      "left_wrist": {
+        "parent": "link6",
+        "position_parent_m": [
+          0.045,
+          0.0,
+          0.1
+        ],
+        "fovy_deg": 70.0
+      },
+      "right_wrist": {
+        "parent": "right_link6",
+        "position_parent_m": [
+          0.045,
+          0.0,
+          0.1
+        ],
+        "fovy_deg": 70.0
+      }
+    },
+    "tabletop_world_z_m": 0.05,
+    "native_state_order": "left joints1..6,gripper,right joints1..6,gripper (radians)",
+    "arm_mapping": "exact joint angles, no offsets or retargeting",
+    "gripper_mapping": "endpoint approximation only; not measured jaw calibration",
+    "visual_partition": {
+      "audit_path": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-real/cad-finger-audit/audit.json",
+      "audit_sha256": "920da06b61f885935d892b57774f1504e0fd96aed24a319ef5fa0e7c8f92db8f",
+      "meshes": {
+        "L": {
+          "source": "/home/robotics/Desktop/RobotArmTraining/sim/panthera/meshes/visual/L_finger.STL",
+          "source_sha256": "a152384aaa7ea128c868ba9a5a679592e74fb9d684a9ba1e69699004194ecbd1",
+          "source_triangles": 17892,
+          "white_component_id": 11,
+          "white": {
+            "path": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-real/finger-visual-partition/L_white.STL",
+            "sha256": "d5f938dadc1b801627d3cc66b20bf93a20ec78a1a8a6c93892fb2681584319bb",
+            "triangles": 1458
+          },
+          "black": {
+            "path": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-real/finger-visual-partition/L_black.STL",
+            "sha256": "be33b312ed35bed987bb0d2d5ac34a80ce3be12e1ed832a17197e2a0ca47bc92",
+            "triangles": 16434
+          }
+        },
+        "R": {
+          "source": "/home/robotics/Desktop/RobotArmTraining/sim/panthera/meshes/visual/R_finger.STL",
+          "source_sha256": "1b5ff532657cbd6a1376e358b88adf171c692bd4882848eb3e5931b9f38c9eee",
+          "source_triangles": 17892,
+          "white_component_id": 11,
+          "white": {
+            "path": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-real/finger-visual-partition/R_white.STL",
+            "sha256": "cd7f14577738dc7a686e262c5f7ea4f946a73f7f1baccf6fcc65164087b7b366",
+            "triangles": 1458
+          },
+          "black": {
+            "path": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-real/finger-visual-partition/R_black.STL",
+            "sha256": "a2e8f576e414765f077a881948eea3053df3998e08c129c4899fb4165c09e68f",
+            "triangles": 16434
+          }
+        }
+      },
+      "replaced_visual_geoms": [
+        "L_finger_photo_white_visual",
+        "L_finger_photo_black_visual",
+        "R_finger_photo_white_visual",
+        "R_finger_photo_black_visual",
+        "right_L_finger_photo_white_visual",
+        "right_L_finger_photo_black_visual",
+        "right_R_finger_photo_white_visual",
+        "right_R_finger_photo_black_visual"
+      ],
+      "physics_modified": false,
+      "geometry_coordinates_modified": false,
+      "method": "Audited connected component11, exact source facet records; white front digit and black mount/fasteners"
+    },
+    "physical_reset": "existing task reset/contact implementation; adapter does not replace grasps",
+    "real_calibrated": false,
+    "camera_source": "existing photograph setup profile; approximate visual dimensions, not new fitted camera transforms"
+  },
+  "assumptions": [
+    "Only two near-identical gripper apertures observed; camera/width/depth parameters may be confounded despite silhouette overlap. Fixedgripperscale whenprovided is a physicalcarriergrasp prior, not estimated from these masks.",
+    "Manual white-finger outer envelopes fill rib slots in BOTH masks. Black pads, left gripper, carrier excluded.",
+    "Native arm angles unchanged; right gripper radians-to-opening endpoint scale is fitted nuisance, not independently measured jaw calibration.",
+    "Camera mount/FOV remains conditional CAD image registration, not full intrinsics/distortion or metric calibration."
+  ],
+  "T_right_tool_camera_opencv": [
+    [
+      0.040035356218904576,
+      -0.34900752729837187,
+      0.9362643409537192,
+      -0.1315479639001618
+    ],
+    [
+      -0.9991276979949251,
+      -0.025118762850993022,
+      0.03336001876795354,
+      -0.0014409133285375741
+    ],
+    [
+      0.011874904285427106,
+      -0.9367832159266689,
+      -0.3497087259510411,
+      0.0905537541072165
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "K": [
+    [
+      381.00886615512246,
+      0,
+      320
+    ],
+    [
+      0,
+      381.00886615512246,
+      240
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "distortion": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "name": "photo_20261027_registered_v1",
+  "kind": "registered_photo_setup",
+  "components": {
+    "camera": {
+      "path": "camera.json",
+      "sha256": "fa3abe4a8ae5d9a934bc7d6a1404e19f6575f7045f18f101cbbfd921f29aa63a"
+    },
+    "planar_base": {
+      "path": "planar-base.json",
+      "sha256": "51f97a710b1eabe377eaafa017cca02bf3b26e305ba80661434cc1dbf7045cf0"
+    }
+  },
+  "diagnostic_carrier_candidate": {
+    "path": "carrier-grasp-training.json",
+    "status": "TRAIN-only rendering hypothesis; carrier CAD reproduction audit pending, never injected into physics"
+  },
+  "physical_scope": "Camera and planar base applied before original task reset; original actual contact grasps retained.",
+  "diagnostic_scope": "TRAIN-only carrier/tool transform and complete CAD relationships only for explicit native-q kinematic reconstruction.",
+  "carrier_grasp_physically_validated": false,
+  "real_calibrated": false,
+  "provenance": "Accepted work calibration profiles copied byte-for-byte; raw calibration observations, masks, alternatives and audit artifacts remain under work/pin-insertion-real."
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "camera": "left_wrist",
+  "kind": "nominal_photo_simulation_mount",
+  "real_calibrated": false,
+  "metric_accuracy_validated": false,
+  "image_width": 640,
+  "image_height": 480,
+  "model_camera_local_position_m": [
+    0.045,
+    0.0,
+    0.1
+  ],
+  "model_camera_local_rotation_mujoco": [
+    [
+      0.0,
+      0.3420201433256687,
+      -0.9396926207859084
+    ],
+    [
+      -1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.9396926207859084,
+      0.3420201433256687
+    ]
+  ],
+  "fovy_deg": 70.0,
+  "provenance": "RobotArmTraining/config/real_setup_20261027.json wrist_cameras; sim/real_setup.py apply_photo_setup; scene_bimanual_photo_20261027.xml left_wrist. Nominal photograph visual reference, not fitted to real left wrist images. LEFT optics only; no right-camera registration reused."
+}

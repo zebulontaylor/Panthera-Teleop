@@ -1,0 +1,1648 @@
+{
+  "date": "2026-11-04",
+  "task": "Left-held pin final alignment from right-wrist view",
+  "status": "Offline experiments completed; contact localization, early hole lock, metric grasp calibration and activation remain unvalidated; no motion enabled",
+  "artifacts": {
+    "manifest.json": {
+      "path": "work/pin-insertion-real/manifest.json",
+      "sha256": "a8b19325310e3248613e3aa9a8ab93adaa56dcb9cbeab834a9f38d1498818586"
+    },
+    "contact-manifest.json": {
+      "path": "work/pin-insertion-real/contact-manifest.json",
+      "sha256": "0f17d0cba2cdcfaa626dc24628a9441a3f9b1dc471b3660525a951afe8d650c1"
+    },
+    "adapted.pt": {
+      "path": "work/pin-insertion-real/adapted.pt",
+      "sha256": "0cb8c666f169305178186837ab4eb94b4f67a5dc521c925a8a9603ab11bbba90"
+    },
+    "contact-real.pt": {
+      "path": "work/pin-insertion-real/contact-real.pt",
+      "sha256": "c867e14e1d7f74b1cf6552da1d4baf7d7f3900e78476185f70cd2ce202d44b7d"
+    },
+    "test-evaluation.json": {
+      "path": "work/pin-insertion-real/test-evaluation.json",
+      "sha256": "da06ba3ab5dd2663585d88c106c6dc2405800ecd1fd4ef38f4023290b2c9833c"
+    },
+    "contact-test-evaluation.json": {
+      "path": "work/pin-insertion-real/contact-test-evaluation.json",
+      "sha256": "90ec2e9bc129ca3f23c9ba54bb349047721dbd8c33cbcf89bc37544532c9087d"
+    },
+    "table-camera.json": {
+      "path": "work/pin-insertion-real/table-camera.json",
+      "sha256": "bdbfb25edc685ecf4427bca2c2f261fde1adfc5358f58bc4fd3c68bb4716881f"
+    },
+    "calibration-expanded.json": {
+      "path": "work/pin-insertion-real/calibration-expanded.json",
+      "sha256": "b9ffcd86d36e0b7846a047f3a4db15088da4242fb27d620f926add10bd8871be"
+    },
+    "contact-geometry-audit.json": {
+      "path": "work/pin-insertion-real/contact-geometry-audit.json",
+      "sha256": "ed4f90ee3bb935a85f08afdc7569c01809319277ee09c50d42855f3726875e85"
+    },
+    "challenge-reviewed.json": {
+      "path": "work/pin-insertion-real/challenge-reviewed.json",
+      "sha256": "1549ca1da6f81902aab8c61efdde78821379efa3cf8b6fc51ec4954f806d36bf"
+    },
+    "videos/early-hole-memory-real.json": {
+      "path": "work/pin-insertion-real/videos/early-hole-memory-real.json",
+      "sha256": "16bdfbd8f14473ee443db481e7c5a3ede2b3b6efee500d17a14fbfbbd5d5138d"
+    },
+    "oct31-hole-memory.json": {
+      "path": "work/pin-insertion-real/oct31-hole-memory.json",
+      "sha256": "3d712fb62154e030ee66a0065c4f0e797dce7c200b0ddc0776d39b3f4ce56ce0"
+    }
+  },
+  "initial_real_split": {
+    "train": {
+      "frames": 60,
+      "episodes": 20,
+      "sessions": 2,
+      "pin_labels": 40,
+      "hole_labels": 40,
+      "gate_negatives": 38,
+      "gate_positives": 0,
+      "gate_unknown": 22
+    },
+    "validation": {
+      "frames": 12,
+      "episodes": 4,
+      "sessions": 1,
+      "pin_labels": 8,
+      "hole_labels": 8,
+      "gate_negatives": 8,
+      "gate_positives": 0,
+      "gate_unknown": 4
+    },
+    "test": {
+      "frames": 30,
+      "episodes": 10,
+      "sessions": 3,
+      "pin_labels": 8,
+      "hole_labels": 26,
+      "gate_negatives": 26,
+      "gate_positives": 0,
+      "gate_unknown": 4
+    }
+  },
+  "contact_split": {
+    "train": {
+      "frames": 74,
+      "episodes": 23,
+      "contact_audit_frames": 34,
+      "landmark_counts": [
+        40,
+        69
+      ],
+      "positive_gates": 0
+    },
+    "validation": {
+      "frames": 24,
+      "episodes": 4,
+      "contact_audit_frames": 16,
+      "landmark_counts": [
+        16,
+        12
+      ],
+      "positive_gates": 0
+    },
+    "test": {
+      "frames": 60,
+      "episodes": 10,
+      "contact_audit_frames": 40,
+      "landmark_counts": [
+        16,
+        44
+      ],
+      "positive_gates": 0
+    }
+  },
+  "approach_dominated_test": {
+    "baseline": {
+      "landmarks": {
+        "pin_tip": {
+          "valid_labels": 8,
+          "invalid_or_unknown_labels": 22,
+          "error_native_px": {
+            "count": 8,
+            "mean": 71.60048567028,
+            "median": 78.28801411087598,
+            "p90": 100.01765823037033
+          },
+          "error_normalized_image_coordinates": {
+            "count": 8,
+            "mean": 0.12927654604682062,
+            "median": 0.1356978271101444,
+            "p90": 0.18459803223123594
+          },
+          "annotation_uncertainty_px": {
+            "count": 8,
+            "mean": 4.0,
+            "median": 4.0,
+            "p90": 4.0
+          }
+        },
+        "target_hole": {
+          "valid_labels": 26,
+          "invalid_or_unknown_labels": 4,
+          "error_native_px": {
+            "count": 26,
+            "mean": 58.54751754763817,
+            "median": 52.4658801467877,
+            "p90": 94.61292367700725
+          },
+          "error_normalized_image_coordinates": {
+            "count": 26,
+            "mean": 0.10865834484618132,
+            "median": 0.10583649871965048,
+            "p90": 0.18876192272813702
+          },
+          "annotation_uncertainty_px": {
+            "count": 26,
+            "mean": 4.0,
+            "median": 4.0,
+            "p90": 4.0
+          }
+        }
+      },
+      "gate": {
+        "0.5": {
+          "known_labels": 26,
+          "unknown_labels": 4,
+          "known_positive_labels": 0,
+          "known_negative_labels": 26,
+          "true_positive": 0,
+          "false_positive": 14,
+          "true_negative": 12,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "accuracy": 0.46153846153846156
+        },
+        "0.8": {
+          "known_labels": 26,
+          "unknown_labels": 4,
+          "known_positive_labels": 0,
+          "known_negative_labels": 26,
+          "true_positive": 0,
+          "false_positive": 3,
+          "true_negative": 23,
+          "false_negative": 0,
+          "precision": 0.0,
+          "recall": null,
+          "accuracy": 0.8846153846153846
+        }
+      }
+    },
+    "adapted": {
+      "landmarks": {
+        "pin_tip": {
+          "valid_labels": 8,
+          "invalid_or_unknown_labels": 22,
+          "error_native_px": {
+            "count": 8,
+            "mean": 6.645433646247773,
+            "median": 5.023637587398851,
+            "p90": 13.186814714582251
+          },
+          "error_normalized_image_coordinates": {
+            "count": 8,
+            "mean": 0.01214927159332492,
+            "median": 0.009386679523049583,
+            "p90": 0.022940667916369447
+          },
+          "annotation_uncertainty_px": {
+            "count": 8,
+            "mean": 4.0,
+            "median": 4.0,
+            "p90": 4.0
+          }
+        },
+        "target_hole": {
+          "valid_labels": 26,
+          "invalid_or_unknown_labels": 4,
+          "error_native_px": {
+            "count": 26,
+            "mean": 11.31613705138626,
+            "median": 9.967717467055957,
+            "p90": 18.528629895440158
+          },
+          "error_normalized_image_coordinates": {
+            "count": 26,
+            "mean": 0.02209250874292518,
+            "median": 0.02045241817011227,
+            "p90": 0.036525200843810966
+          },
+          "annotation_uncertainty_px": {
+            "count": 26,
+            "mean": 4.0,
+            "median": 4.0,
+            "p90": 4.0
+          }
+        }
+      },
+      "gate": {
+        "0.5": {
+          "known_labels": 26,
+          "unknown_labels": 4,
+          "known_positive_labels": 0,
+          "known_negative_labels": 26,
+          "true_positive": 0,
+          "false_positive": 0,
+          "true_negative": 26,
+          "false_negative": 0,
+          "precision": null,
+          "recall": null,
+          "accuracy": 1.0
+        },
+        "0.8": {
+          "known_labels": 26,
+          "unknown_labels": 4,
+          "known_positive_labels": 0,
+          "known_negative_labels": 26,
+          "true_positive": 0,
+          "false_positive": 0,
+          "true_negative": 26,
+          "false_negative": 0,
+          "precision": null,
+          "recall": null,
+          "accuracy": 1.0
+        }
+      }
+    }
+  },
+  "constant_train_mean_baseline": {
+    "fit_split": "train",
+    "train_label_counts": [
+      40,
+      40
+    ],
+    "mean_normalized": [
+      [
+        0.37507812499999993,
+        0.47901041666666666
+      ],
+      [
+        0.44218749999999973,
+        0.6145833333333331
+      ]
+    ],
+    "landmarks": {
+      "pin_tip": {
+        "valid_labels": 8,
+        "invalid_or_unknown_labels": 22,
+        "error_native_px": {
+          "count": 8,
+          "mean": 35.995403572583726,
+          "median": 24.979692867666078,
+          "p90": 71.73887250922148
+        },
+        "error_normalized_image_coordinates": {
+          "count": 8,
+          "mean": 0.0693309854457119,
+          "median": 0.04627797912530274,
+          "p90": 0.14808446162055003
+        },
+        "annotation_uncertainty_px": {
+          "count": 8,
+          "mean": 4.0,
+          "median": 4.0,
+          "p90": 4.0
+        }
+      },
+      "target_hole": {
+        "valid_labels": 26,
+        "invalid_or_unknown_labels": 4,
+        "error_native_px": {
+          "count": 26,
+          "mean": 7.897122710697295,
+          "median": 7.605551275464119,
+          "p90": 10.770329614269016
+        },
+        "error_normalized_image_coordinates": {
+          "count": 26,
+          "mean": 0.014428674705334375,
+          "median": 0.012543327686242285,
+          "p90": 0.021750638560230386
+        },
+        "annotation_uncertainty_px": {
+          "count": 26,
+          "mean": 4.0,
+          "median": 4.0,
+          "p90": 4.0
+        }
+      }
+    }
+  },
+  "contact_test": {
+    "adapted": {
+      "near_contact_test": {
+        "frames": 40,
+        "episodes": 10,
+        "landmarks": {
+          "pin_tip": {
+            "valid_labels": 8,
+            "invalid_or_unknown_labels": 32,
+            "error_native_px": {
+              "count": 8,
+              "mean": 34.540010987217116,
+              "median": 33.39742652636842,
+              "p90": 50.192196012971486
+            },
+            "error_normalized_image_coordinates": {
+              "count": 8,
+              "mean": 0.06260024401169911,
+              "median": 0.05481970359126243,
+              "p90": 0.08906736415383562
+            },
+            "annotation_uncertainty_px": {
+              "count": 8,
+              "mean": 6.0,
+              "median": 6.0,
+              "p90": 6.0
+            }
+          },
+          "target_hole": {
+            "valid_labels": 24,
+            "invalid_or_unknown_labels": 16,
+            "error_native_px": {
+              "count": 24,
+              "mean": 14.395128744490654,
+              "median": 13.412822557072182,
+              "p90": 26.417771948760308
+            },
+            "error_normalized_image_coordinates": {
+              "count": 24,
+              "mean": 0.02707781947338823,
+              "median": 0.024828310061838367,
+              "p90": 0.04952043791399906
+            },
+            "annotation_uncertainty_px": {
+              "count": 24,
+              "mean": 5.0,
+              "median": 5.0,
+              "p90": 5.0
+            }
+          }
+        },
+        "image_error_vector": {
+          "paired_labels": 0,
+          "pin_to_hole_vector_error_px": {
+            "count": 0,
+            "mean": null,
+            "median": null,
+            "p90": null
+          },
+          "direction_cosine": {
+            "count": 0,
+            "mean": null,
+            "median": null,
+            "p90": null
+          },
+          "meaning": "Image-plane pin-to-hole vector only; no metric nudge, surface homography or physical contact established"
+        },
+        "by_held_object": {
+          "bare_cylindrical_pin": {
+            "frames": 16,
+            "episodes": 4,
+            "landmarks": {
+              "pin_tip": {
+                "valid_labels": 8,
+                "invalid_or_unknown_labels": 8,
+                "error_native_px": {
+                  "count": 8,
+                  "mean": 34.540010987217116,
+                  "median": 33.39742652636842,
+                  "p90": 50.192196012971486
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 8,
+                  "mean": 0.06260024401169911,
+                  "median": 0.05481970359126243,
+                  "p90": 0.08906736415383562
+                },
+                "annotation_uncertainty_px": {
+                  "count": 8,
+                  "mean": 6.0,
+                  "median": 6.0,
+                  "p90": 6.0
+                }
+              },
+              "target_hole": {
+                "valid_labels": 0,
+                "invalid_or_unknown_labels": 16,
+                "error_native_px": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                },
+                "annotation_uncertainty_px": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                }
+              }
+            },
+            "image_error_vector": {
+              "paired_labels": 0,
+              "pin_to_hole_vector_error_px": {
+                "count": 0,
+                "mean": null,
+                "median": null,
+                "p90": null
+              },
+              "direction_cosine": {
+                "count": 0,
+                "mean": null,
+                "median": null,
+                "p90": null
+              },
+              "meaning": "Image-plane pin-to-hole vector only; no metric nudge, surface homography or physical contact established"
+            }
+          },
+          "gear": {
+            "frames": 24,
+            "episodes": 6,
+            "landmarks": {
+              "pin_tip": {
+                "valid_labels": 0,
+                "invalid_or_unknown_labels": 24,
+                "error_native_px": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                },
+                "annotation_uncertainty_px": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                }
+              },
+              "target_hole": {
+                "valid_labels": 24,
+                "invalid_or_unknown_labels": 0,
+                "error_native_px": {
+                  "count": 24,
+                  "mean": 14.395128744490654,
+                  "median": 13.412822557072182,
+                  "p90": 26.417771948760308
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 24,
+                  "mean": 0.02707781947338823,
+                  "median": 0.024828310061838367,
+                  "p90": 0.04952043791399906
+                },
+                "annotation_uncertainty_px": {
+                  "count": 24,
+                  "mean": 5.0,
+                  "median": 5.0,
+                  "p90": 5.0
+                }
+              }
+            },
+            "image_error_vector": {
+              "paired_labels": 0,
+              "pin_to_hole_vector_error_px": {
+                "count": 0,
+                "mean": null,
+                "median": null,
+                "p90": null
+              },
+              "direction_cosine": {
+                "count": 0,
+                "mean": null,
+                "median": null,
+                "p90": null
+              },
+              "meaning": "Image-plane pin-to-hole vector only; no metric nudge, surface homography or physical contact established"
+            }
+          }
+        },
+        "by_hole_visibility": {
+          "hidden": {
+            "frames": 16,
+            "landmarks": {
+              "pin_tip": {
+                "valid_labels": 8,
+                "invalid_or_unknown_labels": 8,
+                "error_native_px": {
+                  "count": 8,
+                  "mean": 34.540010987217116,
+                  "median": 33.39742652636842,
+                  "p90": 50.192196012971486
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 8,
+                  "mean": 0.06260024401169911,
+                  "median": 0.05481970359126243,
+                  "p90": 0.08906736415383562
+                },
+                "annotation_uncertainty_px": {
+                  "count": 8,
+                  "mean": 6.0,
+                  "median": 6.0,
+                  "p90": 6.0
+                }
+              },
+              "target_hole": {
+                "valid_labels": 0,
+                "invalid_or_unknown_labels": 16,
+                "error_native_px": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                },
+                "annotation_uncertainty_px": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                }
+              }
+            }
+          }
+        }
+      },
+      "failed_attempt_challenge": {
+        "frames": 3,
+        "episodes": 1,
+        "landmarks": {
+          "pin_tip": {
+            "valid_labels": 3,
+            "invalid_or_unknown_labels": 0,
+            "error_native_px": {
+              "count": 3,
+              "mean": 34.0286803653327,
+              "median": 36.19491053119388,
+              "p90": 38.731668363821164
+            },
+            "error_normalized_image_coordinates": {
+              "count": 3,
+              "mean": 0.06918964154203662,
+              "median": 0.07097182837668185,
+              "p90": 0.07970233148970952
+            },
+            "annotation_uncertainty_px": {
+              "count": 3,
+              "mean": 5.0,
+              "median": 5.0,
+              "p90": 5.0
+            }
+          },
+          "target_hole": {
+            "valid_labels": 3,
+            "invalid_or_unknown_labels": 0,
+            "error_native_px": {
+              "count": 3,
+              "mean": 11.983921539958166,
+              "median": 14.38733930984146,
+              "p90": 15.53198093716695
+            },
+            "error_normalized_image_coordinates": {
+              "count": 3,
+              "mean": 0.02293598313306035,
+              "median": 0.025835311789438233,
+              "p90": 0.030192094240407003
+            },
+            "annotation_uncertainty_px": {
+              "count": 3,
+              "mean": 5.0,
+              "median": 5.0,
+              "p90": 5.0
+            }
+          }
+        },
+        "image_error_vector": {
+          "paired_labels": 3,
+          "pin_to_hole_vector_error_px": {
+            "count": 3,
+            "mean": 41.86726432772252,
+            "median": 41.039912789597956,
+            "p90": 43.95488132856344
+          },
+          "direction_cosine": {
+            "count": 3,
+            "mean": 0.028554058571938445,
+            "median": -0.03737546050401569,
+            "p90": 0.1270803890794445
+          },
+          "meaning": "Image-plane pin-to-hole vector only; no metric nudge, surface homography or physical contact established"
+        },
+        "by_held_object": {
+          "unspecified": {
+            "frames": 3,
+            "episodes": 1,
+            "landmarks": {
+              "pin_tip": {
+                "valid_labels": 3,
+                "invalid_or_unknown_labels": 0,
+                "error_native_px": {
+                  "count": 3,
+                  "mean": 34.0286803653327,
+                  "median": 36.19491053119388,
+                  "p90": 38.731668363821164
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 3,
+                  "mean": 0.06918964154203662,
+                  "median": 0.07097182837668185,
+                  "p90": 0.07970233148970952
+                },
+                "annotation_uncertainty_px": {
+                  "count": 3,
+                  "mean": 5.0,
+                  "median": 5.0,
+                  "p90": 5.0
+                }
+              },
+              "target_hole": {
+                "valid_labels": 3,
+                "invalid_or_unknown_labels": 0,
+                "error_native_px": {
+                  "count": 3,
+                  "mean": 11.983921539958166,
+                  "median": 14.38733930984146,
+                  "p90": 15.53198093716695
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 3,
+                  "mean": 0.02293598313306035,
+                  "median": 0.025835311789438233,
+                  "p90": 0.030192094240407003
+                },
+                "annotation_uncertainty_px": {
+                  "count": 3,
+                  "mean": 5.0,
+                  "median": 5.0,
+                  "p90": 5.0
+                }
+              }
+            },
+            "image_error_vector": {
+              "paired_labels": 3,
+              "pin_to_hole_vector_error_px": {
+                "count": 3,
+                "mean": 41.86726432772252,
+                "median": 41.039912789597956,
+                "p90": 43.95488132856344
+              },
+              "direction_cosine": {
+                "count": 3,
+                "mean": 0.028554058571938445,
+                "median": -0.03737546050401569,
+                "p90": 0.1270803890794445
+              },
+              "meaning": "Image-plane pin-to-hole vector only; no metric nudge, surface homography or physical contact established"
+            }
+          }
+        },
+        "by_hole_visibility": {
+          "crescent": {
+            "frames": 1,
+            "landmarks": {
+              "pin_tip": {
+                "valid_labels": 1,
+                "invalid_or_unknown_labels": 0,
+                "error_native_px": {
+                  "count": 1,
+                  "mean": 26.52527274282623,
+                  "median": 26.52527274282623,
+                  "p90": 26.52527274282623
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 1,
+                  "mean": 0.054712138981461586,
+                  "median": 0.054712138981461586,
+                  "p90": 0.054712138981461586
+                },
+                "annotation_uncertainty_px": {
+                  "count": 1,
+                  "mean": 5.0,
+                  "median": 5.0,
+                  "p90": 5.0
+                }
+              },
+              "target_hole": {
+                "valid_labels": 1,
+                "invalid_or_unknown_labels": 0,
+                "error_native_px": {
+                  "count": 1,
+                  "mean": 15.818141343998322,
+                  "median": 15.818141343998322,
+                  "p90": 15.818141343998322
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 1,
+                  "mean": 0.031281289853149194,
+                  "median": 0.031281289853149194,
+                  "p90": 0.031281289853149194
+                },
+                "annotation_uncertainty_px": {
+                  "count": 1,
+                  "mean": 5.0,
+                  "median": 5.0,
+                  "p90": 5.0
+                }
+              }
+            }
+          },
+          "mostly_visible": {
+            "frames": 2,
+            "landmarks": {
+              "pin_tip": {
+                "valid_labels": 2,
+                "invalid_or_unknown_labels": 0,
+                "error_native_px": {
+                  "count": 2,
+                  "mean": 37.780384176585926,
+                  "median": 37.780384176585926,
+                  "p90": 39.04876309289957
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 2,
+                  "mean": 0.07642839282232414,
+                  "median": 0.07642839282232414,
+                  "p90": 0.08079364437883797
+                },
+                "annotation_uncertainty_px": {
+                  "count": 2,
+                  "mean": 5.0,
+                  "median": 5.0,
+                  "p90": 5.0
+                }
+              },
+              "target_hole": {
+                "valid_labels": 2,
+                "invalid_or_unknown_labels": 0,
+                "error_native_px": {
+                  "count": 2,
+                  "mean": 10.066811637938086,
+                  "median": 10.066811637938086,
+                  "p90": 13.523233775460785
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 2,
+                  "mean": 0.018763329773015928,
+                  "median": 0.018763329773015928,
+                  "p90": 0.024420915386153774
+                },
+                "annotation_uncertainty_px": {
+                  "count": 2,
+                  "mean": 5.0,
+                  "median": 5.0,
+                  "p90": 5.0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "contact-real": {
+      "near_contact_test": {
+        "frames": 40,
+        "episodes": 10,
+        "landmarks": {
+          "pin_tip": {
+            "valid_labels": 8,
+            "invalid_or_unknown_labels": 32,
+            "error_native_px": {
+              "count": 8,
+              "mean": 43.914764512266494,
+              "median": 38.309914645627686,
+              "p90": 55.26751302462016
+            },
+            "error_normalized_image_coordinates": {
+              "count": 8,
+              "mean": 0.07775863385274587,
+              "median": 0.0756970800660739,
+              "p90": 0.09135901998246454
+            },
+            "annotation_uncertainty_px": {
+              "count": 8,
+              "mean": 6.0,
+              "median": 6.0,
+              "p90": 6.0
+            }
+          },
+          "target_hole": {
+            "valid_labels": 24,
+            "invalid_or_unknown_labels": 16,
+            "error_native_px": {
+              "count": 24,
+              "mean": 18.380750509473046,
+              "median": 17.94805166549058,
+              "p90": 27.491897902737545
+            },
+            "error_normalized_image_coordinates": {
+              "count": 24,
+              "mean": 0.03468401717697528,
+              "median": 0.03565467175723956,
+              "p90": 0.05387267100496139
+            },
+            "annotation_uncertainty_px": {
+              "count": 24,
+              "mean": 5.0,
+              "median": 5.0,
+              "p90": 5.0
+            }
+          }
+        },
+        "image_error_vector": {
+          "paired_labels": 0,
+          "pin_to_hole_vector_error_px": {
+            "count": 0,
+            "mean": null,
+            "median": null,
+            "p90": null
+          },
+          "direction_cosine": {
+            "count": 0,
+            "mean": null,
+            "median": null,
+            "p90": null
+          },
+          "meaning": "Image-plane pin-to-hole vector only; no metric nudge, surface homography or physical contact established"
+        },
+        "by_held_object": {
+          "bare_cylindrical_pin": {
+            "frames": 16,
+            "episodes": 4,
+            "landmarks": {
+              "pin_tip": {
+                "valid_labels": 8,
+                "invalid_or_unknown_labels": 8,
+                "error_native_px": {
+                  "count": 8,
+                  "mean": 43.914764512266494,
+                  "median": 38.309914645627686,
+                  "p90": 55.26751302462016
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 8,
+                  "mean": 0.07775863385274587,
+                  "median": 0.0756970800660739,
+                  "p90": 0.09135901998246454
+                },
+                "annotation_uncertainty_px": {
+                  "count": 8,
+                  "mean": 6.0,
+                  "median": 6.0,
+                  "p90": 6.0
+                }
+              },
+              "target_hole": {
+                "valid_labels": 0,
+                "invalid_or_unknown_labels": 16,
+                "error_native_px": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                },
+                "annotation_uncertainty_px": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                }
+              }
+            },
+            "image_error_vector": {
+              "paired_labels": 0,
+              "pin_to_hole_vector_error_px": {
+                "count": 0,
+                "mean": null,
+                "median": null,
+                "p90": null
+              },
+              "direction_cosine": {
+                "count": 0,
+                "mean": null,
+                "median": null,
+                "p90": null
+              },
+              "meaning": "Image-plane pin-to-hole vector only; no metric nudge, surface homography or physical contact established"
+            }
+          },
+          "gear": {
+            "frames": 24,
+            "episodes": 6,
+            "landmarks": {
+              "pin_tip": {
+                "valid_labels": 0,
+                "invalid_or_unknown_labels": 24,
+                "error_native_px": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                },
+                "annotation_uncertainty_px": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                }
+              },
+              "target_hole": {
+                "valid_labels": 24,
+                "invalid_or_unknown_labels": 0,
+                "error_native_px": {
+                  "count": 24,
+                  "mean": 18.380750509473046,
+                  "median": 17.94805166549058,
+                  "p90": 27.491897902737545
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 24,
+                  "mean": 0.03468401717697528,
+                  "median": 0.03565467175723956,
+                  "p90": 0.05387267100496139
+                },
+                "annotation_uncertainty_px": {
+                  "count": 24,
+                  "mean": 5.0,
+                  "median": 5.0,
+                  "p90": 5.0
+                }
+              }
+            },
+            "image_error_vector": {
+              "paired_labels": 0,
+              "pin_to_hole_vector_error_px": {
+                "count": 0,
+                "mean": null,
+                "median": null,
+                "p90": null
+              },
+              "direction_cosine": {
+                "count": 0,
+                "mean": null,
+                "median": null,
+                "p90": null
+              },
+              "meaning": "Image-plane pin-to-hole vector only; no metric nudge, surface homography or physical contact established"
+            }
+          }
+        },
+        "by_hole_visibility": {
+          "hidden": {
+            "frames": 16,
+            "landmarks": {
+              "pin_tip": {
+                "valid_labels": 8,
+                "invalid_or_unknown_labels": 8,
+                "error_native_px": {
+                  "count": 8,
+                  "mean": 43.914764512266494,
+                  "median": 38.309914645627686,
+                  "p90": 55.26751302462016
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 8,
+                  "mean": 0.07775863385274587,
+                  "median": 0.0756970800660739,
+                  "p90": 0.09135901998246454
+                },
+                "annotation_uncertainty_px": {
+                  "count": 8,
+                  "mean": 6.0,
+                  "median": 6.0,
+                  "p90": 6.0
+                }
+              },
+              "target_hole": {
+                "valid_labels": 0,
+                "invalid_or_unknown_labels": 16,
+                "error_native_px": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                },
+                "annotation_uncertainty_px": {
+                  "count": 0,
+                  "mean": null,
+                  "median": null,
+                  "p90": null
+                }
+              }
+            }
+          }
+        }
+      },
+      "failed_attempt_challenge": {
+        "frames": 3,
+        "episodes": 1,
+        "landmarks": {
+          "pin_tip": {
+            "valid_labels": 3,
+            "invalid_or_unknown_labels": 0,
+            "error_native_px": {
+              "count": 3,
+              "mean": 38.61834618400895,
+              "median": 37.697316383535984,
+              "p90": 42.8651855538794
+            },
+            "error_normalized_image_coordinates": {
+              "count": 3,
+              "mean": 0.07747025857915603,
+              "median": 0.07695895800958667,
+              "p90": 0.085922647658088
+            },
+            "annotation_uncertainty_px": {
+              "count": 3,
+              "mean": 5.0,
+              "median": 5.0,
+              "p90": 5.0
+            }
+          },
+          "target_hole": {
+            "valid_labels": 3,
+            "invalid_or_unknown_labels": 0,
+            "error_native_px": {
+              "count": 3,
+              "mean": 10.847568289128501,
+              "median": 12.192578043547277,
+              "p90": 14.026718788550783
+            },
+            "error_normalized_image_coordinates": {
+              "count": 3,
+              "mean": 0.019575955711937234,
+              "median": 0.021236441040890938,
+              "p90": 0.02567067137806629
+            },
+            "annotation_uncertainty_px": {
+              "count": 3,
+              "mean": 5.0,
+              "median": 5.0,
+              "p90": 5.0
+            }
+          }
+        },
+        "image_error_vector": {
+          "paired_labels": 3,
+          "pin_to_hole_vector_error_px": {
+            "count": 3,
+            "mean": 42.95960451219014,
+            "median": 40.7933898576572,
+            "p90": 46.151061898835195
+          },
+          "direction_cosine": {
+            "count": 3,
+            "mean": -0.10217625897616837,
+            "median": -0.11203429759424187,
+            "p90": -0.04767389933034942
+          },
+          "meaning": "Image-plane pin-to-hole vector only; no metric nudge, surface homography or physical contact established"
+        },
+        "by_held_object": {
+          "unspecified": {
+            "frames": 3,
+            "episodes": 1,
+            "landmarks": {
+              "pin_tip": {
+                "valid_labels": 3,
+                "invalid_or_unknown_labels": 0,
+                "error_native_px": {
+                  "count": 3,
+                  "mean": 38.61834618400895,
+                  "median": 37.697316383535984,
+                  "p90": 42.8651855538794
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 3,
+                  "mean": 0.07747025857915603,
+                  "median": 0.07695895800958667,
+                  "p90": 0.085922647658088
+                },
+                "annotation_uncertainty_px": {
+                  "count": 3,
+                  "mean": 5.0,
+                  "median": 5.0,
+                  "p90": 5.0
+                }
+              },
+              "target_hole": {
+                "valid_labels": 3,
+                "invalid_or_unknown_labels": 0,
+                "error_native_px": {
+                  "count": 3,
+                  "mean": 10.847568289128501,
+                  "median": 12.192578043547277,
+                  "p90": 14.026718788550783
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 3,
+                  "mean": 0.019575955711937234,
+                  "median": 0.021236441040890938,
+                  "p90": 0.02567067137806629
+                },
+                "annotation_uncertainty_px": {
+                  "count": 3,
+                  "mean": 5.0,
+                  "median": 5.0,
+                  "p90": 5.0
+                }
+              }
+            },
+            "image_error_vector": {
+              "paired_labels": 3,
+              "pin_to_hole_vector_error_px": {
+                "count": 3,
+                "mean": 42.95960451219014,
+                "median": 40.7933898576572,
+                "p90": 46.151061898835195
+              },
+              "direction_cosine": {
+                "count": 3,
+                "mean": -0.10217625897616837,
+                "median": -0.11203429759424187,
+                "p90": -0.04767389933034942
+              },
+              "meaning": "Image-plane pin-to-hole vector only; no metric nudge, surface homography or physical contact established"
+            }
+          }
+        },
+        "by_hole_visibility": {
+          "crescent": {
+            "frames": 1,
+            "landmarks": {
+              "pin_tip": {
+                "valid_labels": 1,
+                "invalid_or_unknown_labels": 0,
+                "error_native_px": {
+                  "count": 1,
+                  "mean": 34.00056932202562,
+                  "median": 34.00056932202562,
+                  "p90": 34.00056932202562
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 1,
+                  "mean": 0.06728824765766811,
+                  "median": 0.06728824765766811,
+                  "p90": 0.06728824765766811
+                },
+                "annotation_uncertainty_px": {
+                  "count": 1,
+                  "mean": 5.0,
+                  "median": 5.0,
+                  "p90": 5.0
+                }
+              },
+              "target_hole": {
+                "valid_labels": 1,
+                "invalid_or_unknown_labels": 0,
+                "error_native_px": {
+                  "count": 1,
+                  "mean": 14.485253974801658,
+                  "median": 14.485253974801658,
+                  "p90": 14.485253974801658
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 1,
+                  "mean": 0.026779228962360128,
+                  "median": 0.026779228962360128,
+                  "p90": 0.026779228962360128
+                },
+                "annotation_uncertainty_px": {
+                  "count": 1,
+                  "mean": 5.0,
+                  "median": 5.0,
+                  "p90": 5.0
+                }
+              }
+            }
+          },
+          "mostly_visible": {
+            "frames": 2,
+            "landmarks": {
+              "pin_tip": {
+                "valid_labels": 2,
+                "invalid_or_unknown_labels": 0,
+                "error_native_px": {
+                  "count": 2,
+                  "mean": 40.927234615000614,
+                  "median": 40.927234615000614,
+                  "p90": 43.511169200172326
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 2,
+                  "mean": 0.0825612640399,
+                  "median": 0.0825612640399,
+                  "p90": 0.08704310886415066
+                },
+                "annotation_uncertainty_px": {
+                  "count": 2,
+                  "mean": 5.0,
+                  "median": 5.0,
+                  "p90": 5.0
+                }
+              },
+              "target_hole": {
+                "valid_labels": 2,
+                "invalid_or_unknown_labels": 0,
+                "error_native_px": {
+                  "count": 2,
+                  "mean": 9.02872544629192,
+                  "median": 9.02872544629192,
+                  "p90": 11.559807524096206
+                },
+                "error_normalized_image_coordinates": {
+                  "count": 2,
+                  "mean": 0.01597431908672579,
+                  "median": 0.01597431908672579,
+                  "p90": 0.02018401665005791
+                },
+                "annotation_uncertainty_px": {
+                  "count": 2,
+                  "mean": 5.0,
+                  "median": 5.0,
+                  "p90": 5.0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "contact_candidate_validation": {
+    "manifest_sha256": "0f17d0cba2cdcfaa626dc24628a9441a3f9b1dc471b3660525a951afe8d650c1",
+    "selection": "same contact-only validation; no test",
+    "validation": {
+      "adapted": {
+        "selection_mean_error_px": 18.29349994659424,
+        "selection_stratum": "contact",
+        "selection_metric": "balanced visible landmark means",
+        "landmarks": {
+          "pin_tip": {
+            "valid_count": 16,
+            "mean_error_px": 15.942984104156494
+          },
+          "target_hole": {
+            "valid_count": 12,
+            "mean_error_px": 6.423047701517741
+          }
+        },
+        "strata": {
+          "all": {
+            "mean_error_px": 11.863011360168457,
+            "balanced_landmark_mean_error_px": 11.183015902837118,
+            "landmarks": {
+              "pin_tip": {
+                "valid_count": 16,
+                "mean_error_px": 15.942984104156494
+              },
+              "target_hole": {
+                "valid_count": 12,
+                "mean_error_px": 6.423047701517741
+              }
+            }
+          },
+          "approach": {
+            "mean_error_px": 6.235561370849609,
+            "balanced_landmark_mean_error_px": 6.235561370849609,
+            "landmarks": {
+              "pin_tip": {
+                "valid_count": 8,
+                "mean_error_px": 10.374134063720703
+              },
+              "target_hole": {
+                "valid_count": 8,
+                "mean_error_px": 2.0969886779785156
+              }
+            }
+          },
+          "contact": {
+            "mean_error_px": 19.366278012593586,
+            "balanced_landmark_mean_error_px": 18.29349994659424,
+            "landmarks": {
+              "pin_tip": {
+                "valid_count": 8,
+                "mean_error_px": 21.511834144592285
+              },
+              "target_hole": {
+                "valid_count": 4,
+                "mean_error_px": 15.075165748596191
+              }
+            }
+          }
+        }
+      },
+      "contact-real": {
+        "selection_mean_error_px": 13.583458811044693,
+        "selection_stratum": "contact",
+        "selection_metric": "balanced visible landmark means",
+        "landmarks": {
+          "pin_tip": {
+            "valid_count": 16,
+            "mean_error_px": 19.860058784484863
+          },
+          "target_hole": {
+            "valid_count": 12,
+            "mean_error_px": 4.945348083972931
+          }
+        },
+        "strata": {
+          "all": {
+            "mean_error_px": 13.468039912836892,
+            "balanced_landmark_mean_error_px": 12.402703434228897,
+            "landmarks": {
+              "pin_tip": {
+                "valid_count": 16,
+                "mean_error_px": 19.860058784484863
+              },
+              "target_hole": {
+                "valid_count": 12,
+                "mean_error_px": 4.945348083972931
+              }
+            }
+          },
+          "approach": {
+            "mean_error_px": 10.579269409179688,
+            "balanced_landmark_mean_error_px": 10.579269409179688,
+            "landmarks": {
+              "pin_tip": {
+                "valid_count": 8,
+                "mean_error_px": 14.927833557128906
+              },
+              "target_hole": {
+                "valid_count": 8,
+                "mean_error_px": 6.230705261230469
+              }
+            }
+          },
+          "contact": {
+            "mean_error_px": 17.319733877976734,
+            "balanced_landmark_mean_error_px": 13.583458811044693,
+            "landmarks": {
+              "pin_tip": {
+                "valid_count": 8,
+                "mean_error_px": 24.79228401184082
+              },
+              "target_hole": {
+                "valid_count": 4,
+                "mean_error_px": 2.3746336102485657
+              }
+            }
+          }
+        }
+      }
+    },
+    "test_evaluated": false
+  },
+  "camera_independent_validation": {
+    "episode": "20261031T155919-85376e3c",
+    "pairs": 17,
+    "points": 624,
+    "mean_px": 2.788304696727496,
+    "median_px": 2.0829451576740152,
+    "p95_px": 7.562025524263136,
+    "max_px": 19.38122582650042,
+    "rays_behind_plane": 0,
+    "negative_destination_depth": 0
+  },
+  "grasp_fit": {
+    "reprojection": {
+      "training": {
+        "samples": 54,
+        "mean_px": 9.421643874515157,
+        "median_px": 8.405613550181489,
+        "p95_px": 21.476407284987665,
+        "max_px": 22.767875468462073,
+        "nonpositive_depth": 0
+      },
+      "validation": {
+        "samples": 14,
+        "mean_px": 18.74101185436271,
+        "median_px": 19.397247201919384,
+        "p95_px": 25.950779632881897,
+        "max_px": 26.841497498586712,
+        "nonpositive_depth": 0
+      },
+      "test": {
+        "samples": 8,
+        "mean_px": 29.72309146595283,
+        "median_px": 30.47642493718981,
+        "p95_px": 38.09638815631584,
+        "max_px": 39.28928193920629,
+        "nonpositive_depth": 0
+      }
+    },
+    "physically_accepted": false,
+    "tip_distance_to_pad_mm": 52.396416461059204,
+    "pin_length_mm": 17.88,
+    "conclusion": "Fitted tip is farther from modeled jaw pad envelope than entire pin length; no pin-axis choice can make this an accurate held-pin grasp in current CAD."
+  },
+  "memory_failed_attempt": {
+    "output": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-real/videos/early-hole-memory-real.mp4",
+    "checkpoint": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-real/contact-real.pt",
+    "checkpoint_sha256": "c867e14e1d7f74b1cf6552da1d4baf7d7f3900e78476185f70cd2ce202d44b7d",
+    "episode_id": "20261027T155906-04975fdb",
+    "initialization_frames": [
+      330,
+      350
+    ],
+    "initialization_source": "Actual early CNN predictions only; manually reviewed visible pre-occlusion window is a prototype assumption, not an automated visibility classifier. No GT coordinate seeds.",
+    "labels_sha256": "1549ca1da6f81902aab8c61efdde78821379efa3cf8b6fc51ec4954f806d36bf",
+    "frames": 59,
+    "largest_raw_frame_gap_s": 8.513603178,
+    "raw_sequence_span_s": 34.050665271,
+    "memory_gap_override_s": 8.513603179,
+    "memory_horizon_override_s": 35.050665271,
+    "fps": 5,
+    "evaluation": [
+      {
+        "frame_index": 370,
+        "single_frame_hole_error_px": 12.192578043547279,
+        "retained_hole_error_px": 24.033468427450384
+      },
+      {
+        "frame_index": 379,
+        "single_frame_hole_error_px": 14.485253974801651,
+        "retained_hole_error_px": 23.634652717143798
+      },
+      {
+        "frame_index": 388,
+        "single_frame_hole_error_px": 5.864872849036573,
+        "retained_hole_error_px": 24.213416587186558
+      }
+    ],
+    "limitations": [
+      "Offline declared same carrier grasp/right wrist frame; no geometric warp or optical-flow tracking.",
+      "Raw timestamp gap overrides are explicit offline review hypotheses, not live-controller defaults.",
+      "Cached yellow map is mean early CNN spatial softmax; retained marker follows memory API consensus readout, so their maxima need not coincide.",
+      "Contact likely, force unconfirmed; gate unknown, XYZ disabled. Only later independent labels evaluate memory.",
+      "One failure episode with three correlated label frames; no generalization or insertion-success estimate."
+    ],
+    "single_frame_hole_error_px_mean": 10.847568289128501,
+    "retained_hole_error_px_mean": 23.960512577260246
+  },
+  "memory_oct31": {
+    "manifest_sha256": "a8b19325310e3248613e3aa9a8ab93adaa56dcb9cbeab834a9f38d1498818586",
+    "initialization": "Fixed first three source frames0,1,2; CNN-only coordinates. Manual clear-window/stationary carrier assumption, not automated visibility.",
+    "test_episodes": [
+      "18676c13be574fa896d7535de15e7a3a",
+      "270f0f11e74e4465a4bd689aa990789e",
+      "7dbc087ac2ff4b858f65d2121a1d7d4f",
+      "d9322e77ac4a4ca2b49c0080a9bb0218"
+    ],
+    "post_initialization_label_count": 4,
+    "episodes": [
+      {
+        "episode_id": "18676c13be574fa896d7535de15e7a3a",
+        "evaluation": [
+          {
+            "episode_id": "18676c13be574fa896d7535de15e7a3a",
+            "video_frame": 12,
+            "single_frame_hole_error_px": 3.7983976713699086,
+            "retained_hole_error_px": 5.272192595432301
+          }
+        ]
+      },
+      {
+        "episode_id": "270f0f11e74e4465a4bd689aa990789e",
+        "evaluation": [
+          {
+            "episode_id": "270f0f11e74e4465a4bd689aa990789e",
+            "video_frame": 12,
+            "single_frame_hole_error_px": 7.362441546846212,
+            "retained_hole_error_px": 12.308918903137958
+          }
+        ]
+      },
+      {
+        "episode_id": "7dbc087ac2ff4b858f65d2121a1d7d4f",
+        "evaluation": [
+          {
+            "episode_id": "7dbc087ac2ff4b858f65d2121a1d7d4f",
+            "video_frame": 10,
+            "single_frame_hole_error_px": 12.471817150594003,
+            "retained_hole_error_px": 8.194295398627318
+          }
+        ]
+      },
+      {
+        "episode_id": "d9322e77ac4a4ca2b49c0080a9bb0218",
+        "evaluation": [
+          {
+            "episode_id": "d9322e77ac4a4ca2b49c0080a9bb0218",
+            "video_frame": 10,
+            "single_frame_hole_error_px": 8.595317461867896,
+            "retained_hole_error_px": 8.422214071624326
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "Only independent visible labels after initial three frames evaluated; hidden final endpoints have no invented ground truth.",
+      "No coordinate labels seed memory. No test-based choice of seed window, checkpoint, or cache thresholds.",
+      "Static carrier in right-wrist frame is an explicit prior. No contact inference or metric correction."
+    ],
+    "single_frame_hole_error_px_mean": 8.056993457669506,
+    "retained_hole_error_px_mean": 8.549405242205475
+  },
+  "diagnostic_sim": {
+    "category_counts": {
+      "supported_outside": 8,
+      "supported_crescent": 8,
+      "aligned_bore": 8,
+      "hover": 8,
+      "away": 8
+    },
+    "visibility_counts": {
+      "direct_visible": 18,
+      "external_occluded": 10,
+      "own_pin_partial": 12
+    },
+    "active_count": 9,
+    "attempts": 88,
+    "rejections": {
+      "interarm_overlap_over3mm": 48
+    },
+    "diagnostic_only": true,
+    "training_use_approved": false,
+    "real_calibrated": false,
+    "physics_simulated": false
+  },
+  "videos": [
+    {
+      "path": "work/pin-insertion-real/videos/early-hole-memory-real.mp4",
+      "sha256": "3a3f06ccceefa68e4d9f199fbb1d0f878b04eebbcd6cb412a5c0210b7dd4c083"
+    },
+    {
+      "path": "work/pin-insertion-real/videos/failed-contact-real.mp4",
+      "sha256": "1e757808b5686936b6e5d32dbbb61d20d69270ac7253f10d140962d9c7f4f116"
+    },
+    {
+      "path": "work/pin-insertion-real/contact-diagnostic-heatmaps.mp4",
+      "sha256": "7b8b521899c6bfa5f06f36c9b78cff3f76ee409379ec47ed6bb31193a6ec2648"
+    },
+    {
+      "path": "work/pin-insertion-real/videos/adapted-real.mp4",
+      "sha256": "cba1c8baf43d05d6e6ad029d59123fd05c2d7b6c1a55cac47983b00a8010c659"
+    },
+    {
+      "path": "work/pin-insertion-real/videos/adapted-sim.mp4",
+      "sha256": "4b643e1b25f7d5c189a85c1edc1dd9e857bef987708b63f46a40b34b2c295cfb"
+    }
+  ],
+  "limitations": [
+    "No verified real positive gate labels; always-off behavior can pass negative-only metrics.",
+    "Contact images mostly hide endpoints; no reliable new real training pin-contact endpoints were obtained.",
+    "One failed challenge trial with three correlated labels is not a success-rate estimate.",
+    "Retaining an inaccurate early CNN hole location worsened the challenge; initialization-window visibility was manually reviewed, not automated.",
+    "Camera fit is conditional on table plane and FK. Grasp fit failed CAD feasibility; it is not insertion-grade calibration.",
+    "Contact diagnostic renders were not used for training and do not establish dynamics or real grasp accuracy.",
+    "Frozen earlier descriptions saying bore radius17.9625mm mean bore-center pitch radius; actual individual bore diameter is approximately8.34mm."
+  ],
+  "automatic_motion_enabled": false,
+  "verification": {
+    "focused_tests_passed": 85,
+    "additional_subtests_passed": 11,
+    "git_diff_check": "passed"
+  }
+}

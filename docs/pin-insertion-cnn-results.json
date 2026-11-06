@@ -1,0 +1,587 @@
+{
+  "date": "2026-11-04",
+  "status": "offline_prototype_real_validation_failed",
+  "hardware_connected": false,
+  "automatic_motion_enabled": false,
+  "controlled_arm": "left",
+  "camera": "right_wrist",
+  "output_vector_frame": "right_native_base",
+  "checkpoint": "/home/robotics/Desktop/panthera-teleop/work/pin-insertion-cnn/heatmap.pt",
+  "checkpoint_sha256": "954576c720b2ccca9b397e453895d72c00df605ed089be85acb84cd0c8860df9",
+  "dataset_sha256": "34b2c39342b805be915430a76925ad3a27170a53a962673f25fbf3e4e695ce6c",
+  "dataset": {
+    "samples": 3072,
+    "train_samples": 2560,
+    "validation_samples": 512,
+    "active_samples": 966,
+    "class_counts": {
+      "aligned": 768,
+      "away": 540,
+      "edge": 996,
+      "hover": 768
+    },
+    "source_episode_count": 6
+  },
+  "training": {
+    "dataset": "work/pin-insertion-cnn/sim_dataset_v6.npz",
+    "output": "work/pin-insertion-cnn/heatmap.pt",
+    "epochs": 100,
+    "batch_size": 64,
+    "image_size": 160,
+    "seed": 42,
+    "device": "cuda",
+    "lr": 0.001,
+    "threads": 4,
+    "keypoint_weight": 1000.0,
+    "delta_weight": 1.0,
+    "select_by": "keypoint",
+    "model_variant": "heatmap",
+    "heatmap_weight": 10.0
+  },
+  "selected_epoch": 65,
+  "joint_audit": {
+    "samples": 3072,
+    "arm_limit_violating_samples": 0,
+    "arm_limit_violating_values": 0,
+    "state_order": "left6,left_gripper,right6,right_gripper",
+    "arm_angles_clipped": false
+  },
+  "max_fk_position_error_m": 3.5760557644884744e-16,
+  "max_fk_rotation_error_rad": 5.16191365590357e-08,
+  "simulation": {
+    "normal": {
+      "keypoints_native_pixel_errors": {
+        "pin_tip": {
+          "valid_samples": 505,
+          "mean_error_px": 5.339758883135646,
+          "median_error_px": 3.3686835997053186,
+          "p90_error_px": 10.471440233954253
+        },
+        "target_hole": {
+          "valid_samples": 234,
+          "mean_error_px": 10.247289831522197,
+          "median_error_px": 4.787861339834663,
+          "p90_error_px": 29.091881588070187
+        }
+      },
+      "active_delta_mae_per_axis_mm": [
+        1.3748607635498047,
+        1.3655487298965454,
+        0.595272421836853
+      ],
+      "active_direction_cosine_mean": 0.09471174329519272,
+      "active_direction_cosine_valid_samples": 157,
+      "geometric_proxy_ungated_capped_step": {
+        "active_samples": 157,
+        "fraction_strictly_improved": 0.46496815286624205,
+        "mean_residual_before_mm": 2.330718517303467,
+        "mean_residual_after_mm": 2.327542304992676
+      },
+      "geometric_proxy_gate_0_8_capped_step": {
+        "active_samples": 157,
+        "fraction_strictly_improved": 0.3630573248407643,
+        "mean_residual_before_mm": 2.330718517303467,
+        "mean_residual_after_mm": 2.3493881225585938
+      },
+      "gate_confusion": {
+        "0.5": {
+          "overall": {
+            "samples": 512,
+            "true_positive": 148,
+            "false_positive": 68,
+            "true_negative": 287,
+            "false_negative": 9,
+            "precision": 0.6851851851851852,
+            "recall": 0.9426751592356688,
+            "accuracy": 0.849609375
+          },
+          "per_regime": {
+            "aligned": {
+              "samples": 128,
+              "true_positive": 0,
+              "false_positive": 18,
+              "true_negative": 110,
+              "false_negative": 0,
+              "precision": 0.0,
+              "recall": null,
+              "accuracy": 0.859375
+            },
+            "away": {
+              "samples": 93,
+              "true_positive": 0,
+              "false_positive": 41,
+              "true_negative": 52,
+              "false_negative": 0,
+              "precision": 0.0,
+              "recall": null,
+              "accuracy": 0.5591397849462365
+            },
+            "edge": {
+              "samples": 163,
+              "true_positive": 148,
+              "false_positive": 4,
+              "true_negative": 2,
+              "false_negative": 9,
+              "precision": 0.9736842105263158,
+              "recall": 0.9426751592356688,
+              "accuracy": 0.9202453987730062
+            },
+            "hover": {
+              "samples": 128,
+              "true_positive": 0,
+              "false_positive": 5,
+              "true_negative": 123,
+              "false_negative": 0,
+              "precision": 0.0,
+              "recall": null,
+              "accuracy": 0.9609375
+            }
+          }
+        },
+        "0.8": {
+          "overall": {
+            "samples": 512,
+            "true_positive": 127,
+            "false_positive": 25,
+            "true_negative": 330,
+            "false_negative": 30,
+            "precision": 0.8355263157894737,
+            "recall": 0.8089171974522293,
+            "accuracy": 0.892578125
+          },
+          "per_regime": {
+            "aligned": {
+              "samples": 128,
+              "true_positive": 0,
+              "false_positive": 6,
+              "true_negative": 122,
+              "false_negative": 0,
+              "precision": 0.0,
+              "recall": null,
+              "accuracy": 0.953125
+            },
+            "away": {
+              "samples": 93,
+              "true_positive": 0,
+              "false_positive": 18,
+              "true_negative": 75,
+              "false_negative": 0,
+              "precision": 0.0,
+              "recall": null,
+              "accuracy": 0.8064516129032258
+            },
+            "edge": {
+              "samples": 163,
+              "true_positive": 127,
+              "false_positive": 1,
+              "true_negative": 5,
+              "false_negative": 30,
+              "precision": 0.9921875,
+              "recall": 0.8089171974522293,
+              "accuracy": 0.8098159509202454
+            },
+            "hover": {
+              "samples": 128,
+              "true_positive": 0,
+              "false_positive": 0,
+              "true_negative": 128,
+              "false_negative": 0,
+              "precision": null,
+              "recall": null,
+              "accuracy": 1.0
+            }
+          }
+        }
+      },
+      "active_gate_probability_mean": 0.8707337379455566
+    },
+    "black_images": {
+      "keypoints_native_pixel_errors": {
+        "pin_tip": {
+          "valid_samples": 505,
+          "mean_error_px": 32.406642552852695,
+          "median_error_px": 30.8880381602587,
+          "p90_error_px": 53.78207994397206
+        },
+        "target_hole": {
+          "valid_samples": 234,
+          "mean_error_px": 55.73785857907415,
+          "median_error_px": 53.91215544363543,
+          "p90_error_px": 79.49714971307269
+        }
+      },
+      "active_delta_mae_per_axis_mm": [
+        1.4295328855514526,
+        1.3814164400100708,
+        0.5975217819213867
+      ],
+      "active_direction_cosine_mean": -0.03961585834622383,
+      "active_direction_cosine_valid_samples": 157,
+      "geometric_proxy_ungated_capped_step": {
+        "active_samples": 157,
+        "fraction_strictly_improved": 0.4585987261146497,
+        "mean_residual_before_mm": 2.330718517303467,
+        "mean_residual_after_mm": 2.3665287494659424
+      },
+      "geometric_proxy_gate_0_8_capped_step": {
+        "active_samples": 157,
+        "fraction_strictly_improved": 0.0,
+        "mean_residual_before_mm": 2.330718517303467,
+        "mean_residual_after_mm": 2.330718517303467
+      },
+      "gate_confusion": {
+        "0.5": {
+          "overall": {
+            "samples": 512,
+            "true_positive": 154,
+            "false_positive": 351,
+            "true_negative": 4,
+            "false_negative": 3,
+            "precision": 0.30495049504950494,
+            "recall": 0.9808917197452229,
+            "accuracy": 0.30859375
+          },
+          "per_regime": {
+            "aligned": {
+              "samples": 128,
+              "true_positive": 0,
+              "false_positive": 125,
+              "true_negative": 3,
+              "false_negative": 0,
+              "precision": 0.0,
+              "recall": null,
+              "accuracy": 0.0234375
+            },
+            "away": {
+              "samples": 93,
+              "true_positive": 0,
+              "false_positive": 92,
+              "true_negative": 1,
+              "false_negative": 0,
+              "precision": 0.0,
+              "recall": null,
+              "accuracy": 0.010752688172043012
+            },
+            "edge": {
+              "samples": 163,
+              "true_positive": 154,
+              "false_positive": 6,
+              "true_negative": 0,
+              "false_negative": 3,
+              "precision": 0.9625,
+              "recall": 0.9808917197452229,
+              "accuracy": 0.9447852760736196
+            },
+            "hover": {
+              "samples": 128,
+              "true_positive": 0,
+              "false_positive": 128,
+              "true_negative": 0,
+              "false_negative": 0,
+              "precision": 0.0,
+              "recall": null,
+              "accuracy": 0.0
+            }
+          }
+        },
+        "0.8": {
+          "overall": {
+            "samples": 512,
+            "true_positive": 0,
+            "false_positive": 0,
+            "true_negative": 355,
+            "false_negative": 157,
+            "precision": null,
+            "recall": 0.0,
+            "accuracy": 0.693359375
+          },
+          "per_regime": {
+            "aligned": {
+              "samples": 128,
+              "true_positive": 0,
+              "false_positive": 0,
+              "true_negative": 128,
+              "false_negative": 0,
+              "precision": null,
+              "recall": null,
+              "accuracy": 1.0
+            },
+            "away": {
+              "samples": 93,
+              "true_positive": 0,
+              "false_positive": 0,
+              "true_negative": 93,
+              "false_negative": 0,
+              "precision": null,
+              "recall": null,
+              "accuracy": 1.0
+            },
+            "edge": {
+              "samples": 163,
+              "true_positive": 0,
+              "false_positive": 0,
+              "true_negative": 6,
+              "false_negative": 157,
+              "precision": null,
+              "recall": 0.0,
+              "accuracy": 0.03680981595092025
+            },
+            "hover": {
+              "samples": 128,
+              "true_positive": 0,
+              "false_positive": 0,
+              "true_negative": 128,
+              "false_negative": 0,
+              "precision": null,
+              "recall": null,
+              "accuracy": 1.0
+            }
+          }
+        }
+      },
+      "active_gate_probability_mean": 0.5567707419395447
+    },
+    "shuffled_images": {
+      "keypoints_native_pixel_errors": {
+        "pin_tip": {
+          "valid_samples": 505,
+          "mean_error_px": 37.90523215024055,
+          "median_error_px": 35.397636244355596,
+          "p90_error_px": 67.24886227231103
+        },
+        "target_hole": {
+          "valid_samples": 234,
+          "mean_error_px": 34.250713738836794,
+          "median_error_px": 30.447520776129586,
+          "p90_error_px": 58.54347964542954
+        }
+      },
+      "active_delta_mae_per_axis_mm": [
+        1.714897632598877,
+        1.413355827331543,
+        0.5965290069580078
+      ],
+      "active_direction_cosine_mean": 0.0721285417675972,
+      "active_direction_cosine_valid_samples": 157,
+      "geometric_proxy_ungated_capped_step": {
+        "active_samples": 157,
+        "fraction_strictly_improved": 0.4585987261146497,
+        "mean_residual_before_mm": 2.330718517303467,
+        "mean_residual_after_mm": 2.352942705154419
+      },
+      "geometric_proxy_gate_0_8_capped_step": {
+        "active_samples": 157,
+        "fraction_strictly_improved": 0.11464968152866242,
+        "mean_residual_before_mm": 2.330718517303467,
+        "mean_residual_after_mm": 2.346485137939453
+      },
+      "gate_confusion": {
+        "0.5": {
+          "overall": {
+            "samples": 512,
+            "true_positive": 67,
+            "false_positive": 149,
+            "true_negative": 206,
+            "false_negative": 90,
+            "precision": 0.3101851851851852,
+            "recall": 0.4267515923566879,
+            "accuracy": 0.533203125
+          },
+          "per_regime": {
+            "aligned": {
+              "samples": 128,
+              "true_positive": 0,
+              "false_positive": 51,
+              "true_negative": 77,
+              "false_negative": 0,
+              "precision": 0.0,
+              "recall": null,
+              "accuracy": 0.6015625
+            },
+            "away": {
+              "samples": 93,
+              "true_positive": 0,
+              "false_positive": 38,
+              "true_negative": 55,
+              "false_negative": 0,
+              "precision": 0.0,
+              "recall": null,
+              "accuracy": 0.5913978494623656
+            },
+            "edge": {
+              "samples": 163,
+              "true_positive": 67,
+              "false_positive": 2,
+              "true_negative": 4,
+              "false_negative": 90,
+              "precision": 0.9710144927536232,
+              "recall": 0.4267515923566879,
+              "accuracy": 0.43558282208588955
+            },
+            "hover": {
+              "samples": 128,
+              "true_positive": 0,
+              "false_positive": 58,
+              "true_negative": 70,
+              "false_negative": 0,
+              "precision": 0.0,
+              "recall": null,
+              "accuracy": 0.546875
+            }
+          }
+        },
+        "0.8": {
+          "overall": {
+            "samples": 512,
+            "true_positive": 46,
+            "false_positive": 103,
+            "true_negative": 252,
+            "false_negative": 111,
+            "precision": 0.3087248322147651,
+            "recall": 0.2929936305732484,
+            "accuracy": 0.58203125
+          },
+          "per_regime": {
+            "aligned": {
+              "samples": 128,
+              "true_positive": 0,
+              "false_positive": 35,
+              "true_negative": 93,
+              "false_negative": 0,
+              "precision": 0.0,
+              "recall": null,
+              "accuracy": 0.7265625
+            },
+            "away": {
+              "samples": 93,
+              "true_positive": 0,
+              "false_positive": 29,
+              "true_negative": 64,
+              "false_negative": 0,
+              "precision": 0.0,
+              "recall": null,
+              "accuracy": 0.6881720430107527
+            },
+            "edge": {
+              "samples": 163,
+              "true_positive": 46,
+              "false_positive": 2,
+              "true_negative": 4,
+              "false_negative": 111,
+              "precision": 0.9583333333333334,
+              "recall": 0.2929936305732484,
+              "accuracy": 0.3067484662576687
+            },
+            "hover": {
+              "samples": 128,
+              "true_positive": 0,
+              "false_positive": 37,
+              "true_negative": 91,
+              "false_negative": 0,
+              "precision": 0.0,
+              "recall": null,
+              "accuracy": 0.7109375
+            }
+          }
+        }
+      },
+      "active_gate_probability_mean": 0.42681336402893066
+    }
+  },
+  "real": {
+    "episodes": [
+      "001e02d4fa414832b033b544edf8a349",
+      "285fdd7db4ba418e8a8f2594c52128d8",
+      "6804bd9642a84a12802af28a9de5817c",
+      "97bd7a271371430daa0cb7e4ba213a41",
+      "c2ba77d46efa4577827b7434a2f75a34",
+      "eb22572759ff4ab785ffeb4c112231ec"
+    ],
+    "summary": {
+      "samples": 162,
+      "accuracy": null,
+      "insertion_success": null,
+      "label_kind": "unlabeled_real_video",
+      "mean_active_probability": 0.41049801941416725,
+      "active_fraction_at_0_5": 0.43209876543209874,
+      "delta_xyz_mean_m": [
+        0.0007478616054509019,
+        -0.00024739987077142066,
+        -6.879580743411624e-05
+      ],
+      "delta_xyz_std_m": [
+        0.00016997335570691522,
+        0.00018089521725560092,
+        8.221557324165437e-05
+      ],
+      "max_camera_sample_skew_ms": 50.869144
+    },
+    "activation_fraction_at_0_8": 0.06172839506172839,
+    "manual_landmarks": {
+      "pin_tip": {
+        "count": 2,
+        "mean_error_px": 91.85600698260154,
+        "median_error_px": 91.85600698260154
+      },
+      "target_bore": {
+        "count": 1,
+        "mean_error_px": 104.29545537401508,
+        "median_error_px": 104.29545537401508
+      }
+    },
+    "manual_annotation_provenance": "Independent AI manual visual annotations; not human-certified",
+    "qualitative_review": "Overlay review: pin predictions attach to gripper surfaces; gate can exceed0.8 on visibly separated approach frames. Not validated for automatic motion.",
+    "gate_accuracy": null,
+    "xyz_accuracy": null
+  },
+  "baseline_simulation": {
+    "40_epoch_regression": {
+      "pin_tip": {
+        "valid_samples": 505,
+        "mean_error_px": 24.19010427043542,
+        "median_error_px": 21.872824094207726,
+        "p90_error_px": 42.601973740448635
+      },
+      "target_hole": {
+        "valid_samples": 234,
+        "mean_error_px": 19.36326664732323,
+        "median_error_px": 16.816038008473186,
+        "p90_error_px": 33.30663222421833
+      }
+    },
+    "100_epoch_regression": {
+      "pin_tip": {
+        "valid_samples": 505,
+        "mean_error_px": 21.32485857701896,
+        "median_error_px": 18.44680790402468,
+        "p90_error_px": 39.83118865173349
+      },
+      "target_hole": {
+        "valid_samples": 234,
+        "mean_error_px": 17.471785198000706,
+        "median_error_px": 14.305928049882944,
+        "p90_error_px": 35.49264130059684
+      }
+    }
+  },
+  "tests": {
+    "passed": 32,
+    "additional_subtests_passed": 11
+  },
+  "limitations": [
+    "Arm angles are exact measured demo seeds; no fabricated joint perturbations.",
+    "Synthetic pin and large carrier CAD placements in measured wrist camera frustum; tool-object transforms NOT image fitted.",
+    "Bore CAD radius 0.0179625m, plane height 0.01725m; pin CAD tip z=0 and base z=0.01788m. Landmarks outside frame are clipped with validity false.",
+    "Camera uses sibling scene extrinsics/FOV; real wrist intrinsics, distortion, extrinsics and base-to-base transform UNVERIFIED.",
+    "Default 0.2mm nudge deadband is a geometric prototype threshold, not measured clearance or insertion success; pin orientation 0..15deg is unvalidated for insertion and translation alone cannot correct tilt.",
+    "Edge offsets are geometric hypotheses; gravity, support/contact, compliance, slip and insertion success are NOT validated.",
+    "Controlled arm follows the object assignment (pin left, carrier right); hand-object coupling is an assumed rigid translation, not validated contact mechanics.",
+    "Large carrier plus four gears assembled using sibling manifest CAD origins; real object registration and intended bore identity UNVERIFIED.",
+    "Gate is synthetic geometry/visibility supervision with a 1mm carrier support-plane tolerance; physical contact is unobserved, and this is not a real safety or success judgement.",
+    "Recorded forward_complete is not insertion success.",
+    "Forward camera_sample_skew_ms compares camera receipt with sample recording time; measured joint timestamps are unavailable, so actual state age is not guaranteed.",
+    "Manual annotation joins use recorded state receipt timestamps, not device measurement timestamps.",
+    "XYZ and gate have no independent physical labels in these videos.",
+    "Saved camera mapping is used; no calibrated camera-to-robot transform is inferred."
+  ]
+}

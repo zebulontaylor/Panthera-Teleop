@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "visual_physics_target_geometry_contract",
+  "original_visual_sha256": "42d25b297daf6d28b3c2a598411a10ffa6d87bccc2fd3355779390c7e46f3ac7",
+  "original_collision_pieces": 872,
+  "ordered_collision_bundle_sha256": "ed0a163657f50b64c5e7006bebf04917691a719870aa506adcd719a693af0ab2",
+  "target_definition": "Four LARGE outer pin bores; additional tinyinnerholes are not insertiontargets",
+  "pitch_circle_center_radius_m": 0.0179625,
+  "bore_mouth_z_local_m": 0.01725,
+  "nominal_individual_bore_diameter_m": 0.00824,
+  "pin_diameter_m": 0.008,
+  "measured_original_visual_section_radius_m": 0.0041189924535,
+  "measured_collision_section_minimum_radius_m": 0.004111169594,
+  "ideal_nominal_radial_clearance_m": 0.00012,
+  "faceted_collision_section_minimum_radial_gap_m": 0.000111169594,
+  "original_task_axis_error_success_criterion_m": 0.00017,
+  "criterion_is_not_geometric_clearance": true,
+  "new_visual_reproduction": "Documented carrier_real_face_v4 metadata reconstruction, not recoveredoriginalmesh",
+  "common_geometry": "Nominal outerdiameter52.98mm, largeborediameter8.24mm, pitch-circle radius17.9625mm and mouthplane17.25mm retained.",
+  "visual_only_differences": [
+    "New2.6mm innerholes not cut into original collisions",
+    "New mountingboss top21.25mm vsoriginalvisual maximum19.21mm; originalcollisionbosses retained",
+    "Detailed topface silhouette/chamfer/appearance may differ from original collisiondecomposition"
+  ],
+  "physics_policy": "Original collisionmeshes, masses,inertias,joints and tasktargets remainunchanged. Do not infer forces/contact at newly reproduced visual-only details.",
+  "erratum": "Earlier4.17mm bore-radius /0.17mm clearance proxy conflated taskaxiserror criterion with geometry; originalandnewnominal bore is8.24mm. Old artifacts retained as superseded labeling approximations."
+}

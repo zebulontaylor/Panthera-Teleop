@@ -20,7 +20,7 @@ def vector14(value):
 
 
 class Real2SimBridge:
-    def __init__(self, scene=DEFAULT_SCENE, gripper_closed_rad=0., gripper_open_rad=2., gripper_open_m=.04):
+    def __init__(self, scene=DEFAULT_SCENE, gripper_closed_rad=0., gripper_open_rad=2., gripper_open_m=.04, *, model=None, data=None):
         endpoints = np.asarray((gripper_closed_rad, gripper_open_rad), dtype=float)
         if endpoints.shape == (2,):
             endpoints = np.tile(endpoints, (2, 1))
@@ -29,8 +29,13 @@ class Real2SimBridge:
         if not np.isfinite(gripper_open_m) or not 0 < gripper_open_m <= .04:
             raise ValueError('Per-finger maximum must be in (0,.04] metres')
         self.gripper_rad_range, self.gripper_open_m = endpoints, float(gripper_open_m)
-        self.model = mujoco.MjModel.from_xml_path(str(scene))
-        self.data = mujoco.MjData(self.model)
+        if data is not None and model is None:
+            raise ValueError('Existing data requires its existing model')
+        preserve_existing_state = data is not None
+        self.model = mujoco.MjModel.from_xml_path(str(scene)) if model is None else model
+        self.data = mujoco.MjData(self.model) if data is None else data
+        if self.data.qpos.shape != (self.model.nq,):
+            raise ValueError('Existing data/model dimensions differ')
         self.qadr, self.ctrl_ids, self.finger_other, self.sites = [], [], [], []
         for prefix in ('', 'right_'):
             names = [prefix + f'joint{i}' for i in range(1, 7)] + [prefix + 'L_finger_joint']
@@ -41,11 +46,13 @@ class Real2SimBridge:
         self.qadr, self.ctrl_ids = np.array(self.qadr), np.array(self.ctrl_ids)
         self.arm_qadr = self.qadr.reshape(2, 7)[:, :6].copy()
         self.finger_qadr = np.column_stack((self.qadr[GRIP_COLUMNS], self.finger_other))
-        self.base_ids = (0, self.model.body('right_base').id)
+        left_base = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, 'left_base')
+        self.base_ids = (left_base if left_base >= 0 else 0, self.model.body('right_base').id)
         self.limits = self.model.actuator_ctrlrange[self.ctrl_ids].copy()
         self.limits[GRIP_COLUMNS, 1] = self.gripper_open_m
         self.arm_ranges = self.limits.reshape(2, 7, 2)[:, :6].copy()
-        mujoco.mj_resetDataKeyframe(self.model, self.data, self.model.key('home').id)
+        if not preserve_existing_state:
+            mujoco.mj_resetDataKeyframe(self.model, self.data, self.model.key('home').id)
         mujoco.mj_forward(self.model, self.data)
 
     def real_to_sim(self, value):
