@@ -1,0 +1,19 @@
+# Right arm settling telemetry audit
+
+Read-only analysis of the latest 80 operator-kept recordings under `data/kept/20261031*`. Detailed episode results are in `right-arm-settle-demo-audit.json`. No robot commands or training were performed.
+
+A candidate detector using a measured six-joint peak-to-peak range of at most 0.01 rad over one second, plus right joint 1 > 0.35 rad, joint 2 > 1.2 rad and measured gripper <= 1.3, triggered in 79/80 episodes. First-trigger times were 2.765 / 3.198 / 4.305 seconds (minimum / median / maximum). Candidate times were examined every five telemetry records, approximately every 33ms.
+
+This is a useful task-stage gate: the initial neutral pose has joint 2 around 0.25; carrier approach opens the gripper around 1.6–1.8; the held carrier typically has gripper around 1.1. Motion seen first is still required to distinguish startup in an already-held pose. Recommend this broad stage gate over a narrow six-joint box, because grasps and wrist angles vary. Gate should remain true throughout the stability window.
+
+The detector is a probable settling detector, not proof of final intent. Two triggered episodes moved by more than 0.03 rad within the next three seconds: 20261031T155851-f0bb5116 (0.03016 rad) and 20261031T153335-a7c3015c (0.05027 rad). Such later fine corrections are a premature-freeze risk. The sole no-trigger episode was 20261031T155224-d7999767; telemetry shows a held pose at joint 2 around 1.16 rad with gripper around 1.06, so the 1.2-rad stage gate misses a plausible valid pose. A broader joint-2 > 1.0 gate remains separated from neutral 0.25 but has not been replay-audited here. These labels were not visually adjudicated.
+
+Observed first-trigger joint ranges were [0.544,0.860], [1.225,1.591], [0.326,0.532], [0,0.385], [-0.371,-0.095], [-0.359,0.002] rad. They describe this sample and should not become narrow mandatory limits. Initial dwell, stale or missing telemetry, paused policy, manual takeover and collection transitions should reset the one-second timer. Keep the existing measured hold and commanded gripper squeeze behavior on freeze.
+
+## Pin-needs-nudge evidence
+
+The existing left-camera alignment adapter selects a supported carrier-face target and uses fresh held-pin prediction plus hole registration for the planar correction. It blocks stale frames, missing measured timestamps, excessive image/state skew, missing face support, and invalid geometry. Carrier observations may be accumulated only with both arms stationary; pin observations are always fresh. The accumulator uses tighter 0.003 rad joint-anchor tolerance and 0.5mm tool translation tolerance, so a right-arm settling decision alone does not establish valid hole memory.
+
+The held-pin model metadata explicitly says real_bottom_supervision=false. Its distal endpoint is inferred under a center-axis assumption from a proximal-cap prediction. Thus a small pixel error should be called visual alignment, not reliable insertion or proof no nudge is needed. Occlusion, bent/tilted pin, target selection and wrong grasp can invalidate the assumption. The existing worker sets motor_permission=false and cnn_gate_permission=false. Reliable automatic need/no-need needs repeated fresh valid observations, a stable selected target and uncertainty/deadband hysteresis. An unavailable observation must remain unknown, never aligned. Contact/force and successful insertion require separate evidence.
+
+Limitations: only recent kept demonstrations from the current task setup were sampled; review/HITL/discarded episodes were not included, so this is not a false-trigger rate over failures. This is telemetry replay, without causal policy execution, camera inspection, or hardware validation. Later-motion count is a surrogate for premature freezing, not a human-labeled final-pose metric.

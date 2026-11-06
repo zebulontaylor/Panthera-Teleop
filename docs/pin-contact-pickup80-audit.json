@@ -1,0 +1,618 @@
+[
+  {
+    "episode": "20261031T162906-0055bc5e",
+    "table": true,
+    "time_s": 11.21502114,
+    "last_grip": 0.0483805276453495,
+    "min_grip": 0.04775220900774002,
+    "duration_narrow_table_s": 0.8155933069999985
+  },
+  {
+    "episode": "20261031T162845-8467e8e9",
+    "table": true,
+    "time_s": 10.759456302,
+    "last_grip": 0.05340707302093506,
+    "min_grip": 0.05340707302093506,
+    "duration_narrow_table_s": 0.8970993959999998
+  },
+  {
+    "episode": "20261031T162823-6b739f84",
+    "table": true,
+    "time_s": 10.787970609,
+    "last_grip": 0.032672565430402756,
+    "min_grip": 0.032044246792793274,
+    "duration_narrow_table_s": 0.755260453
+  },
+  {
+    "episode": "20261031T162441-cc5b7051",
+    "table": true,
+    "time_s": 10.464638764,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.9561770579999997
+  },
+  {
+    "episode": "20261031T162421-6f6f0d4f",
+    "table": true,
+    "time_s": 9.964960175,
+    "last_grip": -0.00062831852119416,
+    "min_grip": -0.00125663704238832,
+    "duration_narrow_table_s": 0.8289243979999998
+  },
+  {
+    "episode": "20261031T162400-fa8db584",
+    "table": true,
+    "time_s": 11.113653866,
+    "last_grip": -0.010681415908038616,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 0.720763140999999
+  },
+  {
+    "episode": "20261031T162338-5ecdd20a",
+    "table": true,
+    "time_s": 10.426894115,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.836106427999999
+  },
+  {
+    "episode": "20261031T162317-0083e2fa",
+    "table": true,
+    "time_s": 10.578457717,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.7615057799999985
+  },
+  {
+    "episode": "20261031T162256-22778100",
+    "table": true,
+    "time_s": 10.34642559,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.011309733614325523,
+    "duration_narrow_table_s": 0.7091955080000005
+  },
+  {
+    "episode": "20261031T162232-c9808a60",
+    "table": true,
+    "time_s": 11.157000064,
+    "last_grip": 0.10178760439157486,
+    "min_grip": 0.10178760439157486,
+    "duration_narrow_table_s": 0.7270077340000007
+  },
+  {
+    "episode": "20261031T160006-4f9821b9",
+    "table": true,
+    "time_s": 10.714393379,
+    "last_grip": -0.010681415908038616,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 0.8478784360000002
+  },
+  {
+    "episode": "20261031T155919-85376e3c",
+    "table": true,
+    "time_s": 12.039896165,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 0.8949841290000009
+  },
+  {
+    "episode": "20261031T155851-f0bb5116",
+    "table": true,
+    "time_s": 14.552921515,
+    "last_grip": -0.010681415908038616,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 0.8273882789999991
+  },
+  {
+    "episode": "20261031T155827-1cfdc861",
+    "table": true,
+    "time_s": 11.427853461,
+    "last_grip": 0.021991150453686714,
+    "min_grip": 0.021991150453686714,
+    "duration_narrow_table_s": 1.0643365130000007
+  },
+  {
+    "episode": "20261031T155801-43da398d",
+    "table": true,
+    "time_s": 11.683753026,
+    "last_grip": -0.010681415908038616,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 0.807286015999999
+  },
+  {
+    "episode": "20261031T155739-1d465c49",
+    "table": true,
+    "time_s": 10.861129331,
+    "last_grip": -0.010681415908038616,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 0.7066143910000005
+  },
+  {
+    "episode": "20261031T155710-250f6e2e",
+    "table": true,
+    "time_s": 13.731591001,
+    "last_grip": -0.010681415908038616,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 0.8272225740000003
+  },
+  {
+    "episode": "20261031T155645-ebe488bb",
+    "table": true,
+    "time_s": 10.694884229,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 0.7330998859999998
+  },
+  {
+    "episode": "20261031T155618-fd3ad331",
+    "table": true,
+    "time_s": 11.67891987,
+    "last_grip": 0.026389379054307938,
+    "min_grip": 0.026389379054307938,
+    "duration_narrow_table_s": 0.7532338529999993
+  },
+  {
+    "episode": "20261031T155554-bf968949",
+    "table": true,
+    "time_s": 12.093521518,
+    "last_grip": 0.011938052251935005,
+    "min_grip": 0.011938052251935005,
+    "duration_narrow_table_s": 0.6859273359999989
+  },
+  {
+    "episode": "20261031T155527-c975738f",
+    "table": false
+  },
+  {
+    "episode": "20261031T155454-313aeff4",
+    "table": false
+  },
+  {
+    "episode": "20261031T155425-bf5b2305",
+    "table": false
+  },
+  {
+    "episode": "20261031T155355-79ad8da2",
+    "table": false
+  },
+  {
+    "episode": "20261031T155331-c8add3a0",
+    "table": true,
+    "time_s": 10.594825631,
+    "last_grip": -0.010681415908038616,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 0.7400978480000013
+  },
+  {
+    "episode": "20261031T155308-cdc58b72",
+    "table": false
+  },
+  {
+    "episode": "20261031T155247-496a0860",
+    "table": false
+  },
+  {
+    "episode": "20261031T155224-d7999767",
+    "table": true,
+    "time_s": 11.539267725,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.5716218279999996
+  },
+  {
+    "episode": "20261031T155159-fad64f81",
+    "table": true,
+    "time_s": 11.774575263,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.9827201679999984
+  },
+  {
+    "episode": "20261031T155128-ae22439e",
+    "table": true,
+    "time_s": 13.296642151,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 0.828360751
+  },
+  {
+    "episode": "20261031T155057-fe103646",
+    "table": true,
+    "time_s": 11.941746138,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.7806022899999991
+  },
+  {
+    "episode": "20261031T155031-7ad9c4e7",
+    "table": true,
+    "time_s": 10.817149852,
+    "last_grip": -0.010681415908038616,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 0.8644651349999997
+  },
+  {
+    "episode": "20261031T155003-666de1d8",
+    "table": true,
+    "time_s": 11.869855494,
+    "last_grip": 0.011309733614325523,
+    "min_grip": 0.011309733614325523,
+    "duration_narrow_table_s": 1.109824741999999
+  },
+  {
+    "episode": "20261031T154939-fe293af6",
+    "table": true,
+    "time_s": 11.689474703,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.9903556279999997
+  },
+  {
+    "episode": "20261031T154915-28255091",
+    "table": true,
+    "time_s": 11.26686439,
+    "last_grip": -0.010681415908038616,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 0.8754517440000011
+  },
+  {
+    "episode": "20261031T154850-bf524cf7",
+    "table": true,
+    "time_s": 10.515852568,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.7899868300000001
+  },
+  {
+    "episode": "20261031T154823-206a45e4",
+    "table": true,
+    "time_s": 11.774560568,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 1.1739526900000001
+  },
+  {
+    "episode": "20261031T154756-8e0901ff",
+    "table": true,
+    "time_s": 11.586462202,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 0.6471657129999997
+  },
+  {
+    "episode": "20261031T154727-286875e5",
+    "table": true,
+    "time_s": 11.919663745,
+    "last_grip": 0.025761060416698456,
+    "min_grip": 0.025761060416698456,
+    "duration_narrow_table_s": 0.8845704239999996
+  },
+  {
+    "episode": "20261031T154701-d38b6f95",
+    "table": true,
+    "time_s": 11.190810941,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.6610261800000004
+  },
+  {
+    "episode": "20261031T154640-10e1e1ed",
+    "table": true,
+    "time_s": 10.550982789,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.8283058570000001
+  },
+  {
+    "episode": "20261031T154616-c9521567",
+    "table": true,
+    "time_s": 10.633140642,
+    "last_grip": 0.045867253094911575,
+    "min_grip": 0.045867253094911575,
+    "duration_narrow_table_s": 0.9242436760000015
+  },
+  {
+    "episode": "20261031T154234-aa24d2ad",
+    "table": true,
+    "time_s": 11.31682839,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 0.9569903340000003
+  },
+  {
+    "episode": "20261031T154210-0df146b4",
+    "table": true,
+    "time_s": 11.78970182,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.8002403499999993
+  },
+  {
+    "episode": "20261031T154131-9a33bc40",
+    "table": true,
+    "time_s": 11.536900512,
+    "last_grip": -0.00502654816955328,
+    "min_grip": -0.00502654816955328,
+    "duration_narrow_table_s": 0.6661130990000004
+  },
+  {
+    "episode": "20261031T154108-661882db",
+    "table": true,
+    "time_s": 10.972327456,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.8473431750000007
+  },
+  {
+    "episode": "20261031T154040-07531fff",
+    "table": true,
+    "time_s": 11.212816211,
+    "last_grip": -0.00125663704238832,
+    "min_grip": -0.00125663704238832,
+    "duration_narrow_table_s": 0.8272437549999996
+  },
+  {
+    "episode": "20261031T154016-ac7fe558",
+    "table": true,
+    "time_s": 11.586154679,
+    "last_grip": -0.0062831854447722435,
+    "min_grip": -0.0062831854447722435,
+    "duration_narrow_table_s": 0.8148314219999993
+  },
+  {
+    "episode": "20261031T153954-76b67ff9",
+    "table": true,
+    "time_s": 11.99136816,
+    "last_grip": -0.0062831854447722435,
+    "min_grip": -0.0062831854447722435,
+    "duration_narrow_table_s": 0.881886884
+  },
+  {
+    "episode": "20261031T153928-7819a6e1",
+    "table": true,
+    "time_s": 11.876597907,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.8281857250000009
+  },
+  {
+    "episode": "20261031T153516-2cc57fef",
+    "table": true,
+    "time_s": 11.513359935,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.8956845480000002
+  },
+  {
+    "episode": "20261031T153452-7cd519cb",
+    "table": true,
+    "time_s": 10.742338507,
+    "last_grip": 0.010681415908038616,
+    "min_grip": 0.010681415908038616,
+    "duration_narrow_table_s": 0.7344089139999994
+  },
+  {
+    "episode": "20261031T153422-47412bb2",
+    "table": true,
+    "time_s": 12.209117804,
+    "last_grip": -0.00125663704238832,
+    "min_grip": -0.00125663704238832,
+    "duration_narrow_table_s": 0.8493794880000003
+  },
+  {
+    "episode": "20261031T153400-4f0fa5b5",
+    "table": true,
+    "time_s": 11.307688362,
+    "last_grip": 0.026389379054307938,
+    "min_grip": 0.026389379054307938,
+    "duration_narrow_table_s": 0.9301069950000009
+  },
+  {
+    "episode": "20261031T153335-a7c3015c",
+    "table": true,
+    "time_s": 10.586100689,
+    "last_grip": 0.011309733614325523,
+    "min_grip": 0.011309733614325523,
+    "duration_narrow_table_s": 0.8225316950000003
+  },
+  {
+    "episode": "20261031T153311-e7bb2e4a",
+    "table": true,
+    "time_s": 11.599267962,
+    "last_grip": -0.009424777701497078,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.7609613040000003
+  },
+  {
+    "episode": "20261031T153242-7063cc80",
+    "table": true,
+    "time_s": 10.979126235,
+    "last_grip": 0.03518583998084068,
+    "min_grip": 0.03518583998084068,
+    "duration_narrow_table_s": 0.6938965570000004
+  },
+  {
+    "episode": "20261031T153219-8bcacc72",
+    "table": true,
+    "time_s": 10.125666001,
+    "last_grip": -0.005654866807162762,
+    "min_grip": -0.005654866807162762,
+    "duration_narrow_table_s": 0.8216892610000013
+  },
+  {
+    "episode": "20261031T153154-2203afef",
+    "table": true,
+    "time_s": 12.178755865,
+    "last_grip": -0.009424777701497078,
+    "min_grip": -0.009424777701497078,
+    "duration_narrow_table_s": 1.017750091
+  },
+  {
+    "episode": "20261031T153130-0ec472f8",
+    "table": true,
+    "time_s": 11.340692401,
+    "last_grip": 0.026389379054307938,
+    "min_grip": 0.026389379054307938,
+    "duration_narrow_table_s": 0.7353701299999997
+  },
+  {
+    "episode": "20261031T153058-791b23fb",
+    "table": true,
+    "time_s": 18.913364316,
+    "last_grip": 0.200433611869812,
+    "min_grip": -0.010681415908038616,
+    "duration_narrow_table_s": 9.586854874999998
+  },
+  {
+    "episode": "20261031T153035-bb5ce09f",
+    "table": true,
+    "time_s": 10.569021275,
+    "last_grip": -0.00125663704238832,
+    "min_grip": -0.00125663704238832,
+    "duration_narrow_table_s": 0.8160690340000016
+  },
+  {
+    "episode": "20261031T153011-8a0197d4",
+    "table": true,
+    "time_s": 11.426885584,
+    "last_grip": 0.018849555402994156,
+    "min_grip": 0.018221236765384674,
+    "duration_narrow_table_s": 0.7351473350000006
+  },
+  {
+    "episode": "20261031T152948-e726e16f",
+    "table": true,
+    "time_s": 10.788438696,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.7549935459999997
+  },
+  {
+    "episode": "20261031T152927-4c8b1d18",
+    "table": true,
+    "time_s": 9.775533459,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.7340156709999999
+  },
+  {
+    "episode": "20261031T152842-dd8845cd",
+    "table": true,
+    "time_s": 10.338632048,
+    "last_grip": 0.011309733614325523,
+    "min_grip": 0.011309733614325523,
+    "duration_narrow_table_s": 0.827905307
+  },
+  {
+    "episode": "20261031T152817-c7edf604",
+    "table": true,
+    "time_s": 11.251977596,
+    "last_grip": -0.00502654816955328,
+    "min_grip": -0.00502654816955328,
+    "duration_narrow_table_s": 0.645431425
+  },
+  {
+    "episode": "20261031T152754-f31faa97",
+    "table": true,
+    "time_s": 10.91645959,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.7603937160000012
+  },
+  {
+    "episode": "20261031T152728-386df91f",
+    "table": true,
+    "time_s": 12.821598126,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.8746450100000001
+  },
+  {
+    "episode": "20261031T152704-dbf31ca9",
+    "table": true,
+    "time_s": 11.030697684,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.7742166390000005
+  },
+  {
+    "episode": "20261031T152635-3a518cc4",
+    "table": true,
+    "time_s": 12.480294956,
+    "last_grip": 0.0483805276453495,
+    "min_grip": 0.04649557173252106,
+    "duration_narrow_table_s": 0.7942966029999994
+  },
+  {
+    "episode": "20261031T152610-74c1994b",
+    "table": true,
+    "time_s": 12.704993767,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.848420033
+  },
+  {
+    "episode": "20261031T152548-c1703c53",
+    "table": true,
+    "time_s": 10.56228462,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.7943751910000003
+  },
+  {
+    "episode": "20261031T152525-bc3e64a9",
+    "table": true,
+    "time_s": 11.048370495,
+    "last_grip": -0.005654866807162762,
+    "min_grip": -0.005654866807162762,
+    "duration_narrow_table_s": 0.8422066099999999
+  },
+  {
+    "episode": "20261031T152501-a2fb0233",
+    "table": true,
+    "time_s": 12.151022831,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.9627212170000004
+  },
+  {
+    "episode": "20261031T152439-ae1fd300",
+    "table": true,
+    "time_s": 10.439770848,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.011309733614325523,
+    "duration_narrow_table_s": 0.707353147000001
+  },
+  {
+    "episode": "20261031T152417-93528f04",
+    "table": true,
+    "time_s": 11.044546671,
+    "last_grip": 0.010681415908038616,
+    "min_grip": 0.01005309633910656,
+    "duration_narrow_table_s": 0.7808657490000002
+  },
+  {
+    "episode": "20261031T152355-8ce20208",
+    "table": true,
+    "time_s": 11.409063367,
+    "last_grip": -0.005654866807162762,
+    "min_grip": -0.0062831854447722435,
+    "duration_narrow_table_s": 0.7672240059999993
+  },
+  {
+    "episode": "20261031T152332-8429c54c",
+    "table": true,
+    "time_s": 11.316545496,
+    "last_grip": -0.0062831854447722435,
+    "min_grip": -0.0062831854447722435,
+    "duration_narrow_table_s": 0.9352223409999993
+  },
+  {
+    "episode": "20261031T152311-a72b8cd1",
+    "table": true,
+    "time_s": 10.320189663,
+    "last_grip": -0.01005309633910656,
+    "min_grip": -0.01005309633910656,
+    "duration_narrow_table_s": 0.8615005230000001
+  }
+]
