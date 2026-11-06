@@ -77,7 +77,7 @@ Inspect or explicitly stop the backend:
 
 ```bash
 python3 scripts/motor-controller.py status
-# Support both arms before ending powered control:
+# End powered control:
 python3 scripts/motor-controller.py stop
 ```
 

@@ -132,7 +132,7 @@ Reports and source hashes are saved in
 ## Selecting a version
 
 These launchers start real hardware control, like the existing launcher. Neither
-has been started as part of implementation. Support the arms and stop the current
+has been started as part of implementation. Stop the current
 collector before switching; all versions share the original exclusive controller
 lock. Each uses the existing recording directory and recording prerequisites.
 

@@ -82,7 +82,7 @@ The alternative is available through:
 
 This command starts real hardware control just as `start.sh` does. It has not
 been run during this experiment. Use it only in a supervised session after
-supporting the arms and stopping the existing collector; both launchers share
+stopping the existing collector; both launchers share
 the existing exclusive controller lock. Closing the settled gear grasp and
 starting an active recording remain prerequisites for the dashboard action.
 Release the hold before requesting another one-step trial. The standard

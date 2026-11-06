@@ -76,8 +76,8 @@ export. States include per-arm ownership, and metadata logs each handle release
 with the handle/gripper trigger and measured baseline/change. Detection uses the same `neutral_return` hold
 settings as normal collection. Keep the existing hardware stop accessible.
 Live startup and reset use the existing robot lock, limits and trajectory checks.
-Live Ctrl+C retains the existing powered-hold shutdown behavior; the reconnect
-control releases connections only after its support confirmation.
+Live Ctrl+C retains the existing powered-hold shutdown behavior. Reconnect
+refreshes the frontend connection while the independent motor backend retains hold.
 
 ### Active recording and safety slowdown
 

@@ -71,6 +71,6 @@ def main():
     (HERE/f'ten-cm-view-{s}-{done[s]}.json').write_text(json.dumps(result,indent=2)+'\n');print('COMPLETE; HOLDING '+json.dumps(result),flush=True)
     if error>.002:done.update({'left':2,'right':2});print('Further commands disabled: tracking error >2mm',flush=True)
    time.sleep(.01)
- except KeyboardInterrupt:print('Stopping hold; support arms.',flush=True)
+ except KeyboardInterrupt:print('Stopping hold.',flush=True)
  finally:guide.stop_robots(robots)
 if __name__=='__main__':main()

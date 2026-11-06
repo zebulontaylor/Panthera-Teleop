@@ -98,10 +98,10 @@
     "checkpoint": "/mnt/pi05/inference/checkpoints/mixed600-hitl81-2x-009000/pretrained_model",
     "control_source": "hold",
     "hold_status": "failed",
-    "error": "right: motor 6 feedback stale for >0.5 seconds; hold command failed: right: motor 6 feedback stale for >0.5 seconds. Powered hold is not reliable. Support both arms, check USB/power, then use Reconnect."
+    "error": "right: motor 6 feedback stale for >0.5 seconds; hold command failed: right: motor 6 feedback stale for >0.5 seconds. Powered hold is not reliable. Check USB/power, then use Reconnect."
   },
   "dashboard_reconnect_required": true,
-  "reconnect_note": "Support both arms before Reconnect; reconnect releases powered hold. Reconnect loads restored checkpoint identity.",
+  "reconnect_note": "Reconnect loads restored checkpoint identity; the independent motor backend retains powered hold.",
   "wandb_cloud_verification": {
     "passed": true,
     "state": "running",

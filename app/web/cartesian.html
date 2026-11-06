@@ -37,7 +37,7 @@
 <button id="discard" disabled><kbd>D</kbd><strong>Discard episode</strong><span>Discard episode and return both arms</span></button>
 </section>
 <div class="bottom"><div><div id="message" role="status" aria-live="polite"></div><p style="margin:0">During recording: 1 pedal tap keeps, 2 flag for review, 3 delete. Pause 0.65 seconds after the final release to confirm. The first press immediately starts the arm reset; further taps select the saved label during the return.<br>Release the handles and clear the return path before tapping a decision or pressing a decision key. After the return, pull each handle to release that arm.</p><p id="focus">Keep this page focused to use the keyboard.</p></div><div class="stats"><div><b id="kept">0</b><span>Kept</span></div><div><b id="reviewed">0</b><span>For review</span></div><div><b id="discarded">0</b><span>Discarded</span></div></div></div>
-<p class="footnote">Joint + gripper feedback · sent gravity torques · motor health · tool poses · three timestamped camera streams. Cameras use host receive times; calibration is pending. K/R/D returns and holds both arms immediately, with no countdown. Pull each handle to release it. Support the arms before stopping the controller.</p>
+<p class="footnote">Joint + gripper feedback · sent gravity torques · motor health · tool poses · three timestamped camera streams. Cameras use host receive times; calibration is pending. K/R/D returns and holds both arms immediately, with no countdown. Pull each handle to release it.</p>
 </main><script>
 let current=null, connected=false, busy=false, last=null, inFlight=false, assistBusy=false;
 let nudgePress=null, previewBusy=false;

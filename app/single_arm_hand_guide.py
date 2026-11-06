@@ -33,7 +33,7 @@ def main():
         if set(client.robots) != {args.arm}:
             raise RuntimeError(f'Backend must own only the {args.arm} arm')
         print(f'HAND GUIDANCE ACTIVE: {args.arm} arm gravity assisted; gripper passive. '
-              'Support the handle. Exit leaves backend in powered hold.', flush=True)
+              'Exit leaves backend in powered hold.', flush=True)
         while not stopping:
             started = time.monotonic()
             samples = client.read()

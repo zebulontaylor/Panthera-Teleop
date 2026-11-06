@@ -241,7 +241,7 @@ def main():
             NeutralReturn(config['neutral_return'], {side: (r.joint_limits['lower'], r.joint_limits['upper'])
                                                      for side, r in robots.items()}, time.monotonic())
         print('SIMULATION ACTIVE; motors unopened.' if args.demo else
-              'HAND GUIDANCE ACTIVE: both arms independently gravity assisted; grippers passive. Support handles.', flush=True)
+              'HAND GUIDANCE ACTIVE: both arms independently gravity assisted; grippers passive.', flush=True)
         store.update(control_active=True)
         last_print = 0.0
         started = time.monotonic()
@@ -547,7 +547,7 @@ def main():
                 last_print = now
             time.sleep(max(0, 1/config['control_hz']-(time.monotonic()-tick)))
     except KeyboardInterrupt:
-        print('Hand guidance stopped. Gravity assistance ending; support the arms.', flush=True)
+        print('Hand guidance stopped. Gravity assistance ending.', flush=True)
     except Exception as exc:
         reason = f'fault: {exc}'
         if store:
@@ -561,7 +561,7 @@ def main():
             print(f'Could not save event: {log_error}', file=sys.stderr, flush=True)
         if is_serial_disconnect(exc):
             print('Robot USB connection lost. Ending control and saving any unfinished '
-                  'episode for review. Support the arms, check USB/power, and restart '
+                  'episode for review. Check USB/power and restart '
                   'the launcher. For idle USB protection run '
                   'sudo ./scripts/enable-robot-usb.sh with control stopped.',
                   file=sys.stderr, flush=True)

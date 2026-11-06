@@ -117,7 +117,7 @@ def main():
                 last_log=now
             time.sleep(.01)
     except KeyboardInterrupt:
-        print('Stopping position hold; support the arms.',flush=True)
+        print('Stopping position hold.',flush=True)
     finally:
         guide.stop_robots(robots)
 

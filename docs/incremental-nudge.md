@@ -16,7 +16,7 @@ controller has not yet demonstrated physical convergence; see the
 
 Stop the current collector before changing launchers; its motor backend remains
 running in powered hold. The incremental launcher connects through the same
-backend client, with exclusive frontend ownership. With the arms supported, start:
+backend client, with exclusive frontend ownership. Start:
 
 ```bash
 ./start-incremental-nudge.sh

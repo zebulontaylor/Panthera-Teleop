@@ -36,7 +36,7 @@ from hand adjustment captures the new measured reference automatically. Pausing
 holds the measured pose and resumes the remaining trajectory; a browser heartbeat
 loss also pauses. Settings apply to the next cycle. The default **Toward base
 (upward)** retreat points toward the arm base at **40° elevation above horizontal**,
-with an **8° cone half-angle**. The forward approach comes from the base side and
+with an **8° cone half-angle** (adjustable from 0° to 45°). The forward approach comes from the base side and
 down toward the grasp. The fixed captured grasp position sets the horizontal
 bearing independently of wrist angle. Elevation is adjustable from 0° to 90° for
 this base-relative mode. Legacy ±X/±Y/±Z tool retreat axes remain available and use
@@ -78,6 +78,53 @@ These files use their own schema and are not automatically added to HITL dataset
 For a separate disconnected preview without switching dashboards:
 `scripts/start-pin-regrasp-dashboard.sh --port 8092`. Use the switching launcher
 before connecting if another dashboard owns the cameras or motor lease.
+
+### Autonomous pin alignment collection
+
+The same `./start-regrasp.sh` dashboard now offers **Pin alignment** under
+**Collection task**. While disconnected, select it and Apply settings, then
+connect and choose **Adjust by hand**. Both arms enter gravity assistance in
+this mode: hold the pin and carrier in their grippers and position the pin tip
+about 1 mm above the hole. **Capture reference**, clear the motion area, then
+**Start / resume**. Capturing does not infer hole position or verify clearance.
+
+Alignment retreats along the selected angled path and returns with fixed wrist
+orientation and grippers. In Toward base mode, **Cone clockwise rotation** defaults
+to 40° clockwise viewed from above (+Z), toward the pickup side. This rotates the
+horizontal bearing without changing elevation or cone width. Set it to 0° to
+restore the direct baseward bearing; negative values rotate counterclockwise.
+Regrasp and explicit tool-axis directions are unaffected. **Carrier placement jitter** adds sideways carrier
+dragging during the pin retreat, centered on the original reference (0–0.10 m radius).
+Both arms share the same eased progress: the pin follows the carrier displacement
+while retreating relative to the hole, then returns while the carrier holds. Both
+arms are preflighted together and the shared duration expands if either reaches a
+speed limit. This does not establish whole-arm collision clearance.
+The carrier holds still during the recorded return. Dragging uses the selected
+**Motion speed**, subject to the **Joint speed ceiling** and trajectory easing. There is no insertion, release, close, or lift phase.
+
+To enable carrier jitter, capture the aligned reference, set **Carrier placement
+jitter**, Apply settings, and start. No inter-arm calibration is required for
+this installation: the arm bases have matching parallel axes, so carrier and pin
+displacements use the same XYZ directions. Base spacing cancels because targets
+are offsets from the captured reference, rather than absolute points transferred
+between bases. Setting jitter back to zero returns to the original reference.
+
+The tabletop must be horizontal in the left arm base frame. This geometric mapping
+does not sense object slip, contact, or hole clearance; outcomes remain unverified.
+
+Only the forward `return` is recorded, with left wrist, right wrist, and overhead
+videos plus 14 joint-position targets in radians. Alignment opens all three
+configured cameras and shows their previews. Each sample preserves the capture
+timestamps and sequence numbers for each stream; cameras are not hardware
+synchronized. All three streams must remain healthy. Camera faults identify the logical and
+physical camera, last frame age, and capture error; the last health snapshot is
+retained after a fault. Alignment episodes use
+schema version 2 with a video map and per-camera receipts; regrasp keeps its
+existing single-camera format. Episodes remain `unverified` and are saved separately under
+`data/pin-alignment-forward/` (or `<custom --data-dir>/alignment/`). Pause and
+intervention terminate partial episodes, as in regrasp mode. The existing
+regrasp exporter excludes alignment episodes to avoid labeling them as grasps.
+Task changes require disconnecting and capturing a new reference after reconnecting.
 
 ### Pin alignment in simulation
 
@@ -144,7 +191,7 @@ work/teleop-venv/bin/python app/single_arm_hand_guide.py --run --arm right
 
 This mode provides gravity assistance and a passive gripper, without recording
 or automatic trajectories. Ctrl+C in the client leaves the backend holding the
-measured pose. Support the arm before stopping the backend to end powered control.
+measured pose.
 The backend defaults to both arms when `--arm` is omitted.
 
 ### 1. Install the software
@@ -259,7 +306,7 @@ See [incremental height alignment](docs/incremental-nudge.md) for the underlying
 controller and strict profile. The revised mode has not yet demonstrated
 convergence on hardware.
 
-With both arms supported and the return path clear, run:
+With the return path clear, run:
 
 ```bash
 ./start.sh
@@ -275,8 +322,7 @@ Teleop and inference now connect to a separate motor-controller process. The
 backend owns the SDK, motor loop, feedback checks, command caps, and control lease.
 It starts as the independent `panthera-motor-controller` user service on the first
 live connection. Frontend exit or lease expiry leaves the arms in powered position
-hold with passive grippers. Support both arms before explicitly stopping powered
-control with `python3 scripts/motor-controller.py stop`.
+hold with passive grippers. Explicitly stop powered control with `python3 scripts/motor-controller.py stop`.
 See [the architecture and lifecycle guide](docs/motor-controller.md).
 
 ## Robot command interface
@@ -288,7 +334,7 @@ authentication, and execution semantics.
 
 ## Recording and control
 
-Run `./start.sh` from this workspace. It checks all three cameras and both arm configurations, enables independent gravity assistance, and opens http://127.0.0.1:8090. Grippers are passive during demonstrations and open to 60% during each reset. There is no starting-pose or exit trajectory. Episode decisions return the configured reset arms to a raised neutral pose. The session started by Codex runs as the user service `panthera-gravity-assist`; inspect it with `systemctl --user status panthera-gravity-assist` and use `./scripts/stop-gravity-assist.sh` to stop that frontend. Support both arms before running `python3 scripts/motor-controller.py stop` to stop the motor backend and end powered control. A running session must be stopped before launching another.
+Run `./start.sh` from this workspace. It checks all three cameras and both arm configurations, enables independent gravity assistance, and opens http://127.0.0.1:8090. Grippers are passive during demonstrations and open to 60% during each reset. There is no starting-pose or exit trajectory. Episode decisions return the configured reset arms to a raised neutral pose. The session started by Codex runs as the user service `panthera-gravity-assist`; inspect it with `systemctl --user status panthera-gravity-assist` and use `./scripts/stop-gravity-assist.sh` to stop that frontend. Run `python3 scripts/motor-controller.py stop` to stop the motor backend and end powered control. A running session must be stopped before launching another.
 
 Move either arm to start an episode automatically. The recorder includes 0.75 seconds of pre-roll and requires sustained motion for 0.12 seconds to reject encoder jitter. Keep the browser page focused:
 
@@ -315,7 +361,7 @@ playback failures on the dashboard. Set `audio_cues.enabled` to false to disable
 | R | Finish and flag the episode for review |
 | D | Finish and move the episode to recoverable trash |
 
-Release the handles and clear the return path before pressing K/R/D. Each decision immediately starts returning both arms to `[0, 0.25, 0.25, 0, 0, 0]` radians. The model places the tool about 6.4 cm above the zero pose. Joint speed is capped at 0.60 rad/s (2× the preceding speed setting), with a 0.6-second minimum trajectory duration, a 2.0 rad/s² acceleration cap, and return torque caps are `[5, 8, 8, 3, 2, 2]` Nm. Recording stays paused throughout the return and clears its pre-roll afterward. Arrival requires both arms within 0.015 rad of target and no more than 0.004 rad of encoder motion across a 0.25-second window. Reported velocity spikes cannot reset arrival while the encoder pose is stable. Real positional error or vibration still prevents arrival. Return logs include joint error, reported speed, encoder motion, and planned duration. Both arms remain in powered position hold at neutral. Grab a handle and gently pull: a sustained change in measured motor torque releases that arm into gravity assistance, independently of the other arm. A 0.5-second hold baseline and 0.15-second confirmation reject brief torque spikes. Pull thresholds are configured per joint as `[0.6, 1.2, 1.2, 0.6, 0.25, 0.25]` Nm. Recording remains blocked while both arms are held; the first released arm rearms it and movement starts the next episode. The other arm stays held until its own handle is pulled. During the return, both grippers move to 60% of their configured travel (currently 1.2 rad) at 0.8 rad/s with a 0.5 Nm torque cap. Each becomes passive once it reaches the reset opening, so it can be closed freely. Pulling an arm handle also cancels any remaining gripper opening for that arm. An obstructed gripper is released to passive control after 5 seconds and its error is shown on the dashboard; the arms keep holding. Gripper reset outcomes are included in the return log. Return results are saved in `data/return-events.jsonl`. A rejected path, tracking deviation, or arrival timeout cancels the return, shows an error, and holds the measured poses until handle pulls release them. Joint/motor/camera faults still stop the session. The tool path is checked against dipping below its endpoint heights; this is not obstacle or collision detection. Idle pauses during a demonstration do not end it. Ctrl+C in the teleop terminal releases its control lease; the motor backend retains powered position hold. Support both arms before `python3 scripts/motor-controller.py stop` ends powered control. Closing the dashboard does not stop the controller.
+Release the handles and clear the return path before pressing K/R/D. Each decision immediately starts returning both arms to `[0, 0.25, 0.25, 0, 0, 0]` radians. The model places the tool about 6.4 cm above the zero pose. Joint speed is capped at 0.60 rad/s (2× the preceding speed setting), with a 0.6-second minimum trajectory duration, a 2.0 rad/s² acceleration cap, and return torque caps are `[5, 8, 8, 3, 2, 2]` Nm. Recording stays paused throughout the return and clears its pre-roll afterward. Arrival requires both arms within 0.015 rad of target and no more than 0.004 rad of encoder motion across a 0.25-second window. Reported velocity spikes cannot reset arrival while the encoder pose is stable. Real positional error or vibration still prevents arrival. Return logs include joint error, reported speed, encoder motion, and planned duration. Both arms remain in powered position hold at neutral. Grab a handle and gently pull: a sustained change in measured motor torque releases that arm into gravity assistance, independently of the other arm. A 0.5-second hold baseline and 0.15-second confirmation reject brief torque spikes. Pull thresholds are configured per joint as `[0.6, 1.2, 1.2, 0.6, 0.25, 0.25]` Nm. Recording remains blocked while both arms are held; the first released arm rearms it and movement starts the next episode. The other arm stays held until its own handle is pulled. During the return, both grippers move to 60% of their configured travel (currently 1.2 rad) at 0.8 rad/s with a 0.5 Nm torque cap. Each becomes passive once it reaches the reset opening, so it can be closed freely. Pulling an arm handle also cancels any remaining gripper opening for that arm. An obstructed gripper is released to passive control after 5 seconds and its error is shown on the dashboard; the arms keep holding. Gripper reset outcomes are included in the return log. Return results are saved in `data/return-events.jsonl`. A rejected path, tracking deviation, or arrival timeout cancels the return, shows an error, and holds the measured poses until handle pulls release them. Joint/motor/camera faults still stop the session. The tool path is checked against dipping below its endpoint heights; this is not obstacle or collision detection. Idle pauses during a demonstration do not end it. Ctrl+C in the teleop terminal releases its control lease; the motor backend retains powered position hold. `python3 scripts/motor-controller.py stop` ends powered control. Closing the dashboard does not stop the controller.
 
 Episodes live under `data/kept`, `data/review`, or `data/discarded`. Discarded episodes remain recoverable and are excluded from the kept dataset. An unfinished episode goes to review on shutdown. After an abrupt interruption, pending episodes are recovered to review on the next launch. No test recordings enter these directories; simulation defaults should be directed to a temporary directory.
 
@@ -360,7 +406,7 @@ sudo ./scripts/enable-robot-usb.sh
 
 Reconnect both robot USB cables afterward, then launch normally. This disables autosuspend for the Livelybot boards and the tested Terminus robot hub, and excludes the boards' serial ports from ModemManager probing. At startup the hand-guidance controller also keeps each board's upstream USB ancestry awake when permissions allow; otherwise it prints the setup command. These settings mitigate host power management and probing; they cannot prevent cable, supply, or firmware resets. The September 30 failure coincided with kernel USB disconnect/re-enumeration events for both boards, while control commands were still being sent.
 
-A recognized serial disconnect now ends control cleanly with exit status 1, attempts to stop both arms, and finalizes any unfinished episode for review, without a Python traceback. Support the arms and restart after checking the USB connection. Control does not automatically resume through the SDK's background reconnect path, which clears motor objects referenced by the Python wrapper.
+A recognized serial disconnect now ends control cleanly with exit status 1, attempts to stop both arms, and finalizes any unfinished episode for review, without a Python traceback. Restart after checking the USB connection. Control does not automatically resume through the SDK's background reconnect path, which clears motor objects referenced by the Python wrapper.
 
 If a board appears in `lsusb` but no `/dev/ttyACM*` port appears, startup distinguishes an unconfigured USB device from a missing board. Kernel messages such as `rejected 1 configuration due to insufficient available bus power` mean Linux refused to configure the device. Check the hub's external power connection or use a powered hub, then reconnect it. Autosuspend settings do not fix a missing USB power budget.
 

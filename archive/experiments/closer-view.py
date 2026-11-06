@@ -72,6 +72,6 @@ def main():
     if error>.002:
      done.update(robots);print('Further viewing moves disabled: tracking error >2 mm',flush=True)
    time.sleep(.01)
- except KeyboardInterrupt:print('Stopping hold; support arms.',flush=True)
+ except KeyboardInterrupt:print('Stopping hold.',flush=True)
  finally:guide.stop_robots(robots)
 if __name__=='__main__':main()

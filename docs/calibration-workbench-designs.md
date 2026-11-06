@@ -78,7 +78,7 @@ This design has two separate launchers:
 ```
 
 **The collector launcher starts real robot control**, like `start.sh`; it has not
-been run during implementation. Support the arms and stop the existing collector
+been run during implementation. Stop the existing collector
 before changing versions. It shares the normal frontend lease/lock and independent motor backend. The
 normal recording dashboard continues to provide recording and gear-grasp controls.
 The workbench is a separate UI; neither launcher replaces the original script.
@@ -128,8 +128,7 @@ Settled endpoints are held at least 1.2 seconds for the independent workbench to
 observe. The whole press has a 20-second budget and a 0.2-second heartbeat lease.
 Release, lost focus, missing heartbeat, excluded collection modes or faults end
 position commands. Expired/released press IDs cannot rearm the same run. On stop,
-the running frontend returns to its ordinary gravity-assistance path, so the operator
-must continue to support the arms. No automatic return movement is attempted. If the entire frontend stops or disconnects, the independent motor backend retains powered position hold; stopping the frontend does not shut down that backend.
+the running frontend returns to its ordinary gravity-assistance path. No automatic return movement is attempted. If the entire frontend stops or disconnects, the independent motor backend retains powered position hold; stopping the frontend does not shut down that backend.
 
 The workbench does not renew a press in the background. Browser heartbeats are
 forwarded individually to the motor-loop request queue. Analysis and session

@@ -65,8 +65,7 @@ python3 scripts/mark_alignment_calibration.py --label reference
 The same tool accepts `motion-start` and `motion-end`. Markers are separate
 operator annotations; the source recording is unchanged. Analyze an inferred
 cache using `scripts/analyze_marked_alignment.py --help`. Changes to the
-controller or calibration profile require a collector restart; support the
-arms before stopping the active controller.
+controller or calibration profile require a collector restart.
 
 ## Automatic assistance
 
@@ -110,7 +109,7 @@ A measured local image Jacobian is required for each task and grasp/view setup.
 It differentiates the moving-minus-target landmark residual in each wrist view
 with respect to the selected arm's six joint angles. This avoids inventing
 camera-to-base transforms. Establish the matrix and sign using measured small
-joint displacements around a supported, known pose, then verify that predicted
+joint displacements around a known pose, then verify that predicted
 corrections reduce the residual. No calibration motion is launched by this
 feature. Do not substitute an identity matrix or simulation calibration.
 
